@@ -2,9 +2,15 @@
 
 ## Escopo e verificação
 
-Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`. Nenhum código novo em `src/`; referência mantida somente para leitura. Inventário em `FEATURES.md` e proposta de arquitetura em `DEPENDENCIES.md`. A fase permanece 0 e a proposta ainda exige revisão/aprovação explícita.
+Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`. Nenhum código novo em `src/`; referência mantida somente para leitura. Inventário em `FEATURES.md` e arquitetura em `DEPENDENCIES.md`, aprovado explicitamente pelo usuário em 30/10/2026. A fase permanece 0; a aprovação não inicia a implementação.
 
-O alvo informado em `AGENTS.md` é **Minecraft 26.2 com NeoForge 26.2.0.93**, enquanto a tarefa pede equivalências para **NeoForge 26.2**. Esta auditoria não escolhe nem corrige a combinação: a compatibilidade da versão exata está **não verificada** e deve ser esclarecida antes da Fase 1. As fontes 26.2.x abaixo não validam automaticamente 26.2.0.93.
+O alvo é **Minecraft 26.2 com NeoForge 26.2.0.93**, verificado e confirmado pelo usuário em 30/10/2026 e registrado em `AGENTS.md`. As verificações individuais de APIs e de comportamento na versão exata continuam sujeitas às limitações abaixo.
+
+O escopo está limitado ao conteúdo do mod até **0.6.x**. Funcionalidades de versões posteriores ou apenas planejadas em comentários/TODOs não serão implementadas. Os vestígios continuam documentados para rastreabilidade, sem representar compromisso de portagem.
+
+## Organização do inventário
+
+Em 30/10/2026, as seções de catálogo foram movidas integralmente de `FEATURES.md`, sem reescrever nem remover linhas, para `catalogs/variants.md`, `catalogs/content-registries.md`, `catalogs/quests.md` e `catalogs/resources.md`. O índice dos quatro catálogos foi acrescentado no topo de `FEATURES.md`; sistemas, dados salvos, mixins, integrações e cobertura da árvore permaneceram nesse arquivo. A reconstrução dos trechos na ordem original confirmou preservação exata do conteúdo.
 
 ## Mixins do original — lista completa
 
@@ -27,7 +33,7 @@ O [guia oficial de migração 26.2](https://docs.neoforged.net/primer/docs/26.2/
 
 | Original 1.12.2 | Direção de portagem, sem aprovação de API concreta |
 | --- | --- |
-| `OreDictionary`, metadados de variantes e IDs fixos | Tags de itens/blocos, registros modernos e dados JSON. Preservar variantes explícitas nos catálogos de `FEATURES.md`. |
+| `OreDictionary`, metadados de variantes e IDs fixos | Tags de itens/blocos, registros modernos e dados JSON. Preservar variantes explícitas em `catalogs/variants.md`, indexado por `FEATURES.md`. |
 | Receitas, preços, cultivos e catálogos em inicializadores Java | Priorizar dados e regras declarativas; não inventar um formato/API antes da fatia correspondente. |
 | `WorldSavedData`, NBT manual, arquivos de jogador | Separar dados globais, por mundo, por jogador, por entidade e por bloco; mecanismo/assinaturas da versão exata: **não verificado**. Não prometer migração de saves 1.12.2. |
 | `HFTrackers` e ciclos entre sistemas | Contratos básicos e composição gradual; grafo e ordem propostos em `DEPENDENCIES.md`. |
@@ -49,11 +55,12 @@ Estas são direções arquiteturais impostas pelas regras do projeto, não códi
 - Há oito festivais registrados em `HFFestivals`; `festivals/none.json` é cenário auxiliar, não festival adicional.
 - `HFSavedData.writeToNBT` não persiste os rastreadores; contém caminho de migração de cidades. Calendário/cidades/minas/jogadores e entidades possuem mecanismos próprios.
 
-Não foi necessário decidir comportamento novo nesta auditoria. Restaurar vestígios comentados ou resolver diferenças de gameplay exigirá pergunta explícita antes de implementar.
+Não foi necessário decidir comportamento novo nesta auditoria. Vestígios de funcionalidades planejadas para depois de 0.6.x permanecem fora do escopo confirmado. Ambiguidades de gameplay dentro de 0.6.x exigirão pergunta explícita antes de implementar.
 
 ## Validação e limitações
 
-- Revisão documental: sistemas/pacotes confrontados com árvore Java, registros de conteúdo, recursos e configuração de mixins; catálogos complementares em `FEATURES.md`.
-- Build obrigatório: tentativa de `.\gradlew.bat build` na raiz do port; **não validado**, pois não existe wrapper nem projeto Gradle na raiz nesta Fase 0. Não executar o build dentro da referência, que é somente leitura e produziria arquivos nela.
+- Revisão documental: sistemas/pacotes confrontados com árvore Java, registros de conteúdo, recursos e configuração de mixins; catálogos complementares em `catalogs/`, indexados por `FEATURES.md`.
+- Builds obrigatórios **a partir da Fase 1**, conforme confirmação do usuário e atualização de `AGENTS.md`. Na auditoria anterior, `.\gradlew.bat build` falhou pela ausência do wrapper; não houve nova tentativa nesta tarefa documental da Fase 0.
+- Limitação atual de ambiente/estrutura: não existem `gradlew.bat`, `build.gradle` ou `build.gradle.kts` na raiz. A criação e validação do esqueleto ficam para a Fase 1; não executar o build dentro da referência somente leitura.
 - `runClient` não executado: o esqueleto da Fase 1 ainda não existe. Não houve validação de gameplay/renderização no jogo.
-- A documentação pode ser revisada, mas a tarefa não deve ser declarada concluída com build aprovado. Não avançar fase nem gerar infraestrutura para contornar a restrição atual.
+- A reorganização documental foi validada por preservação do conteúdo e conferência de arquivos/linhas; não implica build aprovado. A ausência atual do esqueleto não bloqueia a documentação da Fase 0. Nenhuma fase foi avançada.

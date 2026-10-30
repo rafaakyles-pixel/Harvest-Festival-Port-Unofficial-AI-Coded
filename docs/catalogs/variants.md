@@ -1,0 +1,51 @@
+## Catálogo de variantes de itens, blocos e ferramentas
+
+Declarações de enum ativas dos itens/blocos e de `ITiered.ToolTier`. Cada linha enumera todas as variantes da classe indicada; variantes de interface/diagnóstico não são automaticamente itens obteníveis em sobrevivência. Regras e disponibilidade estão nas classes e seções acima.
+
+- [ ] Variantes de `animals.block.BlockSizedStorage.SizedStorage`: `INCUBATOR`.
+- [ ] Variantes de `animals.block.BlockSizedStorage.Fill`: `EMPTY`, `SMALL`, `MEDIUM`, `LARGE`.
+- [ ] Variantes de `animals.block.BlockTray.Tray`: `NEST_EMPTY`, `SMALL_CHICKEN`, `MEDIUM_CHICKEN`, `LARGE_CHICKEN`, `FEEDER_EMPTY`, `FEEDER_FULL`.
+- [ ] Variantes de `animals.block.BlockTrough.Trough`: `WOOD`.
+- [ ] Variantes de `animals.block.BlockTrough.Section`: `SINGLE`, `END`, `MIDDLE`.
+- [ ] Variantes de `animals.item.ItemAnimalProduct.Sizeable`: `EGG`, `MILK`, `MAYONNAISE`, `WOOL`.
+- [ ] Variantes de `animals.item.ItemAnimalSpawner.Spawner`: `COW`, `SHEEP`, `CHICKEN`.
+- [ ] Variantes de `animals.item.ItemAnimalTool.Tool`: `MILKER`, `BRUSH`, `MEDICINE`, `CHICKEN_FEED`, `MIRACLE_POTION`.
+- [ ] Variantes de `animals.item.ItemAnimalTreat.Treat`: `COW`, `SHEEP`, `CHICKEN`, `GENERIC`.
+- [ ] Variantes de `api.core.ITiered.ToolTier`: `BASIC`, `COPPER`, `SILVER`, `GOLD`, `MYSTRIL`, `CURSED`, `BLESSED`, `MYTHIC`.
+- [ ] Variantes de `buildings.item.ItemCheat.Cheat`: `COORD_SETTER`, `CODE_GENERATOR`, `AIR_PLACER`, `AIR_REMOVER`, `PARK_PLACER`, `PARK_ENDSTONE`, `PARK_LOCATIONS_GENERATOR`, `ORE_CHECKER`, `BUILDING_PREVIEW`.
+- [ ] Variantes de `cooking.block.BlockCookware.Cookware`: `FRIDGE_TOP`, `FRIDGE`, `COUNTER`, `POT`, `FRYING_PAN`, `MIXER`, `OVEN_OFF`, `OVEN_ON`, `COUNTER_IC`, `COUNTER_OC`.
+- [ ] Variantes de `cooking.item.ItemIngredients.Ingredient`: `CURRY_POWDER`, `DUMPLING_POWDER`, `WINE`, `UNUSED1`, `UNUSED2`, `FLOUR`, `OIL`, `RICEBALL`, `SALT`, `CHOCOLATE`.
+- [ ] Variantes de `cooking.item.ItemMeal.Meal`: `PANCAKE_SAVOURY`, `FRIES_FRENCH`, `POPCORN`, `CORNFLAKES`, `EGGPLANT_HAPPY`, `EGG_SCRAMBLED`, `OMELET`, `OMELET_RICE`, `TOAST_FRENCH`, `DOUGHNUT`, `FISH_GRILLED`, `PANCAKE`, `POTSTICKER`, `RISOTTO`, `JUICE_PINEAPPLE`, `JUICE_TOMATO`, `MILK_STRAWBERRY`, `JUICE_VEGETABLE`, `LATTE_VEGETABLE`, `KETCHUP`, `BUTTER`, `FISHSTICKS`, `TURNIP_PICKLED`, `CUCUMBER_PICKLED`, `SALAD`, `SANDWICH`, `SUSHI`, `SASHIMI`, `SASHIMI_CHIRASHI`, `MILK_HOT`, `CHOCOLATE_HOT`, `EGG_BOILED`, `SPINACH_BOILED`, `POTATO_CANDIED`, `DUMPLINGS`, `NOODLES`, `SOUP_RICE`, `PORRIDGE`, `EGG_OVERRICE`, `STEW`, `STEW_PUMPKIN`, `STEW_FISH`, `CORN_BAKED`, `RICEBALLS_TOASTED`, `TOAST`, `DINNERROLL`, `DORIA`, `COOKIES`, `COOKIES_CHOCOLATE`, `CAKE_CHOCOLATE`, `BURNT_COUNTER`, `BURNT_FRYING_PAN`, `BURNT_MIXER`, `BURNT_OVEN`, `BURNT_POT`, `STIR_FRY`, `RICE_FRIED`, `SOUFFLE_APPLE`, `BREAD_CURRY`, `NOODLES_THICK_FRIED`, `TEMPURA`, `CURRY_DRY`, `JUICE_GRAPE`, `JUICE_PEACH`, `JUICE_BANANA`, `JUICE_ORANGE`, `JUICE_APPLE`, `JUICE_FRUIT`, `LATTE_FRUIT`, `JUICE_MIX`, `LATTE_MIX`, `SANDWICH_FRUIT`, `RICE_BAMBOO`, `RICE_MATSUTAKE`, `RICE_MUSHROOM`, `BREAD_RAISIN`, `ICE_CREAM`, `JAM_STRAWBERRY`, `JAM_APPLE`, `JAM_GRAPE`, `MARMALADE`, `NOODLES_TEMPURA`, `RICE_TEMPURA`, `BUN_JAM`, `SWEET_POTATOES`, `CAKE`, `PIE_APPLE`, `SALAD_HERB`, `SOUP_HERB`, `SANDWICH_HERB`.
+- [ ] Variantes de `cooking.item.ItemUtensil.Utensil`: `BLADE`, `KNIFE`.
+- [ ] Variantes de `core.block.BlockDecorative.DecorativeBlock`: `COOKING`.
+- [ ] Variantes de `core.block.BlockFlower.FlowerType`: `GODDESS`, `WEED`, `MOONDROP`, `TOY`, `PINKCAT`, `BLUE_MAGICGRASS`, `RED_MAGICGRASS`.
+- [ ] Variantes de `core.block.BlockStand.Stand`: `POT`, `PLATE`.
+- [ ] Variantes de `core.block.BlockStorage.Storage`: `SHIPPING`, `MAILBOX`, `BASKET`.
+- [ ] Variantes de `crops.block.BlockFruit.Fruit`: `APPLE`, `BANANA`, `GRAPE`, `ORANGE`, `PEACH`.
+- [ ] Variantes de `crops.block.BlockHFCrops.CropType`: `FRESH`, `WITHERED`, `FRESH_DOUBLE`, `WITHERED_DOUBLE`.
+- [ ] Variantes de `crops.block.BlockLeavesFruit.LeavesFruit`: `APPLE`, `GRAPE`, `ORANGE`, `PEACH`.
+- [ ] Variantes de `crops.block.BlockLeavesTropical.LeavesTropical`: `BANANA`.
+- [ ] Variantes de `crops.block.BlockSprinkler.Sprinkler`: `IRON`, `OLD`.
+- [ ] Variantes de `crops.item.ItemCrop.Crops`: `TURNIP`, `POTATO`, `CUCUMBER`, `STRAWBERRY`, `CABBAGE`, `ONION`, `TOMATO`, `CORN`, `PUMPKIN`, `PINEAPPLE`, `WATERMELON`, `EGGPLANT`, `SPINACH`, `CARROT`, `SWEET_POTATO`, `GREEN_PEPPER`, `BEETROOT`, `GRASS`, `WHEAT`, `NETHER_WART`, `TUTORIAL_TURNIP`, `BANANA`, `GRAPE`, `ORANGE`, `PEACH`.
+- [ ] Variantes de `fishing.block.BlockFishTrap.Aquatic`: `TRAP`, `TRAP_BAITED`.
+- [ ] Variantes de `fishing.block.BlockHatchery.Floating`: `HATCHERY`.
+- [ ] Variantes de `fishing.item.ItemFish.Fish`: `ANCHOVY`, `ANGEL`, `ANGLER`, `BASS`, `BLAASOP`, `BOWFIN`, `BUTTERFLY`, `CARP`, `CATFISH`, `CHUB`, `CLOWN`, `COD`, `DAMSEL`, `ELECTRICRAY`, `GOLD`, `HERRING`, `KOI`, `LAMPREY`, `LUNGFISH`, `MANTARAY`, `MINNOW`, `PERCH`, `PICKEREL`, `PIKE`, `PIRANHA`, `PUFFER`, `PUPFISH`, `SALMON`, `SARDINE`, `SIAMESE`, `STARGAZER`, `STINGRAY`, `TANG`, `TETRA`, `TROUT`, `TUNA`, `WALLEYE`.
+- [ ] Variantes de `fishing.item.ItemJunk.Junk`: `CAN`, `BOOT`, `TREASURE`, `BONES`, `FOSSIL`, `BAIT`.
+- [ ] Variantes de `gathering.block.BlockNature.NaturalBlock`: `MATSUTAKE`, `BAMBOO`, `MINT`, `CHAMOMILE`, `LAVENDER`.
+- [ ] Variantes de `gathering.block.BlockRock.Rock`: `STONE_SMALL`, `STONE_MEDIUM`, `STONE_LARGE`, `BOULDER_SMALL`, `BOULDER_MEDIUM`, `BOULDER_LARGE`.
+- [ ] Variantes de `gathering.block.BlockWood.Wood`: `BRANCH_SMALL`, `BRANCH_MEDIUM`, `BRANCH_LARGE`, `STUMP_SMALL`, `STUMP_MEDIUM`, `STUMP_LARGE`.
+- [ ] Variantes de `knowledge.item.ItemBook.Book`: `STATISTICS`, `CALENDAR`.
+- [ ] Variantes de `mining.block.BlockDirt.TextureStyle`: `BLANK`, `INNER`, `VERTICAL`, `HORIZONTAL`, `OUTER`.
+- [ ] Variantes de `mining.block.BlockElevator.Elevator`: `EMPTY`, `JUNK`.
+- [ ] Variantes de `mining.block.BlockLadder.Ladder`: `WOOD`, `DECORATIVE`.
+- [ ] Variantes de `mining.block.BlockOre.Ore`: `ROCK`, `COPPER`, `SILVER`, `GOLD`, `MYSTRIL`, `GEM`, `EMERALD`, `DIAMOND`, `RUBY`, `AMETHYST`, `TOPAZ`, `JADE`.
+- [ ] Variantes de `mining.block.BlockPortal.Portal`: `MINE_TL`, `MINE_TM`, `MINE_TR`, `MINE_BL`, `MINE_BM`, `MINE_BR`, `MINE_TL_EW`, `MINE_TM_EW`, `MINE_TR_EW`, `MINE_BL_EW`, `MINE_BM_EW`, `MINE_BR_EW`, `INTERNAL_TL`, `INTERNAL_TM`, `INTERNAL_TR`, `INTERNAL_BL`, `INTERNAL_BM`, `INTERNAL_BR`, `INTERNAL_TL_EW`, `INTERNAL_TM_EW`, `INTERNAL_TR_EW`, `INTERNAL_BL_EW`, `INTERNAL_BM_EW`, `INTERNAL_BR_EW`, `STONE_TL`, `STONE_TM`, `STONE_TR`, `STONE_BL`, `STONE_BM`, `STONE_BR`, `STONE_TL_EW`, `STONE_TM_EW`, `STONE_TR_EW`, `STONE_BL_EW`, `STONE_BM_EW`, `STONE_BR_EW`.
+- [ ] Variantes de `mining.block.BlockPortal.Type`: `MINE`, `INTERNAL`, `OVERWORLD`.
+- [ ] Variantes de `mining.block.BlockStone.Type`: `REAL`, `DECORATIVE_BLANK`, `DECORATIVE_PURPLE`, `DECORATIVE_SILVER`, `DECORATIVE_GREEN`, `DECORATIVE_BLUE`, `DECORATIVE_RED`, `LADDER_HOLE`.
+- [ ] Variantes de `mining.item.ItemDarkDrop.DarkDrop`: `FEATHER`, `LEATHER`.
+- [ ] Variantes de `mining.item.ItemDarkSpawner.DarkSpawner`: `COW`, `SHEEP`, `CHICKEN`, `CHICK`.
+- [ ] Variantes de `mining.item.ItemMaterial.Material`: `JUNK`, `COPPER`, `SILVER`, `GOLD`, `MYSTRIL`, `MYTHIC`, `ADAMANTITE`, `AGATE`, `ALEXANDRITE`, `AMETHYST`, `FLUORITE`, `MOON_STONE`, `ORICHALC`, `PERIDOT`, `PINK_DIAMOND`, `RUBY`, `SAND_ROSE`, `TOPAZ`, `JADE`, `COIN_GOLD`, `COIN_SILVER`, `COIN_COPPER`.
+- [ ] Variantes de `mining.item.ItemMiningTool.MiningTool`: `ESCAPE_ROPE`, `ELEVATOR_CABLE`.
+- [ ] Variantes de `npcs.item.ItemNPCTool.NPCTool`: `BLUE_FEATHER`, `NPC_KILLER`, `GIFT`, `SPEECH`, `MAIL`.
+- [ ] Variantes de `quests.block.BlockQuestBoard.QuestBlock`: `BOARD`, `ACTIVE`.
+

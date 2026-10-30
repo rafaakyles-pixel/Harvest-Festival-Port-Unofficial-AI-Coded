@@ -3,7 +3,7 @@
 ## 1. Visão Geral do Projeto
 Portabilidade fiel em gameplay do mod Harvest Festival.
 - **Base original:** Branch 1.12.2-0.6.X do repositório Snownee/Harvest-Festival (fork de joshiejack/Harvest-Festival, licença MIT).
-- **Alvo:** Minecraft 26.2 com NeoForge 26.3.0.99.
+- **Alvo:** Minecraft 26.2 com NeoForge 26.2.0.93.
 - **Estrutura:** Um único mod contendo todas as features, organizado internamente em pacotes divididos por sistema.
 - **Escopo:** Uso pessoal, sem publicação.
 
@@ -11,14 +11,17 @@ Portabilidade fiel em gameplay do mod Harvest Festival.
 Antes de escrever qualquer código, execute os seguintes passos na ordem:
 1. Leia este arquivo, `docs/STATUS.md` e `docs/PORTING_NOTES.md`.
 2. Leia `docs/FEATURES.md` se a tarefa atual envolver a implementação de features.
-3. Consulte apenas o código de referência estritamente necessário para a tarefa.
+3. Leia apenas o catálogo necessário, se houver: - `docs/catalogs/variants.md`: variantes de itens, blocos e ferramentas. - `docs/catalogs/content-registries.md`: identificadores de registro de conteúdo. - `docs/catalogs/quests.md`: missões anotadas. - `docs/catalogs/resources.md`: advancements, edifícios, festivais, árvores e loot tables.
+4. Consulte apenas o código de referência estritamente necessário.
 
 **Atenção:** A fase atual do projeto e os pacotes permitidos estão definidos em `docs/STATUS.md`. Se a tarefa solicitada exigir ações fora da fase atual, interrompa o processo e solicite confirmação explícita antes de prosseguir.
 
 ## 3. Estrutura de Diretórios
-- `reference/original-1.12.2/`: Código do mod original. **Estritamente leitura.** Nunca altere seu conteúdo.
+- `reference/original-1.12.2/`: Código do mod original. **Estritamente leitura.**
 - `src/`: Código novo. Único diretório onde a escrita de código é permitida.
-- `docs/FEATURES.md`: Inventário de features do mod original (com checkboxes de controle).
+- `docs/FEATURES.md`: Inventário de features por sistema, integrações adiadas e cobertura.
+- `docs/catalogs/`: catálogos de consulta, lidos somente quando necessário: 
+	 -  `variants.md`, `content-registries.md`, `quests.md`, `resources.md`.
 - `docs/DEPENDENCIES.md`: Grafo de dependências entre os sistemas do mod.
 - `docs/PORTING_NOTES.md`: Registro de equivalências (1.12.2 → 26.2), mixins utilizados, decisões técnicas e integrações com outros mods.
 - `docs/STATUS.md`: Controle de fases (pronto, em andamento, pendente, decisões em aberto).
@@ -38,7 +41,7 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 - Cada tarefa deve consistir em uma fatia vertical pequena e de escopo fechado, contendo critérios de conclusão verificáveis definidos na própria solicitação.
 
 ## 6. Build e Validação
-- **Obrigatório:** O build deve ser executado antes da conclusão de qualquer tarefa. Corrija falhas antes de reportar.
+- **Obrigatório:** O build deve ser executado antes da conclusão de qualquer tarefa, válido a partir da fase 1. Corrija falhas antes de reportar.
 - **Comandos (Windows):** `.\gradlew.bat build` e `.\gradlew.bat runClient`.
 - Limitações de verificação (exemplo: impossibilidade de abrir o cliente do jogo no ambiente atual) devem ser relatadas explicitamente na resposta.
 - Nunca declare uma tarefa como concluída com sucesso sem ter validado o build.

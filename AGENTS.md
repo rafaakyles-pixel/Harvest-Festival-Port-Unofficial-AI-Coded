@@ -31,6 +31,7 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 - **Mixins:** Devem ser utilizados como último recurso, apenas quando não houver alternativa viável via API ou evento. Todo novo mixin deve ser documentado em `PORTING_NOTES.md` detalhando o alvo e o motivo.
 - **Integrações:** Integrações com mods específicos ficam listadas como "adiadas" em `FEATURES.md` e só devem ser implementadas mediante solicitação explícita.
 - **Escopo:** Não refatore nem altere código que não faça parte do escopo direto da tarefa atual.
+- **Dúvidas:** Se houver ambiguidade sobre comportamento do original, escolha de API ou decisão de escopo, pergunte antes de implementar. Não decida sozinho.
 
 ## 5. Pacotes e Arquitetura
 - A criação de novos pacotes de sistema (ex: plantação, mineração, NPCs) é condicionada à existência prévia e aprovação do arquivo `docs/DEPENDENCIES.md`, com o devido registro em `docs/STATUS.md`.

@@ -2,7 +2,7 @@
 
 ## Escopo e verificação
 
-Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`. Nenhum código novo em `src/`; referência mantida somente para leitura. Inventário em `FEATURES.md` e arquitetura em `DEPENDENCIES.md`, aprovado explicitamente pelo usuário em 30/10/2026. A fase permanece 0; a aprovação não inicia a implementação.
+Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`, mantida somente para leitura. Inventário em `FEATURES.md` e arquitetura em `DEPENDENCIES.md`, aprovado explicitamente pelo usuário em 30/10/2026. Após conferência da cobertura, o usuário autorizou a Fase 1, cujo esqueleto mínimo está implementado e validado. Não há sistemas de gameplay portados.
 
 O alvo é **Minecraft 26.2 com NeoForge 26.2.0.93**, verificado e confirmado pelo usuário em 30/10/2026 e registrado em `AGENTS.md`. As verificações individuais de APIs e de comportamento na versão exata continuam sujeitas às limitações abaixo.
 
@@ -57,10 +57,40 @@ Estas são direções arquiteturais impostas pelas regras do projeto, não códi
 
 Não foi necessário decidir comportamento novo nesta auditoria. Vestígios de funcionalidades planejadas para depois de 0.6.x permanecem fora do escopo confirmado. Ambiguidades de gameplay dentro de 0.6.x exigirão pergunta explícita antes de implementar.
 
+## Fase 1 — esqueleto e ambiente
+
+- Autorização de início recebida em 30/10/2026. A revisão de cobertura não encontrou sistemas/pacotes, missões anotadas ou mixins ausentes dos artefatos da Fase 0.
+- Base técnica consultada: [MDK oficial de Minecraft 26.2 com ModDevGradle](https://github.com/NeoForgeMDKs/MDK-26.2-ModDevGradle/tree/a0340c5454c01e43ccf83977601a4d90afee6e1f). Wrapper e licença do template obtidos desse commit, sem executar comandos Git.
+- Versões fixadas: Minecraft **26.2**, NeoForge **26.2.0.93**, ModDevGradle **2.0.148**, wrapper Gradle **9.2.1** e toolchain **Java 25**, conforme configuração do MDK. JDK local utilizado: Oracle **25.0.5.0.2**.
+- Identificador do mod: `harvestfestival`; pacote mínimo: `harvestfestival`; versão técnica inicial do port: `0.1.0-dev` (independente do limite de conteúdo original 0.6.x).
+- `HarvestFestival` usa `@Mod` e registra somente uma mensagem de carregamento. Não foram acrescentados itens, blocos, sistemas, mixins ou integrações.
+- `src/main/templates/META-INF/neoforge.mods.toml` é expandido pelo build para `build/resources/main/META-INF/neoforge.mods.toml`. As dependências estão restritas às versões exatas confirmadas. Não há valores `${...}` não resolvidos no metadado gerado.
+- Licença MIT do template preservada em `TEMPLATE_LICENSE.txt`. Nenhum código de gameplay da referência foi copiado nesta fase.
+
+### Problemas de ambiente encontrados
+
+1. O ambiente restrito bloqueou resolução de hosts e escrita no cache Gradle do usuário. Downloads/build foram executados com a autorização de acesso correspondente; a referência permaneceu somente leitura.
+2. O Gradle iniciou, mas falhou com `Unable to establish loopback connection`, causado por `UnixDomainSockets.connect` / `Invalid argument: connect`. Direcionar `TEMP` e `TMP` para `build/tmp` no processo resolveu a falha; build e cliente funcionaram com esse ajuste. Nenhuma configuração global do Windows foi alterada.
+3. O log do cliente registra avisos/erro do OSHI sobre contadores Windows `Perflib 009`, além de avisos vanilla de comandos/traduções. Não impediram o carregamento nem a abertura do menu; contadores do sistema não foram modificados.
+
+### Como reproduzir no PowerShell
+
+Executar na raiz do projeto. Ajustar `JAVA_HOME` se o JDK 25 estiver instalado em outro local. O ajuste temporário abaixo foi necessário neste ambiente; suas variáveis valem apenas para a sessão atual do terminal.
+
+```powershell
+$env:JAVA_HOME = 'C:/Program Files/Java/jdk-25.0.5.0.2'
+New-Item -ItemType Directory -Path 'build/tmp' -Force | Out-Null
+$env:TEMP = (Resolve-Path 'build/tmp').Path
+$env:TMP = $env:TEMP
+.\gradlew.bat build
+.\gradlew.bat runClient
+```
+
 ## Validação e limitações
 
-- Revisão documental: sistemas/pacotes confrontados com árvore Java, registros de conteúdo, recursos e configuração de mixins; catálogos complementares em `catalogs/`, indexados por `FEATURES.md`.
-- Builds obrigatórios **a partir da Fase 1**, conforme confirmação do usuário e atualização de `AGENTS.md`. Na auditoria anterior, `.\gradlew.bat build` falhou pela ausência do wrapper; não houve nova tentativa nesta tarefa documental da Fase 0.
-- Limitação atual de ambiente/estrutura: não existem `gradlew.bat`, `build.gradle` ou `build.gradle.kts` na raiz. A criação e validação do esqueleto ficam para a Fase 1; não executar o build dentro da referência somente leitura.
-- `runClient` não executado: o esqueleto da Fase 1 ainda não existe. Não houve validação de gameplay/renderização no jogo.
-- A reorganização documental foi validada por preservação do conteúdo e conferência de arquivos/linhas; não implica build aprovado. A ausência atual do esqueleto não bloqueia a documentação da Fase 0. Nenhuma fase foi avançada.
+- Revisão documental: sistemas/pacotes, 123 missões anotadas e os 2 mixins conferidos; catálogos complementares em `catalogs/`, indexados por `FEATURES.md`.
+- Build do esqueleto: **BUILD SUCCESSFUL**, 30/10/2026, com artefato `build/libs/harvestfestival-0.1.0-dev.jar`. Não há fontes de testes nesta fase; o build não representa teste de gameplay.
+- Cliente: executado por `runClient`, janela `Minecraft NeoForge* 26.2` aberta e menu principal observado, exibindo Minecraft 26.2, NeoForge 26.2.0.93 e 3 mods carregados.
+- `run/logs/latest.log` confirma `Harvest Festival 0.1.0-dev (harvestfestival)` e `Harvest Festival skeleton loaded; no gameplay content registered.`
+- Servidor dedicado, mundo jogável, persistência e gameplay não foram validados nesta fatia. As equivalências de mixins acima continuam sujeitas à verificação quando seus sistemas forem implementados.
+- Fase 1 validada; a Fase 2 depende de autorização e tarefa com escopo fechado.

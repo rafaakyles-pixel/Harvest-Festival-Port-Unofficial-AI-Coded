@@ -1,6 +1,6 @@
 # Dependências entre sistemas
 
-Auditoria de 30/10/2026. **Aprovado pelo usuário em 30/10/2026.** A fase continua sendo 0; a aprovação do grafo não inicia a implementação nem altera as restrições da fase. A distribuição permanece em mod único conforme `AGENTS.md`.
+Auditoria de 30/10/2026. **Aprovado pelo usuário em 30/10/2026.** A Fase 1 foi posteriormente autorizada e seu esqueleto validado; os pacotes permitidos continuam definidos em `STATUS.md`. A aprovação do grafo não autoriza antecipar sistemas das próximas fases. A distribuição permanece em mod único conforme `AGENTS.md`.
 
 ## Leitura do grafo
 

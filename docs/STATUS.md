@@ -60,3 +60,4 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - **Estrutura Interna:** Mod único, organizado internamente com pacotes divididos por sistema.
 - **Arquitetura de Compatibilidade:** Implementação baseada em dados e tags (JSON) desde o dia zero, evitando hardcoding.
 - **Controle de Versão:** Commits, pushes e demais alterações de repositório Git serão executados de forma manual e exclusiva pelo desenvolvedor humano.
+- **Controle de Ambiente (02/11/2026):** Projeto movido para `C:\dev\harvest-festival-port`; diretório `C:\dev` oculto, sem impedir o acesso. Eclipse Temurin 21.0.13+9 instalado para iniciar o Gradle 9.2.1; a toolchain do projeto permanece Java 25. Build e três testes reexecutados com sucesso no novo caminho, usando `TEMP`/`TMP` locais e override `file.encoding=COMPAT`; procedimento atual em `PORTING_NOTES.md`.

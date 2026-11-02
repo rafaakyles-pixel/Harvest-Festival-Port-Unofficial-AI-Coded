@@ -73,7 +73,7 @@ Não foi necessário decidir comportamento novo nesta auditoria. Vestígios de f
 2. O Gradle iniciou, mas falhou com `Unable to establish loopback connection`, causado por `UnixDomainSockets.connect` / `Invalid argument: connect`. Direcionar `TEMP` e `TMP` para `build/tmp` no processo resolveu a falha; build e cliente funcionaram com esse ajuste. Nenhuma configuração global do Windows foi alterada.
 3. O log do cliente registra avisos/erro do OSHI sobre contadores Windows `Perflib 009`, além de avisos vanilla de comandos/traduções. Não impediram o carregamento nem a abertura do menu; contadores do sistema não foram modificados.
 
-### Como reproduzir no PowerShell
+### Como reproduzir no PowerShell (histórico da Fase 1)
 
 Executar na raiz do projeto. Ajustar `JAVA_HOME` se o JDK 25 estiver instalado em outro local. O ajuste temporário abaixo foi necessário neste ambiente; suas variáveis valem apenas para a sessão atual do terminal.
 
@@ -151,7 +151,7 @@ Além do problema de socket já registrado na Fase 1, surgiram duas falhas de am
 - `AgentLoadException` / JAR de instrumentação não encontrado: caminho temporário com acento recebido incorretamente pelo self-attach do FML. Usar a forma curta ASCII do diretório `build/tmp` resolveu. Não houve alteração de configurações globais do Windows, JDK ou Gradle.
 - `generateModMetadata.filteringCharset = 'UTF-8'` mantém a leitura/expansão dos metadados independente da codificação de execução do Gradle.
 
-Procedimento validado nesta máquina (a forma curta é específica deste checkout; conferir antes de reutilizar em outro local):
+Procedimento histórico anterior à mudança para `C:\dev` (não reutilizar os caminhos antigos; procedimento atual ao final deste documento):
 
 ```powershell
 $env:JAVA_HOME = 'C:/Program Files/Java/jdk-25.0.5.0.2'
@@ -167,3 +167,28 @@ $env:TMP = $env:TEMP
 Limitações: servidor dedicado, dois jogadores simultâneos e rejeição de comandos sem permissão não foram validados em execução. A permissão foi conferida na API usada; isolamento do attachment foi testado automaticamente. Os avisos OSHI/Perflib anteriores continuam presentes e não impediram a validação funcional.
 
 Build final de 02/11/2026: **BUILD SUCCESSFUL**, com três testes executados, zero falhas e zero erros. Relatório em `build/reports/tests/test/index.html`; artefato em `build/libs/harvestfestival-0.1.0-dev.jar`. `runClient` também terminou com sucesso após saída normal. A Fase 2 não está integralmente concluída; somente esta fatia foi encerrada.
+
+## Ambiente atual após mudança de pasta — 02/11/2026
+
+- Raiz atual: `C:\dev\harvest-festival-port`. O atributo oculto de `C:\dev` não impediu leitura, build ou execução dos testes.
+- Java do launcher/daemon Gradle: Eclipse Temurin **21.0.13+9**, em `C:\Program Files\Eclipse Adoptium\jdk-21.0.13.9-hotspot`, confirmado por `gradlew.bat --version` com `JAVA_HOME` definido no processo.
+- Toolchain do projeto: **Java 25**, mantida em `build.gradle`. A instalação do Java 21 não altera o alvo de compilação nem substitui a toolchain usada pelos testes/jogo. O JDK 25 continua instalado.
+- Nesta sessão do agente, `JAVA_HOME` e `GRADLE_USER_HOME` não estavam definidos; não presumir que a instalação mudou o Java escolhido por todos os terminais. O cache Gradle continua em `C:\Users\Usuário\.gradle`.
+- A tentativa sem ajuste de temporários falhou com `Unable to establish loopback connection`. Com `TEMP`/`TMP` no novo projeto, o primeiro build passou reaproveitando os testes anteriores. Ao forçar a execução dos testes, o executor falhou; o override de codificação `COMPAT` resolveu. Portanto, o sucesso inicial com tarefas `UP-TO-DATE` não bastava para confirmar o novo ambiente.
+- Validação final: `BUILD SUCCESSFUL`, com os três testes efetivamente reexecutados, zero falhas e zero erros. Não foi executado `runClient` após esta mudança; a validação funcional anterior continua registrada acima.
+- Nenhuma configuração global de Java, Windows ou Gradle foi alterada pelo agente. Os procedimentos antigos foram preservados como histórico.
+
+Procedimento atual validado no PowerShell:
+
+```powershell
+Set-Location 'C:\dev\harvest-festival-port'
+$env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.13.9-hotspot'
+New-Item -ItemType Directory -Path 'build/tmp' -Force | Out-Null
+$env:TEMP = (Resolve-Path 'build/tmp').Path
+$env:TMP = $env:TEMP
+.\gradlew.bat build '-Dorg.gradle.jvmargs=-Xmx2G -Dfile.encoding=COMPAT' --console=plain
+# Para exigir nova execução dos testes mesmo com resultados em cache:
+.\gradlew.bat build test --rerun '-Dorg.gradle.jvmargs=-Xmx2G -Dfile.encoding=COMPAT' --console=plain
+```
+
+O diretório padrão e as raízes de escrita informados pelo aplicativo para este chat ainda apontavam para as pastas antigas/OneDrive nesta conferência. As operações foram direcionadas explicitamente a `C:\dev\harvest-festival-port`, com autorização de execução fora das raízes padrão. Vincular essa pasta como raiz de trabalho no aplicativo evita depender desse acesso adicional em futuras tarefas.

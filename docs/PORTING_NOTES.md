@@ -2,7 +2,7 @@
 
 ## Escopo e verificação
 
-Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`, mantida somente para leitura. Inventário em `FEATURES.md` e arquitetura em `DEPENDENCIES.md`, aprovado explicitamente pelo usuário em 30/10/2026. Após conferência da cobertura, o usuário autorizou a Fase 1, cujo esqueleto mínimo está implementado e validado. Não há sistemas de gameplay portados.
+Auditoria estática em 30/10/2026 da cópia `reference/original-1.12.2/`, mantida somente para leitura. Inventário em `FEATURES.md` e arquitetura em `DEPENDENCIES.md`, aprovado explicitamente pelo usuário em 30/10/2026. Fase 1 validada; primeira fatia da Fase 2 implementada: saldo individual persistente e comandos administrativos, com validação funcional em 02/11/2026.
 
 O alvo é **Minecraft 26.2 com NeoForge 26.2.0.93**, verificado e confirmado pelo usuário em 30/10/2026 e registrado em `AGENTS.md`. As verificações individuais de APIs e de comportamento na versão exata continuam sujeitas às limitações abaixo.
 
@@ -93,4 +93,77 @@ $env:TMP = $env:TEMP
 - Cliente: executado por `runClient`, janela `Minecraft NeoForge* 26.2` aberta e menu principal observado, exibindo Minecraft 26.2, NeoForge 26.2.0.93 e 3 mods carregados.
 - `run/logs/latest.log` confirma `Harvest Festival 0.1.0-dev (harvestfestival)` e `Harvest Festival skeleton loaded; no gameplay content registered.`
 - Servidor dedicado, mundo jogável, persistência e gameplay não foram validados nesta fatia. As equivalências de mixins acima continuam sujeitas à verificação quando seus sistemas forem implementados.
-- Fase 1 validada; a Fase 2 depende de autorização e tarefa com escopo fechado.
+- Fase 1 validada também pelo usuário, que confirmou o funcionamento do cliente e autorizou a continuação em 30/10/2026. A primeira fatia da Fase 2 foi posteriormente aprovada: saldo persistente e comandos administrativos, conforme `STATUS.md`.
+
+## Fase 2 — saldo persistente por jogador
+
+### Comportamento e limites da fatia
+
+- Referências consultadas: `player/stats/Stats`, `StatsServer`, `PlayerLoader` e `player/command/HFCommandGold`. Saldo inicial zero, armazenamento `long`, valores negativos permitidos e soma com overflow de 64 bits preservados, sem teto ou clamp adicional.
+- O original mantém dados por UUID fora da entidade. No port, o attachment `harvestfestival:gold` é salvo pelo ciclo vanilla/NeoForge de dados do jogador. `copyOnDeath()` preserva o ouro na substituição da entidade ao renascer. Não há migração dos arquivos `HF/<UUID>.dat` de 1.12.2 nesta fatia.
+- API de acesso `PlayerGold.get/set/add` recebe `ServerPlayer`; comandos executam no servidor. O saldo ainda não tem espelho de cliente: o resultado é enviado pelas mensagens dos comandos. Sincronização para HUD/GUI pertence à futura fatia de interface.
+- Nenhum item, bloco, tag de conteúdo, mixin, loja, remessa ou integração externa foi acrescentado. Traduções dos comandos em JSON `en_us` e `pt_br`.
+
+### APIs verificadas na versão exata
+
+Conferidas nas fontes locais `neoforge-26.2.0.93-sources.jar` e `build/moddev/artifacts/minecraft-patched-26.2.0.93-sources.jar`, e confirmadas por compilação/execução:
+
+| Necessidade | API usada |
+| --- | --- |
+| Registro do dado | `DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID)` e registro no `IEventBus` do mod |
+| Valor inicial e persistência | `AttachmentType.builder(() -> 0L).serialize(Codec.LONG.fieldOf("gold"))`; nesta versão, `serialize` recebe `MapCodec` |
+| Leitura/alteração | `ServerPlayer.getData/setData` com fornecedor do attachment |
+| Preservação no renascimento | `AttachmentType.Builder.copyOnDeath()` |
+| Comandos | `RegisterCommandsEvent` no `NeoForge.EVENT_BUS`, Brigadier e `EntityArgument.player()` |
+| Permissão administrativa | `Commands.hasPermission(Commands.LEVEL_GAMEMASTERS)`, equivalente ao nível 2 usado pelo original |
+| Mensagens | `CommandSourceStack.sendSuccess` e `Component.translatable` |
+
+O payload é um composto com campo `gold` de 64 bits dentro de `neoforge:attachments` / `harvestfestival:gold`. O salvamento acompanha autosave e saída normal do jogador/mundo; não é uma gravação síncrona de disco a cada comando.
+
+### Comandos e verificação manual
+
+```text
+/hf gold get
+/hf gold set <valor>
+/hf gold add <valor>
+/hf gold <jogador> get
+/hf gold <jogador> set <valor>
+/hf gold <jogador> add <valor>
+```
+
+Alvo omitido usa o executor jogador; console precisa informar um jogador conectado. Nome e seletor de jogador único são aceitos. `get` é a consulta aprovada nesta fatia. `set`/`add` preservam a ordem dos argumentos do original; o parser Brigadier rejeita verbos desconhecidos e números fora de `long` em vez de reproduzir o fallback antigo que tratava qualquer verbo diferente de `set` como adição. O retorno numérico do comando é sucesso (`1`); o saldo completo aparece na mensagem.
+
+Teste realizado em 02/11/2026, por `runClient`, no mundo local `HF Gold Validation` com comandos habilitados:
+
+1. `/hf gold get` retornou `0`.
+2. `/hf gold set 3000000000` e `/hf gold Dev add -25` retornaram `2999999975`.
+3. Após salvar/sair e reabrir o mundo, `/hf gold @s get` retornou `2999999975`.
+4. Após `/kill @s` e renascimento, `/hf gold get` manteve `2999999975`.
+5. Mundo salvo e cliente encerrado normalmente; mensagens e ciclos de salvamento registrados em `run/logs/latest.log`.
+
+### Testes automatizados e ambiente Windows
+
+`PlayerGoldPersistenceTest` usa o carregamento real do mod pela integração `unitTest` do ModDevGradle e JUnit Jupiter 5.13.4, sem incluir testes no JAR de distribuição. Os três testes cobrem saldo inicial/dado ausente, isolamento entre dois titulares e serialização do attachment registrado para arquivo NBT comprimido com releitura por um titular novo. Valores cobertos: `0`, `125`, `-50`, `2147483648`, `Long.MIN_VALUE` e `Long.MAX_VALUE`. Estes testes exercitam armazenamento, não simulam dois clientes conectados.
+
+Além do problema de socket já registrado na Fase 1, surgiram duas falhas de ambiente na inicialização do JUnit:
+
+- `GradleWorkerMain` não encontrado: arquivo de argumentos do Gradle escrito em UTF-8 no caminho de usuário acentuado e interpretado pelo launcher Windows com outra codificação. O override de processo `-Dorg.gradle.jvmargs=-Xmx2G -Dfile.encoding=COMPAT` resolveu o lançamento.
+- `AgentLoadException` / JAR de instrumentação não encontrado: caminho temporário com acento recebido incorretamente pelo self-attach do FML. Usar a forma curta ASCII do diretório `build/tmp` resolveu. Não houve alteração de configurações globais do Windows, JDK ou Gradle.
+- `generateModMetadata.filteringCharset = 'UTF-8'` mantém a leitura/expansão dos metadados independente da codificação de execução do Gradle.
+
+Procedimento validado nesta máquina (a forma curta é específica deste checkout; conferir antes de reutilizar em outro local):
+
+```powershell
+$env:JAVA_HOME = 'C:/Program Files/Java/jdk-25.0.5.0.2'
+New-Item -ItemType Directory -Path 'build/tmp' -Force | Out-Null
+# Consulta somente a forma curta do caminho, sem mover ou apagar arquivos.
+cmd /c 'for %I in ("C:\Users\Usuário\Documents\harvest-festival-port\build\tmp") do @echo %~sI'
+$env:TEMP = 'C:/Users/USURIO~2/DOCUME~1/HARVES~1/build/tmp'
+$env:TMP = $env:TEMP
+.\gradlew.bat build '-Dorg.gradle.jvmargs=-Xmx2G -Dfile.encoding=COMPAT' --console=plain
+.\gradlew.bat runClient '-Dorg.gradle.jvmargs=-Xmx2G -Dfile.encoding=COMPAT' --console=plain
+```
+
+Limitações: servidor dedicado, dois jogadores simultâneos e rejeição de comandos sem permissão não foram validados em execução. A permissão foi conferida na API usada; isolamento do attachment foi testado automaticamente. Os avisos OSHI/Perflib anteriores continuam presentes e não impediram a validação funcional.
+
+Build final de 02/11/2026: **BUILD SUCCESSFUL**, com três testes executados, zero falhas e zero erros. Relatório em `build/reports/tests/test/index.html`; artefato em `build/libs/harvestfestival-0.1.0-dev.jar`. `runClient` também terminou com sucesso após saída normal. A Fase 2 não está integralmente concluída; somente esta fatia foi encerrada.

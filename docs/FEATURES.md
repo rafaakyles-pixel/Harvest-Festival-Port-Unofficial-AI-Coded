@@ -8,7 +8,7 @@
 - [Recursos de comportamento](catalogs/resources.md)
 
 
-Auditoria estática de 30/10/2026, limitada a `reference/original-1.12.2/` (branch de referência declarada: `1.12.2-0.6.X`). Os checkboxes controlam a **portagem**, não a leitura: nenhum conteúdo foi implementado. Classes abaixo pertencem a `joshie.harvest`; os pacotes indicados identificam sua localização em `src/main/java/` do original. Recursos são relativos a `src/main/resources/assets/harvestfestival/` do original.
+Auditoria estática de 30/10/2026, limitada a `reference/original-1.12.2/` (branch de referência declarada: `1.12.2-0.6.X`). Os checkboxes controlam a **portagem**, não a leitura. A primeira fatia de saldo persistente foi implementada e validada em 02/11/2026; entradas agregadas permanecem pendentes enquanto houver funcionalidades não portadas. Classes abaixo pertencem a `joshie.harvest`; os pacotes indicados identificam sua localização em `src/main/java/` do original. Recursos são relativos a `src/main/resources/assets/harvestfestival/` do original.
 
 O inventário separa comportamento ativo, vestígios comentados e integrações **adiadas**. A existência de uma textura ou constante não comprova uma funcionalidade jogável. Os catálogos ao final detalham variantes e missões sem transformar classes de suporte em novas mecânicas.
 
@@ -102,6 +102,8 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 - [ ] Exibição de ingredientes/refeições nos utensílios e pratos — `IngredientMappingEvent`, `MealDefinition`, `SpecialRendererCookware`, `TilePlate`.
 
 ## Economia e lojas (`shops`, `player`, `core`)
+
+- [x] Fatia de saldo individual persistente e comandos administrativos `get`, `set` e `add`, preservado ao salvar/carregar e renascer — originais: `Stats`, `StatsServer`, `PlayerLoader`, `HFCommandGold`; port: `harvestfestival.player.PlayerGold`, `harvestfestival.player.command.GoldCommands`. Sem HUD, lojas ou remessas nesta fatia.
 
 - [ ] Saldo individual, preços, envio de produtos, histórico de remessas e pagamento na virada do dia — `StatsServer`, `ShippingRegistry`, `TileShipping`, `TrackingServer`, `StackSold`, `PlayerTrackerServer`, `TrackingRenderer`.
 - [ ] Lojas de rancho, café, carpinteiro, avicultura, supermercado, minerador, pesca, relojoeiro, cozinha e comerciante; lojas festivas — `HFShops`, `Shop`, `ShopHours`, `ShopHelper`, `ShopData`, `ShopInventory`.

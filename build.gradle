@@ -27,9 +27,27 @@ neoForge {
             sourceSet(sourceSets.main)
         }
     }
+
+    unitTest {
+        enable()
+        testedMod = mods.harvestfestival
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.13.4')
+        }
+    }
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    filteringCharset = 'UTF-8'
     var replaceProperties = [
         minecraft_version: minecraft_version,
         neo_version: neo_version,

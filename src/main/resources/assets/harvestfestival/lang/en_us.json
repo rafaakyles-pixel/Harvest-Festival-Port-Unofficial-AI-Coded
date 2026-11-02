@@ -1,0 +1,5 @@
+{
+  "commands.harvestfestival.gold.get": "%s has %s gold.",
+  "commands.harvestfestival.gold.set": "Set %s's gold balance to %s.",
+  "commands.harvestfestival.gold.add": "Updated %s's gold balance to %s."
+}

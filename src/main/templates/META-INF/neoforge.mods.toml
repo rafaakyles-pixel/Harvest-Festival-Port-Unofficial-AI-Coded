@@ -6,7 +6,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 description='''
 Portabilidade pessoal do Harvest Festival 0.6.x.
-Fase 1: esqueleto sem conteúdo de gameplay.
+Fase 2: saldo individual de ouro persistente e comandos administrativos.
 '''
 
 [[dependencies.${mod_id}]]

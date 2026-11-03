@@ -35,6 +35,8 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 
 ## Calendário, estações, tempo e sono (`calendar`, `core.handlers`)
 
+- [x] Fatia de calendário básico: dia, estação, ano e dia da semana derivados do relógio persistente, avanço diário e comandos administrativos; validação manual confirmada pelo usuário em 02/11/2026 — originais: `CalendarDate`, `CalendarHelper`, `CalendarServer`, `HFCommandDay`, `HFCommandSeason`, `HFCommandYear`, `HFCommandNewDay`; port: `CalendarDate`, `Season`, `WorldCalendar`, `CalendarCommands`. Aniversários, duração configurável, HUD, clima e festivais permanecem pendentes.
+
 - [ ] Datas, dias da semana, quatro estações, anos, aniversários e duração do dia — `CalendarDate`, `Season`, `Weekday`, `CalendarAPI`, `CalendarHelper`, `CalendarServer`, `HFCalendar`.
 - [ ] Previsão e intensidade de sol, chuva, tufão, neve e nevasca — `Weather`, `SeasonData`, `CalendarServer`, `PacketSyncForecast`, `PacketSyncStrength`.
 - [ ] Renderização sazonal, precipitação/neblina e remoção de neve — `WeatherRenderer`, `CalendarRender`, `SnowLoader`, `EntityRendererMixin`.
@@ -218,3 +220,7 @@ Contagem de arquivos `.java` (inclui arquivos comentados; não equivale a classe
 
 Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `src/api/java/net/quetzi/morpheus/api/`: `IMorpheusAPI.java` e `INewDayHandler.java` (integração adiada).
 
+
+## Progresso da infraestrutura diária
+
+- [ ] Evento interno de novo dia implementado; validação manual pendente — originais: `NewDayHandler`, `CalendarHelper`; port: `DailyTransition`, `DailyUpdates`, `NewDayEvent`. Não conclui as fases diárias de blocos nem os consumidores de gameplay.

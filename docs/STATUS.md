@@ -2,7 +2,7 @@
 
 ## Fase Atual
 **Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Permitido agora:** Segunda fatia aprovada: calendário básico persistente, avanço diário e comandos administrativos de data; infraestrutura e testes necessários.
+- **Permitido agora:** Terceira fatia aprovada: evento interno de novo dia; passagem natural, sono e newDay atualizam, ajustes administrativos HF apenas reposicionam a data.
 - **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
 - **Critérios da fatia:** regras de calendário do original, transições de estação/ano corretas, data preservada ao reabrir, comandos administrativos e testes/build aprovados. HUD, clima e festivais fora desta fatia.
 - **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
@@ -20,6 +20,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ## Acompanhamento de Tarefas
 
 ### ✅ Pronto
+- Segunda fatia da Fase 2 concluída em 02/11/2026: calendário básico persistente. Usuário confirmou aprovação dos testes manuais de comandos, troca de estação, virada do ano, salvar/reabrir e passagem natural do tempo. Cinco testes automatizados de calendário e três de ouro aprovados.
 - Estrutura inicial do repositório (`.gitignore`, `AGENTS.md`, `docs/`).
 - Definição das regras permanentes de desenvolvimento em `AGENTS.md`.
 - Auditoria documental da Fase 0: inventário dos 19 diretórios imediatos do Java, 123 missões anotadas, recursos, integrações adiadas e os 2 mixins do original.
@@ -35,10 +36,10 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
 
 ### 🔄 Em Andamento
-- Segunda fatia da Fase 2 aprovada pelo usuário: calendário básico. Código implementado e build aprovado, com cinco testes de calendário e três de ouro. Validação manual de comandos e reabertura de mundo ainda pendente.
+- Terceira fatia implementada: NewDayEvent e detecção por tick do servidor, sem replay ao abrir o mundo. Build e testes automatizados aprovados; validação manual pelo usuário pendente.
 
 ### ⏳ Próximos passos
-- Definir e aprovar a próxima fatia da Fase 2. Calendário, HUD, lojas e remessas ainda não foram implementados.
+- Definir e aprovar a próxima fatia da Fase 2. Validar manualmente as notificações internas de novo dia. HUD, clima, lojas e remessas permanecem pendentes.
 
 ---
 

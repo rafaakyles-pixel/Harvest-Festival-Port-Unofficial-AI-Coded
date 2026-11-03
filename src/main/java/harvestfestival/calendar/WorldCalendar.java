@@ -22,6 +22,7 @@ public final class WorldCalendar {
 
     public static void set(MinecraftServer server, CalendarDate date) {
         server.clockManager().setTotalTicks(clock(server), date.atTimeOfDay(ticks(server)));
+        DailyUpdates.rebase(server);
     }
 
     public static void prepareNextDay(MinecraftServer server) {

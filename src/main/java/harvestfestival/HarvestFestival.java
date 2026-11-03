@@ -1,6 +1,7 @@
 package harvestfestival;
 
 import com.mojang.logging.LogUtils;
+import harvestfestival.calendar.command.CalendarCommands;
 import harvestfestival.player.PlayerGold;
 import harvestfestival.player.command.GoldCommands;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,7 @@ public final class HarvestFestival {
     public HarvestFestival(IEventBus modBus) {
         PlayerGold.register(modBus);
         NeoForge.EVENT_BUS.addListener(GoldCommands::register);
-        LOGGER.info("Harvest Festival loaded with persistent player gold.");
+        NeoForge.EVENT_BUS.addListener(CalendarCommands::register);
+        LOGGER.info("Harvest Festival loaded with persistent player gold and the world calendar.");
     }
 }

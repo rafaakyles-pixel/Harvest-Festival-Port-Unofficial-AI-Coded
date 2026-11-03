@@ -2,9 +2,9 @@
 
 ## Fase Atual
 **Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Permitido agora:** Primeira fatia aprovada: saldo individual persistente e comandos administrativos de consulta/alteração; infraestrutura e testes necessários.
-- **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, conforme `DEPENDENCIES.md` aprovado.
-- **Critérios da fatia:** saldo fiel ao original, individual e preservado ao salvar/carregar; comandos administrativos; build aprovado.
+- **Permitido agora:** Segunda fatia aprovada: calendário básico persistente, avanço diário e comandos administrativos de data; infraestrutura e testes necessários.
+- **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
+- **Critérios da fatia:** regras de calendário do original, transições de estação/ano corretas, data preservada ao reabrir, comandos administrativos e testes/build aprovados. HUD, clima e festivais fora desta fatia.
 - **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
 
 ## Fases do Projeto
@@ -35,7 +35,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
 
 ### 🔄 Em Andamento
-- Nenhuma implementação em andamento; primeira fatia concluída. A Fase 2 continua aberta para definição da próxima fatia.
+- Segunda fatia da Fase 2 aprovada pelo usuário: calendário básico. Código implementado e build aprovado, com cinco testes de calendário e três de ouro. Validação manual de comandos e reabertura de mundo ainda pendente.
 
 ### ⏳ Próximos passos
 - Definir e aprovar a próxima fatia da Fase 2. Calendário, HUD, lojas e remessas ainda não foram implementados.

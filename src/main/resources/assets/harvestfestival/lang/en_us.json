@@ -1,5 +1,20 @@
 {
   "commands.harvestfestival.gold.get": "%s has %s gold.",
   "commands.harvestfestival.gold.set": "Set %s's gold balance to %s.",
-  "commands.harvestfestival.gold.add": "Updated %s's gold balance to %s."
+  "commands.harvestfestival.gold.add": "Updated %s's gold balance to %s.",
+  "commands.harvestfestival.calendar.out_of_range": "That date exceeds the world clock range.",
+  "harvestfestival.season.spring": "Spring",
+  "commands.harvestfestival.calendar.invalid_season": "Unknown season. Use spring, summer, autumn or winter.",
+  "harvestfestival.season.autumn": "Autumn",
+  "commands.harvestfestival.calendar.date": "Day %s of %s, year %s (%s).",
+  "harvestfestival.weekday.tuesday": "Tuesday",
+  "harvestfestival.season.winter": "Winter",
+  "harvestfestival.weekday.friday": "Friday",
+  "harvestfestival.weekday.thursday": "Thursday",
+  "harvestfestival.weekday.wednesday": "Wednesday",
+  "harvestfestival.weekday.monday": "Monday",
+  "harvestfestival.weekday.saturday": "Saturday",
+  "harvestfestival.weekday.sunday": "Sunday",
+  "harvestfestival.season.summer": "Summer",
+  "commands.harvestfestival.calendar.next_day": "Time moved to the last tick of the day. The next day begins when the Overworld clock advances."
 }

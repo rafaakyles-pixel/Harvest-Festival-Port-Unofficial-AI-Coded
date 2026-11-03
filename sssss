@@ -1,0 +1,41 @@
+[33mcommit 8aa54fe77d0fb04763a237959aa8c7a92b56bfb7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Mon Nov 2 18:37:14 2026 -0300
+
+    docs: atualizar caminho do projeto e ambiente de build
+
+[33mcommit f9fb68ce64ca9e498704453e8b70e56ee5a491e3[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Mon Nov 2 16:43:51 2026 -0300
+
+    feat: implementar saldo persistente e comandos de ouro
+
+[33mcommit 7b5657fbc5018e2155b14f67c0800212b34ad16f[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Fri Oct 30 09:25:55 2026 -0300
+
+    build: configurar e validar esqueleto NeoForge da fase 1
+
+[33mcommit 0b9a5413691557cb017a0dca94bc9b1527d50469[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Fri Oct 30 09:09:30 2026 -0300
+
+    fase 0.1: divisão de FEATURES em catalog/
+
+[33mcommit eefcc5d983586506797ee98e1c2dd7a7d170e909[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Fri Oct 30 09:05:32 2026 -0300
+
+    fase 0 iniciada: AGENTS, DEPENDENCIES, FEATURES, PORTING_NOTES e STATUS alterados
+
+[33mcommit 62db779782a05a63e65527f47f34d03a2add526b[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Fri Oct 30 00:42:15 2026 -0300
+
+    Refino das instruções e inicio do vibe code
+
+[33mcommit 090dae1ae18ca62a546e6f758657dd9b77465bd9[m
+Author: Akyles <rafaakyles@gmail.com>
+Date:   Fri Oct 30 00:24:35 2026 -0300
+
+    estrutura inicial do projeto e regras para o Codex em AGENTS

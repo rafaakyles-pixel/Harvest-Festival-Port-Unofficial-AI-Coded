@@ -3,7 +3,9 @@ package harvestfestival.player;
 import com.mojang.serialization.Codec;
 import harvestfestival.HarvestFestival;
 import java.util.function.Supplier;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,6 +18,7 @@ public final class PlayerGold {
             () -> AttachmentType.builder(() -> 0L)
                     .serialize(Codec.LONG.fieldOf("gold"))
                     .copyOnDeath()
+                    .sync((holder, recipient) -> holder == recipient, ByteBufCodecs.LONG)
                     .build());
 
     private PlayerGold() {}
@@ -24,7 +27,8 @@ public final class PlayerGold {
         ATTACHMENTS.register(modBus);
     }
 
-    public static long get(ServerPlayer player) {
+    // On the client, this reads the owner's server-synchronized balance.
+    public static long get(Player player) {
         return player.getData(GOLD);
     }
 

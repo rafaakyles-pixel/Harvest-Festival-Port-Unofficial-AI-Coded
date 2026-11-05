@@ -101,7 +101,7 @@ $env:TMP = $env:TEMP
 
 - Referências consultadas: `player/stats/Stats`, `StatsServer`, `PlayerLoader` e `player/command/HFCommandGold`. Saldo inicial zero, armazenamento `long`, valores negativos permitidos e soma com overflow de 64 bits preservados, sem teto ou clamp adicional.
 - O original mantém dados por UUID fora da entidade. No port, o attachment `harvestfestival:gold` é salvo pelo ciclo vanilla/NeoForge de dados do jogador. `copyOnDeath()` preserva o ouro na substituição da entidade ao renascer. Não há migração dos arquivos `HF/<UUID>.dat` de 1.12.2 nesta fatia.
-- API de acesso `PlayerGold.get/set/add` recebe `ServerPlayer`; comandos executam no servidor. O saldo ainda não tem espelho de cliente: o resultado é enviado pelas mensagens dos comandos. Sincronização para HUD/GUI pertence à futura fatia de interface.
+- Atualizado na quarta fatia: `PlayerGold.get(Player)` permite leitura no cliente; `set/add` continuam recebendo `ServerPlayer`. Comandos executam no servidor. O attachment agora sincroniza o saldo somente ao dono; HUD/GUI permanecem adiados.
 - Nenhum item, bloco, tag de conteúdo, mixin, loja, remessa ou integração externa foi acrescentado. Traduções dos comandos em JSON `en_us` e `pt_br`.
 
 ### APIs verificadas na versão exata
@@ -213,7 +213,7 @@ Regra aprovada pelo usuário: passagem natural, sono e `/hf newDay` notificam um
 
 O evento é único por transição observada, não um laço de compensação por dias pulados. Consumidores futuros podem assinar o evento; cultivos, animais, pagamentos, fases PRE/MAIN/POST de blocos e pausa sem jogadores não foram implementados nesta fatia. Alterações vanilla ou de terceiros executadas dentro de um tick podem gerar uma transição; a supressão administrativa explícita cobre os comandos HF. Não se promete transação durável ou execução exatamente uma vez em caso de crash de futuros consumidores.
 
-Cinco testes novos cobrem transição natural sem repetição, salto de sono na virada do ano, ajuste administrativo, pausa/recuo/reabertura, independência de titulares e ausência de laço por dias pulados. São testes do detector; sono e eventos reais ainda precisam da verificação manual. Não foi repetida automação de interface, conforme preferência do usuário.
+Cinco testes novos cobrem transição natural sem repetição, salto de sono na virada do ano, ajuste administrativo, pausa/recuo/reabertura, independência de titulares e ausência de laço por dias pulados. São testes do detector; a verificação manual de sono e eventos reais foi posteriormente confirmada pelo usuário. Não foi repetida automação de interface, conforme preferência do usuário.
 
 ### Roteiro de verificação manual
 
@@ -225,4 +225,20 @@ Abrir um mundo de teste com comandos e acompanhar `run/logs/latest.log`, procura
 4. Dormir numa cama durante a noite: uma linha nova pela passagem ao dia seguinte.
 5. Salvar/sair e reabrir: nenhuma linha nova apenas pela entrada. Pausar o relógio também não deve gerar repetição.
 
-Aprovação manual pendente; build/testes automatizados não são apresentados como teste físico de sono ou multiplayer.
+Validação manual aprovada pelo usuário: todos os passos do roteiro funcionaram como descrito. O usuário também confirmou build bem-sucedido após executar runClient. Fatia encerrada; isso não amplia a cobertura para servidor dedicado ou multiplayer simultâneo.
+
+## Fase 2 — sincronização individual do ouro
+
+Quarta fatia aprovada pelo usuário e implementada em 02/11/2026. O original `StatsServer.syncGold` envia `PacketSyncGold` apenas ao jogador proprietário, com um long de 64 bits; o cliente atualiza seus próprios dados. O port usa `AttachmentType.Builder.sync((holder, recipient) -> holder == recipient, ByteBufCodecs.LONG)`, mantendo o codec persistente e `copyOnDeath`. Não há pacote próprio nem mensagem cliente → servidor para alterar ouro.
+
+APIs verificadas nas fontes locais de NeoForge 26.2.0.93 e Minecraft correspondente: `AttachmentType.Builder.sync`, `AttachmentSync.syncEntityUpdate`, `syncInitialPlayerAttachments` e `ByteBufCodecs.LONG`. O caminho de atualização inclui o próprio jogador entre os destinatários e aplica o filtro; o envio inicial também usa o filtro. `PlayerList` chama a sincronização inicial ao entrar e renascer; `ServerPlayer` a chama após troca de dimensão. Um attachment ainda ausente conserva o padrão zero em ambos os lados.
+
+`PlayerGold.get(Player)` disponibiliza a leitura do espelho ao futuro HUD. Alterações pela API do mod continuam restritas a `ServerPlayer`. Ler o attachment de outro jogador no cliente não fornece seu saldo real. Nenhuma classe exclusiva do cliente foi importada pelo código comum.
+
+Validação: build aprovado e 13 testes existentes executados sem falhas (3 de persistência do ouro, 5 de calendário e 5 de transição diária). Esses testes são regressões; não verificam envio/recebimento de pacotes. Não foram executados runClient, servidor dedicado ou dois clientes nesta fatia. A implementação está entregue; validação funcional de rede permanece pendente.
+
+### Verificação desta fatia
+
+- Regressão simples pelo usuário: executar runClient, entrar em mundo com comandos, usar `/hf gold set 12345`, `/hf gold add -45`, morrer/renascer e salvar/reabrir. `/hf gold get` deve retornar 12300. Testar também passagem por portal. Esse roteiro verifica estabilidade e saldo no servidor, não o espelho do cliente.
+- Verificação efetiva de rede, a realizar com depurador ou futura interface: inspecionar `PlayerGold.get(Minecraft.getInstance().player)` no cliente após entrada, alteração, renascimento, reconexão e troca de dimensão, esperando o saldo atualizado. Com dois clientes e saldos diferentes, conferir que cada um recebe somente seu próprio attachment de ouro; acompanhar o receptor de SyncAttachmentsPayload para confirmar que não chegaram dados do outro jogador. Não solicitar ao usuário que trate uma consulta administrativa como prova de sincronização.
+- Build: usar o comando de ambiente já registrado acima. HUD e comandos de diagnóstico adicionais não foram introduzidos nesta fatia.

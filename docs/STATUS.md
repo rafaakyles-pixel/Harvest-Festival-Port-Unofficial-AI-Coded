@@ -2,9 +2,9 @@
 
 ## Fase Atual
 **Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Permitido agora:** Terceira fatia aprovada: evento interno de novo dia; passagem natural, sono e newDay atualizam, ajustes administrativos HF apenas reposicionam a data.
+- **Permitido agora:** Quarta fatia aprovada: sincronização de ouro exclusivamente para o próprio jogador, com escrita no servidor e leitura disponível ao cliente.
 - **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
-- **Critérios da fatia:** regras de calendário do original, transições de estação/ano corretas, data preservada ao reabrir, comandos administrativos e testes/build aprovados. HUD, clima e festivais fora desta fatia.
+- **Critérios da fatia:** saldo enviado ao dono na entrada, alterações e renascimento, preservando persistência e isolamento; build aprovado. Recebimento real no cliente e multiplayer exigem validação de execução.
 - **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
 
 ## Fases do Projeto
@@ -20,6 +20,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ## Acompanhamento de Tarefas
 
 ### ✅ Pronto
+- Terceira fatia concluída: atualização diária interna. Usuário confirmou todos os testes manuais do roteiro e build bem-sucedido após runClient; commit realizado pelo usuário.
 - Segunda fatia da Fase 2 concluída em 02/11/2026: calendário básico persistente. Usuário confirmou aprovação dos testes manuais de comandos, troca de estação, virada do ano, salvar/reabrir e passagem natural do tempo. Cinco testes automatizados de calendário e três de ouro aprovados.
 - Estrutura inicial do repositório (`.gitignore`, `AGENTS.md`, `docs/`).
 - Definição das regras permanentes de desenvolvimento em `AGENTS.md`.
@@ -36,10 +37,16 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
 
 ### 🔄 Em Andamento
-- Terceira fatia implementada: NewDayEvent e detecção por tick do servidor, sem replay ao abrir o mundo. Build e testes automatizados aprovados; validação manual pelo usuário pendente.
+- Quarta fatia implementada: ouro sincronizado por attachment NeoForge com filtro de proprietário. Build aprovado em 02/11/2026 e 13 testes de regressão sem falhas. Verificação do recebimento no cliente e isolamento em rede ainda pendentes; os testes existentes cobrem persistência/calendário, não transporte.
 
 ### ⏳ Próximos passos
-- Definir e aprovar a próxima fatia da Fase 2. Validar manualmente as notificações internas de novo dia. HUD, clima, lojas e remessas permanecem pendentes.
+- Validar em execução a sincronização da quarta fatia. Roteiro e limites em PORTING_NOTES.md.
+- Escopos restantes propostos, em ordem, sujeitos à definição e aprovação de cada fatia:
+  1. Aniversário do jogador: regra original de definição, persistência e sincronização individual, sem relações/festivais.
+  2. Preços: contrato de consulta e registros orientados a dados/tags, com conjunto mínimo de conteúdo para validar a economia.
+  3. Remessas: depósito mínimo funcional, propriedade e fila persistente; pagamento diário integrado ao ouro e NewDayEvent, incluindo salvar/reabrir e prevenção de pagamento duplicado. Dividir depósito e liquidação em fatias se necessário.
+  4. Fechamento da base: testes integrados de servidor dedicado, dois jogadores, permissões, reconexão e persistência; revisão dos contratos de registros/dados/rede utilizados e documentação de encerramento.
+- HUD/calendário visual continuam adiados por decisão do usuário. Clima, lojas, catálogos completos de conteúdo e demais sistemas não são antecipados por esta proposta. Configurações e conteúdo de apoio entram apenas quando necessários à fatia aprovada.
 
 ---
 
@@ -62,3 +69,5 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - **Arquitetura de Compatibilidade:** Implementação baseada em dados e tags (JSON) desde o dia zero, evitando hardcoding.
 - **Controle de Versão:** Commits, pushes e demais alterações de repositório Git serão executados de forma manual e exclusiva pelo desenvolvedor humano.
 - **Controle de Ambiente (02/11/2026):** Projeto movido para `C:\dev\harvest-festival-port`; diretório `C:\dev` oculto, sem impedir o acesso. Eclipse Temurin 21.0.13+9 instalado para iniciar o Gradle 9.2.1; a toolchain do projeto permanece Java 25. Build e três testes reexecutados com sucesso no novo caminho, usando `TEMP`/`TMP` locais e override `file.encoding=COMPAT`; procedimento atual em `PORTING_NOTES.md`.
+
+- **Cadência de commits:** Após o commit da terceira fatia, o usuário decidiu acumular as próximas alterações e realizar novo commit somente ao concluir a Fase 2. Validações e documentação continuam por fatia; o agente não executa comandos Git.

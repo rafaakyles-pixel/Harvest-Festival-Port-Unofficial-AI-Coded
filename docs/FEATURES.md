@@ -223,4 +223,8 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 
 ## Progresso da infraestrutura diária
 
-- [ ] Evento interno de novo dia implementado; validação manual pendente — originais: `NewDayHandler`, `CalendarHelper`; port: `DailyTransition`, `DailyUpdates`, `NewDayEvent`. Não conclui as fases diárias de blocos nem os consumidores de gameplay.
+- [x] Evento interno de novo dia implementado; validação manual aprovada pelo usuário — originais: `NewDayHandler`, `CalendarHelper`; port: `DailyTransition`, `DailyUpdates`, `NewDayEvent`. Não conclui as fases diárias de blocos nem os consumidores de gameplay.
+
+## Progresso da sincronização individual
+
+- [ ] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Implementada com API de attachments NeoForge; build e regressões aprovados. Recebimento no cliente e isolamento multiplayer aguardam validação em execução, sem HUD nesta fatia.

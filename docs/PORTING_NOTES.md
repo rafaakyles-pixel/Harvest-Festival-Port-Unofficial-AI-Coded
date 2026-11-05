@@ -235,10 +235,21 @@ APIs verificadas nas fontes locais de NeoForge 26.2.0.93 e Minecraft corresponde
 
 `PlayerGold.get(Player)` disponibiliza a leitura do espelho ao futuro HUD. Alterações pela API do mod continuam restritas a `ServerPlayer`. Ler o attachment de outro jogador no cliente não fornece seu saldo real. Nenhuma classe exclusiva do cliente foi importada pelo código comum.
 
-Validação: build aprovado e 13 testes existentes executados sem falhas (3 de persistência do ouro, 5 de calendário e 5 de transição diária). Esses testes são regressões; não verificam envio/recebimento de pacotes. Não foram executados runClient, servidor dedicado ou dois clientes nesta fatia. A implementação está entregue; validação funcional de rede permanece pendente.
+### Validação informada pelo responsável — 04/11/2026
 
-### Verificação desta fatia
+Fatia concluída: sincronização de saldo de ouro com o jogador proprietário. Validação manual, no jogo, pelo responsável, com runClient em mundo single player.
 
-- Regressão simples pelo usuário: executar runClient, entrar em mundo com comandos, usar `/hf gold set 12345`, `/hf gold add -45`, morrer/renascer e salvar/reabrir. `/hf gold get` deve retornar 12300. Testar também passagem por portal. Esse roteiro verifica estabilidade e saldo no servidor, não o espelho do cliente.
-- Verificação efetiva de rede, a realizar com depurador ou futura interface: inspecionar `PlayerGold.get(Minecraft.getInstance().player)` no cliente após entrada, alteração, renascimento, reconexão e troca de dimensão, esperando o saldo atualizado. Com dois clientes e saldos diferentes, conferir que cada um recebe somente seu próprio attachment de ouro; acompanhar o receptor de SyncAttachmentsPayload para confirmar que não chegaram dados do outro jogador. Não solicitar ao usuário que trate uma consulta administrativa como prova de sincronização.
-- Build: usar o comando de ambiente já registrado acima. HUD e comandos de diagnóstico adicionais não foram introduzidos nesta fatia.
+Cenários validados: `/hf gold set` e `/hf gold add`, com valor consultado por `/hf gold get`; renascer após a morte; atravessar portal e voltar; sair e reabrir o mundo.
+
+Cenários pendentes: servidor dedicado, dois jogadores e reconexão. A consulta administrativa verifica o saldo no servidor; o relato não inclui inspeção direta do espelho no cliente ou do tráfego de rede. A conclusão da fatia registra o aceite do responsável, sem ampliar a cobertura dos cenários relatados.
+
+- Build (última linha de saída fornecida pelo responsável): **não informado**.
+- Testes automatizados (quantidade informada pelo responsável): **não informado**.
+
+### Próxima fatia — remessas e pagamento diário
+
+Escopo definido: depósito de produtos, fila persistente e crédito sem duplicação. Critérios: a fila sobrevive a salvar e reabrir o mundo; cada item é creditado uma única vez. Fora do escopo: preços por tags e aniversário. Nenhuma implementação de remessas foi realizada nesta atualização documental.
+
+Permanecem pendentes: aniversário (definição conforme o original, persistência e sincronização), preços (registros por dados/tags e consulta de valores) e validação integrada (servidor dedicado, dois jogadores, permissões, reconexão e persistência).
+
+A lista de leitura obrigatória está em STATUS.md. Atenção ao caminho do evento diário: `src/main/java/harvestfestival/daily/` não existe nesta árvore; `NewDayEvent`, `DailyUpdates` e `DailyTransition` estão em `src/main/java/harvestfestival/calendar/`. A remessa consumirá o evento existente; não foi realizada mudança de pacote.

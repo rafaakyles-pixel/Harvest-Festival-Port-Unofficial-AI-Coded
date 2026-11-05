@@ -107,6 +107,7 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 
 - [x] Fatia de saldo individual persistente e comandos administrativos `get`, `set` e `add`, preservado ao salvar/carregar e renascer — originais: `Stats`, `StatsServer`, `PlayerLoader`, `HFCommandGold`; port: `harvestfestival.player.PlayerGold`, `harvestfestival.player.command.GoldCommands`. Sem HUD, lojas ou remessas nesta fatia.
 
+- [ ] Próxima fatia: remessas e pagamento diário — depósito de produtos, fila persistente e crédito sem duplicação. Critérios: fila preservada ao salvar/reabrir e cada item creditado uma única vez. Preços por tags e aniversário fora do escopo; permanecem pendentes.
 - [ ] Saldo individual, preços, envio de produtos, histórico de remessas e pagamento na virada do dia — `StatsServer`, `ShippingRegistry`, `TileShipping`, `TrackingServer`, `StackSold`, `PlayerTrackerServer`, `TrackingRenderer`.
 - [ ] Lojas de rancho, café, carpinteiro, avicultura, supermercado, minerador, pesca, relojoeiro, cozinha e comerciante; lojas festivas — `HFShops`, `Shop`, `ShopHours`, `ShopHelper`, `ShopData`, `ShopInventory`.
 - [ ] Horários, dias, estoque, condições por amizade/missão, produtos obtidos/enviados e finais de semana — `OpeningHandler`, `SpecialRulesFriendship`, `SpecialRulesQuest`, `PurchasableStock`, `PurchasableWeekend`, `PurchasableObtained`, `PurchasableRecipeShipped`.
@@ -227,4 +228,4 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 
 ## Progresso da sincronização individual
 
-- [ ] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Implementada com API de attachments NeoForge; build e regressões aprovados. Recebimento no cliente e isolamento multiplayer aguardam validação em execução, sem HUD nesta fatia.
+- [x] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Concluída conforme validação manual do responsável em 04/11/2026, com runClient single player: set/add consultados por get, morte/renascimento, portal e volta, sair/reabrir. Pendentes: servidor dedicado, dois jogadores e reconexão. Build e quantidade de testes automatizados informados pelo responsável: **não informado**.

@@ -2,9 +2,9 @@
 
 ## Fase Atual
 **Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Permitido agora:** Quarta fatia aprovada: sincronização de ouro exclusivamente para o próprio jogador, com escrita no servidor e leitura disponível ao cliente.
+- **Próxima fatia:** Remessas e pagamento diário — depósito de produtos, fila persistente e crédito sem duplicação. Implementação ainda não iniciada.
 - **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
-- **Critérios da fatia:** saldo enviado ao dono na entrada, alterações e renascimento, preservando persistência e isolamento; build aprovado. Recebimento real no cliente e multiplayer exigem validação de execução.
+- **Critérios da próxima fatia:** a fila sobrevive a salvar e reabrir o mundo; cada item é creditado uma única vez. Fora do escopo: preços por tags e aniversário.
 - **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
 
 ## Fases do Projeto
@@ -20,6 +20,9 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ## Acompanhamento de Tarefas
 
 ### ✅ Pronto
+- Quarta fatia concluída em 04/11/2026: sincronização de saldo de ouro com o jogador proprietário. Validação manual no jogo pelo responsável, com runClient em mundo single player: `/hf gold set` e `/hf gold add`, consultados por `/hf gold get`; renascimento após morte; atravessar portal e voltar; sair e reabrir o mundo.
+- Build desta validação (última linha fornecida pelo responsável): **não informado**. Testes automatizados (quantidade informada pelo responsável): **não informado**.
+- Cenários pendentes da quarta fatia: servidor dedicado, dois jogadores e reconexão. Sair e reabrir o mundo single player não encerra a pendência de reconexão.
 - Terceira fatia concluída: atualização diária interna. Usuário confirmou todos os testes manuais do roteiro e build bem-sucedido após runClient; commit realizado pelo usuário.
 - Segunda fatia da Fase 2 concluída em 02/11/2026: calendário básico persistente. Usuário confirmou aprovação dos testes manuais de comandos, troca de estação, virada do ano, salvar/reabrir e passagem natural do tempo. Cinco testes automatizados de calendário e três de ouro aprovados.
 - Estrutura inicial do repositório (`.gitignore`, `AGENTS.md`, `docs/`).
@@ -37,23 +40,27 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
 
 ### 🔄 Em Andamento
-- Quarta fatia implementada: ouro sincronizado por attachment NeoForge com filtro de proprietário. Build aprovado em 02/11/2026 e 13 testes de regressão sem falhas. Verificação do recebimento no cliente e isolamento em rede ainda pendentes; os testes existentes cobrem persistência/calendário, não transporte.
+- Nenhuma implementação em andamento. Sincronização de ouro concluída conforme validação do responsável; Fase 2 permanece aberta.
 
 ### ⏳ Próximos passos
-- Validar em execução a sincronização da quarta fatia. Roteiro e limites em PORTING_NOTES.md.
-- Escopos restantes propostos, em ordem, sujeitos à definição e aprovação de cada fatia:
-  1. Aniversário do jogador: regra original de definição, persistência e sincronização individual, sem relações/festivais.
-  2. Preços: contrato de consulta e registros orientados a dados/tags, com conjunto mínimo de conteúdo para validar a economia.
-  3. Remessas: depósito mínimo funcional, propriedade e fila persistente; pagamento diário integrado ao ouro e NewDayEvent, incluindo salvar/reabrir e prevenção de pagamento duplicado. Dividir depósito e liquidação em fatias se necessário.
-  4. Fechamento da base: testes integrados de servidor dedicado, dois jogadores, permissões, reconexão e persistência; revisão dos contratos de registros/dados/rede utilizados e documentação de encerramento.
-- HUD/calendário visual continuam adiados por decisão do usuário. Clima, lojas, catálogos completos de conteúdo e demais sistemas não são antecipados por esta proposta. Configurações e conteúdo de apoio entram apenas quando necessários à fatia aprovada.
+- Implementar a próxima fatia definida: remessas e pagamento diário, com depósito de produtos, fila persistente e crédito sem duplicação. Critérios: a fila sobrevive a salvar/reabrir; cada item é creditado uma única vez. Preços por tags e aniversário ficam fora do escopo.
+- Pendências: aniversário (definição conforme o original, persistência e sincronização); preços (registros por dados/tags e consulta de valores); validação integrada (servidor dedicado, dois jogadores, permissões, reconexão e persistência).
+- HUD/calendário visual continuam adiados por decisão do usuário.
 
+### Leitura obrigatória para a próxima fatia
+- `AGENTS.md`
+- `docs/STATUS.md`
+- `docs/PORTING_NOTES.md`
+- `docs/DEPENDENCIES.md` — economia e remessas.
+- `docs/FEATURES.md` — economia e shipping.
+- `src/main/java/harvestfestival/player/PlayerGold.java` — padrão de attachment.
+- `src/main/java/harvestfestival/daily/` — caminho solicitado, mas inexistente na conferência de 04/11/2026. O evento diário a consumir está atualmente em `src/main/java/harvestfestival/calendar/NewDayEvent.java`, com `DailyUpdates.java` e `DailyTransition.java` no mesmo diretório; ler esses arquivos. Nenhum arquivo foi movido.
 ---
 
 ## Registro de Decisões
 
 ### ❓ Em Aberto
-- **Validações futuras:** Servidor dedicado, dois jogadores simultâneos e rejeição dos comandos para jogador sem permissão não foram testados em execução. O isolamento de dados tem teste automatizado e os comandos exigem `LEVEL_GAMEMASTERS` no servidor.
+- **Validações futuras:** Servidor dedicado, dois jogadores simultâneos, reconexão e rejeição dos comandos para jogador sem permissão não foram testados em execução. O isolamento de dados tem teste automatizado e os comandos exigem `LEVEL_GAMEMASTERS` no servidor.
 - **Referência Externa:** O conteúdo de `reference/piscary-1.16.5-pirate-treasure/` está fora do escopo até aprovação e direcionamento explícito.
 
 ### 🔒 Tomadas

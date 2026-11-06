@@ -2,9 +2,10 @@
 
 ## Fase Atual
 **Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Próxima fatia:** Remessas e pagamento diário — depósito de produtos, fila persistente e crédito sem duplicação. Implementação ainda não iniciada.
+- **Sexta fatia concluída na implementação:** preços de remessa por item e tag. Build aprovado em 06/11/2026 com 26 testes. Roteiro single player pendente de execução.
+- **Próxima fatia:** a definir pelo responsável, ainda na Fase 2.
 - **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
-- **Critérios da próxima fatia:** a fila sobrevive a salvar e reabrir o mundo; cada item é creditado uma única vez. Fora do escopo: preços por tags e aniversário.
+- **Critério atualizado:** preços por tags, fora do escopo da quinta fatia, passam a compor a sexta. Ordem de consulta: item, tag, SellValue. A fila persiste o valor no depósito. Aniversário segue pendente.
 - **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
 
 ## Fases do Projeto
@@ -20,6 +21,9 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ## Acompanhamento de Tarefas
 
 ### ✅ Pronto
+- Sexta fatia implementada em 06/11/2026. Regras de datapack recarregáveis com prioridade e desempate entre tags, rejeição de regras inválidas e de IDs de item desconhecidos. Sete novos testes aprovados. Cobertura e roteiro em PORTING_NOTES.md.
+- Quinta fatia concluída conforme validação manual informada pelo responsável em 05/11/2026, com `runClient` em mundo single player: `/hf gold set`, colocação da caixa no chão, graveto validado e consulta por `/hf gold get`; valor mantido após morte e destruição da caixa; sair/reabrir o mundo; `/hf newDay` com valores corretos e sem duplicação, inclusive após sair e entrar. O relato não amplia a cobertura para servidor dedicado ou reconexão multiplayer.
+- Quinta fatia implementada em 04/11/2026: caixa `harvestfestival:shipping_box`, depósito manual de uma unidade por clique, attachment persistente `shipping_queue` com `copyOnDeath` e pagamento pelo consumidor de `NewDayEvent`, reutilizando a soma de `PlayerGold`. Sem novos pacotes de sistema. Seis testes novos de remessas; total de 19 testes, zero falhas e zero erros. Build aprovado (`BUILD SUCCESSFUL in 13s`). Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. Roteiro e limitações em `PORTING_NOTES.md`.
 - Quarta fatia concluída em 04/11/2026: sincronização de saldo de ouro com o jogador proprietário. Validação manual no jogo pelo responsável, com runClient em mundo single player: `/hf gold set` e `/hf gold add`, consultados por `/hf gold get`; renascimento após morte; atravessar portal e voltar; sair e reabrir o mundo.
 - Build desta validação (última linha fornecida pelo responsável): **não informado**. Testes automatizados (quantidade informada pelo responsável): **não informado**.
 - Cenários pendentes da quarta fatia: servidor dedicado, dois jogadores e reconexão. Sair e reabrir o mundo single player não encerra a pendência de reconexão.
@@ -40,21 +44,22 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
 
 ### 🔄 Em Andamento
-- Nenhuma implementação em andamento. Sincronização de ouro concluída conforme validação do responsável; Fase 2 permanece aberta.
+- Validação manual da sexta fatia em single player pendente. A Fase 2 permanece aberta.
 
 ### ⏳ Próximos passos
-- Implementar a próxima fatia definida: remessas e pagamento diário, com depósito de produtos, fila persistente e crédito sem duplicação. Critérios: a fila sobrevive a salvar/reabrir; cada item é creditado uma única vez. Preços por tags e aniversário ficam fora do escopo.
-- Pendências: aniversário (definição conforme o original, persistência e sincronização); preços (registros por dados/tags e consulta de valores); validação integrada (servidor dedicado, dois jogadores, permissões, reconexão e persistência).
+- Executar o roteiro de recarga da sexta fatia e registrar o resultado.
+- Pendências: aniversário (definição conforme o original, persistência e sincronização); validação integrada (servidor dedicado, dois jogadores, permissões, reconexão e persistência).
 - HUD/calendário visual continuam adiados por decisão do usuário.
 
-### Leitura obrigatória para a próxima fatia
+### Leitura de preparação da sexta fatia (histórico)
 - `AGENTS.md`
 - `docs/STATUS.md`
 - `docs/PORTING_NOTES.md`
-- `docs/DEPENDENCIES.md` — economia e remessas.
-- `docs/FEATURES.md` — economia e shipping.
-- `src/main/java/harvestfestival/player/PlayerGold.java` — padrão de attachment.
-- `src/main/java/harvestfestival/daily/` — caminho solicitado, mas inexistente na conferência de 04/11/2026. O evento diário a consumir está atualmente em `src/main/java/harvestfestival/calendar/NewDayEvent.java`, com `DailyUpdates.java` e `DailyTransition.java` no mesmo diretório; ler esses arquivos. Nenhum arquivo foi movido.
+- `docs/DEPENDENCIES.md` — limites da base compartilhada e dependências de economia/cultivos.
+- `docs/FEATURES.md` — economia e cultivos.
+- `src/main/java/harvestfestival/player/PlayerShipping.java` e `ShippingQueue.java` — preço provisório e valor fixado no depósito.
+- `src/test/java/harvestfestival/player/PlayerShippingTest.java` — cobertura existente.
+- Consultar apenas os trechos necessários do original: `core/registry/ShippingRegistry.java`, `crops/HFCrops.java` e `api/crops/Crop.java`, sob `reference/original-1.12.2/src/main/java/joshie/harvest/`. Catálogos de variantes e registros somente conforme o escopo definido.
 ---
 
 ## Registro de Decisões

@@ -4,6 +4,8 @@ import com.mojang.logging.LogUtils;
 import harvestfestival.calendar.DailyUpdates;
 import harvestfestival.calendar.command.CalendarCommands;
 import harvestfestival.player.PlayerGold;
+import harvestfestival.player.PlayerShipping;
+import harvestfestival.player.ShippingPrices;
 import harvestfestival.player.command.GoldCommands;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -17,6 +19,10 @@ public final class HarvestFestival {
 
     public HarvestFestival(IEventBus modBus) {
         PlayerGold.register(modBus);
+        PlayerShipping.register(modBus);
+        ShippingContent.register(modBus);
+        NeoForge.EVENT_BUS.addListener(ShippingPrices::register);
+        NeoForge.EVENT_BUS.addListener(PlayerShipping::newDay);
         NeoForge.EVENT_BUS.addListener(DailyUpdates::beforeTick);
         NeoForge.EVENT_BUS.addListener(DailyUpdates::afterTick);
         NeoForge.EVENT_BUS.addListener(DailyUpdates::stopped);

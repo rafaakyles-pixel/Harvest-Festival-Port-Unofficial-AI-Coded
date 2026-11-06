@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
@@ -37,7 +38,11 @@ public final class PlayerGold {
     }
 
     public static void add(ServerPlayer player, long amount) {
+        addTo(player, amount);
+    }
+
+    static void addTo(IAttachmentHolder holder, long amount) {
         // Preserve the original signed-long arithmetic, including negative values and overflow.
-        set(player, get(player) + amount);
+        holder.setData(GOLD, holder.getData(GOLD) + amount);
     }
 }

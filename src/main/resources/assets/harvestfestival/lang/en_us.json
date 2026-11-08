@@ -1,4 +1,7 @@
 {
+  "commands.harvestfestival.birthday.date": "%s's birthday: day %s of %s.",
+  "commands.harvestfestival.birthday.absent": "%s has no birthday date.",
+  "commands.harvestfestival.birthday.test": "Is it %s's birthday on the queried date: %s.",
   "block.harvestfestival.shipping_box": "Shipping Box",
   "commands.harvestfestival.gold.get": "%s has %s gold.",
   "commands.harvestfestival.gold.set": "Set %s's gold balance to %s.",

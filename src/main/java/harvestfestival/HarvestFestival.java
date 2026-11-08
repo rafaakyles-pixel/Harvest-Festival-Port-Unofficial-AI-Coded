@@ -2,6 +2,10 @@ package harvestfestival;
 
 import com.mojang.logging.LogUtils;
 import harvestfestival.calendar.DailyUpdates;
+import harvestfestival.calendar.NpcBirthdays;
+import harvestfestival.calendar.command.NpcBirthdayCommands;
+import harvestfestival.player.PlayerBirthday;
+import harvestfestival.player.command.BirthdayCommands;
 import harvestfestival.calendar.command.CalendarCommands;
 import harvestfestival.player.PlayerGold;
 import harvestfestival.player.PlayerShipping;
@@ -19,6 +23,10 @@ public final class HarvestFestival {
 
     public HarvestFestival(IEventBus modBus) {
         PlayerGold.register(modBus);
+        PlayerBirthday.register(modBus);
+        NeoForge.EVENT_BUS.addListener(NpcBirthdays::register);
+        NeoForge.EVENT_BUS.addListener(BirthdayCommands::register);
+        NeoForge.EVENT_BUS.addListener(NpcBirthdayCommands::register);
         PlayerShipping.register(modBus);
         ShippingContent.register(modBus);
         NeoForge.EVENT_BUS.addListener(ShippingPrices::register);

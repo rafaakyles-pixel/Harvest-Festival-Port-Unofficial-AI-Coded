@@ -1,4 +1,7 @@
 {
+  "commands.harvestfestival.birthday.date": "Aniversário de %s: dia %s de %s.",
+  "commands.harvestfestival.birthday.absent": "%s está sem data de aniversário.",
+  "commands.harvestfestival.birthday.test": "É aniversário de %s na data consultada: %s.",
   "block.harvestfestival.shipping_box": "Caixa de remessas",
   "commands.harvestfestival.gold.get": "%s tem %s de ouro.",
   "commands.harvestfestival.gold.set": "Saldo de ouro de %s definido como %s.",

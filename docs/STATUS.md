@@ -1,20 +1,20 @@
 # Controle de estado, acompanhamento de tarefas e registro de decisões do projeto. O avanço de fases e a aprovação de artefatos devem ser registrados obrigatoriamente neste arquivo.
 
 ## Fase Atual
-**Fase 2: Base Compartilhada** — continuação autorizada pelo usuário em 30/10/2026, após confirmar pessoalmente o funcionamento do cliente da Fase 1.
-- **Sexta fatia concluída:** preços de remessa por item e tag. Build aprovado em 06/11/2026 com 26 testes. O responsável executou os passos 1 a 6 com runClient em mundo single player em 06/11/2026, sem erros.
-- **Sétima fatia concluída (08/11/2026):** base de aniversários do jogador e tabela de NPCs por datapack, com correção da mensagem `true`/`false` e validação em single player. O responsável confirmou que a ausência persiste após limpar, salvar e reabrir. Cobertura efetivamente observada e limites registrados em `PORTING_NOTES.md`; validação integrada permanece pendente.
-- **Pacotes permitidos:** `harvestfestival`, `harvestfestival.player` e `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`, conforme `DEPENDENCIES.md` aprovado.
-- **Critério atualizado:** preços por tags compõem a sexta fatia. A sétima entrega apenas dados de aniversário, persistência, sincronização e comandos administrativos; efeitos e escolha pelo jogador ficam adiados.
-- **Bloqueado:** Antecipação de sistemas de fases posteriores e alterações no código de referência.
+**Fase 3: Sistemas** — avanço autorizado explicitamente pelo responsável em 08/11/2026. Fase 2 e oitava fatia concluídas com ressalva do cenário 8.
+- **Aceite:** cenários 1–7 e 9 aceitos conforme a cobertura e limitações da tabela. Mantido o comportamento offline observado: remessas pagam na próxima virada com o jogador conectado; nenhuma correção solicitada.
+- **Pendência obrigatória:** cenário 8 permanece **não executado**, a verificar no primeiro consumidor cliente (HUD/interface): ouro e aniversário do titular, isolamento entre jogadores, atualização, limpeza e reconexão. Mensagens administrativas e testes de codec não comprovam o espelho.
+- **Pacotes já aprovados:** `harvestfestival`, `harvestfestival.player`, `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`. Nenhum novo pacote criado nesta transição.
+- **Próxima implementação:** definir uma fatia vertical pequena da Fase 3 com critérios verificáveis, conforme `DEPENDENCIES.md`; registrar os novos pacotes quando a fatia for definida.
+- **Limites:** referência somente leitura; integrações específicas adiadas; esta transição não implementa sistemas nem autoriza HUD ou efeitos de aniversário.
 
 ## Fases do Projeto
 O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é permitido após o registro explícito da mudança de fase neste arquivo.
 
 0. [x] **Auditoria:** Inventário de features, criação do grafo de dependências e levantamento de mixins/integrações.
 1. [x] **Esqueleto (validado):** Configuração do projeto NeoForge 26.2 compilando e abrindo o jogo com o mod carregado, sem conteúdo; funcionamento confirmado pelo usuário.
-2. [ ] **Base Compartilhada (Atual):** Implementação de registros, dados do jogador, calendário/estações e economia básica, em fatias fechadas.
-3. [ ] **Sistemas:** Implementação modular de sistemas (um por vez), seguindo estritamente a ordem definida em `DEPENDENCIES.md`.
+2. [x] **Base Compartilhada:** concluída pelo responsável em 08/11/2026, com cenário 8 transportado como pendência obrigatória.
+3. [ ] **Sistemas (Atual):** Implementação modular de sistemas (um por vez), seguindo estritamente a ordem definida em `DEPENDENCIES.md`.
 4. [ ] **Polimento:** Integrações com outros mods e refinamentos finais.
 
 ---
@@ -48,11 +48,11 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 
 ### 🔄 Em Andamento
 - A sincronização do attachment de aniversário com o cliente foi verificada só por teste de codificação de rede (data e ausência), sem inspeção do espelho cliente. A verificação real fica pendente na validação integrada. A mensagem administrativa `true`/`false` foi observada no cliente, o que não comprova o espelho do attachment.
-- A Fase 2 permanece aberta. Servidor dedicado, multiplayer e reconexão continuam pendentes.
+- Fase 3 autorizada; primeira fatia ainda não definida. Espelho cliente permanece pendente.
 
 ### ⏳ Próximos passos
-- Definir a próxima fatia fechada da Fase 2; nenhuma transição de fase autorizada nesta conclusão.
-- Pendências: validação integrada (servidor dedicado, dois jogadores, permissões, reconexão, persistência e espelho cliente do aniversário); escolha futura da data pelo jogador e efeitos de aniversário continuam adiados.
+- Definir a primeira fatia fechada da Fase 3 conforme DEPENDENCIES.md.
+- Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.
 - HUD/calendário visual continuam adiados por decisão do usuário.
 
 ### Leitura utilizada na sétima fatia — aniversário do jogador
@@ -65,7 +65,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ## Registro de Decisões
 
 ### ❓ Em Aberto
-- **Validações futuras:** Servidor dedicado, dois jogadores simultâneos, reconexão e rejeição dos comandos para jogador sem permissão não foram testados em execução. O isolamento de dados tem teste automatizado e os comandos exigem `LEVEL_GAMEMASTERS` no servidor.
+- **Validação integrada:** cenário 8 pendente; demais resultados aceitos pelo responsável em 08/11/2026, sem ampliar a cobertura observada.
 - **Referência Externa:** O conteúdo de `reference/piscary-1.16.5-pirate-treasure/` está fora do escopo até aprovação e direcionamento explícito.
 
 ### 🔒 Tomadas
@@ -81,3 +81,55 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - **Arquitetura de Compatibilidade:** Implementação baseada em dados e tags (JSON) desde o dia zero, evitando hardcoding.
 - **Controle de Versão:** Commits, pushes e demais alterações de repositório Git serão executados de forma manual e exclusiva pelo desenvolvedor humano.
 - **Controle de Ambiente (02/11/2026):** Projeto movido para `C:\dev\harvest-festival-port`; diretório `C:\dev` oculto, sem impedir o acesso. Eclipse Temurin 21.0.13+9 instalado para iniciar o Gradle 9.2.1; a toolchain do projeto permanece Java 25. Build e três testes reexecutados com sucesso no novo caminho, usando `TEMP`/`TMP` locais e override `file.encoding=COMPAT`; procedimento atual em `PORTING_NOTES.md`.
+
+## Oitava fatia — tabela de validação integrada (08/11/2026)
+
+Plano aprovado e preparação executada. A tabela distingue verificação do agente e ações do responsável; nenhuma expectativa abaixo equivale a resultado observado. Cenário parcialmente executado mantém `não executado` até completar suas subetapas.
+
+| Nº | Cenário | Resultado | Quem executou | Evidência e pendência |
+| --- | --- | --- | --- | --- |
+| 1 | Servidor dedicado com mod, sem erro | passou | Agente | Log dedicado: carregamento HF; `Done (0.244s)!` às 11:33:55; `list`, `hf day` e consulta de NPC responderam às 11:33:57. Nenhum ERROR/FATAL na subida e inspeção até 11:44. Às 11:51:25 houve Connection reset após queda nativa do cliente; servidor permaneceu ativo. Avisos e ocorrência registrados nas notas. |
+| 2 | Dois clientes com nomes distintos | passou | Responsável conectou; agente verificou | HFTester2 entrou às 11:43:35; HFTester1 às 11:43:49; `list` às 11:44:17: `There are 2 of a max of 2 players online: HFTester2, HFTester1`. Primeiro runClient2 falhou nativamente; repetição conectou. |
+| 3 | Isolamento de ouro, aniversário e fila | passou | Responsável depositou; agente preparou e inspecionou | `data get entity <nome> "neoforge:attachments"` às 11:45:36: HFTester1 ouro 100, primavera 5, fila de um graveto a 25; HFTester2 ouro 200, inverno 20, fila de um graveto a 40. Dados distintos preservados simultaneamente. |
+| 4 | Permissões dos três comandos | passou | Responsável (gold sem OP) e agente (demais consultas) | Cliente HFTester2: get de gold, birthday e npcBirthday negados sem OP; os três aceitos após op nível 2 (11:49–11:50). Variantes mutadoras/alvo explícito do roteiro ampliado não foram executadas nesta comparação; não ampliar a cobertura. |
+| 5 | Reconexão preserva ouro, aniversário e fila | passou | Agente (HFTester2), responsável (HFTester1); agente inspecionou | HFTester2 saiu/entrou às 11:50:38/11:50:51: 200, inverno 20, fila 40. HFTester1 reconectou após queda nativa às 11:52:29: 100, primavera 5, fila 25. NBT e comandos às 11:50:59/11:52:41. |
+| 6 | Relógio único e pagamentos sem duplicação | passou | Agente (viradas/inspeção e consulta inicial HFTester2), responsável (consultas dos clientes) | Ambos mostraram primavera 1/ano 1; viradas às 11:52:52 e 11:53:07 geraram uma atualização cada. Ouro 125/240, filas vazias; segunda virada manteve valores. Logs dos clientes às 11:53:36 e 11:53:43: primavera 3/ano 1. |
+| 7 | Remessa offline na virada | passou | Responsável depositou/desconectou/reconectou HFTester2; agente executou viradas e inspeções | Observação concluída: não pagou offline nem ao reconectar (240 e fila 40); pagou na próxima virada conectado (280 e fila vazia às 16:36:59). Leituras offline precedidas de save-all. Aceito no encerramento pelo responsável em 08/11/2026; não constitui prova adicional de paridade. |
+| 8 | Espelho cliente e isolamento do titular | não executado | — | Sem depurador preparado. Pendência obrigatória quando houver primeiro consumidor cliente (HUD/interface). Mensagens administrativas e testes de codec não comprovam o espelho. |
+| 9 | Preços e aniversários por datapack e reload | passou | Responsável depositou; agente operou console/pack e inspecionou | Às 16:45:58, fila real 100+140+140 (segundo clique extra informado pelo responsável); crédito 380 levou 280 a 660. Nova virada manteve 660. Pack desativado/reload: depósito a 100, saldo 760 e fila vazia às 16:46:49. NPC retornou primavera 15 e sibling ausente; regras inválidas e continuidade da válida verificadas antes. |
+
+### Build e evidências desta preparação
+
+- Build com reexecução de testes: `BUILD SUCCESSFUL in 16s`; 38 testes, zero falhas, erros ou ignorados, tarefa `test` executada. `run/validation/build.log`.
+- Build final após ajuste de console: `BUILD SUCCESSFUL in 8s`; 38 testes nos XML, `test UP-TO-DATE`, reutilizando a execução acima. `run/validation/build-final.log`.
+- Última linha literal do build final:
+
+```text
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+```
+
+- Logs dos jogos: `run/server/logs/latest.log`, `run/client1/logs/latest.log`, `run/client2/logs/latest.log`. Roteiro completo e detalhes do ambiente em `PORTING_NOTES.md`, seção da oitava fatia.
+- Ocorrência de ambiente: primeiro segundo cliente encerrou às 11:34:55 com `EXCEPTION_ACCESS_VIOLATION` em `glfw.dll`, fora da JVM; `run/client2/hs_err_pid15572.log`. Reiniciado sem alteração de código; posteriormente conectado. Causa não determinada; nenhum bug do mod diagnosticado ou corrigido.
+- Pendências: cenário 8 obrigatório no primeiro consumidor cliente; aceite da Fase 2 e avanço à Fase 3 registrados em 08/11/2026. Variantes adicionais de permissão do roteiro ampliado não foram exercitadas; consultas dos três comandos passaram. Falhas nativas de GLFW registradas sem causa comprovada. Servidor encerrado normalmente por stop às 16:46:49, com salvamento de jogadores e todas as dimensões.
+- **Fase 2 encerrada pelo responsável, exceto cenário 8; Fase 3 autorizada em 08/11/2026.**
+
+### Encerramento da execução desta fatia — 08/11/2026
+
+- Cenários 1–7 e 9 observados, com limites explícitos na tabela; cenário 8 pendente obrigatório. O cenário 7 foi posteriormente aceito pelo responsável no encerramento, sem alteração de comportamento.
+- Build mais recente: `BUILD SUCCESSFUL in 6s`; 38 testes, zero falhas, erros ou ignorados; `test UP-TO-DATE`, reutilizando a reexecução desta sessão. Saída `run/validation/build-conclusion.log`; última linha literal igual à transcrita acima.
+- Servidor encerrado por `save-all` e `stop` às 16:46:49; jogadores e todas as dimensões salvos; runServer terminou com sucesso. Evidência `run/validation/server-final.log`.
+- Nenhum bug do mod corrigido e nenhuma feature criada. **Fase 2 posteriormente encerrada pelo responsável com ressalva do cenário 8; Fase 3 autorizada.**
+
+## Aceite e transição — 08/11/2026
+
+O responsável deu a Fase 2 e a oitava fatia como concluídas, exceto o cenário 8, e autorizou seguir à Fase 3 antes dessa verificação. Esta decisão sucede os registros históricos que mantinham a fase aberta ou aguardavam aceite do comportamento offline. Mantida a regra observada de pagamento na próxima virada com o jogador conectado, sem correção e sem alegar prova adicional de paridade.
+
+O cenário 8 continua não executado e obrigatório no primeiro consumidor cliente (HUD/interface): ouro/aniversário do titular, isolamento entre jogadores, atualização, limpeza e reconexão. Mensagens administrativas e testes de codec não comprovam o espelho. Avançar não elimina a pendência nem autoriza implementar HUD agora.
+
+Somente STATUS.md e PORTING_NOTES.md atualizados. Nenhum código, pacote ou sistema novo; primeira fatia da Fase 3 ainda precisa de escopo e critérios verificáveis conforme DEPENDENCIES.md. Limitações dos testes e incidentes nativos de GLFW preservados. Nenhum comando Git ou controle de interface realizado.
+
+Validação documental da transição: `BUILD SUCCESSFUL in 6s`; 38 testes nos XML, zero falhas, erros ou ignorados. `test UP-TO-DATE`, sem nova execução de testes. Comando: `.\gradlew.bat build '-Dorg.gradle.jvmargs=-Xmx1G -Dfile.encoding=COMPAT' --max-workers=2 --console=plain`; saída em `run/validation/build-phase3-transition.log`. Nenhum cliente aberto nesta atualização. Última linha literal:
+
+```text
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+```

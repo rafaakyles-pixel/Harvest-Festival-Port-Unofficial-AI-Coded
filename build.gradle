@@ -15,10 +15,26 @@ neoForge {
     runs {
         client {
             client()
+            gameDirectory = layout.projectDirectory.dir('run/client1')
+            programArgument '--username'
+            programArgument 'HFTester1'
+            jvmArgument '-Xms512m'
+            jvmArgument '-Xmx3G'
+        }
+        client2 {
+            client()
+            gameDirectory = layout.projectDirectory.dir('run/client2')
+            programArgument '--username'
+            programArgument 'HFTester2'
+            jvmArgument '-Xms512m'
+            jvmArgument '-Xmx3G'
         }
         server {
             server()
+            gameDirectory = layout.projectDirectory.dir('run/server')
             programArgument '--nogui'
+            jvmArgument '-Xms512m'
+            jvmArgument '-Xmx2G'
         }
     }
 
@@ -36,6 +52,10 @@ neoForge {
 
 repositories {
     mavenCentral()
+}
+
+tasks.named('runServer', JavaExec) {
+    standardInput = System.in
 }
 
 testing {

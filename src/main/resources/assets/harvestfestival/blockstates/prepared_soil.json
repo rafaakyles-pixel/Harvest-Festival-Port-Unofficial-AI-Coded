@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "watered=false": {
+      "model": "harvestfestival:block/prepared_soil"
+    },
+    "watered=true": {
+      "model": "harvestfestival:block/prepared_soil_watered"
+    }
+  }
+}

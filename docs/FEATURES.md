@@ -60,6 +60,7 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 
 ## Ferramentas, esforço e efeitos (`tools`, `core.base.item`)
 
+- [x] Fatia 9, mínimo implementado: enxada/regador de nível único, ação sobre bloco por regras/tags, solo preparado com marca persistente de rega e reserva de 128 unidades no item. Testes/build aprovados; aceite manual single player pendente. Não conclui ferramentas por nível, esforço ou cultivo. Contrato e roteiro em `PORTING_NOTES.md`.
 - [ ] Machado, martelo, enxada, foice e regador por nível; carga e área de ação, derrubada de árvores, reserva de água — `HFTools`, `ItemAxe`, `ItemHammer`, `ItemHoe`, `ItemSickle`, `ItemWateringCan`, `TreeTasks`, `ItemTool`, `ItemToolChargeable`, `ItemToolSmashing`, `ITiered.ToolTier`.
 - [ ] Experiência/níveis, dano, melhoria, conserto e ferramentas amaldiçoadas/abençoadas — `ToolHelper`, `ItemTool`, `QuestBlacksmithing`, `QuestPriestRepair`, `QuestBlessing`, `QuestToolTrader`.
 - [ ] Consumo de fome, fadiga, exaustão, maldição, desmaio, retorno à cama e recuperação pelo sono — `ToolEvents`, `ToolHelper`, `HFPotion`, `HFTools`, `SleepHandler`.

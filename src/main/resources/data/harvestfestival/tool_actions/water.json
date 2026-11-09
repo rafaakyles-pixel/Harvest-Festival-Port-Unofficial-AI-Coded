@@ -1,0 +1,13 @@
+{
+  "action": "water",
+  "target_tag": "harvestfestival:waterable",
+  "requires_properties": {
+    "watered": "false"
+  },
+  "result": {
+    "block": "harvestfestival:prepared_soil",
+    "properties": {
+      "watered": "true"
+    }
+  }
+}

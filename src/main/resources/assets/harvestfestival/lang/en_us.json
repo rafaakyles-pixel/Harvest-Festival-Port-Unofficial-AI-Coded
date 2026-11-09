@@ -1,4 +1,7 @@
 {
+  "item.harvestfestival.hoe": "Hoe",
+  "item.harvestfestival.watering_can": "Watering Can",
+  "block.harvestfestival.prepared_soil": "Prepared Soil",
   "commands.harvestfestival.birthday.date": "%s's birthday: day %s of %s.",
   "commands.harvestfestival.birthday.absent": "%s has no birthday date.",
   "commands.harvestfestival.birthday.test": "Is it %s's birthday on the queried date: %s.",

@@ -1,4 +1,7 @@
 {
+  "item.harvestfestival.hoe": "Enxada",
+  "item.harvestfestival.watering_can": "Regador",
+  "block.harvestfestival.prepared_soil": "Solo preparado",
   "commands.harvestfestival.birthday.date": "Aniversário de %s: dia %s de %s.",
   "commands.harvestfestival.birthday.absent": "%s está sem data de aniversário.",
   "commands.harvestfestival.birthday.test": "É aniversário de %s na data consultada: %s.",

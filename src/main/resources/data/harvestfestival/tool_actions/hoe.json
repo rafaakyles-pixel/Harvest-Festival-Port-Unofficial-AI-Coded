@@ -1,0 +1,11 @@
+{
+  "action": "hoe",
+  "target_tag": "harvestfestival:tillable",
+  "requires_air_above": true,
+  "result": {
+    "block": "harvestfestival:prepared_soil",
+    "properties": {
+      "watered": "false"
+    }
+  }
+}

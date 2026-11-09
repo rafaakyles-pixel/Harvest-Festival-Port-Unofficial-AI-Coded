@@ -11,6 +11,8 @@ import harvestfestival.player.PlayerGold;
 import harvestfestival.player.PlayerShipping;
 import harvestfestival.player.ShippingPrices;
 import harvestfestival.player.command.GoldCommands;
+import harvestfestival.tools.ToolContent;
+import harvestfestival.tools.ToolActionRules;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
@@ -22,6 +24,8 @@ public final class HarvestFestival {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public HarvestFestival(IEventBus modBus) {
+        ToolContent.register(modBus);
+        NeoForge.EVENT_BUS.addListener(ToolActionRules::register);
         PlayerGold.register(modBus);
         PlayerBirthday.register(modBus);
         NeoForge.EVENT_BUS.addListener(NpcBirthdays::register);

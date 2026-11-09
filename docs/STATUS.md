@@ -4,8 +4,10 @@
 **Fase 3: Sistemas** — avanço autorizado explicitamente pelo responsável em 08/11/2026. Fase 2 e oitava fatia concluídas com ressalva do cenário 8.
 - **Aceite:** cenários 1–7 e 9 aceitos conforme a cobertura e limitações da tabela. Mantido o comportamento offline observado: remessas pagam na próxima virada com o jogador conectado; nenhuma correção solicitada.
 - **Pendência obrigatória:** cenário 8 permanece **não executado**, a verificar no primeiro consumidor cliente (HUD/interface): ouro e aniversário do titular, isolamento entre jogadores, atualização, limpeza e reconexão. Mensagens administrativas e testes de codec não comprovam o espelho.
-- **Pacotes já aprovados:** `harvestfestival`, `harvestfestival.player`, `harvestfestival.player.command`, `harvestfestival.calendar` e `harvestfestival.calendar.command`. Nenhum novo pacote criado nesta transição.
-- **Próxima implementação:** definir uma fatia vertical pequena da Fase 3 com critérios verificáveis, conforme `DEPENDENCIES.md`; registrar os novos pacotes quando a fatia for definida.
+- **Pacotes já aprovados:** `harvestfestival`, `harvestfestival.player`, `harvestfestival.player.command`, `harvestfestival.calendar`, `harvestfestival.calendar.command` e `harvestfestival.tools` (produção e testes; aprovado em 09/11/2026).
+- **Fatia 9 em andamento:** plano aprovado em 09/11/2026 e implementação entregue: enxada/regador de nível único, solo mínimo `prepared_soil`, regras por tags e água persistente no item. Build e testes aprovados; aceite manual single player pendente. Cultivo permanece na fatia 10.
+- **Aceite explícito do responsável:** remessa de jogador offline na virada só é paga na próxima virada com ele conectado; comportamento adotado.
+- **Critério de aceite futuro obrigatório:** o cenário 8 (espelho cliente de ouro e aniversário) deve integrar os critérios de aceite da primeira fatia que introduzir HUD ou interface.
 - **Limites:** referência somente leitura; integrações específicas adiadas; esta transição não implementa sistemas nem autoriza HUD ou efeitos de aniversário.
 
 ## Fases do Projeto
@@ -48,10 +50,10 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 
 ### 🔄 Em Andamento
 - A sincronização do attachment de aniversário com o cliente foi verificada só por teste de codificação de rede (data e ausência), sem inspeção do espelho cliente. A verificação real fica pendente na validação integrada. A mensagem administrativa `true`/`false` foi observada no cliente, o que não comprova o espelho do attachment.
-- Fase 3 autorizada; primeira fatia ainda não definida. Espelho cliente permanece pendente.
+- Fatia 9 implementada e validada automaticamente; aguarda execução/aceite do roteiro single player em PORTING_NOTES.md. Servidor dedicado e multiplayer pendentes nesta fatia. Espelho cliente de ouro/aniversário permanece pendente obrigatório para a primeira fatia com HUD/interface.
 
 ### ⏳ Próximos passos
-- Definir a primeira fatia fechada da Fase 3 conforme DEPENDENCIES.md.
+- Executar o roteiro single player e registrar o aceite da fatia 9. Definir a fatia 10 de cultivo sem antecipá-la nesta tarefa.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.
 - HUD/calendário visual continuam adiados por decisão do usuário.
 
@@ -133,3 +135,13 @@ Validação documental da transição: `BUILD SUCCESSFUL in 6s`; 38 testes nos X
 ```text
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
 ```
+
+Validação desta preparação documental (09/11/2026): BUILD SUCCESSFUL in 15s; 38 testes nos XML, zero falhas, erros ou ignorados. Tarefa test UP-TO-DATE, sem reexecução nem testes das ferramentas ainda. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. Build executado com TEMP/TMP locais e COMPAT; acesso ao cache Gradle exigiu execução autorizada após bloqueio inicial de escrita no arquivo de lock. runClient não executado; servidor dedicado e multiplayer pendentes para a fatia 9.
+
+## Fatia 9 — entrega automatizada (09/11/2026)
+
+Plano aprovado e pacote harvestfestival.tools criado. Duas ferramentas, solo preparado passivo e regras recarregáveis por tags entregues; nenhuma implementação de cultivo, esforço, coleta, interface ou integração externa. Etapa 4 continua parcialmente aberta para cesta, flores e apoios restantes.
+
+Build: `BUILD SUCCESSFUL in 13s`; 57 testes, sendo 19 novos, zero falhas, erros ou ignorados; tarefa test executada. Relatórios em build/test-results/test e build/reports/tests/test/index.html. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`.
+
+Roteiro concreto single player em PORTING_NOTES.md; runClient não executado nesta implementação. Aceite manual pendente. Servidor dedicado e multiplayer continuam pendentes para a fatia 9. Nenhum comando Git executado.

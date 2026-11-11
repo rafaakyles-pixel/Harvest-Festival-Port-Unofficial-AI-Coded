@@ -1,4 +1,5 @@
 {
+  "tooltip.harvestfestival.watering_can.water": "Water: %s / %s",
   "item.harvestfestival.hoe": "Hoe",
   "item.harvestfestival.watering_can": "Watering Can",
   "block.harvestfestival.prepared_soil": "Prepared Soil",

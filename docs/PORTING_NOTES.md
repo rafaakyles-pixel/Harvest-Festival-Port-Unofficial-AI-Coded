@@ -800,3 +800,38 @@ $env:TMP = $env:TEMP
 8. Datapack: criar `run/client1/saves/<mundo>/datapacks/hf_tools_validation/pack.mcmeta` com `{"pack":{"description":"Validação das ferramentas","min_format":[107,1],"max_format":[107,1]}}`. Criar `data/harvestfestival/tags/block/tillable.json` dentro do pack com `{"replace":true,"values":["minecraft:stone"]}`. `/reload`; se necessário `/datapack enable "file/hf_tools_validation" last`. Enxada agora deve preparar pedra livre e recusar terra. Restaurar a tag para terra ao terminar este passo ou desativar o pack.
 9. No mesmo pack, criar `data/harvestfestival/tool_actions/water.json` contendo apenas `{`. `/reload`: aviso `Ignoring tool action ...water.json` em `run/client1/logs/latest.log`; rega indisponível, sem consumo, e enxada válida continua funcionando. Substituir pelo JSON válido da seção acima e recarregar: rega retorna. Acrescentar uma cópia válida como `duplicate.json`: tentar regar solo seco deve gerar `Ambiguous tool action`, sem mudança ou consumo. Remover a cópia e recarregar: volta a funcionar. Desativar o pack e recarregar: regras/tags originais retornam.
 10. Salvar/sair e encerrar o cliente. Registrar resultados por passo e executar o build novamente. Sair/reabrir single player não encerra a pendência multiplayer.
+
+### Aceite da entrega da fatia 9 — 09/11/2026
+
+O responsável aprovou a entrega implementada. Não informou execução ou resultados do roteiro manual; portanto o aceite não é evidência de validação single player, servidor dedicado ou multiplayer. Essas pendências permanecem explícitas. Nenhum código alterado e nenhuma implementação da fatia 10 iniciada por este aceite.
+
+## Aceite manual da fatia 9 e complemento visual do regador — 09/11/2026
+
+O responsável informou «Teste validado, fatia aprovada». Isso encerra a fatia 9 quanto ao aceite single player, sucedendo o registro anterior que aguardava confirmação. O relato não detalhou resultados individuais por passo e não amplia a cobertura para servidor dedicado ou multiplayer.
+
+### Relato sobre o solo, registrado sem implementação
+
+O responsável observou que o solo não seca com o tempo nem ao passar dos dias, e que pisar nele não o faz retornar à terra. São comportamentos ausentes do bloco passivo aprovado para a fatia 9. A secagem/consumo da marca de rega na atualização diária é pendência essencial para o ciclo de cultivo da fatia 10. Retorno à terra por pisoteio e eventuais outras condições de secagem devem ter comportamento e condições conferidos no original antes de implementar; não presumir equivalência com as regras vanilla ou que caminhar e saltar são a mesma ação. Este complemento somente registra essas pendências, sem alterar o solo.
+
+### Indicadores de água implementados
+
+Pedido adicional autorizado pelo responsável para facilitar os testes. O regador apresenta barra azul no ícone do inventário/hotbar e tooltip traduzido `Água: atual / 128` (`Water: current / 128`). A linha fica vermelha quando vazio e aqua quando possui água. A barra usa a faixa vanilla de 0 a 13 pixels; arredonda para cima para manter pelo menos um pixel enquanto existir uma unidade. O tooltip fornece a quantidade exata. Vazio mantém o fundo da barra, sem preenchimento azul; cheio ocupa os 13 pixels. Estado ausente ou inválido continua representando zero.
+
+A apresentação lê exclusivamente WateringCanState do próprio ItemStack, já persistido e sincronizado pelo inventário. Não muda consumo, enchimento, codec, capacidade, regras por tags ou comportamento do solo. A apresentação não adiciona telas, rede ou armazenamento. Respeita ocultação do tooltip e ocultação do componente de água. A textura provisória do item permanece a existente; esta alteração é o indicador de quantidade, não uma arte definitiva do regador.
+
+APIs verificadas nas fontes locais de Minecraft/NeoForge 26.2.0.93: `Item.isBarVisible`, `getBarWidth`, `getBarColor`, `RegisterTooltipAppendersEvent.registerAppender`, `TooltipLocation.POST_CUSTOM`, `TooltipAppender`, `TooltipDisplay.hideTooltip/shows` e `Component.translatable`. Registro no barramento do mod em ToolContent. Foi usado o evento moderno de appenders em lugar do método depreciado Item.appendHoverText. Nenhum pacote ou mixin novo.
+
+### Critérios de aceite e verificação
+
+1. Em `runClient`, passar o cursor sobre um regador vazio: `Água: 0 / 128` em vermelho, barra sem azul. Encher mirando água: `128 / 128` e barra azul cheia.
+2. Em sobrevivência, regar um solo seco: `127 / 128`. Repetir em solo molhado não reduz. Para inspecionar faixas rapidamente, `/give @s harvestfestival:watering_can[harvestfestival:watering_can_state={water:64}]` deve mostrar `64 / 128` e 7 pixels; com `water:1`, um pixel; gastar a última unidade deixa vazio.
+3. Salvar/reabrir e conferir que os indicadores refletem o mesmo valor. Trocar idioma entre português e inglês e conferir a linha traduzida. Esses passos verificam o complemento visual, não repetem a alegação de aceite da fatia 9 anterior.
+4. **Cenário 8 obrigatório incluído no aceite deste complemento**, pois agora existe interface visual: inspecionar espelho cliente de ouro/aniversário do titular, atualização, limpeza, reconexão e isolamento entre jogadores. Continua não executado. Barra/tooltip de água, comandos administrativos e testes de codec não comprovam ouro/aniversário; não declarar encerrado esse critério com base no teste do regador. Nenhum HUD de ouro ou aniversário foi antecipado.
+
+Build: `BUILD SUCCESSFUL in 15s`; 57 testes existentes reexecutados, zero falhas, erros ou ignorados. Sem testes novos para este ajuste de apresentação. Comando com TEMP/TMP locais: `.\gradlew.bat build '-Dorg.gradle.jvmargs=-Xmx1G -Dfile.encoding=COMPAT' --max-workers=2 --console=plain`. Última linha literal:
+
+```text
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
+```
+
+O agente não executou runClient neste complemento; aparência e passos novos permanecem pendentes de validação manual. Servidor dedicado, multiplayer e cenário 8 continuam pendentes. Nenhum comando Git executado.

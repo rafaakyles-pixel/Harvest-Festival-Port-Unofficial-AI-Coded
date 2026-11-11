@@ -5,7 +5,7 @@
 - **Aceite:** cenários 1–7 e 9 aceitos conforme a cobertura e limitações da tabela. Mantido o comportamento offline observado: remessas pagam na próxima virada com o jogador conectado; nenhuma correção solicitada.
 - **Pendência obrigatória:** cenário 8 permanece **não executado**, a verificar no primeiro consumidor cliente (HUD/interface): ouro e aniversário do titular, isolamento entre jogadores, atualização, limpeza e reconexão. Mensagens administrativas e testes de codec não comprovam o espelho.
 - **Pacotes já aprovados:** `harvestfestival`, `harvestfestival.player`, `harvestfestival.player.command`, `harvestfestival.calendar`, `harvestfestival.calendar.command` e `harvestfestival.tools` (produção e testes; aprovado em 09/11/2026).
-- **Fatia 9 em andamento:** plano aprovado em 09/11/2026 e implementação entregue: enxada/regador de nível único, solo mínimo `prepared_soil`, regras por tags e água persistente no item. Build e testes aprovados; aceite manual single player pendente. Cultivo permanece na fatia 10.
+- **Fatia 9 concluída:** responsável confirmou teste validado e fatia aprovada em 09/11/2026. Enxada/regador de nível único, solo mínimo `prepared_soil`, regras por tags e água persistente no item aceitos em single player. Servidor dedicado e multiplayer permanecem pendentes. Complemento visual do regador solicitado separadamente; cultivo permanece na fatia 10.
 - **Aceite explícito do responsável:** remessa de jogador offline na virada só é paga na próxima virada com ele conectado; comportamento adotado.
 - **Critério de aceite futuro obrigatório:** o cenário 8 (espelho cliente de ouro e aniversário) deve integrar os critérios de aceite da primeira fatia que introduzir HUD ou interface.
 - **Limites:** referência somente leitura; integrações específicas adiadas; esta transição não implementa sistemas nem autoriza HUD ou efeitos de aniversário.
@@ -50,10 +50,11 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 
 ### 🔄 Em Andamento
 - A sincronização do attachment de aniversário com o cliente foi verificada só por teste de codificação de rede (data e ausência), sem inspeção do espelho cliente. A verificação real fica pendente na validação integrada. A mensagem administrativa `true`/`false` foi observada no cliente, o que não comprova o espelho do attachment.
-- Fatia 9 implementada e validada automaticamente; aguarda execução/aceite do roteiro single player em PORTING_NOTES.md. Servidor dedicado e multiplayer pendentes nesta fatia. Espelho cliente de ouro/aniversário permanece pendente obrigatório para a primeira fatia com HUD/interface.
+- Complemento visual autorizado após o aceite da fatia 9: barra de água no item e quantidade exata no tooltip do regador. Sem novo pacote ou alteração do estado persistido. Por introduzir interface, seus critérios de aceite incluem o cenário 8 de espelho cliente de ouro/aniversário, ainda não executado; o indicador de água não comprova esse cenário.
 
 ### ⏳ Próximos passos
-- Executar o roteiro single player e registrar o aceite da fatia 9. Definir a fatia 10 de cultivo sem antecipá-la nesta tarefa.
+- Validar o complemento visual do regador e manter o cenário 8 nos critérios de aceite desta interface. Definir a fatia 10 de cultivo sem antecipá-la nesta tarefa.
+- Solo, pendências relatadas pelo responsável: não seca com o tempo ou ao passar dos dias e não retorna à terra ao pisar. Secagem/consumo da rega na atualização diária deve integrar o cultivo; conferir no original as condições de pisoteio e retorno à terra antes de implementar. Somente registro nesta tarefa.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.
 - HUD/calendário visual continuam adiados por decisão do usuário.
 
@@ -145,3 +146,11 @@ Plano aprovado e pacote harvestfestival.tools criado. Duas ferramentas, solo pre
 Build: `BUILD SUCCESSFUL in 13s`; 57 testes, sendo 19 novos, zero falhas, erros ou ignorados; tarefa test executada. Relatórios em build/test-results/test e build/reports/tests/test/index.html. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`.
 
 Roteiro concreto single player em PORTING_NOTES.md; runClient não executado nesta implementação. Aceite manual pendente. Servidor dedicado e multiplayer continuam pendentes para a fatia 9. Nenhum comando Git executado.
+
+### Aceite manual e complemento visual — 09/11/2026
+
+Responsável confirmou teste validado e fatia 9 aprovada. Aceite single player registrado, sem atribuir resultados individuais não relatados nem validar dedicado/multiplayer. Barra azul e tooltip de água do regador implementados como complemento autorizado, ainda aguardando validação visual. O cenário 8 integra obrigatoriamente os critérios de aceite deste complemento e permanece não executado.
+
+Pendências do solo observadas pelo responsável: não seca por tempo/dias e não retorna à terra ao pisar. Registradas para definição e implementação no cultivo; nenhuma alteração de solo neste complemento.
+
+Build do complemento: `BUILD SUCCESSFUL in 15s`; 57 testes existentes executados, zero falhas, erros ou ignorados. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. runClient não executado pelo agente nesta alteração. Roteiro e APIs em PORTING_NOTES.md.

@@ -1,4 +1,5 @@
 {
+  "tooltip.harvestfestival.watering_can.water": "Água: %s / %s",
   "item.harvestfestival.hoe": "Enxada",
   "item.harvestfestival.watering_can": "Regador",
   "block.harvestfestival.prepared_soil": "Solo preparado",

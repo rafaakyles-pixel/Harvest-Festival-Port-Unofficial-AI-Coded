@@ -29,6 +29,7 @@ public final class ToolContent {
     private ToolContent() {}
 
     public static void register(IEventBus bus) {
+        bus.addListener(WateringCanItem::registerTooltips);
         COMPONENTS.register(bus);
         BLOCKS.register(bus);
         ITEMS.register(bus);

@@ -154,3 +154,7 @@ Responsável confirmou teste validado e fatia 9 aprovada. Aceite single player r
 Pendências do solo observadas pelo responsável: não seca por tempo/dias e não retorna à terra ao pisar. Registradas para definição e implementação no cultivo; nenhuma alteração de solo neste complemento.
 
 Build do complemento: `BUILD SUCCESSFUL in 15s`; 57 testes existentes executados, zero falhas, erros ou ignorados. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. runClient não executado pelo agente nesta alteração. Roteiro e APIs em PORTING_NOTES.md.
+
+## Reorganização documental — 11/11/2026
+
+Compactação de PORTING_NOTES autorizada pelo responsável: entrada estável e contratos por sistema em docs/porting/. Histórico integral preservado em [docs/archive/README.md](archive/README.md), com reconstrução conferida. Inclui fatias 1–9, procedimentos e evidências. Nenhuma mudança de fase, pacote, gameplay ou cobertura; cenário 8 e validação visual permanecem pendentes. Validação desta reorganização: BUILD SUCCESSFUL em 17s; test UP-TO-DATE, sem reexecução. Preservação textual integral e links vigentes conferidos; runClient não executado (alteração documental).

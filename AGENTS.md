@@ -58,3 +58,14 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 ## 8. Convenções de Idioma
 - Toda a documentação (arquivos `.md`) e mensagens de commit devem ser escritas em **Português**.
 - Nomes de classes, pacotes, métodos, variáveis e identificadores devem seguir as convenções Java e Minecraft, escritos em **Inglês**.
+
+## 9. Manutenção da documentação (controle de tamanho)
+
+- **Leitura inicial:** leia `AGENTS.md`, `docs/STATUS.md` e `docs/PORTING_NOTES.md`. Leia somente os contratos de `docs/porting/` indicados pelo índice e pertinentes ao sistema alterado ou consumido. `docs/archive/` só é consultado quando necessário para evidência histórica ou procedimento referenciado.
+- **PORTING_NOTES é uma entrada estável:** escopo, ambiente consolidado, decisões transversais, pendências obrigatórias e índice por sistema. Não acrescentar uma seção por fatia nem tabela global acumulativa de APIs. Meta de até 200 linhas, sem omitir informação nem juntar parágrafos artificialmente para cumprir contagem; detalhes vigentes vão ao contrato pertinente.
+- **Ao concluir uma fatia**, atualizar no lugar o contrato de `docs/porting/<sistema>.md`: comportamento final, decisões do responsável, formato persistido, API pública, APIs verificadas com versão/evidência, limitações e validação. Evitar duplicar APIs já documentadas. Cerca de 15 linhas é meta para resumo, somente quando não omitir informações; contratos completos não têm esse limite.
+- **Contagens de testes:** distinguir novos testes da suíte total e execução efetiva de resultados em cache. Não ampliar cobertura manual a partir de build ou codec.
+- **Não registrar** em STATUS/PORTING_NOTES: roteiros manuais, horários/logs intermediários, tentativas falhas ou última linha literal do build. Roteiros novos vão na resposta; pendências obrigatórias e procedimentos reutilizáveis ficam no arquivo histórico pertinente ou seção de ambiente, com link.
+- **Histórico:** evidências, incidentes e decisões substituídas vão para `docs/archive/fatia-NN-nome.md`, nunca apagados sem aprovação; referenciar no STATUS diretamente ou pelo índice histórico. Contratos ainda consumidos pertencem a `docs/porting/`, não exclusivamente ao arquivo histórico.
+- **Ambiente:** consolidar procedimento e limitações no PORTING_NOTES; não repetir por fatia. Preservar evidências antigas no histórico.
+- **Compactação existente:** exige tarefa própria autorizada e preservação de decisões, pendências obrigatórias (inclusive cenário 8), limitações e rastreabilidade. A manutenção rotineira dos contratos e índice segue esta regra sem exigir novas compactações periódicas.

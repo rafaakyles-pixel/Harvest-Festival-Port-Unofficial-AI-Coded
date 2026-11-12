@@ -1,4 +1,7 @@
 {
+  "item.harvestfestival.turnip_seeds": "Turnip Seeds",
+  "item.harvestfestival.turnip": "Turnip",
+  "block.harvestfestival.crop": "Crop",
   "tooltip.harvestfestival.watering_can.water": "Water: %s / %s",
   "item.harvestfestival.hoe": "Hoe",
   "item.harvestfestival.watering_can": "Watering Can",

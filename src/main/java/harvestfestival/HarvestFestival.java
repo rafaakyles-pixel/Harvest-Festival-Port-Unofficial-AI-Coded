@@ -13,6 +13,9 @@ import harvestfestival.player.ShippingPrices;
 import harvestfestival.player.command.GoldCommands;
 import harvestfestival.tools.ToolContent;
 import harvestfestival.tools.ToolActionRules;
+import harvestfestival.crops.CropContent;
+import harvestfestival.crops.CropDefinitions;
+import harvestfestival.crops.CropDailyUpdates;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
@@ -24,6 +27,13 @@ public final class HarvestFestival {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public HarvestFestival(IEventBus modBus) {
+        CropContent.register(modBus);
+        NeoForge.EVENT_BUS.addListener(CropDefinitions::register);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::loaded);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::unloaded);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::stopped);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::newDay);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::migrateLoaded);
         ToolContent.register(modBus);
         NeoForge.EVENT_BUS.addListener(ToolActionRules::register);
         PlayerGold.register(modBus);

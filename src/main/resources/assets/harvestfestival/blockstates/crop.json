@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "appearance=0": {"model":"harvestfestival:block/crop_small"},
+    "appearance=1": {"model":"harvestfestival:block/crop_growing"},
+    "appearance=2": {"model":"harvestfestival:block/crop_mature"},
+    "appearance=3": {"model":"harvestfestival:block/crop_withered"}
+  }
+}

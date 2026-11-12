@@ -26,10 +26,12 @@ Uma regra por recurso em `data/harvestfestival/shipping_prices/items/<namespace>
 
 `price` é inteiro positivo até o máximo de long. A regra de tag exige também `priority`, inteiro de 32 bits com sinal. Vale primeiro o item específico. Entre as tags vigentes do item vale a maior prioridade e, em empate nessa prioridade, o maior preço. O aviso identifica as tags empatadas e sai uma vez por item por recarga. Sem regra aplicável, usa-se a leitura existente de SellValue e exige-se valor positivo. O depósito grava o preço na fila e o pagamento usa o valor gravado.
 
-No original, ShippingRegistry consulta SellValue antes do registro. A precedência desta fatia foi definida pelo responsável. HFCrops usa os preços de venda de Crop e registra os produtos. A tabela inicial aproveita somente os valores de cenoura (160 por item) e trigo (100 pela tag comum c:crops/wheat).
+No original, ShippingRegistry consulta SellValue antes do registro. A precedência desta fatia foi definida pelo responsável. HFCrops usa os preços de venda de Crop e registra os produtos. A tabela inclui cenoura (160 por item), trigo (100 pela tag comum c:crops/wheat) e, na fatia 10, nabo (60 pela tag c:crops/turnip).
 
 APIs conferidas nos artefatos locais de 26.2.0.93 e exercitadas pelo build: AddServerReloadListenersEvent, SortedReloadListenerEvent.addListener, SimplePreparableReloadListener.prepare/apply, ResourceManager.listResources, BuiltInRegistries.ITEM.getOptional e Holder.is(TagKey). A busca opcional permite rejeitar um identificador desconhecido antes da inclusão na tabela.
 
 ## Atualizações e validação
+
+Fatia 10 não altera código econômico. Novo teste integra nabo maduro, produto/tag/preço reais empacotados, depósito, fila persistida em NBT comprimido e pagamento único de 60; semente recusada. Integra os 24 novos/81 totais executados, sem substituir validação manual do ciclo completo nem sorteio de loot em mundo real. Contrato em [Cultivos](cultivos.md).
 
 SellValue é fallback autorizado; precedência item > tag > SellValue definida pelo responsável. Fatia 5: 6 testes novos, suíte total 19. Fatia 6: 7 novos, suíte total 26; builds e single player aprovados. Cobertura dedicada aceita conforme [fatia 8](../archive/fatia-08-validacao-integrada.md). Pagamento apenas na próxima virada com jogador conectado aceito em 08/11/2026; não paga offline nem ao reconectar.

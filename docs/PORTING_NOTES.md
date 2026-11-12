@@ -24,15 +24,17 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada, regador, água no item, solo e futuro cultivo | [Ferramentas](porting/ferramentas.md) |
+| Bloco genérico de cultivo, sementes, crescimento diário, morte e colheita | [Cultivos](porting/cultivos.md) |
 
 ### Contratos transversais e decisões obrigatórias
 
+- A Fase 3 deve completar o gameplay de cada sistema em fatias verificáveis; mínimos aprovados não equivalem a sistema completo. Pendências agrícolas, incluindo relação com ferramentas vanilla e solo compartilhado, pertencem à Fase 3, não ao polimento. Diretriz reafirmada em 12/11/2026; detalhes em [Ferramentas](porting/ferramentas.md).
 - Servidor é autoridade dos dados; ouro/aniversário sincronizam apenas ao titular. Comandos administrativos consultam o servidor.
-- O calendário deriva do relógio persistente do Overworld; não criar segundo contador salvo.
+- O calendário deriva do relógio persistente do Overworld; não criar segundo calendário. A sequência técnica persistente de eventos aprovada na fatia 10 identifica atualizações, não mede dias ou tempo; contrato em [Calendário](porting/calendario.md).
 - `NewDayEvent` notifica uma transição observada; não compensa dias pulados nem promete transação durável contra crash.
 - Remessas fixam preço no depósito e pagam na próxima virada com o jogador conectado. Não pagam offline nem ao reconectar; comportamento aceito em 08/11/2026.
 - A futura escolha de aniversário pelo jogador deve reutilizar API/attachment existentes, validando autorização; escolha e efeitos continuam adiados.
-- A fatia 10 deve consumir/limpar `PreparedSoilBlock.WATERED` diariamente. Conferir no original pisoteio e outras condições de secagem, sem presumir comportamento vanilla.
+- Cultivos avaliam farmland com `moisture=7` antes da secagem diária 7→3→0; solo já seco sem planta pode voltar à terra. Migração de prepared_soil e pisoteio por queda autorizados na fatia 11; sem compensação retroativa. Chuva/clima continuam pendentes. Contrato em [Ferramentas](porting/ferramentas.md).
 
 ## Validação e pendências obrigatórias
 
@@ -45,7 +47,8 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 - A pendência não autoriza antecipar HUD de ouro/aniversário ou calendário visual.
 - Fatia 9 aceita em single player em 09/11/2026, sem relato individual por passo; dedicado/multiplayer continuam pendentes.
 - Complemento visual do regador implementado; aparência e passos novos ainda aguardam validação manual.
-- Última validação de implementação registrada: suíte total 57, 19 novos na fatia 9; complemento reexecutou os 57 existentes, sem novos. Builds aprovados; não equivale a validação visual.
+- Fatia 11: farmland compartilhada aceita pelo responsável em 12/11/2026 («Testado e aprovado»), em single player, sem detalhamento individual dos cenários. Esse aceite não encerra cenário 8, indicadores/texturas anteriores, dedicado ou multiplayer. Evidência e cobertura em [Ferramentas](porting/ferramentas.md).
+- Fatia 10: teste final aprovado pelo responsável em 12/11/2026, sem ampliar cobertura além do ciclo single player entregue. Build anterior aprovado, 24 testes novos/81 totais executados. Cobertura em [Cultivos](porting/cultivos.md); dedicado/multiplayer e cenário 8 continuam pendentes. Texturas originais de enxada/regador aplicadas depois desse aceite ainda aguardam verificação visual.
 
 ## Ambiente consolidado
 
@@ -89,7 +92,7 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Chuva: candidata `CustomWeatherEffectRenderer#tickRain`, consultada na branch móvel 26.2.x. Paridade de partículas/sons, aplicação dinâmica ao Overworld e execução na versão exata 26.2.0.93 **não verificadas**.
 - Anzol: equivalente para reconhecer vara HF no renderizador **não verificado**. Investigar extensão moderna; renderizador próprio é alternativa, sem decisão aprovada.
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
-- Nenhum mixin novo aprovado. Novos mixins exigem aqui alvo/motivo e link para documentação detalhada do sistema.
+- Fatia 11: `harvestfestival.tools.mixin.FarmlandBlockMixin`, subpacote aprovado explicitamente pelo responsável. Alvo `FarmlandBlock.randomTick`, injeção HEAD cancelável para solos participantes por tag; impede hidratação/secagem aleatória concorrendo com o ciclo diário. A fonte exata 26.2.0.93 não oferece evento cancelável nesse método. Queda e ticks de obstrução permanecem vanilla/NeoForge. Evidências, limites e migração em [Ferramentas](porting/ferramentas.md).
 
 ## Histórico e manutenção
 

@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-/** Passive soil: the future crop consumer owns the daily use/reset of WATERED. */
+/** Legacy registry entry retained to load and migrate existing port saves. */
 public final class PreparedSoilBlock extends Block {
     public static final BooleanProperty WATERED = BooleanProperty.create("watered");
 

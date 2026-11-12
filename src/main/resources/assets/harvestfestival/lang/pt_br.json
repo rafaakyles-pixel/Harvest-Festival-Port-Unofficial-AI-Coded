@@ -1,4 +1,7 @@
 {
+  "item.harvestfestival.turnip_seeds": "Sementes de nabo",
+  "item.harvestfestival.turnip": "Nabo",
+  "block.harvestfestival.crop": "Cultivo",
   "tooltip.harvestfestival.watering_can.water": "Água: %s / %s",
   "item.harvestfestival.hoe": "Enxada",
   "item.harvestfestival.watering_can": "Regador",

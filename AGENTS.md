@@ -1,7 +1,10 @@
 # Diretrizes e regras fundamentais para o desenvolvimento e portabilidade do projeto. 
 
+**Alteração deste arquivo:** `AGENTS.md` só pode ser editado mediante autorização explícita do responsável para a alteração em questão. Autorizações para implementar features, corrigir bugs ou atualizar outros documentos não autorizam modificar este arquivo. A autorização de uma edição não se estende a edições futuras.
+
 ## 1. Visão Geral do Projeto
 Portabilidade fiel em gameplay do mod Harvest Festival.
+- **Fidelidade obrigatória:** O projeto deve se basear completamente no comportamento do mod original indicado abaixo. Toda mecânica a acrescentar, completar ou alterar no port deve ter seu funcionamento conferido no original antes da implementação; não presumir regras vanilla, convenções de outros mods ou comportamentos considerados mais convenientes.
 - **Base original:** Branch 1.12.2-0.6.X do repositório Snownee/Harvest-Festival (fork de joshiejack/Harvest-Festival, licença MIT).
 - **Alvo:** Minecraft 26.2 com NeoForge 26.2.0.93.
 - **Estrutura:** Um único mod contendo todas as features, organizado internamente em pacotes divididos por sistema.
@@ -12,7 +15,7 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 1. Leia este arquivo, `docs/STATUS.md` e `docs/PORTING_NOTES.md`.
 2. Leia `docs/FEATURES.md` se a tarefa atual envolver a implementação de features.
 3. Leia apenas o catálogo necessário, se houver: - `docs/catalogs/variants.md`: variantes de itens, blocos e ferramentas. - `docs/catalogs/content-registries.md`: identificadores de registro de conteúdo. - `docs/catalogs/quests.md`: missões anotadas. - `docs/catalogs/resources.md`: advancements, edifícios, festivais, árvores e loot tables.
-4. Consulte apenas o código de referência estritamente necessário.
+4. Consulte apenas o código de referência estritamente necessário para comprovar a mecânica em questão, incluindo condições, configurações padrão, exceções e interações relevantes. Quando o comportamento for herdado do Minecraft/Forge original, confira também essa implementação; não o deduza pela versão alvo. Se a leitura não esclarecer o funcionamento, valide no jogo original quando possível ou apresente a incerteza ao responsável antes de implementar.
 
 **Atenção:** A fase atual do projeto e os pacotes permitidos estão definidos em `docs/STATUS.md`. Se a tarefa solicitada exigir ações fora da fase atual, interrompa o processo e solicite confirmação explícita antes de prosseguir.
 
@@ -27,8 +30,9 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 - `docs/STATUS.md`: Controle de fases (pronto, em andamento, pendente, decisões em aberto).
 
 ## 4. Regras de Código e Modding
+- **Evidência de gameplay:** Registre no contrato pertinente em `docs/porting/` as fontes consultadas e o comportamento comprovado. Diferencie leitura de código de observação em jogo; nunca atribua testes manuais não realizados. Mecânica ausente no original, divergência intencional ou simplificação de comportamento exige decisão explícita do responsável antes da implementação. Recortes de fatia delimitam o que será entregue, mas não autorizam inventar o funcionamento das partes incluídas.
 - **Uso de APIs:** Não invente APIs de Minecraft ou NeoForge. Verifique a documentação oficial ou o código-fonte da versão alvo. Se a verificação for impossível, registre a incerteza como "não verificado" em `PORTING_NOTES.md`.
-- **Sistemas Modernos:** Utilize sempre o equivalente moderno do NeoForge 26.2 (eventos, capabilities, registros, data packs) em vez de tentar replicar mecanismos obsoletos do Forge 1.12.2.
+- **Sistemas Modernos:** Utilize sempre o equivalente moderno do NeoForge 26.2 (eventos, capabilities, registros, data packs) em vez de tentar replicar mecanismos obsoletos do Forge 1.12.2. A adaptação técnica deve preservar o gameplay comprovado do original; necessidade de outra API não autoriza mudar a mecânica sem decisão explícita do responsável.
 - **Data-Driven:** Priorize dados em vez de código hardcoded. Receitas, loot tables, tags, traduções (lang) e configurações devem ser implementados em JSON.
 - **Tags:** É obrigatório o uso de tags para itens e blocos (sementes, cultivos, minérios, comidas, etc.) em vez de IDs fixos. Esta é a base para compatibilidade.
 - **Mixins:** Devem ser utilizados como último recurso, apenas quando não houver alternativa viável via API ou evento. Todo novo mixin deve ser documentado em `PORTING_NOTES.md` detalhando o alvo e o motivo.

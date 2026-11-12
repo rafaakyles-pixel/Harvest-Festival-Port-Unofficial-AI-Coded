@@ -22,7 +22,8 @@ public final class DailyUpdates {
         var tracker = TRACKERS.get(event.getServer());
         if (tracker == null) return;
         tracker.finish(WorldCalendar.ticks(event.getServer())).ifPresent(change -> {
-            NeoForge.EVENT_BUS.post(new NewDayEvent(event.getServer(), change.previous(), change.current()));
+            long cycle = event.getServer().overworld().getDataStorage().computeIfAbsent(DailyCycleData.TYPE).next();
+            NeoForge.EVENT_BUS.post(new NewDayEvent(event.getServer(), change.previous(), change.current(), cycle));
             LogUtils.getLogger().info("Harvest Festival daily update: {} -> {}", change.previous(), change.current());
         });
     }

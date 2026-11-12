@@ -3,9 +3,9 @@
   "target_tag": "harvestfestival:tillable",
   "requires_air_above": true,
   "result": {
-    "block": "harvestfestival:prepared_soil",
+    "block": "minecraft:farmland",
     "properties": {
-      "watered": "false"
+      "moisture": "0"
     }
   }
 }

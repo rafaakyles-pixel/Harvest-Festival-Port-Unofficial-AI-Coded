@@ -2,6 +2,9 @@ package harvestfestival.tools;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import harvestfestival.crops.CropContent;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
@@ -51,10 +54,13 @@ public final class ToolActions {
     static InteractionResult useOn(ToolAction action, UseOnContext context) {
         var level = context.getLevel();
         var player = context.getPlayer();
-        var pos = context.getClickedPos();
+        var clicked = context.getClickedPos();
+        var pos = resolveTarget(action, clicked, level::getBlockState);
         var stack = context.getItemInHand();
         if (player == null || context.getClickedFace() == Direction.DOWN
                 || !level.mayInteract(player, pos)
+                || !level.mayInteract(player, clicked)
+                || !player.mayUseItemAt(clicked, context.getClickedFace(), stack)
                 || !player.mayUseItemAt(pos, context.getClickedFace(), stack)) return InteractionResult.PASS;
         // Rules are server data. Let the server decide; never mutate a client world or stack.
         if (level.isClientSide()) return InteractionResult.SUCCESS;
@@ -65,5 +71,9 @@ public final class ToolActions {
             public boolean set(BlockState state) { return level.setBlock(pos, state, Block.UPDATE_ALL); }
         }, stack, player.isCreative());
         return result == Result.CHANGED ? InteractionResult.SUCCESS : InteractionResult.PASS;
+    }
+
+    public static BlockPos resolveTarget(ToolAction action, BlockPos clicked, Function<BlockPos, BlockState> states) {
+        return action == ToolAction.WATER && states.apply(clicked).is(CropContent.CROPS) ? clicked.below() : clicked;
     }
 }

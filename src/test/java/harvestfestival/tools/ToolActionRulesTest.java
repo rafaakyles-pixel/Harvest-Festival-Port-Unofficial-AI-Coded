@@ -124,7 +124,7 @@ class ToolActionRulesTest {
             var can = ToolActionsTest.fullCan();
             assertEquals(ToolActions.Result.CHANGED, ToolActions.apply(ToolAction.WATER, target, can,
                     false, listener.rules(), message -> fail(message)));
-            assertTrue(target.state().getValue(PreparedSoilBlock.WATERED));
+            assertEquals(7, target.state().getValue(net.minecraft.world.level.block.FarmlandBlock.MOISTURE));
             assertEquals(127, WateringCanState.get(can).water());
         } finally {
             registry.prepareTagReload(new net.minecraft.tags.TagLoader.LoadResult<>(key, saved)).apply();

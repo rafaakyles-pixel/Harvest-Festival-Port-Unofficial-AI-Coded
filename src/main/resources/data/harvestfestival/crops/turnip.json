@@ -1,0 +1,12 @@
+{
+  "seed_tag": "harvestfestival:seeds/turnip",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": ["spring"],
+  "stages": [2, 4, 5],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/turnip"
+}

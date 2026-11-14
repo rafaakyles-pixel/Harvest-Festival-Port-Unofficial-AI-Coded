@@ -27,6 +27,8 @@ public final class CropContent {
             () -> new BlockEntityType<>(CropBlockEntity::new, CROP.get()));
     public static final DeferredItem<CropSeedItem> TURNIP_SEEDS = ITEMS.registerItem("turnip_seeds", CropSeedItem::new);
     public static final DeferredItem<Item> TURNIP = ITEMS.registerSimpleItem("turnip");
+    public static final DeferredItem<CropSeedItem> CUCUMBER_SEEDS = ITEMS.registerItem("cucumber_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> CUCUMBER = ITEMS.registerSimpleItem("cucumber");
 
     private CropContent() {}
     public static void register(IEventBus bus) {

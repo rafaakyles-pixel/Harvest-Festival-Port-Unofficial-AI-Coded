@@ -73,14 +73,18 @@ public final class CropDailyUpdates {
         var sections = chunk.getSections();
         for (int index = 0; index < sections.length; index++) {
             var section = sections[index];
-            if (!section.maybeHas(state -> state.is(ToolContent.PREPARED_SOIL.get()))) continue;
+            if (!section.maybeHas(state -> state.is(ToolContent.PREPARED_SOIL.get()) || state.is(CropContent.CROP.get()))) continue;
             int baseY = chunk.getSectionYFromSectionIndex(index) * 16;
             for (int y = 0; y < 16; y++) for (int z = 0; z < 16; z++) for (int x = 0; x < 16; x++) {
                 var state = section.getBlockState(x, y, z);
                 var next = FarmlandSoil.migrate(state);
-                if (next == state) continue;
+                if (next == state && !state.is(CropContent.CROP.get())) continue;
                 var pos = new BlockPos(chunk.getPos().getMinBlockX() + x, baseY + y, chunk.getPos().getMinBlockZ() + z);
-                level.setBlock(pos, next, Block.UPDATE_ALL);
+                if (next != state) level.setBlock(pos, next, Block.UPDATE_ALL);
+                // Refresh old visual caches only after FULL; never grow or reset saved crop counters here.
+                if (state.is(CropContent.CROP.get()) && chunk.getBlockEntity(pos) instanceof CropBlockEntity crop) {
+                    crop.setCrop(crop.crop());
+                }
             }
         }
     }

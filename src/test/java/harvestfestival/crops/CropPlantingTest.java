@@ -16,6 +16,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropPlantingTest {
     @TempDir Path directory;
+    @Test void clickingGrassOrDirtCannotPlantNeighboringFarmlandOrConsumeSeeds() throws Exception {
+        try (var resources = new CropTestSupport(directory)) {
+            for (var item : java.util.List.of(CropContent.TURNIP_SEEDS.get(), CropContent.CUCUMBER_SEEDS.get())) {
+                for (var centerSoil : java.util.List.of(net.minecraft.world.level.block.Blocks.GRASS_BLOCK,
+                        net.minecraft.world.level.block.Blocks.DIRT)) {
+                    var plot = new Plot();
+                    plot.soils.put(BlockPos.ZERO.below(), centerSoil.defaultBlockState());
+                    var seeds = new ItemStack(item, 2);
+                    var definition = CropDefinitions.INSTANCE.forSeed(seeds);
+                    assertEquals(0, CropSeedItem.plant(plot, BlockPos.ZERO, Direction.UP, seeds, definition));
+                    assertTrue(plot.plants.isEmpty());
+                    assertEquals(2, seeds.getCount());
+                    plot.soils.put(BlockPos.ZERO.below(), net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState());
+                    assertEquals(9, CropSeedItem.plant(plot, BlockPos.ZERO, Direction.UP, seeds, definition));
+                    assertEquals(1, seeds.getCount());
+                }
+            }
+        }
+    }
+    @Test void cucumberBagUsesExistingPlantingAndStartsWithNoHarvests() throws Exception {
+        try (var resources = new CropTestSupport(directory)) {
+            var plot = new Plot();
+            var seeds = new ItemStack(CropContent.CUCUMBER_SEEDS.get());
+            var definition = CropDefinitions.INSTANCE.forSeed(seeds);
+            assertEquals(9, CropSeedItem.plant(plot, BlockPos.ZERO, Direction.UP, seeds, definition));
+            assertTrue(seeds.isEmpty());
+            assertTrue(plot.plants.values().stream().allMatch(state -> state.crop().equals(definition.id())
+                    && state.stage() == 1 && state.dryDays() == 1 && state.harvests() == 0));
+        }
+    }
     @Test void oneBagPlantsNineValidPlotsAndCannotOverwrite() throws Exception {
         try (var resources = new CropTestSupport(directory)) {
             var plot = new Plot();
@@ -57,12 +87,13 @@ class CropPlantingTest {
     }
     private static final class Plot implements CropSeedItem.Plot {
         final Map<BlockPos, CropState> plants = new HashMap<>();
+        final Map<BlockPos, net.minecraft.world.level.block.state.BlockState> soils = new HashMap<>();
         final Set<BlockPos> blocked = new HashSet<>(), denied = new HashSet<>();
         int mode = -1;
         public boolean editable(BlockPos pos) { return mode != 0 && !denied.contains(pos); }
         public boolean empty(BlockPos pos) { return mode != 1 && !plants.containsKey(pos) && !blocked.contains(pos); }
         public boolean soilMatches(BlockPos pos, TagKey<Block> tag) {
-            return mode != 2 && net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState().is(tag);
+            return mode != 2 && soils.getOrDefault(pos, net.minecraft.world.level.block.Blocks.FARMLAND.defaultBlockState()).is(tag);
         }
         public boolean plant(BlockPos pos, CropState state) { if (mode == 3) return false; plants.put(pos, state); return true; }
     }

@@ -60,13 +60,20 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                 }
                 var stages = new ArrayList<Integer>();
                 for (var value : json.getAsJsonArray("stages")) stages.add(integer(value));
+                var appearances = new ArrayList<Integer>();
+                if (json.has("appearances")) {
+                    for (var value : json.getAsJsonArray("appearances")) appearances.add(integer(value));
+                }
                 var loot = Identifier.parse(string(json, "harvest_loot"));
                 definitions.put(id, new CropDefinition(id,
                         TagKey.create(Registries.ITEM, Identifier.parse(string(json, "seed_tag"))),
                         TagKey.create(Registries.BLOCK, Identifier.parse(string(json, "soil_tag"))), seasons, stages,
                         bool(json, "requires_water"), integer(json.get("drought_limit")),
                         bool(json, "dies_without_water_integrated"), bool(json, "dies_without_water_dedicated"),
-                        integer(json.get("planting_radius")), loot));
+                        integer(json.get("planting_radius")), loot,
+                        json.has("regrow_stage") ? integer(json.get("regrow_stage")) : 0,
+                        json.has("max_harvests") ? integer(json.get("max_harvests")) : 1,
+                        emptyHarvestPolicy(json), appearances));
             } catch (IOException | RuntimeException ex) {
                 warn.accept("Ignoring crop definition " + entry.getKey() + ": " + ex.getMessage());
             }
@@ -77,6 +84,14 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
     private static int integer(com.google.gson.JsonElement value) {
         if (value == null || !value.isJsonPrimitive() || !value.getAsJsonPrimitive().isNumber()) throw new IllegalArgumentException("expected integer");
         return Integer.parseInt(value.getAsString());
+    }
+    private static CropDefinition.EmptyHarvestPolicy emptyHarvestPolicy(JsonObject json) {
+        if (!json.has("empty_harvest_policy")) return CropDefinition.EmptyHarvestPolicy.PRESERVE;
+        return switch (string(json, "empty_harvest_policy")) {
+            case "preserve" -> CropDefinition.EmptyHarvestPolicy.PRESERVE;
+            case "advance" -> CropDefinition.EmptyHarvestPolicy.ADVANCE;
+            default -> throw new IllegalArgumentException("unknown empty_harvest_policy");
+        };
     }
     private static String string(JsonObject json, String field) {
         var value = json.get(field);

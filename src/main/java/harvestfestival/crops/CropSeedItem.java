@@ -23,6 +23,8 @@ public final class CropSeedItem extends Item {
     /** One bag attempts all valid squares, consuming once only after a successful placement. */
     public static int plant(Plot plot, BlockPos center, Direction face, ItemStack seeds, CropDefinition definition) {
         if (face != Direction.UP || seeds.isEmpty() || definition == null) return 0;
+        // Explicit port rule: a valid neighboring plot cannot authorize a click on grass/dirt.
+        if (!plot.editable(center.below()) || !plot.soilMatches(center.below(), definition.soilTag())) return 0;
         int planted = 0;
         int radius = definition.plantingRadius();
         for (int x = -radius; x <= radius; x++) {

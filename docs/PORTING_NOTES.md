@@ -24,10 +24,12 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada, regador, água no item, solo e futuro cultivo | [Ferramentas](porting/ferramentas.md) |
-| Bloco genérico de cultivo, sementes, crescimento diário, morte e colheita | [Cultivos](porting/cultivos.md) |
+| Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita e rebrota limitada | [Cultivos](porting/cultivos.md) |
 
 ### Contratos transversais e decisões obrigatórias
 
+- Todo item novo adicionado em uma fatia deve incluir textura do original, conforme condição explícita do responsável em 13/11/2026. Registrar proveniência/licença e distinguir inspeção de arquivo de validação em jogo. Não alterar AGENTS.md sem autorização específica.
+- Plantio de sementes exige solo arado válido no bloco clicado antes de tentar o 3×3, por solicitação explícita de 14/11/2026. É divergência autorizada do original, que valida cada destino sem essa condição central; contrato e evidência em [Cultivos](porting/cultivos.md).
 - A Fase 3 deve completar o gameplay de cada sistema em fatias verificáveis; mínimos aprovados não equivalem a sistema completo. Pendências agrícolas, incluindo relação com ferramentas vanilla e solo compartilhado, pertencem à Fase 3, não ao polimento. Diretriz reafirmada em 12/11/2026; detalhes em [Ferramentas](porting/ferramentas.md).
 - Servidor é autoridade dos dados; ouro/aniversário sincronizam apenas ao titular. Comandos administrativos consultam o servidor.
 - O calendário deriva do relógio persistente do Overworld; não criar segundo calendário. A sequência técnica persistente de eventos aprovada na fatia 10 identifica atualizações, não mede dias ou tempo; contrato em [Calendário](porting/calendario.md).
@@ -47,8 +49,10 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 - A pendência não autoriza antecipar HUD de ouro/aniversário ou calendário visual.
 - Fatia 9 aceita em single player em 09/11/2026, sem relato individual por passo; dedicado/multiplayer continuam pendentes.
 - Complemento visual do regador implementado; aparência e passos novos ainda aguardam validação manual.
-- Fatia 11: farmland compartilhada aceita pelo responsável em 12/11/2026 («Testado e aprovado»), em single player, sem detalhamento individual dos cenários. Esse aceite não encerra cenário 8, indicadores/texturas anteriores, dedicado ou multiplayer. Evidência e cobertura em [Ferramentas](porting/ferramentas.md).
-- Fatia 10: teste final aprovado pelo responsável em 12/11/2026, sem ampliar cobertura além do ciclo single player entregue. Build anterior aprovado, 24 testes novos/81 totais executados. Cobertura em [Cultivos](porting/cultivos.md); dedicado/multiplayer e cenário 8 continuam pendentes. Texturas originais de enxada/regador aplicadas depois desse aceite ainda aguardam verificação visual.
+- Fatia 11: farmland compartilhada aceita pelo responsável em 12/11/2026 («Testado e aprovado»), em single player, sem detalhamento individual dos cenários. Esse aceite não encerra cenário 8, indicadores, dedicado ou multiplayer; texturas tiveram confirmação separada. Evidência e cobertura em [Ferramentas](porting/ferramentas.md).
+- Fatia 10: teste final aprovado pelo responsável em 12/11/2026, sem ampliar cobertura além do ciclo single player entregue. Build anterior aprovado, 24 testes novos/81 totais executados. Cobertura em [Cultivos](porting/cultivos.md); dedicado/multiplayer e cenário 8 continuam pendentes. Texturas da enxada/regador confirmadas separadamente pelo responsável em 12/11/2026 como correspondentes ao original; barra/tooltip e cenário 8 permanecem pendentes.
+
+- Fatia 12 e correções aceitas globalmente pelo responsável em 14/11/2026 («Confirmado a fatia»), sem ampliar cobertura individual, dedicado/multiplayer, cenário 8 ou indicadores do regador. Contrato em [Cultivos](porting/cultivos.md).
 
 ## Ambiente consolidado
 

@@ -97,7 +97,7 @@ Build aprovado em 12/11/2026: 6 testes novos, 87 totais executados, zero falhas/
 
 Testes existentes de plantio, resolução do regador, ordem diária, repetição, chunks ausentes e persistência passaram a usar farmland; regressões de colheita/remessa continuam aprovadas. Testes de regras genéricas ainda usam o registro legado em fixtures para verificar parsing de propriedades booleanas; as regras empacotadas são testadas com farmland real. A migração automatizada verifica conversão/codec, não a carga de um save completo nem notificações entre blocos num mundo.
 
-runClient não foi executado pelo agente nesta alteração. Em 12/11/2026 o responsável informou «Testado e aprovado»: aceite global da fatia 11 em single player, sem detalhamento individual de migração, interação, queda ou salvar/reabrir. Não atribuir execução separada desses cenários nem testes de entidades ao agente. Dedicado/multiplayer, cenário 8 e indicadores/texturas anteriores continuam pendentes.
+runClient não foi executado pelo agente nesta alteração. Em 12/11/2026 o responsável informou «Testado e aprovado»: aceite global da fatia 11 em single player, sem detalhamento individual de migração, interação, queda ou salvar/reabrir. Não atribuir execução separada desses cenários nem testes de entidades ao agente. Dedicado/multiplayer, cenário 8 e indicadores continuam pendentes; texturas tiveram confirmação separada abaixo.
 
 ## Texturas básicas originais
 
@@ -105,4 +105,4 @@ A pedido do responsável, os itens atuais usam cópias byte a byte de `textures/
 
 Proveniência: Snownee/Harvest-Festival, branch 1.12.2-0.6.X; licença MIT e aviso Copyright (c) 2014, 2015, 2016 joshiejack preservados no recurso empacotado `META-INF/licenses/harvest-festival-original.txt`, copiado da referência. Referência permanece somente leitura. Inspeção das duas imagens e conferência de hashes realizadas; revisão artística pode ocorrer no polimento.
 
-Validação visual em jogo destas texturas ainda pendente; não confundir com o aceite anterior do ciclo agrícola. Atualização de recursos/documentos sem testes novos; build e estado da suíte informados na entrega. Cenário 8 e aceite visual dos indicadores continuam pendentes.
+Em 12/11/2026 o responsável confirmou que os visuais da enxada e do regador estão como no original, encerrando a pendência das texturas. Confirmação do responsável, sem atribuir inspeção de perspectivas específicas nem execução ao agente. Cenário 8 e aceite visual da barra/tooltip continuam pendentes. Registro documental sem testes novos ou mudanças de gameplay.

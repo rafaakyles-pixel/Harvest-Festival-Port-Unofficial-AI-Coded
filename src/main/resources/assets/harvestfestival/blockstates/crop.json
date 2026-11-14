@@ -3,6 +3,13 @@
     "appearance=0": {"model":"harvestfestival:block/crop_small"},
     "appearance=1": {"model":"harvestfestival:block/crop_growing"},
     "appearance=2": {"model":"harvestfestival:block/crop_mature"},
-    "appearance=3": {"model":"harvestfestival:block/crop_withered"}
+    "appearance=3": {"model":"harvestfestival:block/crop_withered"},
+    "appearance=4": {"model":"harvestfestival:block/turnip_1"},
+    "appearance=5": {"model":"harvestfestival:block/turnip_2"},
+    "appearance=6": {"model":"harvestfestival:block/turnip_3"},
+    "appearance=7": {"model":"harvestfestival:block/cucumber_1"},
+    "appearance=8": {"model":"harvestfestival:block/cucumber_2"},
+    "appearance=9": {"model":"harvestfestival:block/cucumber_3"},
+    "appearance=10": {"model":"harvestfestival:block/cucumber_4"}
   }
 }

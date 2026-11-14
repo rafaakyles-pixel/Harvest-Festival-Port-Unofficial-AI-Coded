@@ -20,6 +20,53 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropPersistenceTest {
     @TempDir Path directory;
+    @Test void regrowingEntityAndUpdatePayloadPreserveHarvestCountAcrossDiskReload() throws Exception {
+        try (var resources = new CropTestSupport(directory.resolve("pack"))) {
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var expected = new CropState(CropTestSupport.cucumber().id(), 7, 3, false, 6);
+            var entity = CropRegrowthTest.entity(expected);
+            var file = directory.resolve("regrowth.nbt");
+            NbtIo.writeCompressed(entity.saveWithFullMetadata(registry), file);
+            var copy = (CropBlockEntity) BlockEntity.loadStatic(entity.getBlockPos(), entity.getBlockState(),
+                    NbtIo.readCompressed(file, NbtAccounter.unlimitedHeap()), registry);
+            assertNotNull(copy);
+            assertEquals(expected, copy.crop());
+            var client = CropRegrowthTest.entity(CropState.INVALID);
+            client.loadCustomOnly(TagValueInput.create(ProblemReporter.DISCARDING, registry, copy.getUpdateTag(registry)));
+            assertEquals(expected, client.crop());
+            for (int i = 0; i < 3; i++) copy.setCrop(CropLifecycle.newDay(copy.crop(), CropTestSupport.cucumber(),
+                    harvestfestival.calendar.Season.SPRING, true, false));
+            var seventh = CropLifecycle.afterHarvest(copy.crop(), CropTestSupport.cucumber());
+            assertNotNull(seventh);
+            assertEquals(7, seventh.harvests());
+            assertEquals(expected, entity.crop());
+        }
+    }
+
+    @Test void absentHarvestCountLoadsLegacyTurnipWithoutChangingOtherFields() {
+        var json = JsonParser.parseString("{\"crop\":\"harvestfestival:turnip\",\"stage\":4,\"dry_days\":2,\"dead\":false}");
+        var crop = CropState.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
+        assertEquals(0, crop.harvests());
+        assertEquals(4, crop.stage());
+        assertEquals(2, crop.dryDays());
+        assertFalse(crop.dead());
+    }
+
+    @Test void invalidPresentHarvestCountsNeverResetToZeroOrGrantProducts() {
+        var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+        for (String invalid : new String[]{"-1", "1000001", "2147483648", "1.5", "\"2\"", "true", "null", "{}", "[]"}) {
+            var json = JsonParser.parseString("{\"crop\":\"harvestfestival:cucumber\",\"stage\":10,\"dry_days\":1,\"dead\":false,\"harvests\":" + invalid + "}");
+            assertTrue(CropState.CODEC.parse(JsonOps.INSTANCE, json).error().isPresent(), invalid);
+            // NBT has neither null nor a boolean type (booleans become numeric bytes).
+            if (invalid.equals("null") || invalid.equals("true")) continue;
+            var nbt = new CompoundTag();
+            nbt.put("crop_state", JsonOps.INSTANCE.convertTo(NbtOps.INSTANCE, json));
+            var entity = CropRegrowthTest.entity(new CropState(net.minecraft.resources.Identifier.parse("harvestfestival:cucumber"), 10, 1, false, 2));
+            entity.loadCustomOnly(TagValueInput.create(ProblemReporter.DISCARDING, registry, nbt));
+            assertEquals(CropState.INVALID, entity.crop(), invalid);
+        }
+        assertThrows(IllegalArgumentException.class, () -> new CropState(net.minecraft.resources.Identifier.parse("test:crop"), 1, 1, false, -1));
+    }
     @Test void actualRegisteredEntityAndSoilSurviveCompressedDiskRoundTrip() throws Exception {
         var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
         var state = CropContent.CROP.get().defaultBlockState().setValue(CropBlock.APPEARANCE, 1);

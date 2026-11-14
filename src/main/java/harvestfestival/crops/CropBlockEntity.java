@@ -16,6 +16,18 @@ public final class CropBlockEntity extends BlockEntity {
     public CropBlockEntity(BlockPos pos, BlockState state) { super(CropContent.CROP_ENTITY.get(), pos, state); }
     public CropState crop() { return crop; }
 
+    /** Compare the snapshot and commit before drops. A detached entity cannot supply a second loot pass. */
+    public boolean commitHarvest(CropState expected, CropState next, java.util.function.BooleanSupplier remove) {
+        if (!crop.equals(expected) || isRemoved()) return false;
+        if (next == null) {
+            if (!remove.getAsBoolean()) return false;
+            crop = CropState.INVALID;
+        } else {
+            setCrop(next);
+        }
+        return true;
+    }
+
     public void setCrop(CropState value) {
         crop = value;
         setChanged();

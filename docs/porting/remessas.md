@@ -32,6 +32,8 @@ APIs conferidas nos artefatos locais de 26.2.0.93 e exercitadas pelo build: AddS
 
 ## Atualizações e validação
 
+Fatia 12: produto `harvestfestival:cucumber` integra `c:crops/cucumber` e `c:crops`, com preço 40/prioridade 0; semente integra `c:seeds`, sem preço. Sem mudança no código econômico. Um teste novo percorre oito colheitas, depósito de oito produtos a 40, descarte da tabela de preços após depósito, persistência da fila em NBT comprimido e pagamento único de 320. Integra os 15 novos/102 totais executados e aprovados da fatia 12. Produto primário fornecido pelo adaptador de teste; não comprova sorteio de loot em mundo, cliente, dedicado ou multiplayer. Aceite manual pendente; detalhes em [Cultivos](cultivos.md).
+
 Fatia 10 não altera código econômico. Novo teste integra nabo maduro, produto/tag/preço reais empacotados, depósito, fila persistida em NBT comprimido e pagamento único de 60; semente recusada. Integra os 24 novos/81 totais executados, sem substituir validação manual do ciclo completo nem sorteio de loot em mundo real. Contrato em [Cultivos](cultivos.md).
 
 SellValue é fallback autorizado; precedência item > tag > SellValue definida pelo responsável. Fatia 5: 6 testes novos, suíte total 19. Fatia 6: 7 novos, suíte total 26; builds e single player aprovados. Cobertura dedicada aceita conforme [fatia 8](../archive/fatia-08-validacao-integrada.md). Pagamento apenas na próxima virada com jogador conectado aceito em 08/11/2026; não paga offline nem ao reconectar.

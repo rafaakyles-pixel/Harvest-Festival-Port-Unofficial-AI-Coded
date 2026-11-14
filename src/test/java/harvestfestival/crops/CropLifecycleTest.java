@@ -16,7 +16,7 @@ class CropLifecycleTest {
         try (var resources = new CropTestSupport(directory)) {
             var definition = CropTestSupport.turnip();
             var crop = CropState.planted(definition.id());
-            assertEquals(0, definition.appearance(crop.stage()));
+            assertEquals(4, definition.appearance(crop.stage()));
             for (int expected = 2; expected <= 5; expected++) {
                 assertFalse(CropLifecycle.canHarvest(crop, definition));
                 crop = CropLifecycle.newDay(crop, definition, Season.SPRING, true, false);
@@ -24,8 +24,8 @@ class CropLifecycleTest {
                 assertEquals(1, crop.dryDays());
             }
             assertTrue(CropLifecycle.canHarvest(crop, definition));
-            assertEquals(1, definition.appearance(3));
-            assertEquals(2, definition.appearance(5));
+            assertEquals(5, definition.appearance(3));
+            assertEquals(6, definition.appearance(5));
             assertEquals(5, CropLifecycle.newDay(crop, definition, Season.SPRING, true, false).stage());
         }
     }
@@ -78,15 +78,15 @@ class CropLifecycleTest {
             var present = new AtomicBoolean(true);
             var outputs = new ArrayList<ItemStack>();
             var product = List.of(new ItemStack(CropContent.TURNIP.get()));
-            assertFalse(CropBlock.harvestOnce(crop, definition, () -> product, () -> false, outputs::add));
+            assertFalse(CropBlock.harvestOnce(crop, definition, () -> product, next -> false, outputs::add));
             assertTrue(outputs.isEmpty());
-            assertFalse(CropBlock.harvestOnce(crop, definition, List::of, () -> fail("must not remove without loot"), outputs::add));
+            assertFalse(CropBlock.harvestOnce(crop, definition, List::of, next -> fail("must not remove without loot"), outputs::add));
             assertFalse(CropBlock.harvestOnce(CropState.planted(definition.id()), definition,
-                    () -> fail("immature must not roll loot"), () -> true, outputs::add));
-            assertTrue(CropBlock.harvestOnce(crop, definition, () -> product, () -> present.getAndSet(false), stack -> {
+                    () -> fail("immature must not roll loot"), next -> true, outputs::add));
+            assertTrue(CropBlock.harvestOnce(crop, definition, () -> product, next -> { assertNull(next); return present.getAndSet(false); }, stack -> {
                 assertFalse(present.get()); outputs.add(stack);
             }));
-            assertFalse(CropBlock.harvestOnce(crop, definition, () -> product, () -> present.getAndSet(false), outputs::add));
+            assertFalse(CropBlock.harvestOnce(crop, definition, () -> product, next -> { assertNull(next); return present.getAndSet(false); }, outputs::add));
             assertEquals(1, outputs.size());
         }
     }

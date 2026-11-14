@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/cucumber_seeds",
+    "tints": [
+      {"type": "minecraft:constant", "value": 3584787},
+      {"type": "minecraft:constant", "value": 3584787}
+    ]
+  }
+}

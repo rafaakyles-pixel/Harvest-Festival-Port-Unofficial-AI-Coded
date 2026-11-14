@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -36,7 +38,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class CropBlock extends BaseEntityBlock {
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CropBlock::new);
     // Visual cache only. Logical stage lives in the block entity and has no blockstate bound.
-    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 3);
+    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 10);
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
     public CropBlock(Properties properties) {
         super(properties);
@@ -72,19 +74,47 @@ public final class CropBlock extends BaseEntityBlock {
                 || !player.mayUseItemAt(pos, hit.getDirection(), held)) return InteractionResult.PASS;
         if (!(level.getBlockEntity(pos) instanceof CropBlockEntity crop)) return InteractionResult.PASS;
         if (!(level instanceof ServerLevel server)) return InteractionResult.SUCCESS;
-        boolean harvested = harvestOnce(crop.crop(), CropDefinitions.INSTANCE.get(crop.crop().crop()),
+        var expected = crop.crop();
+        boolean harvested = harvestOnce(expected, CropDefinitions.INSTANCE.get(expected.crop()),
                 () -> Block.getDrops(state, server, pos, crop),
-                () -> server.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL),
+                next -> server.getBlockEntity(pos) == crop && crop.commitHarvest(expected, next,
+                        () -> server.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL)),
                 stack -> Block.popResource(server, pos, stack));
         return harvested ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
     public static boolean harvestOnce(CropState crop, CropDefinition definition, Supplier<List<ItemStack>> drops,
-            BooleanSupplier remove, Consumer<ItemStack> output) {
+            Predicate<CropState> commit, Consumer<ItemStack> output) {
         if (!CropLifecycle.canHarvest(crop, definition)) return false;
-        var items = drops.get();
-        if (items.isEmpty() || !remove.getAsBoolean()) return false;
+        var items = drops.get().stream().filter(stack -> !stack.isEmpty()).toList();
+        if (items.isEmpty() && definition.emptyHarvestPolicy() == CropDefinition.EmptyHarvestPolicy.PRESERVE) return false;
+        if (!commit.test(CropLifecycle.afterHarvest(crop, definition))) return false;
         items.forEach(output);
         return true;
+    }
+
+    /** Breaking never retains a regrowing plant, even with a sickle or an empty loot result. */
+    public static boolean breakOnce(CropState crop, CropDefinition definition, Supplier<List<ItemStack>> drops,
+            BooleanSupplier remove, Consumer<ItemStack> output) {
+        var items = CropLifecycle.canHarvest(crop, definition) ? drops.get() : List.<ItemStack>of();
+        if (!remove.getAsBoolean()) return false;
+        items.stream().filter(stack -> !stack.isEmpty()).forEach(output);
+        return true;
+    }
+
+    @Override public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player,
+            ItemStack tool, boolean willHarvest, FluidState fluid) {
+        // Legacy single-harvest crops keep their existing vanilla drop path.
+        if (level instanceof ServerLevel server && level.getBlockEntity(pos) instanceof CropBlockEntity crop) {
+            var expected = crop.crop();
+            var definition = CropDefinitions.INSTANCE.get(expected.crop());
+            if (definition != null && definition.regrowStage() > 0) {
+                return breakOnce(expected, definition, () -> Block.getDrops(state, server, pos, crop, player, tool),
+                        () -> server.getBlockEntity(pos) == crop && crop.commitHarvest(expected, null,
+                                () -> server.removeBlock(pos, false)),
+                        stack -> Block.popResource(server, pos, stack));
+            }
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, tool, willHarvest, fluid);
     }
     @Override protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         if (!(params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof CropBlockEntity crop)) return List.of();

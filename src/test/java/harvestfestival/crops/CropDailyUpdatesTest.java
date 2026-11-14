@@ -19,6 +19,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropDailyUpdatesTest {
     @TempDir Path directory;
+    @Test void regrowthUsesSameCycleGuardAcrossRewateringUnloadAndAdministrativeRebase() throws Exception {
+        try (var resources = new CropTestSupport(directory)) {
+            var work = new Work("regrowth", new ArrayList<>(), true);
+            work.crop = new CropState(CropTestSupport.cucumber().id(), 7, 1, false, 3);
+            CropDailyUpdates.process(10, List.of(work));
+            assertEquals(8, work.crop.stage());
+            assertEquals(3, work.crop.harvests());
+            work.soil = work.soil.setValue(FarmlandBlock.MOISTURE, 7);
+            CropDailyUpdates.process(10, List.of(work));
+            assertTrue(CropDailyUpdates.watered(work.soil));
+            var transition = new harvestfestival.calendar.DailyTransition();
+            transition.begin(0); // Same baseline reset used by administrative date commands.
+            assertTrue(transition.finish(0).isEmpty());
+            assertEquals(8, work.crop.stage());
+            CropDailyUpdates.process(50, List.of());
+            CropDailyUpdates.process(100, List.of());
+            assertEquals(8, work.crop.stage());
+            CropDailyUpdates.process(101, List.of(work));
+            assertEquals(9, work.crop.stage());
+            assertEquals(3, work.crop.harvests());
+            assertEquals(3, work.soil.getValue(FarmlandBlock.MOISTURE));
+            CropDailyUpdates.process(102, List.of(work));
+            assertEquals(9, work.crop.stage());
+            assertEquals(0, work.soil.getValue(FarmlandBlock.MOISTURE));
+        }
+    }
     @Test void everyCropGrowsBeforeAnySoilDriesIncludingEmptySoil() throws Exception {
         try (var resources = new CropTestSupport(directory)) {
             var order = new ArrayList<String>();

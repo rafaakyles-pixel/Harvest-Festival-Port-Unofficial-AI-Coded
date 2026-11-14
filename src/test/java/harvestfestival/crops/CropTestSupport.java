@@ -26,6 +26,9 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/cucumber.json", "harvestfestival/loot_table/crops/cucumber.json",
+        "harvestfestival/tags/item/seeds/cucumber.json", "c/tags/item/crops/cucumber.json",
+        "harvestfestival/shipping_prices/tags/c/crops/cucumber.json",
         "minecraft/tags/block/maintains_farmland.json", "harvestfestival/crops/turnip.json", "harvestfestival/loot_table/crops/turnip.json",
         "harvestfestival/tags/block/crops.json", "harvestfestival/tags/block/crop_soils.json",
         "harvestfestival/tags/block/waterable.json", "harvestfestival/tags/block/tillable.json",
@@ -58,6 +61,7 @@ public final class CropTestSupport implements AutoCloseable {
     }
     public static void bindItems() {
         for (var item : List.of(CropContent.TURNIP.get(), CropContent.TURNIP_SEEDS.get(),
+                CropContent.CUCUMBER.get(), CropContent.CUCUMBER_SEEDS.get(),
                 harvestfestival.tools.ToolContent.WATERING_CAN.get(), harvestfestival.tools.ToolContent.HOE.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         }
@@ -68,6 +72,7 @@ public final class CropTestSupport implements AutoCloseable {
                         new PackLocationInfo(path.toString(), Component.literal("Crop test"), PackSource.DEFAULT, Optional.empty()), path)).toList());
     }
     public static CropDefinition turnip() { return CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:turnip")); }
+    public static CropDefinition cucumber() { return CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:cucumber")); }
     public void close() {
         CropDefinitions.INSTANCE.apply(Map.of(), null, null);
         BuiltInRegistries.BLOCK.prepareTagReload(new TagLoader.LoadResult<>(Registries.BLOCK, blocks)).apply();

@@ -24,13 +24,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void eightCucumberHarvestsUseBundledPriceAndPayOnlyOnceAfterReload() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var definition = CropTestSupport.cucumber();
+            var entity = new harvestfestival.crops.CropBlockEntity(net.minecraft.core.BlockPos.ZERO, CropContent.CROP.get().defaultBlockState());
+            entity.setCrop(CropState.planted(definition.id()));
+            var prices = new ShippingPrices();
+            prices.apply(prices.prepare(fixture.manager, null), fixture.manager, null);
+            var holder = new SavedHolder();
+            for (int harvest = 0; harvest < 8; harvest++) {
+                for (int day = 0; day < (harvest == 0 ? 9 : 3); day++)
+                    entity.setCrop(CropLifecycle.newDay(entity.crop(), definition, Season.SPRING, true, false));
+                var expected = entity.crop();
+                assertTrue(CropBlock.harvestOnce(expected, definition, () -> List.of(new ItemStack(CropContent.CUCUMBER.get())),
+                        next -> entity.commitHarvest(expected, next, () -> true), stack -> assertTrue(PlayerShipping.depositInto(holder, stack, prices))));
+            }
+            assertEquals(CropState.INVALID, entity.crop());
+            assertEquals(320, holder.getData(PlayerShipping.QUEUE).total());
+            assertFalse(PlayerShipping.depositInto(holder, new ItemStack(CropContent.CUCUMBER_SEEDS.get()), prices));
+            prices.apply(ShippingPrices.read(java.util.Map.of(), message -> fail(message)), null, null); // Deposited values remain fixed.
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registry);
+            holder.serializeAttachments(output);
+            var file = directory.resolve("cucumber-shipping.nbt");
+            NbtIo.writeCompressed(output.buildResult(), file);
+            var reopened = new SavedHolder();
+            reopened.read(TagValueInput.create(ProblemReporter.DISCARDING, registry, NbtIo.readCompressed(file, NbtAccounter.unlimitedHeap())));
+            PlayerShipping.pay(reopened);
+            PlayerShipping.pay(reopened);
+            assertEquals(320, reopened.getData(PlayerGold.GOLD));
+            assertTrue(reopened.getData(PlayerShipping.QUEUE).entries().isEmpty());
+        }
+    }
     @Test void matureTurnipUsesRealTagAndExistingQueueThenPaysOnceAfterDiskReload() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var definition = CropTestSupport.turnip();
             var crop = CropState.planted(definition.id());
             for (int i = 0; i < 4; i++) crop = CropLifecycle.newDay(crop, definition, Season.SPRING, true, false);
             var drops = new ArrayList<ItemStack>();
-            assertTrue(CropBlock.harvestOnce(crop, definition, () -> List.of(new ItemStack(CropContent.TURNIP.get())), () -> true, drops::add));
+            assertTrue(CropBlock.harvestOnce(crop, definition, () -> List.of(new ItemStack(CropContent.TURNIP.get())), next -> { assertNull(next); return true; }, drops::add));
             var prices = new ShippingPrices();
             prices.apply(prices.prepare(fixture.manager, null), fixture.manager, null);
             var holder = new SavedHolder();

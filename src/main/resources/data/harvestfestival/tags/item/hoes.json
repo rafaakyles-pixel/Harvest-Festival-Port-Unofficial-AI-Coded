@@ -1,5 +1,8 @@
 {
   "values": [
-    "harvestfestival:hoe"
-  ]
+    "harvestfestival:hoe",
+    "harvestfestival:hoe_copper",
+    "harvestfestival:hoe_silver"
+  ],
+  "replace": false
 }

@@ -23,18 +23,32 @@ public final class ToolContent {
     public static final Supplier<DataComponentType<SickleState>> SICKLE_STATE = COMPONENTS.register(
             "sickle_state", () -> DataComponentType.<SickleState>builder().persistent(SickleState.CODEC)
                     .networkSynchronized(ByteBufCodecs.fromCodec(SickleState.CODEC)).build());
+    public static final Supplier<DataComponentType<FarmToolState>> FARM_TOOL_STATE = COMPONENTS.register(
+            "farm_tool_state", () -> DataComponentType.<FarmToolState>builder().persistent(FarmToolState.CODEC)
+                    .networkSynchronized(ByteBufCodecs.fromCodec(FarmToolState.CODEC)).build());
     public static final DeferredItem<SickleItem> SICKLE = ITEMS.registerItem("sickle", SickleItem::new,
             props -> props.durability(SickleItem.MAX_DAMAGE));
     public static final DeferredBlock<PreparedSoilBlock> PREPARED_SOIL = BLOCKS.registerBlock(
             "prepared_soil", PreparedSoilBlock::new, props -> props.strength(0.6F).sound(SoundType.GRAVEL));
-    public static final DeferredItem<HoeItem> HOE = ITEMS.registerItem("hoe", HoeItem::new, props -> props.stacksTo(1));
-    public static final DeferredItem<WateringCanItem> WATERING_CAN = ITEMS.registerItem(
-            "watering_can", WateringCanItem::new, props -> props.stacksTo(1));
+    public static final DeferredItem<HoeItem> HOE = hoe("hoe", ToolTier.BASIC);
+    public static final DeferredItem<HoeItem> HOE_COPPER = hoe("hoe_copper", ToolTier.COPPER);
+    public static final DeferredItem<HoeItem> HOE_SILVER = hoe("hoe_silver", ToolTier.SILVER);
+    public static final DeferredItem<WateringCanItem> WATERING_CAN = can("watering_can", ToolTier.BASIC);
+    public static final DeferredItem<WateringCanItem> WATERING_CAN_COPPER = can("watering_can_copper", ToolTier.COPPER);
+    public static final DeferredItem<WateringCanItem> WATERING_CAN_SILVER = can("watering_can_silver", ToolTier.SILVER);
+
+    private static DeferredItem<HoeItem> hoe(String id, ToolTier tier) {
+        return ITEMS.registerItem(id, properties -> new HoeItem(properties, tier), props -> props.durability(tier.durability()));
+    }
+    private static DeferredItem<WateringCanItem> can(String id, ToolTier tier) {
+        return ITEMS.registerItem(id, properties -> new WateringCanItem(properties, tier), props -> props.stacksTo(1));
+    }
 
     private ToolContent() {}
 
     public static void register(IEventBus bus) {
         bus.addListener(WateringCanItem::registerTooltips);
+        bus.addListener(HoeItem::registerTooltips);
         COMPONENTS.register(bus);
         BLOCKS.register(bus);
         ITEMS.register(bus);

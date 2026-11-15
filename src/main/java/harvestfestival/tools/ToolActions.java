@@ -12,9 +12,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 public final class ToolActions {
     private ToolActions() {}
+    private static final TagKey<Block> WATERABLE = TagKey.create(Registries.BLOCK, Identifier.parse("harvestfestival:waterable"));
 
     public enum Result { CHANGED, NO_MATCH, BLOCKED, EMPTY, UNCHANGED, AMBIGUOUS, FAILED }
 
@@ -51,28 +66,48 @@ public final class ToolActions {
         return Result.CHANGED;
     }
 
-    static InteractionResult useOn(ToolAction action, UseOnContext context) {
-        var level = context.getLevel();
-        var player = context.getPlayer();
-        var clicked = context.getClickedPos();
-        var pos = resolveTarget(action, clicked, level::getBlockState);
-        var stack = context.getItemInHand();
-        if (player == null || context.getClickedFace() == Direction.DOWN
-                || !level.mayInteract(player, pos)
-                || !level.mayInteract(player, clicked)
-                || !player.mayUseItemAt(clicked, context.getClickedFace(), stack)
-                || !player.mayUseItemAt(pos, context.getClickedFace(), stack)) return InteractionResult.PASS;
-        // Rules are server data. Let the server decide; never mutate a client world or stack.
-        if (level.isClientSide()) return InteractionResult.SUCCESS;
-        var result = apply(action, new Target() {
-            public BlockState state() { return level.getBlockState(pos); }
-            public boolean airAbove() { return level.isEmptyBlock(pos.above()); }
-            public boolean canEdit() { return true; } // Checked against the real player above.
-            public boolean set(BlockState state) { return level.setBlock(pos, state, Block.UPDATE_ALL); }
-        }, stack, player.isCreative());
-        if (result == Result.CHANGED && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)
-            ToolEffort.basicAction(serverPlayer);
-        return result == Result.CHANGED ? InteractionResult.SUCCESS : InteractionResult.PASS;
+    static InteractionResult useArea(ToolAction action, ToolTier itemTier, ToolTier areaTier, Level level,
+            Player player, InteractionHand hand, BlockHitResult hit) {
+        var stack = player.getItemInHand(hand);
+        var clicked = hit.getBlockPos();
+        if (hit.getType() != HitResult.Type.BLOCK || !level.hasChunkAt(clicked)
+                || !FarmToolTasks.canUse(stack, itemTier, action)
+                || !allowed(level, player, stack, clicked, hit.getDirection())) return InteractionResult.PASS;
+        if (action == ToolAction.WATER && !waterAnchor(level.getBlockState(clicked))) return InteractionResult.PASS;
+        // The client predicts only acceptance; all state and costs are authoritative on the server.
+        if (!(level instanceof ServerLevel server) || !(player instanceof ServerPlayer serverPlayer)) return InteractionResult.SUCCESS;
+        var face = action == ToolAction.HOE ? Direction.UP : hit.getDirection();
+        int changes = ToolArea.perform(ToolArea.positions(clicked, Direction.fromYRot(player.getYRot()), action, areaTier),
+                () -> FarmToolTasks.canUse(stack, itemTier, action)
+                        && (action != ToolAction.WATER || WateringCanState.get(stack).water() > 0),
+                candidate -> {
+                    if (!level.hasChunkAt(candidate)) return Result.BLOCKED;
+                    var pos = resolveTarget(action, candidate, level::getBlockState);
+                    return apply(action, new Target() {
+                        public BlockState state() { return level.getBlockState(pos); }
+                        public boolean airAbove() { return level.isEmptyBlock(pos.above()); }
+                        public boolean canEdit() { return level.hasChunkAt(pos)
+                                && allowed(level, player, stack, candidate, face) && allowed(level, player, stack, pos, face); }
+                        public boolean set(BlockState result) {
+                            if (action == ToolAction.HOE) {
+                                // Publish the approved tag rule as the proposed result; don't inherit modern extra soil recipes.
+                                var context = new UseOnContext(level, player, hand, stack, new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false));
+                                var event = new BlockEvent.BlockToolModificationEvent(state(), context, ItemAbilities.HOE_TILL, false);
+                                event.setFinalState(result);
+                                NeoForge.EVENT_BUS.post(event);
+                                if (event.isCanceled() || event.getFinalState() == null || event.getFinalState().equals(state())) return false;
+                                result = event.getFinalState();
+                            }
+                            return level.setBlock(pos, result, Block.UPDATE_ALL);
+                        }
+                    }, stack, player.isCreative());
+                }, pos -> FarmToolTasks.complete(stack, itemTier, action, player.isCreative(), ToolEffortSettings.INSTANCE.rule(),
+                        damage -> EnchantmentHelper.processDurabilityChange(server, stack, damage), amount -> ToolEffort.consume(serverPlayer, amount)));
+        return changes > 0 ? InteractionResult.SUCCESS : InteractionResult.PASS;
+    }
+    static boolean waterAnchor(BlockState state) { return state.is(WATERABLE) || state.is(CropContent.CROPS); }
+    private static boolean allowed(Level level, Player player, ItemStack stack, BlockPos pos, Direction face) {
+        return face != Direction.DOWN && level.mayInteract(player, pos) && player.mayUseItemAt(pos, face, stack);
     }
 
     public static BlockPos resolveTarget(ToolAction action, BlockPos clicked, Function<BlockPos, BlockState> states) {

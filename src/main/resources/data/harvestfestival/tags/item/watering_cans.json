@@ -1,5 +1,8 @@
 {
   "values": [
-    "harvestfestival:watering_can"
-  ]
+    "harvestfestival:watering_can",
+    "harvestfestival:watering_can_copper",
+    "harvestfestival:watering_can_silver"
+  ],
+  "replace": false
 }

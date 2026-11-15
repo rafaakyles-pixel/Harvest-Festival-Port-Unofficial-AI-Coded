@@ -34,7 +34,11 @@ public final class CreativeTabs {
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
+        output.accept(ToolContent.HOE_COPPER.get());
+        output.accept(ToolContent.HOE_SILVER.get());
         output.accept(ToolContent.WATERING_CAN.get());
+        output.accept(ToolContent.WATERING_CAN_COPPER.get());
+        output.accept(ToolContent.WATERING_CAN_SILVER.get());
         output.accept(ToolContent.SICKLE.get());
         output.accept(ShippingContent.SHIPPING_BOX.get());
         output.accept(CropContent.TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);

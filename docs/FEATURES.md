@@ -246,7 +246,7 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 - [x] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Concluída conforme validação manual do responsável em 04/11/2026, com runClient single player: set/add consultados por get, morte/renascimento, portal e volta, sair/reabrir. Pendentes: servidor dedicado, dois jogadores e reconexão. Build e quantidade de testes automatizados informados pelo responsável: **não informado**.
 
 - [x] Fatia 13: trigo HF com 27 viradas regadas, corte por foice e produto vanilla a 100; foice básica com dano/nível persistentes e esforço básico. Contratos em porting/cultivos.md e porting/ferramentas.md. Fatia 13 aceita pelo responsável.
-- [x] Fatia 14: fadiga, desmaio e recuperação implementados; aceite manual pendente.
+- [x] Fatia 14: fadiga, desmaio e recuperação implementados; aceite global do responsável em 15/11/2026.
 
 
 
@@ -256,15 +256,20 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 
 | Fatia | Recorte | Aceite próprio |
 | --- | --- | --- |
-| 14 | Implementada: esforço/sono, cebola/espinafre | Build aprovado, 20 novos/139 totais executados; aceite manual pendente e memória de camas por dimensão adiada por decisão explícita |
-| 15 | Cenoura e beterraba comuns; batata com drop especial | Produtos/visuais vanilla com sementes HF; batata exige uma/duas entradas e possibilidade individual de venenosa, testes de sorteio e preço 1 da venenosa. Não tratar batata como mera duplicação do nabo |
+| 14 | Implementada: esforço/sono, cebola/espinafre | Build aprovado, 20 novos/139 totais executados; aceite global do responsável em 15/11/2026 e memória de camas por dimensão adiada por decisão explícita |
+| 15-F | Implementada: enxada/regador até prata, anterior aos cultivos | Carga persistente da enxada até 1×3; regador sem carga até 3×3; custos/nível/dano/água por alteração. 12 novos/151 testes executados; aceite manual pendente. Recorte de alvos aprovado em Ferramentas |
+| 15-A | Cenoura e beterraba comuns; batata com drop especial, aguardando aprovação própria | Produtos/visuais vanilla com sementes HF; batata exige uma/duas entradas e possibilidade individual de venenosa, sorteio em cada avaliação do laço e preço 1 da venenosa. Não tratar batata como mera duplicação do nabo |
 | 15-V | Política agrícola vanilla, fatia separada a aprovar antes de declarar equivalência vanilla concluída | Matriz independente de plantio, ticks/crescimento, uso de item, drops, sementes da grama, umidade e enxadas; receitas HF→vanilla, sem conversão inversa inventada; preservar itens/usos alimentares, testes de combinações, recarga/reinício e escopo por tags |
-| 16 | Morango, tomate e berinjela | Rebrota comum com limites 12/8/8, dados individuais, persistência e sazonalidade; desbloqueios comerciais continuam dependentes de lojas/cidade |
-| 17 | Repolho, abacaxi, milho, batata-doce e pimentão verde | Repolho de colheita única; demais rebrota limitada 3/7/14/9. Dividir entrega se necessário, sem misturar novos mecanismos |
+| 16-A | Morango, tomate e berinjela | Rebrota comum com limites 12/8/8, dados individuais, persistência e sazonalidade; desbloqueios comerciais continuam dependentes de lojas/cidade |
+| 16-F | Foice cobre/prata | Carga e áreas próprias 3×1/3×2, ordem dos callbacks de quebra, custos e ausência de duplicação; exige levantamento fechado e aprovação |
+| 17-A/B | Repolho; depois abacaxi, milho, batata-doce e pimentão verde | Repolho de colheita única; demais rebrota limitada 3/7/14/9. Entregas separadas se necessário, sem misturar mecanismos novos |
+| 17-F | Enxada/regador ouro/mystril; foice ouro/mystril em recorte próprio se necessário | Áreas/carga/custos/durabilidade por ferramenta, com testes próprios; sem herdar geometria do regador |
 | 18-A | Melancia e abóbora | Transformação na própria posição em bloco ao amadurecer, sem regrow; aparência de haste e orientação aleatória da abóbora; conferir drops do bloco convertido e ausência de segunda emissão HF |
 | 18-B | Grama/forragem | Planta dupla desde estágio 6, sem água, corte mínimo 6 e quantidade por estágio; comprovar ordem de remoção/markSafe/replantio e resultado efetivo do limite antes de aprovar preservação |
 
-15-V e 18-A/B são recortes explícitos propostos, não autorização para ampliar a fatia 14 nem promessa de concluir tudo em cinco implementações. A numeração definitiva depende do aceite. Trigo da fatia 13 não concluiu 15-V.
+Somente 15-F tem implementação autorizada nesta sequência após a fatia 14. Os demais recortes exigem aprovação própria; não há promessa de concluir o catálogo em cinco implementações. Trigo da fatia 13 não concluiu 15-V. Tiers amaldiçoados/abençoados/míticos, reparos e obtenção por serviços ficam em recortes posteriores com dependências próprias; árvores/aspersores mantêm mecanismos separados.
 
 
-Fatia 14 implementada em 15/11/2026 conforme aprovação: efeitos próprios, desmaio padrão sem morte, recuperação e esforço nas ações existentes de foice/enxada/regador; cebola e espinafre com recursos originais/remessas/abas. Contratos em [Ferramentas](porting/ferramentas.md) e [Cultivos](porting/cultivos.md). Memória de camas por dimensão mantida pendente pelo responsável; accessor mínimo de sono autorizado. Não conclui maldição, ferramentas completas, política vanilla, cenário 8, dedicado/multiplayer ou aceite manual. Planos transitórios removidos a pedido; roteiro manual somente na resposta final.
+Fatia 14 implementada em 15/11/2026 conforme aprovação: efeitos próprios, desmaio padrão sem morte, recuperação e esforço nas ações existentes de foice/enxada/regador; cebola e espinafre com recursos originais/remessas/abas. Contratos em [Ferramentas](porting/ferramentas.md) e [Cultivos](porting/cultivos.md). Memória de camas por dimensão mantida pendente pelo responsável; accessor mínimo de sono autorizado. Não conclui maldição, ferramentas completas, política vanilla, cenário 8, dedicado/multiplayer ; aceite global do responsável em 15/11/2026. Planos transitórios removidos a pedido; roteiro manual somente na resposta final.
+
+Diretriz de 15/11/2026: distribuir tiers para facilitar testes. Levantamento seguido de aprovação explícita somente da 15-F: regador até prata (3×3 sem carga), enxada até prata (1×3 com carga). A enxada original não oferece 3×3 nesse tier. Custos, nível, durabilidade, orientação, recortes autorizados e validação em [Ferramentas](porting/ferramentas.md). Aprovação não abrange cultivos novos nem política vanilla.

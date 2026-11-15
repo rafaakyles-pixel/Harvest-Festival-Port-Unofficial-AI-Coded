@@ -23,7 +23,7 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Ouro, attachments, sincronização, aniversários do jogador/NPCs | [Jogador](porting/jogador.md) |
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
-| Enxada, regador, água no item, solo e futuro cultivo | [Ferramentas](porting/ferramentas.md) |
+| Enxada/regador até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
 | Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita e rebrota limitada | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
@@ -102,7 +102,7 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
 - Fatia 11: `harvestfestival.tools.mixin.FarmlandBlockMixin`, subpacote aprovado explicitamente pelo responsável. Alvo `FarmlandBlock.randomTick`, injeção HEAD cancelável para solos participantes por tag; impede hidratação/secagem aleatória concorrendo com o ciclo diário. A fonte exata 26.2.0.93 não oferece evento cancelável nesse método. Queda e ticks de obstrução permanecem vanilla/NeoForge. Evidências, limites e migração em [Ferramentas](porting/ferramentas.md).
 
-- Fatia 14: `harvestfestival.tools.mixin.PlayerSleepAccessor`, autorizado explicitamente pelo responsável, escreve somente `Player.sleepCounter` no desmaio com sono instantâneo. Fonte exata 26.2.0.93 não expõe setter/evento equivalente; decisão coletiva de sono continua no motor. Aplicação à classe transformada testada; sono real/manual ainda pendente. Contrato em [Ferramentas](porting/ferramentas.md).
+- Fatia 14: `harvestfestival.tools.mixin.PlayerSleepAccessor`, autorizado explicitamente pelo responsável, escreve somente `Player.sleepCounter` no desmaio com sono instantâneo. Fonte exata 26.2.0.93 não expõe setter/evento equivalente; decisão coletiva de sono continua no motor. Aplicação à classe transformada testada; aceite global da fatia 14 informado pelo responsável em 15/11/2026, sem detalhamento individual do sono. Contrato em [Ferramentas](porting/ferramentas.md).
 
 ## Histórico e manutenção
 

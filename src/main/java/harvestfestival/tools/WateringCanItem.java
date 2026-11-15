@@ -16,7 +16,9 @@ import net.neoforged.neoforge.common.tooltip.TooltipLocation;
 import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 
 public final class WateringCanItem extends Item {
-    public WateringCanItem(Properties properties) { super(properties); }
+    private final ToolTier tier;
+    public WateringCanItem(Properties properties, ToolTier tier) { super(properties); this.tier = tier; }
+    public ToolTier tier() { return tier; }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
@@ -37,11 +39,13 @@ public final class WateringCanItem extends Item {
 
     public static void registerTooltips(RegisterTooltipAppendersEvent event) {
         event.registerAppender(TooltipLocation.POST_CUSTOM, (stack, context, display, player, flag, builder) -> {
-            if (!stack.is(ToolContent.WATERING_CAN.get()) || display.hideTooltip()
+            if (!(stack.getItem() instanceof WateringCanItem can) || display.hideTooltip()
                     || !display.shows(ToolContent.WATER_STATE.get())) return;
             int water = WateringCanState.get(stack).water();
             builder.accept(Component.translatable("tooltip.harvestfestival.watering_can.water",
                     water, WateringCanState.CAPACITY).withStyle(water == 0 ? ChatFormatting.RED : ChatFormatting.AQUA));
+            builder.accept(Component.translatable("tooltip.harvestfestival.watering_can.area",
+                    1 + 2 * can.tier.waterSides(), 1 + can.tier.waterFront()).withStyle(ChatFormatting.AQUA));
         });
     }
 
@@ -49,12 +53,15 @@ public final class WateringCanItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         var player = context.getPlayer();
         if (player != null && fill(context.getLevel(), player, context.getHand())) return InteractionResult.SUCCESS;
-        return ToolActions.useOn(ToolAction.WATER, context);
+        if (player == null) return InteractionResult.PASS;
+        return ToolActions.useArea(ToolAction.WATER, tier, tier, context.getLevel(), player, context.getHand(),
+                new net.minecraft.world.phys.BlockHitResult(context.getClickLocation(), context.getClickedFace(), context.getClickedPos(), false));
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        return fill(level, player, hand) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+        return fill(level, player, hand) ? InteractionResult.SUCCESS : ToolActions.useArea(ToolAction.WATER, tier, tier,
+                level, player, hand, getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE));
     }
 
     private boolean fill(Level level, Player player, InteractionHand hand) {

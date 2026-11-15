@@ -42,5 +42,16 @@
   "effect.harvestfestival.fatigue": "Fadiga",
   "effect.harvestfestival.exhaustion": "Exaustão",
   "death.attack.harvestfestival.exhausted": "%1$s sucumbiu à exaustão",
-  "death.attack.harvestfestival.exhausted.player": "%1$s sucumbiu à exaustão"
+  "death.attack.harvestfestival.exhausted.player": "%1$s sucumbiu à exaustão",
+  "item.harvestfestival.hoe_copper": "Enxada de cobre",
+  "item.harvestfestival.hoe_silver": "Enxada de prata",
+  "item.harvestfestival.watering_can_copper": "Regador de cobre",
+  "item.harvestfestival.watering_can_silver": "Regador de prata",
+  "item.harvestfestival.hoe.broken": "%s quebrada",
+  "tooltip.harvestfestival.hoe.area": "Carga atual: 1×%s",
+  "tooltip.harvestfestival.hoe.charge": "Segure o botão direito para carregar",
+  "tooltip.harvestfestival.hoe.discharge": "Agache e use para zerar a carga",
+  "tooltip.harvestfestival.hoe.discharged": "Carga da enxada zerada",
+  "tooltip.harvestfestival.hoe.charging": "Carregando enxada: 1×%s",
+  "tooltip.harvestfestival.watering_can.area": "Rega uma área de %s×%s"
 }

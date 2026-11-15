@@ -46,7 +46,7 @@ public final class CropTestSupport implements AutoCloseable {
         "minecraft/tags/block/maintains_farmland.json", "harvestfestival/crops/turnip.json", "harvestfestival/loot_table/crops/turnip.json",
         "harvestfestival/tags/block/crops.json", "harvestfestival/tags/block/crop_soils.json",
         "harvestfestival/tags/block/waterable.json", "harvestfestival/tags/block/tillable.json",
-        "harvestfestival/tags/item/seeds/turnip.json", "harvestfestival/tags/item/watering_cans.json",
+        "harvestfestival/tags/item/seeds/turnip.json", "harvestfestival/tags/item/watering_cans.json", "harvestfestival/tags/item/hoes.json",
         "c/tags/item/crops/turnip.json", "c/tags/item/crops.json", "c/tags/item/seeds.json",
         "harvestfestival/shipping_prices/tags/c/crops/turnip.json",
         "harvestfestival/tool_actions/water.json", "harvestfestival/tool_actions/hoe.json"
@@ -86,6 +86,15 @@ public final class CropTestSupport implements AutoCloseable {
         }
         harvestfestival.tools.ToolContent.SICKLE.get().builtInRegistryHolder().bindComponents(DataComponentMap.builder()
                 .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, 128).set(DataComponents.DAMAGE, 0).build());
+        for (var item : List.of(harvestfestival.tools.ToolContent.HOE.get(), harvestfestival.tools.ToolContent.HOE_COPPER.get(),
+                harvestfestival.tools.ToolContent.HOE_SILVER.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 1)
+                    .set(DataComponents.MAX_DAMAGE, item.tier().durability()).set(DataComponents.DAMAGE, 0).build());
+        }
+        for (var item : List.of(harvestfestival.tools.ToolContent.WATERING_CAN.get(), harvestfestival.tools.ToolContent.WATERING_CAN_COPPER.get(),
+                harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 1).build());
+        }
     }
     public static MultiPackResourceManager manager(Path... paths) {
         return new MultiPackResourceManager(PackType.SERVER_DATA, java.util.Arrays.stream(paths)

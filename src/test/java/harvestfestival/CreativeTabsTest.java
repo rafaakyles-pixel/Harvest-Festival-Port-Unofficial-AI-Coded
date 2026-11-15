@@ -30,16 +30,16 @@ class CreativeTabsTest {
             assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds", "onion_seeds", "spinach_seeds"), ids(visible));
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
-            assertEquals(List.of("hoe", "watering_can", "sickle", "shipping_box"), ids(visible));
+            assertEquals(List.of("hoe", "hoe_copper", "hoe_silver", "watering_can", "watering_can_copper", "watering_can_silver", "sickle", "shipping_box"), ids(visible));
             assertEquals(List.of("turnip", "cucumber", "onion", "spinach"), ids(searchOnly));
-            assertEquals(0, WateringCanState.get(visible.get(1)).water());
-            assertEquals(0, visible.get(2).getDamageValue());
-            assertEquals(SickleState.NEW, SickleState.get(visible.get(2)));
-            WateringCanState.fill(visible.get(1));
+            for (int i = 3; i <= 5; i++) assertEquals(0, WateringCanState.get(visible.get(i)).water());
+            assertEquals(0, visible.get(6).getDamageValue());
+            assertEquals(SickleState.NEW, SickleState.get(visible.get(6)));
+            WateringCanState.fill(visible.get(3));
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
-            assertEquals(0, WateringCanState.get(visible.get(1)).water());
-            assertEquals(4, ids(visible).stream().distinct().count());
+            assertEquals(0, WateringCanState.get(visible.get(3)).water());
+            assertEquals(8, ids(visible).stream().distinct().count());
         }
     }
     @Test void registeredTabsHaveExistingIconsAndTranslatedTitles() {

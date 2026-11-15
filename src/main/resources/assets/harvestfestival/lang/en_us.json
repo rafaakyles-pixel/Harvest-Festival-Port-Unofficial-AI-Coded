@@ -42,5 +42,16 @@
   "effect.harvestfestival.fatigue": "Fatigue",
   "effect.harvestfestival.exhaustion": "Exhaustion",
   "death.attack.harvestfestival.exhausted": "%1$s collapsed from exhaustion",
-  "death.attack.harvestfestival.exhausted.player": "%1$s collapsed from exhaustion"
+  "death.attack.harvestfestival.exhausted.player": "%1$s collapsed from exhaustion",
+  "item.harvestfestival.hoe_copper": "Copper Hoe",
+  "item.harvestfestival.hoe_silver": "Silver Hoe",
+  "item.harvestfestival.watering_can_copper": "Copper Watering Can",
+  "item.harvestfestival.watering_can_silver": "Silver Watering Can",
+  "item.harvestfestival.hoe.broken": "Broken %s",
+  "tooltip.harvestfestival.hoe.area": "Current charge: 1×%s",
+  "tooltip.harvestfestival.hoe.charge": "Hold right click to charge",
+  "tooltip.harvestfestival.hoe.discharge": "Sneak and use to reset charge",
+  "tooltip.harvestfestival.hoe.discharged": "Hoe charge reset",
+  "tooltip.harvestfestival.hoe.charging": "Charging hoe: 1×%s",
+  "tooltip.harvestfestival.watering_can.area": "Waters a %s×%s area"
 }

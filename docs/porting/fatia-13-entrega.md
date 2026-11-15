@@ -1,0 +1,43 @@
+# Entrega da fatia 13
+
+## Arquivos criados ou modificados
+
+- `src/main/java/harvestfestival/CreativeTabs.java`
+- `src/main/java/harvestfestival/HarvestFestival.java`
+- `src/main/java/harvestfestival/crops/CropDefinition.java`
+- `src/main/java/harvestfestival/crops/CropDefinitions.java`
+- `src/main/java/harvestfestival/crops/CropContent.java`
+- `src/main/java/harvestfestival/crops/CropBlock.java`
+- `src/main/java/harvestfestival/tools/SickleItem.java`
+- `src/main/java/harvestfestival/tools/SickleRules.java`
+- `src/main/java/harvestfestival/tools/SickleState.java`
+- `src/main/java/harvestfestival/tools/ToolContent.java`
+- `src/test/java/harvestfestival/CreativeTabsTest.java`
+- `src/test/java/harvestfestival/crops/WheatCropTest.java`
+- `src/test/java/harvestfestival/crops/CropDefinitionsTest.java`
+- `src/test/java/harvestfestival/crops/CropTestSupport.java`
+- `src/test/java/harvestfestival/tools/SickleTest.java`
+- `src/test/java/harvestfestival/player/CropShippingTest.java`
+- `src/main/resources/data/harvestfestival/crops/wheat.json`
+- `src/main/resources/data/harvestfestival/loot_table/crops/wheat.json`
+- `src/main/resources/data/harvestfestival/tags/item/seeds/wheat.json`
+- `src/main/resources/data/harvestfestival/tags/item/sickles.json`
+- `src/main/resources/data/harvestfestival/tool_settings/sickle.json`
+- `src/main/resources/data/c/tags/item/seeds.json`
+- `src/main/resources/assets/harvestfestival/blockstates/crop.json`
+- `src/main/resources/assets/harvestfestival/models/item/handheld_rotated.json`
+- `src/main/resources/assets/harvestfestival/models/item/sickle.json`
+- `src/main/resources/assets/harvestfestival/models/item/wheat_seeds.json`
+- `src/main/resources/assets/harvestfestival/items/sickle.json`
+- `src/main/resources/assets/harvestfestival/items/wheat_seeds.json`
+- `src/main/resources/assets/harvestfestival/textures/item/tools/sickle_basic.png`
+- `src/main/resources/assets/harvestfestival/lang/en_us.json`
+- `src/main/resources/assets/harvestfestival/lang/pt_br.json`
+- `docs/STATUS.md`
+- `docs/PORTING_NOTES.md`
+- `docs/FEATURES.md`
+- `docs/porting/cultivos.md`
+- `docs/porting/ferramentas.md`
+- `docs/porting/remessas.md`
+- `docs/porting/abas-criativas.md`
+- `docs/porting/fatia-13-entrega.md`

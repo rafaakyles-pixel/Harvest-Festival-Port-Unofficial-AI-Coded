@@ -26,6 +26,9 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/wheat.json", "harvestfestival/loot_table/crops/wheat.json",
+        "harvestfestival/tags/item/seeds/wheat.json", "harvestfestival/tags/item/sickles.json",
+        "harvestfestival/shipping_prices/tags/c/crops/wheat.json", "harvestfestival/tool_settings/sickle.json",
         "harvestfestival/crops/cucumber.json", "harvestfestival/loot_table/crops/cucumber.json",
         "harvestfestival/tags/item/seeds/cucumber.json", "c/tags/item/crops/cucumber.json",
         "harvestfestival/shipping_prices/tags/c/crops/cucumber.json",
@@ -55,16 +58,23 @@ public final class CropTestSupport implements AutoCloseable {
         manager = manager(path);
         BuiltInRegistries.BLOCK.prepareTagReload(new TagLoader.LoadResult<>(Registries.BLOCK,
                 TagLoader.loadTagsForRegistry(manager, Registries.BLOCK, (id, required) -> BuiltInRegistries.BLOCK.get(id)))).apply();
-        BuiltInRegistries.ITEM.prepareTagReload(new TagLoader.LoadResult<>(Registries.ITEM,
-                TagLoader.loadTagsForRegistry(manager, Registries.ITEM, (id, required) -> BuiltInRegistries.ITEM.get(id)))).apply();
+        var itemTags = new java.util.HashMap<>(TagLoader.loadTagsForRegistry(manager, Registries.ITEM, (id, required) -> BuiltInRegistries.ITEM.get(id)));
+        // Supplied by NeoForge's common tags in the real game; this fixture loads only mod resources.
+        itemTags.put(TagKey.create(Registries.ITEM, net.minecraft.resources.Identifier.parse("c:crops/wheat")),
+                List.of(net.minecraft.world.item.Items.WHEAT.builtInRegistryHolder()));
+        BuiltInRegistries.ITEM.prepareTagReload(new TagLoader.LoadResult<>(Registries.ITEM, itemTags)).apply();
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
         for (var item : List.of(CropContent.TURNIP.get(), CropContent.TURNIP_SEEDS.get(),
                 CropContent.CUCUMBER.get(), CropContent.CUCUMBER_SEEDS.get(),
+                CropContent.WHEAT_SEEDS.get(), net.minecraft.world.item.Items.WHEAT, net.minecraft.world.item.Items.WHEAT_SEEDS,
+                harvestfestival.ShippingContent.SHIPPING_BOX.get().asItem(),
                 harvestfestival.tools.ToolContent.WATERING_CAN.get(), harvestfestival.tools.ToolContent.HOE.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         }
+        harvestfestival.tools.ToolContent.SICKLE.get().builtInRegistryHolder().bindComponents(DataComponentMap.builder()
+                .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, 128).set(DataComponents.DAMAGE, 0).build());
     }
     public static MultiPackResourceManager manager(Path... paths) {
         return new MultiPackResourceManager(PackType.SERVER_DATA, java.util.Arrays.stream(paths)

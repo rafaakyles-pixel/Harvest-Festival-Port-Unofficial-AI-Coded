@@ -57,7 +57,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Complemento visual autorizado após o aceite da fatia 9: barra de água no item e quantidade exata no tooltip do regador. Sem novo pacote ou alteração do estado persistido. Por introduzir interface, seus critérios de aceite incluem o cenário 8 de espelho cliente de ouro/aniversário, ainda não executado; o indicador de água não comprova esse cenário.
 
 ### ⏳ Próximos passos
-- Próxima fatia: preparar levantamento e plano da fatia 13, ainda sem implementação aprovada. Candidato proposto: foice básica e trigo original, sujeito à comprovação de dependências e comportamento. Inclusão solicitada explicitamente: duas abas criativas HF, sementes e ferramentas/blocos, com enxada e shipping_box juntas; regador na segunda aba. Distribuição de produtos e demais detalhes devem constar do plano.
+- Fatia 13: implementação autorizada em 14/11/2026; abas prioritárias, trigo HF e foice básica. Validação manual pendente. Fadiga, desmaio e recuperação ficam para a próxima fatia. Cenário 8 permanece aberto.
 - Validar barra/tooltip do regador, mantendo o cenário 8 nos critérios de aceite da interface. Texturas da enxada/regador já confirmadas separadamente pelo responsável.
 - Obrigação da Fase 3 reafirmada pelo responsável em 12/11/2026: completar o sistema agrícola e seus itens/ferramentas, procurando paridade de gameplay com o original. Fatias continuam pequenas e verificáveis, mas seus mínimos não encerram o sistema nem transferem funções faltantes ao polimento. Próximas fatias devem tratar ferramentas/sementes vanilla, solo compartilhado, itens e comportamentos agrícolas restantes conforme FEATURES/DEPENDENCIES; dependências de lojas/NPCs permanecem ordenadas pelo grafo.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.
@@ -165,3 +165,6 @@ Build do complemento: `BUILD SUCCESSFUL in 15s`; 57 testes existentes executados
 ## Reorganização documental — 11/11/2026
 
 Compactação de PORTING_NOTES autorizada pelo responsável: entrada estável e contratos por sistema em docs/porting/. Histórico integral preservado em [docs/archive/README.md](archive/README.md), com reconstrução conferida. Inclui fatias 1–9, procedimentos e evidências. Nenhuma mudança de fase, pacote, gameplay ou cobertura; cenário 8 e validação visual permanecem pendentes. Validação desta reorganização: BUILD SUCCESSFUL em 17s; test UP-TO-DATE, sem reexecução. Preservação textual integral e links vigentes conferidos; runClient não executado (alteração documental).
+
+
+Validação automatizada da fatia 13: build aprovado; 14 testes novos, 119 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado nesta entrega; aceite visual e manual pendente. Testes usam adaptadores, registros e serialização reais, sem simular cliente ou servidor dedicado.

@@ -1,4 +1,6 @@
 {
+  "itemGroup.harvestfestival.seeds": "Harvest Festival — Sementes",
+  "itemGroup.harvestfestival.tools_and_blocks": "Harvest Festival — Ferramentas e blocos",
   "item.harvestfestival.cucumber": "Pepino",
   "item.harvestfestival.cucumber_seeds": "Sementes de pepino",
   "item.harvestfestival.turnip_seeds": "Sementes de nabo",
@@ -29,5 +31,8 @@
   "harvestfestival.weekday.saturday": "Sábado",
   "harvestfestival.weekday.sunday": "Domingo",
   "harvestfestival.season.summer": "Verão",
-  "commands.harvestfestival.calendar.next_day": "Horário movido para o último tick do dia. O próximo dia começa quando o relógio do Overworld avançar."
+  "commands.harvestfestival.calendar.next_day": "Horário movido para o último tick do dia. O próximo dia começa quando o relógio do Overworld avançar.",
+  "item.harvestfestival.wheat_seeds": "Sementes de trigo HF",
+  "item.harvestfestival.sickle": "Foice",
+  "item.harvestfestival.sickle.broken": "%s quebrada"
 }

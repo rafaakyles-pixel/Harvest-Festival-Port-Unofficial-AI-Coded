@@ -129,3 +129,17 @@ runClient não foi executado pelo agente na implementação. Em 12/11/2026 o res
 - **Destino aleatório na morte:** `TileCrop` pode converter a posição em madeira/pedra/erva daninha; são blocos substitutos, não drops imediatos de toda planta morta. Esse comportamento ainda falta ao port, conforme recorte aprovado, e deve ser coberto nas fatias funcionais da Fase 3 junto dos recursos necessários.
 - **Chunks descarregados:** `DailyTickHandler.processTickableBlocks` só chama `newDay` se `world.isBlockLoaded(pos)`. `TileHarvest.validate` reinscreve a posição; `CropData` persiste estágio/água, sem data de última atualização ou laço de compensação. No caminho diário padrão consultado, não crescer descarregado e não recuperar dias na volta é comportamento do original, não uma simplificação criada pelo port. A evidência é leitura do código de referência, não execução adicional de 1.12.2. Chunk mantido carregado por outro mecanismo não se enquadra como descarregado.
 - O sistema agrícola completo continua obrigação da Fase 3. Aceite desta fatia não encerra catálogo, ferramentas completas, chuva ou demais regras vanilla; solo compartilhado passa a ser tratado pela fatia 11, ver [Ferramentas](ferramentas.md) e FEATURES. Integrações específicas e dependências de outros sistemas continuam explicitamente delimitadas.
+
+## Fatia 13 — trigo e corte por ferramenta
+
+Plano aprovado em 14/11/2026. Trigo HF reutiliza crop/entidade/ciclo: primavera, verão e outono, estágio inicial 1, limites 2/5/9/12/16/22/27/28, água obrigatória e 27 viradas regadas. Produto único minecraft:wheat; preço existente 100 por c:crops/wheat. Não altera sementes ou regras globais vanilla.
+
+Evidência por leitura de HFCrops.WHEAT, Crop, CropData, CropRegistry, GrowthHandler, DropHandler e BlockHFCrops: requiresSickle impede interação; minimumCut=0 admite tentativa imatura, mas DropHandler só fornece produto maduro. Corte sempre remove; mão/ferramenta inadequada e planta imatura/murcha não dão produto. Criativo percorre remoção com produto quando maduro e foice. Não houve execução do original.
+
+Definição recebe harvest_tool_tag opcional; ausência mantém os contratos anteriores. minimum_cut aceita somente zero; rebrota com ferramenta é rejeitada. Tags vazias não autorizam produto. Loot condicionado à ferramenta, remoção confirmada e invalidação da entidade evitam segunda emissão. Falha de remoção não fornece produto; loot vazio remove. Recarga conserva estado e identidade diária; definição inválida congela crescimento e impede produto.
+
+Slots visuais 11–18 usam minecraft:block/wheat_stage0..7; 0–10 preservados. Saco usa texturas originais existentes com cor 0xEAC715 nas duas camadas. Modelos vanilla atuais foram autorizados, sem promessa de igualdade de pixels com 1.12.2. Nenhum novo campo persistido no cultivo.
+
+A velocidade de quebra dos cultivos passa a seguir BlockHFCrops: dureza viva 0,1/murcha 0,5, divisor 10 com tag de foice e 100 sem; modificadores do jogador preservados. Fontes alvo locais 26.2.0.93: getDestroyProgress, Player.getDestroySpeed, ItemInstance no parâmetro TOOL e onDestroyedByPlayer. Ciclo, farmland, migração e pagamentos permanecem existentes.
+
+Validação automatizada da fatia 13: build aprovado; 14 testes novos, 119 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado nesta entrega; aceite visual e manual pendente. Testes usam adaptadores, registros e serialização reais, sem simular cliente ou servidor dedicado.

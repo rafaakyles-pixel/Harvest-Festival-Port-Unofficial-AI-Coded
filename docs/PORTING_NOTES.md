@@ -26,6 +26,8 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Enxada, regador, água no item, solo e futuro cultivo | [Ferramentas](porting/ferramentas.md) |
 | Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita e rebrota limitada | [Cultivos](porting/cultivos.md) |
 
+Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
+
 ### Contratos transversais e decisões obrigatórias
 
 - Todo item novo adicionado em uma fatia deve incluir textura do original, conforme condição explícita do responsável em 13/11/2026. Registrar proveniência/licença e distinguir inspeção de arquivo de validação em jogo. Não alterar AGENTS.md sem autorização específica.
@@ -104,3 +106,4 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Atualizar contratos por sistema no lugar, preservando decisões substituídas no histórico quando necessário.
 - Acrescentar aqui apenas decisões transversais, pendências obrigatórias ou uma linha de índice para novo sistema.
 - Não acrescentar resumos por fatia, listas globais de APIs ou logs de build. A meta é manter esta entrada estável durante a portagem.
+

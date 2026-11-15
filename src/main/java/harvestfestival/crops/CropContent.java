@@ -28,6 +28,7 @@ public final class CropContent {
     public static final DeferredItem<CropSeedItem> TURNIP_SEEDS = ITEMS.registerItem("turnip_seeds", CropSeedItem::new);
     public static final DeferredItem<Item> TURNIP = ITEMS.registerSimpleItem("turnip");
     public static final DeferredItem<CropSeedItem> CUCUMBER_SEEDS = ITEMS.registerItem("cucumber_seeds", CropSeedItem::new);
+    public static final DeferredItem<CropSeedItem> WHEAT_SEEDS = ITEMS.registerItem("wheat_seeds", CropSeedItem::new);
     public static final DeferredItem<Item> CUCUMBER = ITEMS.registerSimpleItem("cucumber");
 
     private CropContent() {}

@@ -106,3 +106,19 @@ A pedido do responsável, os itens atuais usam cópias byte a byte de `textures/
 Proveniência: Snownee/Harvest-Festival, branch 1.12.2-0.6.X; licença MIT e aviso Copyright (c) 2014, 2015, 2016 joshiejack preservados no recurso empacotado `META-INF/licenses/harvest-festival-original.txt`, copiado da referência. Referência permanece somente leitura. Inspeção das duas imagens e conferência de hashes realizadas; revisão artística pode ocorrer no polimento.
 
 Em 12/11/2026 o responsável confirmou que os visuais da enxada e do regador estão como no original, encerrando a pendência das texturas. Confirmação do responsável, sem atribuir inspeção de perspectivas específicas nem execução ao agente. Cenário 8 e aceite visual da barra/tooltip continuam pendentes. Registro documental sem testes novos ou mudanças de gameplay.
+
+## Fatia 13 — foice básica
+
+Plano aprovado em 14/11/2026. harvestfestival:sickle atua em um cultivo HF por quebra, sem carga/área adicional. Dano 0–128, retém item em 128 e velocidade 0,05 quando esgotada. Continua reconhecida pela tag sickles, inclusive esgotada. Não confundir reconhecimento com canUse. Atributos de ataque +5 e velocidade -3.
+
+Fontes originais: ItemSickle, ItemTool, ItemToolChargeable, ITiered, ToolHelper e HFTools; patches oficiais Forge 1.12.x de PlayerInteractionManager e ItemStack consultados no levantamento. Callback ocorre antes de remover; cada tarefa utilizável aumenta nível em 0,39215682745098 até 100. Survival consome um dano e exaustão 4/27×3. Criativo não percorre o callback normal. Opção consume_hunger=false também desabilita dano, mantendo nível. Não houve teste no original.
+
+data/harvestfestival/tool_settings/sickle.json contém consume_hunger booleano e actions_per_half_haunch inteiro positivo. Recarga inválida/ausente desabilita tarefas de custo/nível, com aviso, sem fallback; reconhecimento para colheita permanece por tag. Componente sickle_state persiste nível; ausente significa novo, inválido fica inerte. Dano usa componentes vanilla. Cópias não compartilham estado mutável.
+
+APIs verificadas nas fontes locais 26.2.0.93: Item.mineBlock/getName/getDestroySpeed/use, ItemAttributeModifiers, EnchantmentHelper.processDurabilityChange e ItemStack.setDamageValue. Não usar hurtAndBreak: removeria ao atingir o máximo moderno. Adapter conserva ferramenta em 128. Dano respeita modificadores de encantamento. Sem novo mixin.
+
+Recorte explicitamente aprovado: atuação agrícola em cultivos HF; demais vegetais, reparo e progressão permanecem pendentes. Fadiga, efeitos de exaustão/desmaio e recuperação são pendências da próxima fatia, solicitadas pelo responsável; consumo básico de fome permanece. Não generalizar esta entrega como ferramenta completa.
+
+Textura sickle_basic.png copiada byte a byte da referência (SHA256 492539E8EF4271D07F67ADA26245F6906E0EB76288405E80B71F35A6528E3367), modelo com handheld_rotated original. Licença MIT já empacotada preservada. Conferência de arquivos não comprova aparência no cliente.
+
+Validação automatizada da fatia 13: build aprovado; 14 testes novos, 119 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado nesta entrega; aceite visual e manual pendente. Testes usam adaptadores, registros e serialização reais, sem simular cliente ou servidor dedicado.

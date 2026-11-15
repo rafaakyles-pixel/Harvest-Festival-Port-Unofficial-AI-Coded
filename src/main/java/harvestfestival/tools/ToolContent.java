@@ -20,6 +20,11 @@ public final class ToolContent {
             "watering_can_state", () -> DataComponentType.<WateringCanState>builder()
                     .persistent(WateringCanState.CODEC)
                     .networkSynchronized(ByteBufCodecs.fromCodec(WateringCanState.CODEC)).build());
+    public static final Supplier<DataComponentType<SickleState>> SICKLE_STATE = COMPONENTS.register(
+            "sickle_state", () -> DataComponentType.<SickleState>builder().persistent(SickleState.CODEC)
+                    .networkSynchronized(ByteBufCodecs.fromCodec(SickleState.CODEC)).build());
+    public static final DeferredItem<SickleItem> SICKLE = ITEMS.registerItem("sickle", SickleItem::new,
+            props -> props.durability(SickleItem.MAX_DAMAGE));
     public static final DeferredBlock<PreparedSoilBlock> PREPARED_SOIL = BLOCKS.registerBlock(
             "prepared_soil", PreparedSoilBlock::new, props -> props.strength(0.6F).sound(SoundType.GRAVEL));
     public static final DeferredItem<HoeItem> HOE = ITEMS.registerItem("hoe", HoeItem::new, props -> props.stacksTo(1));

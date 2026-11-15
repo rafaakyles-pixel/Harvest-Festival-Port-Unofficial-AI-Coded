@@ -27,6 +27,8 @@ public final class HarvestFestival {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public HarvestFestival(IEventBus modBus) {
+        CreativeTabs.register(modBus);
+        NeoForge.EVENT_BUS.addListener(harvestfestival.tools.SickleRules::register);
         CropContent.register(modBus);
         NeoForge.EVENT_BUS.addListener(CropDefinitions::register);
         NeoForge.EVENT_BUS.addListener(CropDailyUpdates::loaded);

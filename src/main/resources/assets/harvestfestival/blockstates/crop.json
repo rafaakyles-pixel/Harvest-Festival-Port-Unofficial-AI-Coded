@@ -1,15 +1,61 @@
 {
   "variants": {
-    "appearance=0": {"model":"harvestfestival:block/crop_small"},
-    "appearance=1": {"model":"harvestfestival:block/crop_growing"},
-    "appearance=2": {"model":"harvestfestival:block/crop_mature"},
-    "appearance=3": {"model":"harvestfestival:block/crop_withered"},
-    "appearance=4": {"model":"harvestfestival:block/turnip_1"},
-    "appearance=5": {"model":"harvestfestival:block/turnip_2"},
-    "appearance=6": {"model":"harvestfestival:block/turnip_3"},
-    "appearance=7": {"model":"harvestfestival:block/cucumber_1"},
-    "appearance=8": {"model":"harvestfestival:block/cucumber_2"},
-    "appearance=9": {"model":"harvestfestival:block/cucumber_3"},
-    "appearance=10": {"model":"harvestfestival:block/cucumber_4"}
+    "appearance=0": {
+      "model": "harvestfestival:block/crop_small"
+    },
+    "appearance=1": {
+      "model": "harvestfestival:block/crop_growing"
+    },
+    "appearance=2": {
+      "model": "harvestfestival:block/crop_mature"
+    },
+    "appearance=3": {
+      "model": "harvestfestival:block/crop_withered"
+    },
+    "appearance=4": {
+      "model": "harvestfestival:block/turnip_1"
+    },
+    "appearance=5": {
+      "model": "harvestfestival:block/turnip_2"
+    },
+    "appearance=6": {
+      "model": "harvestfestival:block/turnip_3"
+    },
+    "appearance=7": {
+      "model": "harvestfestival:block/cucumber_1"
+    },
+    "appearance=8": {
+      "model": "harvestfestival:block/cucumber_2"
+    },
+    "appearance=9": {
+      "model": "harvestfestival:block/cucumber_3"
+    },
+    "appearance=10": {
+      "model": "harvestfestival:block/cucumber_4"
+    },
+    "appearance=11": {
+      "model": "minecraft:block/wheat_stage0"
+    },
+    "appearance=12": {
+      "model": "minecraft:block/wheat_stage1"
+    },
+    "appearance=13": {
+      "model": "minecraft:block/wheat_stage2"
+    },
+    "appearance=14": {
+      "model": "minecraft:block/wheat_stage3"
+    },
+    "appearance=15": {
+      "model": "minecraft:block/wheat_stage4"
+    },
+    "appearance=16": {
+      "model": "minecraft:block/wheat_stage5"
+    },
+    "appearance=17": {
+      "model": "minecraft:block/wheat_stage6"
+    },
+    "appearance=18": {
+      "model": "minecraft:block/wheat_stage7"
+    }
   }
 }

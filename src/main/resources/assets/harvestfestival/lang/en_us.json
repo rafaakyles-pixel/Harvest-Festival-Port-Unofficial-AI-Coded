@@ -1,4 +1,6 @@
 {
+  "itemGroup.harvestfestival.seeds": "Harvest Festival — Seeds",
+  "itemGroup.harvestfestival.tools_and_blocks": "Harvest Festival — Tools and Blocks",
   "item.harvestfestival.cucumber": "Cucumber",
   "item.harvestfestival.cucumber_seeds": "Cucumber Seeds",
   "item.harvestfestival.turnip_seeds": "Turnip Seeds",
@@ -29,5 +31,8 @@
   "harvestfestival.weekday.saturday": "Saturday",
   "harvestfestival.weekday.sunday": "Sunday",
   "harvestfestival.season.summer": "Summer",
-  "commands.harvestfestival.calendar.next_day": "Time moved to the last tick of the day. The next day begins when the Overworld clock advances."
+  "commands.harvestfestival.calendar.next_day": "Time moved to the last tick of the day. The next day begins when the Overworld clock advances.",
+  "item.harvestfestival.wheat_seeds": "HF Wheat Seeds",
+  "item.harvestfestival.sickle": "Sickle",
+  "item.harvestfestival.sickle.broken": "Broken %s"
 }

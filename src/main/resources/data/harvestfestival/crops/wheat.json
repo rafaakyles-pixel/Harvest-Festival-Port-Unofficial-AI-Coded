@@ -1,0 +1,16 @@
+{
+  "seed_tag": "harvestfestival:seeds/wheat",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": ["spring", "summer", "autumn"],
+  "stages": [2, 5, 9, 12, 16, 22, 27, 28],
+  "appearances": [11, 12, 13, 14, 15, 16, 17, 18],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/wheat",
+  "harvest_tool_tag": "harvestfestival:sickles",
+  "minimum_cut": 0,
+  "empty_harvest_policy": "advance"
+}

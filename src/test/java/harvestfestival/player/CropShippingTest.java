@@ -24,6 +24,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void wheatUsesExistingVanillaProductAndPriceThenPaysOnceAfterSave() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var definition = harvestfestival.crops.CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:wheat"));
+            var crop = CropState.planted(definition.id());
+            for (int i=0;i<27;i++) crop=CropLifecycle.newDay(crop,definition,Season.SPRING,true,false);
+            var drops=new ArrayList<ItemStack>();
+            assertTrue(CropBlock.breakOnce(crop,definition,new ItemStack(harvestfestival.tools.ToolContent.SICKLE.get()),
+                    ()->List.of(new ItemStack(net.minecraft.world.item.Items.WHEAT)),()->true,drops::add));
+            var prices=new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+            var holder=new SavedHolder();
+            assertTrue(PlayerShipping.depositInto(holder,drops.getFirst(),prices));
+            assertEquals(100,holder.getData(PlayerShipping.QUEUE).total());
+            assertFalse(PlayerShipping.depositInto(holder,new ItemStack(CropContent.WHEAT_SEEDS.get()),prices));
+            prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+            var registry=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var output=TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry);
+            holder.serializeAttachments(output);
+            var file=directory.resolve("wheat-shipping.nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+            var reopened=new SavedHolder();
+            reopened.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+            PlayerShipping.pay(reopened); PlayerShipping.pay(reopened);
+            assertEquals(100,reopened.getData(PlayerGold.GOLD));
+            assertTrue(reopened.getData(PlayerShipping.QUEUE).entries().isEmpty());
+        }
+    }
     @Test void eightCucumberHarvestsUseBundledPriceAndPayOnlyOnceAfterReload() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var definition = CropTestSupport.cucumber();

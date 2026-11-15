@@ -65,6 +65,9 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                     for (var value : json.getAsJsonArray("appearances")) appearances.add(integer(value));
                 }
                 var loot = Identifier.parse(string(json, "harvest_loot"));
+                if (json.has("minimum_cut") && integer(json.get("minimum_cut")) != 0) {
+                    throw new IllegalArgumentException("only minimum_cut=0 is supported");
+                }
                 definitions.put(id, new CropDefinition(id,
                         TagKey.create(Registries.ITEM, Identifier.parse(string(json, "seed_tag"))),
                         TagKey.create(Registries.BLOCK, Identifier.parse(string(json, "soil_tag"))), seasons, stages,
@@ -73,7 +76,9 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                         integer(json.get("planting_radius")), loot,
                         json.has("regrow_stage") ? integer(json.get("regrow_stage")) : 0,
                         json.has("max_harvests") ? integer(json.get("max_harvests")) : 1,
-                        emptyHarvestPolicy(json), appearances));
+                        emptyHarvestPolicy(json), appearances,
+                        json.has("harvest_tool_tag") ? TagKey.create(Registries.ITEM,
+                                Identifier.parse(string(json, "harvest_tool_tag"))) : null));
             } catch (IOException | RuntimeException ex) {
                 warn.accept("Ignoring crop definition " + entry.getKey() + ": " + ex.getMessage());
             }

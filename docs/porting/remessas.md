@@ -37,3 +37,5 @@ Fatia 12: produto `harvestfestival:cucumber` integra `c:crops/cucumber` e `c:cro
 Fatia 10 não altera código econômico. Novo teste integra nabo maduro, produto/tag/preço reais empacotados, depósito, fila persistida em NBT comprimido e pagamento único de 60; semente recusada. Integra os 24 novos/81 totais executados, sem substituir validação manual do ciclo completo nem sorteio de loot em mundo real. Contrato em [Cultivos](cultivos.md).
 
 SellValue é fallback autorizado; precedência item > tag > SellValue definida pelo responsável. Fatia 5: 6 testes novos, suíte total 19. Fatia 6: 7 novos, suíte total 26; builds e single player aprovados. Cobertura dedicada aceita conforme [fatia 8](../archive/fatia-08-validacao-integrada.md). Pagamento apenas na próxima virada com jogador conectado aceito em 08/11/2026; não paga offline nem ao reconectar.
+
+Fatia 13: trigo HF entrega minecraft:wheat e reutiliza a regra existente c:crops/wheat=100. Nenhuma regra econômica nova. Teste integra corte, depósito, fila em NBT comprimido e pagamento único; produto é fornecido pelo adaptador, sem simular sorteio em mundo.

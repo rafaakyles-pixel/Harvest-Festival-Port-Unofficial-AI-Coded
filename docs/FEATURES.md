@@ -25,7 +25,7 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 
 ## Itens e blocos compartilhados (`core`)
 
-- [ ] Próxima fatia: duas abas criativas solicitadas em 14/11/2026, sementes e ferramentas/blocos; enxada e caixa de remessas juntas. Levantamento/plano pendentes; não implica copiar todas as abas do original nem criar novos itens para preenchimento.
+- [x] Fatia 13: duas abas criativas implementadas, sementes e ferramentas/blocos; produtos na busca global. Novos itens devem receber destino nas abas. Validação visual pendente; cenário 8 aberto.
 
 - [ ] Flores, ervas daninhas e flor da deusa — `HFCore`, `BlockFlower`.
 - [ ] Água da deusa e ritual da flor com água/plantas — `BlockGoddessWater`, `GoddessHandler`, `BlockFlower`, `EntityNPCGoddess`.
@@ -244,3 +244,7 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 ## Progresso da sincronização individual
 
 - [x] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Concluída conforme validação manual do responsável em 04/11/2026, com runClient single player: set/add consultados por get, morte/renascimento, portal e volta, sair/reabrir. Pendentes: servidor dedicado, dois jogadores e reconexão. Build e quantidade de testes automatizados informados pelo responsável: **não informado**.
+
+- [x] Fatia 13: trigo HF com 27 viradas regadas, corte por foice e produto vanilla a 100; foice básica com dano/nível persistentes e esforço básico. Contratos em porting/cultivos.md e porting/ferramentas.md. Validação manual pendente.
+- [ ] Próxima fatia: fadiga, desmaio e recuperação adiados explicitamente na foice pelo responsável.
+

@@ -53,5 +53,8 @@
   "tooltip.harvestfestival.hoe.discharge": "Agache e use para zerar a carga",
   "tooltip.harvestfestival.hoe.discharged": "Carga da enxada zerada",
   "tooltip.harvestfestival.hoe.charging": "Carregando enxada: 1×%s",
-  "tooltip.harvestfestival.watering_can.area": "Rega uma área de %s×%s"
+  "tooltip.harvestfestival.watering_can.area": "Rega uma área de %s×%s",
+  "item.harvestfestival.carrot_seeds": "Sementes de cenoura HF",
+  "item.harvestfestival.beetroot_seeds": "Sementes de beterraba HF",
+  "item.harvestfestival.potato_seeds": "Sementes de batata HF"
 }

@@ -22,9 +22,14 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ---
 ## Acompanhamento de Tarefas
 
+### 15-A — implementada, aguardando aceite manual
+- Continuidade explicitamente autorizada pelo responsável em 15/11/2026 após o plano da expansão agrícola: cenoura/beterraba e batata com sorteio próprio. Sementes HF, produtos/visuais vanilla, ciclo, tags/preços/remessas e abas entregues; fontes, APIs e limites em [Cultivos](porting/cultivos.md#fatia-15-a--cenoura-beterraba-e-batata).
+- Build aprovado: 9 testes novos/160 totais efetivamente executados, zero falhas/erros/ignorados; `test` executado, sem resultado em cache. Recursos/API de loot decodificados por registros reais; adaptadores não substituem jogo. runClient não executado pelo agente; aceite manual da 15-A pendente.
+- Ferramentas/fome/carga/durabilidade não alteradas nesta fatia. 15-V permanece separada e não implementada; cenário 8, dedicado/multiplayer e memória de camas por dimensão continuam pendentes. Indicadores do regador já confirmados funcionais.
+
 ### 15-F — implementada, aguardando aceite manual
 - Plano aprovado pelo responsável em 15/11/2026 somente para enxada/regador até prata, anterior à expansão agrícola. Carga/áreas, custos por tarefa, nível e durabilidade da enxada, persistência, texturas originais e destinos criativos implementados nos pacotes existentes; recorte e evidências em [Ferramentas](porting/ferramentas.md#contrato-atual--15-f-enxada-e-regador-até-prata).
-- Build aprovado: 12 novos/151 testes totais executados, sem falhas/erros/ignorados. runClient não executado pelo agente; aceite manual da 15-F pendente. Cenário 8, dedicado/multiplayer e memória de camas por dimensão permanecem pendentes; indicadores anteriores do regador confirmados funcionais. 15-A e 15-V aguardam aprovação própria.
+- Build aprovado: 12 novos/151 testes totais executados, sem falhas/erros/ignorados. runClient não executado pelo agente; aceite manual da 15-F pendente. Cenário 8, dedicado/multiplayer e memória de camas por dimensão permanecem pendentes; indicadores anteriores do regador confirmados funcionais. 15-A posteriormente autorizada e entregue acima; 15-V aguarda aprovação própria.
 
 ### ✅ Pronto
 - Fatia 14 aceita pelo responsável em 15/11/2026: testes aprovados, sem atribuir execução individual ao agente. Conferência solicitada da semente de cebola confirmou desenho compartilhado e tintas originais distintas do trigo; sem alteração visual. Build da implementação: 20 novos/139 totais executados. Memória de camas por dimensão, cenário 8 e dedicado/multiplayer continuam pendentes. Indicadores do regador funcionais.
@@ -64,7 +69,7 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 - Complemento visual autorizado após o aceite da fatia 9: barra de água no item e quantidade exata no tooltip do regador. Sem novo pacote ou alteração do estado persistido. Por introduzir interface, seus critérios de aceite incluem o cenário 8 de espelho cliente de ouro/aniversário, ainda não executado; o indicador de água não comprova esse cenário.
 
 ### ⏳ Próximos passos
-- Próximo passo: validar manualmente a 15-F; depois aprovar separadamente 15-A (cenoura/beterraba/batata) e 15-V. Sequência de cultivos/mecanismos/tiers em [FEATURES](FEATURES.md#sequência-agrícola-pendente). Não antecipar implementação das fatias seguintes.
+- Próximo passo: validar manualmente a 15-A e encerrar o aceite pendente da 15-F; 15-V exige plano/aprovação separados. Sequência de cultivos/mecanismos/tiers em [FEATURES](FEATURES.md#sequência-agrícola-pendente). Não antecipar implementação das fatias seguintes.
 - Executar cenário 8, ainda vinculado ao complemento visual do regador. Indicadores funcionais e texturas confirmados não comprovam o espelho cliente de ouro/aniversário.
 - Obrigação da Fase 3 reafirmada pelo responsável em 12/11/2026: completar o sistema agrícola e seus itens/ferramentas, procurando paridade de gameplay com o original. Fatias continuam pequenas e verificáveis, mas seus mínimos não encerram o sistema nem transferem funções faltantes ao polimento. Próximas fatias devem tratar ferramentas/sementes vanilla, solo compartilhado, itens e comportamentos agrícolas restantes conforme FEATURES/DEPENDENCIES; dependências de lojas/NPCs permanecem ordenadas pelo grafo.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.

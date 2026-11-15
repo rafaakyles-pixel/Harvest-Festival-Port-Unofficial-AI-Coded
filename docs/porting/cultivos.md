@@ -1,6 +1,6 @@
 # Cultivos — contrato vigente
 
-Fatias 10–12; atualização em 13/11/2026. Pacote `harvestfestival.crops` aprovado em produção e testes. Dependências: etapas 5/6 de `DEPENDENCIES.md`, [Ferramentas](ferramentas.md), [Calendário](calendario.md) e [Remessas](remessas.md). Contrato anterior integral em [histórico da fatia 12](../archive/fatia-12-cultivos-anterior.md).
+Fatias 10–15-A; atualização em 15/11/2026. Pacote `harvestfestival.crops` aprovado em produção e testes. Dependências: etapas 5/6 de `DEPENDENCIES.md`, [Ferramentas](ferramentas.md), [Calendário](calendario.md) e [Remessas](remessas.md). Contrato anterior integral em [histórico da fatia 12](../archive/fatia-12-cultivos-anterior.md).
 
 ## Decisões e comportamento
 
@@ -182,3 +182,35 @@ Quatro testes novos de cultivos cobrem crescimento/limites visuais/estação/sem
 Preferência do responsável em 14/11/2026: não acumular arquivos de plano; roteiro manual somente na resposta final após implementação. Plano da fatia e proposta agrícola anterior removidos com autorização, após incorporar evidências, correção rastreável e sequência em FEATURES. Indicadores do regador confirmados funcionais; cenário 8, dedicado/multiplayer e validação manual desta entrega continuam pendentes.
 
 Aceite global da fatia 14 pelo responsável em 15/11/2026, sem atribuir execução individual ao agente. Conferência adicional da semente de cebola: HFCrops.ONION usa 0xDCC307, WHEAT usa 0xEAC715; initClient aplica a mesma cor às duas camadas do modelo crops_seeds. Port mantém esses valores distintos e neck/body com SHA256 idênticos aos originais. A semelhança do saco é original; nenhum recurso visual alterado. Conferência estática, sem nova sessão de cliente. Cenário 8 e dedicado/multiplayer continuam pendentes.
+
+## Fatia 15-A — cenoura, beterraba e batata
+
+Plano aprovado pelo responsável após a 15-F, com continuidade explícita em 15/11/2026. Implementação nos pacotes existentes, sem alterar ferramentas, fome, carga, durabilidade ou política vanilla 15-V. Aquisição das sementes por comandos/aba Sementes; preços de compra e desbloqueios abaixo são evidência, não lojas/receitas implementadas.
+
+| Cultivo / semente HF | Estação | Limites / viradas regadas desde estágio 1 | Produto vanilla / venda | Compra original / cor do saco |
+| --- | --- | --- | --- | --- |
+| carrot / carrot_seeds | Outono | 1/2/3/4/5/6/7/8 / 7 | minecraft:carrot / 160 | 500 / 0xF8AC33 |
+| beetroot / beetroot_seeds | Outono | 1/2/3/4 / 3 | minecraft:beetroot / 120 | 550, TOWN_PROGRESS (progress) / 0x690000 |
+| potato / potato_seeds | Primavera | 1/2/3/4/5/6/7/8 / 7 | minecraft:potato / 80; minecraft:poisonous_potato / 1 | 350 / 0xBE8D2B |
+
+Evidência por leitura de `crops/HFCrops`, `api/crops/Crop`, `StateHandlerBlock`, `GrowthHandler`, `DropHandler`, `crops/CropData`, `CropRegistry`, `TileCrop`, `BlockHFCrops`, `ItemHFSeeds`, `core/helpers/RegistryHelper` e `HFModInfo`. Não houve execução do original. Os três são cultivos de um bloco, água obrigatória, sem foice/rebrota, máximo de uma colheita. Cenoura/beterraba entregam uma unidade madura; batata usa o handler especial abaixo. Plantio 3×3 com centro arado (divergência autorizada), prioridade da rega, seca inicial 1, morte sazonal e entrada seca >2 no integrado seguem o ciclo existente. Dedicado mantém morte por seca desabilitada por padrão. Sem compensação em chunks descarregados, chuva/aspersores ou substitutos aleatórios na morte.
+
+### Batata e transação de colheita
+
+`RegistryHelper.registerCrop("potato") → addHandlersToCrop → Class.forName(HFModInfo.DROPHANDLERS + "Potato")` associa efetivamente `crops/handlers/drop/DropHandlerPotato`; `setStages(Blocks.POTATOES,...)` só substitui o state handler. O laço original reavalia `rand.nextInt(20)==0 ? 2 : 1` em **cada** condição, inclusive a primeira e a última. Sequência de limites: 20/50/20 ou 20/50/20/50/20. Uma unidade é garantida se elegível, segunda com probabilidade 1/20; cada unidade é substituída por venenosa com 1/50, podendo resultar em duas venenosas. Não sortear quantidade uma vez, não adicionar veneno como bônus, não aplicar quantidade vanilla/Fortune. Maturidade é verificada antes de acessar loot; imatura/murcha não sorteia.
+
+Entrada de loot registrada `harvestfestival:potato_harvest`, referenciada pelo `harvest_loot` existente. Produtos e divisores ficam no JSON (`normal`, `poisonous`, `extra_divisor=20`, `poison_divisor=50`); divisores inteiros positivos, codecs normais de condições/funções/peso preservados. `PotatoHarvestLoot.createItemStack` usa o random do contexto e o mesmo laço testado. Não introduz reflexão em produção: registro moderno substitui descoberta antiga, preservando o comportamento.
+
+Novas definições usam `empty_harvest_policy=advance` e booleano estrito opcional `harvest_on_player_break=true`. Ausência mantém false e preserva o caminho anterior de nabo/cebola/espinafre. Clique de colheita e quebra removem antes de emitir; loot vazio remove, falha de remoção não emite. Quebra madura também entrega em criativo, como `BlockHFCrops.removedByPlayer`/patch Forge 1.12.x já conferido acima, independentemente de `willHarvest`. Snapshot invalidado impede segunda emissão pelo fluxo vanilla. Não há campo persistido novo; `CropState`, entidade e identidade diária permanecem compatíveis.
+
+### Recursos, APIs e cobertura
+
+Slots 0–24 preservados; cenoura 25–28, beterraba 29–32, batata 33–36. `StateHandlerBlock` associa estágio lógico aos metadados em ordem. Modelos vanilla **26.2** autorizados, sem alegar igualdade de pixels com 1.12.2: cenoura/batata agrupam idades 0–1/2–3/4–6/7; beterraba 0/1/2/3. Mapeamentos conferidos no client.jar 26.2. Sementes reutilizam os dois PNGs originais já empacotados: neck SHA256 `4361F05DAF8B89559AB239DA937A56B7404DDCE86077D75CACFE946EBB429597`, body `9DADEA780A0C25CEA0AFD50106C446E558BFDEC2C8549516A13EA2ECDAB14E2E`; hashes reconferidos contra referência MIT, cores nas duas camadas. Produtos/ícones/traduções vanilla reutilizados; nomes das sementes em pt_br/en_us. Destinos em [Abas](abas-criativas.md), preços/tags em [Remessas](remessas.md).
+
+APIs conferidas nas fontes locais exatas `minecraft-patched-26.2.0.93-sources.jar`: `LootPoolSingletonContainer`/`singletonFields`, `LootPoolEntryContainer.codec`, `LootPoolEntries.CODEC`, `Item.CODEC` (Holder), `LootContext.getRandom`, `LootTable.DIRECT_CODEC`, `Registries.LOOT_POOL_ENTRY_TYPE` (registro de MapCodec). `DeferredRegister` do NeoForge registra o codec; compilação e decodificação pelo registro real verificam a associação. Reutilizados `getDrops`, `onDestroyedByPlayer`, `commitHarvest`, blockstate/entidade e sincronização já documentados; sem mixin/API cliente nova.
+
+Testes novos cobrem três ciclos completos, estações/água/seca/resgate/dedicado, limites visuais, recursos/tintas/traduções, remoção antes do produto, falha/loot vazio/snapshot antigo/segunda passagem de drops, NBT comprimido de estados plantado/intermediário/maduro/morto e recarga inválida/restaurada. Testes determinísticos decodificam a tabela e a entrada de batata pelo codec registrado, executam o laço real com sequência controlada e comprovam os sorteios finais e substituições individuais. Teste econômico verifica preços separados 160/120/80/1, sementes sem preço, fila persistida e pagamento único de 361 após descartar a tabela. Regressões existentes e teste de plantio/abas ampliados.
+
+Limites: adaptadores não simulam cliques de cliente, `ServerPlayerGameMode`, servidor real, renderização ou loot de mundo; decodificação da tabela e execução do laço não equivalem a sorteio em jogo. runClient/aceite manual da 15-A, cenário 8 e dedicado/multiplayer permanecem pendentes. Indicadores do regador já confirmados funcionais; memória de camas por dimensão adiada. 15-V continua separada: sem conversão automática de sementes, bloqueio global, receitas ou mudança de alimentação vanilla.
+
+Validação automatizada da 15-A: build aprovado, 9 testes novos (8 de cultivos/loot/recursos e 1 de remessas), 160 totais efetivamente executados, zero falhas/erros/ignorados. `compileJava`/recursos reutilizados no build aprovado após compilação nesta implementação; `compileTestJava` e `test` executados. Não atribuir resultado em cache à execução dos testes.

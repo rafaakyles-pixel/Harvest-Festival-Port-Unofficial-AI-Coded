@@ -78,7 +78,8 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                         json.has("max_harvests") ? integer(json.get("max_harvests")) : 1,
                         emptyHarvestPolicy(json), appearances,
                         json.has("harvest_tool_tag") ? TagKey.create(Registries.ITEM,
-                                Identifier.parse(string(json, "harvest_tool_tag"))) : null));
+                                Identifier.parse(string(json, "harvest_tool_tag"))) : null,
+                        json.has("harvest_on_player_break") && bool(json, "harvest_on_player_break")));
             } catch (IOException | RuntimeException ex) {
                 warn.accept("Ignoring crop definition " + entry.getKey() + ": " + ex.getMessage());
             }

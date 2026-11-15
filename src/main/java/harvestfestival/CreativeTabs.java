@@ -31,6 +31,9 @@ public final class CreativeTabs {
         output.accept(CropContent.WHEAT_SEEDS.get());
         output.accept(CropContent.ONION_SEEDS.get());
         output.accept(CropContent.SPINACH_SEEDS.get());
+        output.accept(CropContent.CARROT_SEEDS.get());
+        output.accept(CropContent.BEETROOT_SEEDS.get());
+        output.accept(CropContent.POTATO_SEEDS.get());
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());

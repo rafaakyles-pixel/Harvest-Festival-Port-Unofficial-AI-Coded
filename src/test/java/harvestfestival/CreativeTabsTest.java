@@ -27,7 +27,8 @@ class CreativeTabsTest {
                 else visible.add(stack);
             };
             CreativeTabs.seeds(output);
-            assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds", "onion_seeds", "spinach_seeds"), ids(visible));
+            assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds", "onion_seeds", "spinach_seeds",
+                    "carrot_seeds", "beetroot_seeds", "potato_seeds"), ids(visible));
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
             assertEquals(List.of("hoe", "hoe_copper", "hoe_silver", "watering_can", "watering_can_copper", "watering_can_silver", "sickle", "shipping_box"), ids(visible));

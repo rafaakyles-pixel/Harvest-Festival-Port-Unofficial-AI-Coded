@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "harvestfestival:potato_harvest",
+          "normal": "minecraft:potato",
+          "poisonous": "minecraft:poisonous_potato",
+          "extra_divisor": 20,
+          "poison_divisor": 50
+        }
+      ]
+    }
+  ]
+}

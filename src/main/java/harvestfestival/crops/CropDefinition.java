@@ -14,16 +14,27 @@ public record CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> 
         Set<Season> seasons, List<Integer> stages, boolean requiresWater, int droughtLimit,
         boolean diesWithoutWaterIntegrated, boolean diesWithoutWaterDedicated,
         int plantingRadius, Identifier harvestLoot, int regrowStage, int maxHarvests,
-        EmptyHarvestPolicy emptyHarvestPolicy, List<Integer> appearances, TagKey<Item> harvestToolTag) {
+        EmptyHarvestPolicy emptyHarvestPolicy, List<Integer> appearances, TagKey<Item> harvestToolTag,
+        boolean harvestOnPlayerBreak) {
     public enum EmptyHarvestPolicy { PRESERVE, ADVANCE }
+
+    public CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> soilTag,
+            Set<Season> seasons, List<Integer> stages, boolean requiresWater, int droughtLimit,
+            boolean diesWithoutWaterIntegrated, boolean diesWithoutWaterDedicated,
+            int plantingRadius, Identifier harvestLoot, int regrowStage, int maxHarvests,
+            EmptyHarvestPolicy emptyHarvestPolicy, List<Integer> appearances, TagKey<Item> harvestToolTag) {
+        this(id, seedTag, soilTag, seasons, stages, requiresWater, droughtLimit,
+                diesWithoutWaterIntegrated, diesWithoutWaterDedicated, plantingRadius, harvestLoot,
+                regrowStage, maxHarvests, emptyHarvestPolicy, appearances, harvestToolTag, false);
+    }
 
     public CropDefinition {
         seasons = Set.copyOf(seasons);
         stages = List.copyOf(stages);
         appearances = List.copyOf(appearances);
         if (!appearances.isEmpty() && (appearances.size() != stages.size()
-                || appearances.stream().anyMatch(value -> value < 0 || value > 24 || value == 3))) {
-            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..24 except 3");
+                || appearances.stream().anyMatch(value -> value < 0 || value > 36 || value == 3))) {
+            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..36 except 3");
         }
         if (seasons.isEmpty() || stages.isEmpty() || plantingRadius < 0 || plantingRadius > 1
                 || droughtLimit < 0 || droughtLimit >= 1_000_000) {

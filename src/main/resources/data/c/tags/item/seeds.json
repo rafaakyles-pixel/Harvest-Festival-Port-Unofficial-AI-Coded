@@ -4,6 +4,9 @@
     "harvestfestival:cucumber_seeds",
     "harvestfestival:wheat_seeds",
     "harvestfestival:onion_seeds",
-    "harvestfestival:spinach_seeds"
+    "harvestfestival:spinach_seeds",
+    "harvestfestival:carrot_seeds",
+    "harvestfestival:beetroot_seeds",
+    "harvestfestival:potato_seeds"
   ]
 }

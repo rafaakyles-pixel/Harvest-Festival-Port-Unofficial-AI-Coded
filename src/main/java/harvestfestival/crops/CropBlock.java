@@ -39,7 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class CropBlock extends BaseEntityBlock {
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CropBlock::new);
     // Visual cache only. Logical stage lives in the block entity and has no blockstate bound.
-    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 24);
+    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 36);
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
     public CropBlock(Properties properties) {
         super(properties);
@@ -119,7 +119,7 @@ public final class CropBlock extends BaseEntityBlock {
         if (level instanceof ServerLevel server && level.getBlockEntity(pos) instanceof CropBlockEntity crop) {
             var expected = crop.crop();
             var definition = CropDefinitions.INSTANCE.get(expected.crop());
-            if (definition != null && (definition.regrowStage() > 0 || definition.requiresTool())) {
+            if (definition != null && (definition.regrowStage() > 0 || definition.requiresTool() || definition.harvestOnPlayerBreak())) {
                 return breakOnce(expected, definition, tool, () -> Block.getDrops(state, server, pos, crop, player, tool),
                         () -> server.getBlockEntity(pos) == crop && crop.commitHarvest(expected, null,
                                 () -> server.removeBlock(pos, false)),

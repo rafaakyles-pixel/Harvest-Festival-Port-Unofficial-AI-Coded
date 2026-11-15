@@ -26,6 +26,16 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/carrot.json", "harvestfestival/loot_table/crops/carrot.json",
+        "harvestfestival/tags/item/seeds/carrot.json", "c/tags/item/crops/carrot.json",
+        "harvestfestival/shipping_prices/tags/c/crops/carrot.json",
+        "harvestfestival/crops/beetroot.json", "harvestfestival/loot_table/crops/beetroot.json",
+        "harvestfestival/tags/item/seeds/beetroot.json", "c/tags/item/crops/beetroot.json",
+        "harvestfestival/shipping_prices/tags/c/crops/beetroot.json",
+        "harvestfestival/crops/potato.json", "harvestfestival/loot_table/crops/potato.json",
+        "harvestfestival/tags/item/seeds/potato.json", "c/tags/item/crops/potato.json",
+        "harvestfestival/shipping_prices/tags/c/crops/potato.json", "c/tags/item/crops/poisonous_potato.json",
+        "harvestfestival/shipping_prices/tags/c/crops/poisonous_potato.json",
         "harvestfestival/crops/onion.json",
         "harvestfestival/loot_table/crops/onion.json",
         "harvestfestival/tags/item/seeds/onion.json",
@@ -77,6 +87,11 @@ public final class CropTestSupport implements AutoCloseable {
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
+        for (var item : List.of(CropContent.CARROT_SEEDS.get(), CropContent.BEETROOT_SEEDS.get(), CropContent.POTATO_SEEDS.get(),
+                net.minecraft.world.item.Items.CARROT, net.minecraft.world.item.Items.BEETROOT, net.minecraft.world.item.Items.BEETROOT_SEEDS,
+                net.minecraft.world.item.Items.POTATO, net.minecraft.world.item.Items.POISONOUS_POTATO)) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
         for (var item : List.of(CropContent.ONION.get(), CropContent.ONION_SEEDS.get(), CropContent.SPINACH.get(), CropContent.SPINACH_SEEDS.get(), CropContent.TURNIP.get(), CropContent.TURNIP_SEEDS.get(),
                 CropContent.CUCUMBER.get(), CropContent.CUCUMBER_SEEDS.get(),
                 CropContent.WHEAT_SEEDS.get(), net.minecraft.world.item.Items.WHEAT, net.minecraft.world.item.Items.WHEAT_SEEDS,

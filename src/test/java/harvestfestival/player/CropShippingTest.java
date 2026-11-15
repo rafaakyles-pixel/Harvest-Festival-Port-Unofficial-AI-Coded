@@ -24,6 +24,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void vanillaProductsUseSeparateTagPricesAndPersistPaymentWithoutSeedConversion() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager, null), fixture.manager, null);
+            var products = List.of(net.minecraft.world.item.Items.CARROT, net.minecraft.world.item.Items.BEETROOT,
+                    net.minecraft.world.item.Items.POTATO, net.minecraft.world.item.Items.POISONOUS_POTATO);
+            long[] expected = {160, 120, 80, 1};
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var holder = new SavedHolder();
+            long total = 0;
+            for (int i = 0; i < products.size(); i++) {
+                var stack = new ItemStack(products.get(i), 2);
+                assertTrue(PlayerShipping.depositInto(holder, stack, prices));
+                total += expected[i]; assertEquals(total, holder.getData(PlayerShipping.QUEUE).total());
+                assertEquals(1, stack.getCount());
+            }
+            var poison = new ItemStack(net.minecraft.world.item.Items.POISONOUS_POTATO);
+            assertFalse(poison.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
+                    net.minecraft.resources.Identifier.parse("c:crops/potato"))));
+            for (var seed : List.of(CropContent.CARROT_SEEDS.get(), CropContent.BEETROOT_SEEDS.get(), CropContent.POTATO_SEEDS.get())) {
+                var stack = new ItemStack(seed);
+                assertFalse(PlayerShipping.depositInto(holder, stack, prices)); assertEquals(1, stack.getCount());
+            }
+            prices.apply(ShippingPrices.read(java.util.Map.of(), message -> fail(message)), null, null);
+            var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registry); holder.serializeAttachments(output);
+            var file = directory.resolve("vanilla-products.nbt"); NbtIo.writeCompressed(output.buildResult(), file);
+            var copy = new SavedHolder();
+            copy.read(TagValueInput.create(ProblemReporter.DISCARDING, registry, NbtIo.readCompressed(file, NbtAccounter.unlimitedHeap())));
+            PlayerShipping.pay(copy); PlayerShipping.pay(copy);
+            assertEquals(361, copy.getData(PlayerGold.GOLD)); assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+        }
+    }
     @Test void onionAndSpinachEachPay900AfterQueueSaveWithoutSeedPrices() throws Exception {
         try(var fixture=new CropTestSupport(directory.resolve("pack"))) {
             var prices=new ShippingPrices();prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);

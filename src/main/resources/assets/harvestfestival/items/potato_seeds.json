@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/potato_seeds",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 12487979
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 12487979
+      }
+    ]
+  }
+}

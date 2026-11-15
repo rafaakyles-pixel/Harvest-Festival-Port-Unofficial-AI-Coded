@@ -45,7 +45,7 @@ class CropDefinitionsTest {
         assertEquals(0, definition.appearance(1));
         assertEquals(1, definition.appearance(3));
         assertEquals(2, definition.appearance(5));
-        for (String invalid : List.of("[4, 5]", "[4, 5, 25]", "[4, 5, -1]", "[4, 5, 3]", "[4, 5, 6.5]", "[4, 5, \"6\"]", "null", "{}")) {
+        for (String invalid : List.of("[4, 5]", "[4, 5, 37]", "[4, 5, -1]", "[4, 5, 3]", "[4, 5, 6.5]", "[4, 5, \"6\"]", "null", "{}")) {
             var warnings = new ArrayList<String>();
             var definitions = CropDefinitions.read(Map.ofEntries(resource("valid", legacy),
                     resource("invalid", mapped.replace("[4, 5, 6]", invalid))), warnings::add);

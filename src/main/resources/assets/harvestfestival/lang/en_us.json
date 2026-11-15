@@ -53,5 +53,8 @@
   "tooltip.harvestfestival.hoe.discharge": "Sneak and use to reset charge",
   "tooltip.harvestfestival.hoe.discharged": "Hoe charge reset",
   "tooltip.harvestfestival.hoe.charging": "Charging hoe: 1×%s",
-  "tooltip.harvestfestival.watering_can.area": "Waters a %s×%s area"
+  "tooltip.harvestfestival.watering_can.area": "Waters a %s×%s area",
+  "item.harvestfestival.carrot_seeds": "HF Carrot Seeds",
+  "item.harvestfestival.beetroot_seeds": "HF Beetroot Seeds",
+  "item.harvestfestival.potato_seeds": "HF Potato Seeds"
 }

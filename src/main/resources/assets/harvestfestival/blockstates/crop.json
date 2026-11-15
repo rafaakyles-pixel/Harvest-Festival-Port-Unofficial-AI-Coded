@@ -74,6 +74,42 @@
     },
     "appearance=24": {
       "model": "harvestfestival:block/spinach_3"
+    },
+    "appearance=25": {
+      "model": "minecraft:block/carrots_stage0"
+    },
+    "appearance=26": {
+      "model": "minecraft:block/carrots_stage1"
+    },
+    "appearance=27": {
+      "model": "minecraft:block/carrots_stage2"
+    },
+    "appearance=28": {
+      "model": "minecraft:block/carrots_stage3"
+    },
+    "appearance=29": {
+      "model": "minecraft:block/beetroots_stage0"
+    },
+    "appearance=30": {
+      "model": "minecraft:block/beetroots_stage1"
+    },
+    "appearance=31": {
+      "model": "minecraft:block/beetroots_stage2"
+    },
+    "appearance=32": {
+      "model": "minecraft:block/beetroots_stage3"
+    },
+    "appearance=33": {
+      "model": "minecraft:block/potatoes_stage0"
+    },
+    "appearance=34": {
+      "model": "minecraft:block/potatoes_stage1"
+    },
+    "appearance=35": {
+      "model": "minecraft:block/potatoes_stage2"
+    },
+    "appearance=36": {
+      "model": "minecraft:block/potatoes_stage3"
     }
   }
 }

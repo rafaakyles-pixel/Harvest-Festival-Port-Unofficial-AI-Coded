@@ -3,6 +3,10 @@
     "#c:crops/turnip",
     "#c:crops/cucumber",
     "harvestfestival:onion",
-    "harvestfestival:spinach"
+    "harvestfestival:spinach",
+    "#c:crops/carrot",
+    "#c:crops/beetroot",
+    "#c:crops/potato",
+    "#c:crops/poisonous_potato"
   ]
 }

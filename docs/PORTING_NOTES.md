@@ -24,7 +24,7 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
-| Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita e rebrota limitada | [Cultivos](porting/cultivos.md) |
+| Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita/rebrota e loot especial da batata | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 

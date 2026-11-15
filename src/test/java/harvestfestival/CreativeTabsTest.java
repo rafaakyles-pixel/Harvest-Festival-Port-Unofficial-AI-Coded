@@ -27,11 +27,11 @@ class CreativeTabsTest {
                 else visible.add(stack);
             };
             CreativeTabs.seeds(output);
-            assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds"), ids(visible));
+            assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds", "onion_seeds", "spinach_seeds"), ids(visible));
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
             assertEquals(List.of("hoe", "watering_can", "sickle", "shipping_box"), ids(visible));
-            assertEquals(List.of("turnip", "cucumber"), ids(searchOnly));
+            assertEquals(List.of("turnip", "cucumber", "onion", "spinach"), ids(searchOnly));
             assertEquals(0, WateringCanState.get(visible.get(1)).water());
             assertEquals(0, visible.get(2).getDamageValue());
             assertEquals(SickleState.NEW, SickleState.get(visible.get(2)));

@@ -61,13 +61,13 @@ O inventário separa comportamento ativo, vestígios comentados e integrações 
 - [ ] Desbloqueios de sementes por ano, rancho ou missão; preços e alimentação animal — `HFCrops`, `SpecialRulesYear`, `SpecialRulesRanch`, `SpecialRulesQuest`, `Crop`.
 - [ ] Aspersores e compatibilidade do aspersor antigo — `BlockSprinkler`, `TileSprinkler`, `TileSprinklerOld`.
 - [ ] Opções de crescimento diário, farinha de osso e restrição sazonal, consumo do aspersor e morte por falta de água distinta em servidor integrado/dedicado — `HFCrops`, `BlockHFCrops`, `TileCrop`.
-- [ ] Conversão/receitas de sementes, associação com cultivos vanilla, bloqueios configuráveis de sementes, enxadas, drops, umidade e crescimento vanilla — `SeedRecipeHandler`, `HFCrops`, `DisableHandler`, `CropRegistry`.
+- [ ] Receitas de sacos HF para sementes vanilla e controles independentes de plantio, enxadas, drops, sementes da grama, umidade e crescimento — `SeedRecipeHandler`, `HFCrops`, `DisableHandler`, `RegistryHelper`. Trigo da fatia 13 não conclui essa política; recorte 15-V em [sequência agrícola](#sequência-agrícola-pendente), sem conversão automática vanilla→HF.
 - [ ] Modelos/tintas de cultivos e folhas e loot com tipo de cultivo — `CropStateMapper`, `BakedCrops`, `BakedLeaves`, `BakedTintedQuad`, `SetCropType`.
 
 ## Ferramentas, esforço e efeitos (`tools`, `core.base.item`)
 
 - [x] Fatia 9 validada e aprovada pelo responsável em single player: enxada/regador de nível único, ação sobre bloco por regras/tags, solo preparado com marca persistente de rega e reserva de 128 unidades no item. Não conclui ferramentas por nível, esforço ou cultivo. Contrato e roteiro em `PORTING_NOTES.md`.
-- [ ] Complemento visual autorizado: barra de água e quantidade exata no tooltip do regador; validação visual pendente. Cenário 8 incluído nos critérios de aceite desta primeira interface.
+- [x] Indicadores do regador (barra/tooltip) confirmados funcionais pelo responsável nesta solicitação, em 14/11/2026. Cenário 8 continua pendente e vinculado ao complemento; não atribuir testes individuais ao agente.
 - [x] Fatia 10: rega ao clicar na planta resolve o solo abaixo; crescimento avalia água antes da secagem diária, inclusive em solo vazio carregado. Testes automatizados aprovados e aceite manual global informado em 12/11/2026, sem atribuir resultados individuais não relatados.
 - [x] Fatia 11 implementada e aceita em single player pelo responsável em 12/11/2026, sem relato individual por cenário: ferramentas HF e vanilla compartilham farmland; regras/tags de rega usam moisture, com migração de prepared_soil preservando água. Build aprovado, 6 testes novos/87 totais executados. Não inclui bloqueio configurável de ferramentas vanilla nem integrações específicas.
 - [x] Texturas básicas originais de enxada/regador aplicadas e confirmadas pelo responsável em 12/11/2026 como correspondentes ao original. Não encerra barra/tooltip nem cenário 8. Releitura artística posterior pode integrar polimento; itens e comportamentos completos continuam trabalho da Fase 3.
@@ -245,6 +245,26 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 
 - [x] Sincronização do ouro somente ao proprietário — originais: `StatsServer`, `PacketSyncGold`; port: `harvestfestival.player.PlayerGold`. Concluída conforme validação manual do responsável em 04/11/2026, com runClient single player: set/add consultados por get, morte/renascimento, portal e volta, sair/reabrir. Pendentes: servidor dedicado, dois jogadores e reconexão. Build e quantidade de testes automatizados informados pelo responsável: **não informado**.
 
-- [x] Fatia 13: trigo HF com 27 viradas regadas, corte por foice e produto vanilla a 100; foice básica com dano/nível persistentes e esforço básico. Contratos em porting/cultivos.md e porting/ferramentas.md. Validação manual pendente.
-- [ ] Próxima fatia: fadiga, desmaio e recuperação adiados explicitamente na foice pelo responsável.
+- [x] Fatia 13: trigo HF com 27 viradas regadas, corte por foice e produto vanilla a 100; foice básica com dano/nível persistentes e esforço básico. Contratos em porting/cultivos.md e porting/ferramentas.md. Fatia 13 aceita pelo responsável.
+- [x] Fatia 14: fadiga, desmaio e recuperação implementados; aceite manual pendente.
 
+
+
+
+
+## Sequência agrícola pendente
+
+| Fatia | Recorte | Aceite próprio |
+| --- | --- | --- |
+| 14 | Implementada: esforço/sono, cebola/espinafre | Build aprovado, 20 novos/139 totais executados; aceite manual pendente e memória de camas por dimensão adiada por decisão explícita |
+| 15 | Cenoura e beterraba comuns; batata com drop especial | Produtos/visuais vanilla com sementes HF; batata exige uma/duas entradas e possibilidade individual de venenosa, testes de sorteio e preço 1 da venenosa. Não tratar batata como mera duplicação do nabo |
+| 15-V | Política agrícola vanilla, fatia separada a aprovar antes de declarar equivalência vanilla concluída | Matriz independente de plantio, ticks/crescimento, uso de item, drops, sementes da grama, umidade e enxadas; receitas HF→vanilla, sem conversão inversa inventada; preservar itens/usos alimentares, testes de combinações, recarga/reinício e escopo por tags |
+| 16 | Morango, tomate e berinjela | Rebrota comum com limites 12/8/8, dados individuais, persistência e sazonalidade; desbloqueios comerciais continuam dependentes de lojas/cidade |
+| 17 | Repolho, abacaxi, milho, batata-doce e pimentão verde | Repolho de colheita única; demais rebrota limitada 3/7/14/9. Dividir entrega se necessário, sem misturar novos mecanismos |
+| 18-A | Melancia e abóbora | Transformação na própria posição em bloco ao amadurecer, sem regrow; aparência de haste e orientação aleatória da abóbora; conferir drops do bloco convertido e ausência de segunda emissão HF |
+| 18-B | Grama/forragem | Planta dupla desde estágio 6, sem água, corte mínimo 6 e quantidade por estágio; comprovar ordem de remoção/markSafe/replantio e resultado efetivo do limite antes de aprovar preservação |
+
+15-V e 18-A/B são recortes explícitos propostos, não autorização para ampliar a fatia 14 nem promessa de concluir tudo em cinco implementações. A numeração definitiva depende do aceite. Trigo da fatia 13 não concluiu 15-V.
+
+
+Fatia 14 implementada em 15/11/2026 conforme aprovação: efeitos próprios, desmaio padrão sem morte, recuperação e esforço nas ações existentes de foice/enxada/regador; cebola e espinafre com recursos originais/remessas/abas. Contratos em [Ferramentas](porting/ferramentas.md) e [Cultivos](porting/cultivos.md). Memória de camas por dimensão mantida pendente pelo responsável; accessor mínimo de sono autorizado. Não conclui maldição, ferramentas completas, política vanilla, cenário 8, dedicado/multiplayer ou aceite manual. Planos transitórios removidos a pedido; roteiro manual somente na resposta final.

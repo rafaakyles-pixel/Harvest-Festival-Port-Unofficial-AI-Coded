@@ -28,6 +28,8 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
+Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
+
 ### Contratos transversais e decisões obrigatórias
 
 - Todo item novo adicionado em uma fatia deve incluir textura do original, conforme condição explícita do responsável em 13/11/2026. Registrar proveniência/licença e distinguir inspeção de arquivo de validação em jogo. Não alterar AGENTS.md sem autorização específica.
@@ -50,7 +52,7 @@ Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). 
 - Roteiro existente: seção “Roteiro integrado completo” da [fatia 8](archive/fatia-08-validacao-integrada.md). Não criar documento vazio nem adiar a obrigação para outra interface.
 - A pendência não autoriza antecipar HUD de ouro/aniversário ou calendário visual.
 - Fatia 9 aceita em single player em 09/11/2026, sem relato individual por passo; dedicado/multiplayer continuam pendentes.
-- Complemento visual do regador implementado; aparência e passos novos ainda aguardam validação manual.
+- Indicadores do regador confirmados funcionais pelo responsável nesta solicitação em 14/11/2026. Substitui a pendência visual dos registros anteriores; não encerra cenário 8 nem dedicado/multiplayer.
 - Fatia 11: farmland compartilhada aceita pelo responsável em 12/11/2026 («Testado e aprovado»), em single player, sem detalhamento individual dos cenários. Esse aceite não encerra cenário 8, indicadores, dedicado ou multiplayer; texturas tiveram confirmação separada. Evidência e cobertura em [Ferramentas](porting/ferramentas.md).
 - Fatia 10: teste final aprovado pelo responsável em 12/11/2026, sem ampliar cobertura além do ciclo single player entregue. Build anterior aprovado, 24 testes novos/81 totais executados. Cobertura em [Cultivos](porting/cultivos.md); dedicado/multiplayer e cenário 8 continuam pendentes. Texturas da enxada/regador confirmadas separadamente pelo responsável em 12/11/2026 como correspondentes ao original; barra/tooltip e cenário 8 permanecem pendentes.
 
@@ -100,6 +102,8 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
 - Fatia 11: `harvestfestival.tools.mixin.FarmlandBlockMixin`, subpacote aprovado explicitamente pelo responsável. Alvo `FarmlandBlock.randomTick`, injeção HEAD cancelável para solos participantes por tag; impede hidratação/secagem aleatória concorrendo com o ciclo diário. A fonte exata 26.2.0.93 não oferece evento cancelável nesse método. Queda e ticks de obstrução permanecem vanilla/NeoForge. Evidências, limites e migração em [Ferramentas](porting/ferramentas.md).
 
+- Fatia 14: `harvestfestival.tools.mixin.PlayerSleepAccessor`, autorizado explicitamente pelo responsável, escreve somente `Player.sleepCounter` no desmaio com sono instantâneo. Fonte exata 26.2.0.93 não expõe setter/evento equivalente; decisão coletiva de sono continua no motor. Aplicação à classe transformada testada; sono real/manual ainda pendente. Contrato em [Ferramentas](porting/ferramentas.md).
+
 ## Histórico e manutenção
 
 - [Índice dos registros preservados](archive/README.md): texto anterior integral, dividido por assunto/fatia; propostas antigas não prevalecem sobre decisões posteriores.
@@ -107,3 +111,5 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Acrescentar aqui apenas decisões transversais, pendências obrigatórias ou uma linha de índice para novo sistema.
 - Não acrescentar resumos por fatia, listas globais de APIs ou logs de build. A meta é manter esta entrada estável durante a portagem.
 
+
+Memória de camas por dimensão mantida pendente pelo responsável na fatia 14; o port usa somente RespawnConfig correspondente à dimensão destino e fallback quando ausente. Limites, dados de esforço/sono e APIs em [Ferramentas](porting/ferramentas.md).

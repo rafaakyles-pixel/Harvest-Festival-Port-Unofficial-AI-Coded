@@ -35,3 +35,7 @@ Cinco testes novos cobrem transição natural sem repetição, salto de sono na 
 ## Validação consolidada
 
 Calendário: 5 testes novos, suíte total 8. Detector diário: 5 novos, suíte total 13. Roteiros manuais aceitos. Cobertura dedicada conforme [fatia 8](../archive/fatia-08-validacao-integrada.md), sem ampliar variantes observadas.
+
+## Consumidor de sono — fatia 14
+
+ToolSleep usa os eventos modernos de tentativa/continuidade/despertar e SleepFinishedTimeEvent. Ajusta o sono concluído do Overworld para a próxima fronteira de 24000 via ClockAdjustment.Absolute; a decisão coletiva/ADVANCE_TIME permanece no motor. NewDayEvent continua exclusivamente no detector existente, sem publicação extra no desmaio. Recuperação consulta a fronteira no despertar, não é consumidor diário para jogadores acordados. Regras sazonais e limites em [Ferramentas](ferramentas.md); memória de camas por dimensão adiada explicitamente. Testes de núcleo não comprovam sono/virada real em multiplayer.

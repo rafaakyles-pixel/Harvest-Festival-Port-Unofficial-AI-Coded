@@ -15,3 +15,5 @@ Trechos integrais, em ordem, do PORTING_NOTES.md anterior. Propostas e pendênci
 SHA-256 original: 666420CC338CA01562128754C8AFEACF64A5DA74DE95E06B6CB2CD745A60B1EA.
 
 Conteúdo textual integral conferido após gravação contra o original versionado, normalizando finais de linha. O hash acima registra o arquivo de origem; os recortes usam UTF-8 e podem normalizar terminadores. Nenhuma linha de conteúdo foi omitida.
+
+- Planos transitórios da fatia 14 removidos com autorização do responsável após implementação; hipótese incorreta sobre handlers e sua correção preservadas em [Cultivos](../porting/cultivos.md), sequência vigente em [FEATURES](../FEATURES.md#sequência-agrícola-pendente). Demais arquivos históricos preservados.

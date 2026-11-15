@@ -39,3 +39,5 @@ Fatia 10 não altera código econômico. Novo teste integra nabo maduro, produto
 SellValue é fallback autorizado; precedência item > tag > SellValue definida pelo responsável. Fatia 5: 6 testes novos, suíte total 19. Fatia 6: 7 novos, suíte total 26; builds e single player aprovados. Cobertura dedicada aceita conforme [fatia 8](../archive/fatia-08-validacao-integrada.md). Pagamento apenas na próxima virada com jogador conectado aceito em 08/11/2026; não paga offline nem ao reconectar.
 
 Fatia 13: trigo HF entrega minecraft:wheat e reutiliza a regra existente c:crops/wheat=100. Nenhuma regra econômica nova. Teste integra corte, depósito, fila em NBT comprimido e pagamento único; produto é fornecido pelo adaptador, sem simular sorteio em mundo.
+
+Fatia 14: onion/spinach integram c:crops/<espécie> e c:crops, preço 100/prioridade 0 por dados; sementes integram c:seeds sem preço. Novo teste deposita nove unidades de cada espécie, grava/reabre NBT comprimido e paga 900 uma única vez por fila. Nenhuma mudança no algoritmo econômico; integra 20 testes novos/139 totais executados. Aceite manual, dedicado/multiplayer e cenário 8 pendentes.

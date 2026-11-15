@@ -34,5 +34,13 @@
   "commands.harvestfestival.calendar.next_day": "Time moved to the last tick of the day. The next day begins when the Overworld clock advances.",
   "item.harvestfestival.wheat_seeds": "HF Wheat Seeds",
   "item.harvestfestival.sickle": "Sickle",
-  "item.harvestfestival.sickle.broken": "Broken %s"
+  "item.harvestfestival.sickle.broken": "Broken %s",
+  "item.harvestfestival.onion": "Onion",
+  "item.harvestfestival.onion_seeds": "Onion Seeds",
+  "item.harvestfestival.spinach": "Spinach",
+  "item.harvestfestival.spinach_seeds": "Spinach Seeds",
+  "effect.harvestfestival.fatigue": "Fatigue",
+  "effect.harvestfestival.exhaustion": "Exhaustion",
+  "death.attack.harvestfestival.exhausted": "%1$s collapsed from exhaustion",
+  "death.attack.harvestfestival.exhausted.player": "%1$s collapsed from exhaustion"
 }

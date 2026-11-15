@@ -143,3 +143,40 @@ Slots visuais 11–18 usam minecraft:block/wheat_stage0..7; 0–10 preservados. 
 A velocidade de quebra dos cultivos passa a seguir BlockHFCrops: dureza viva 0,1/murcha 0,5, divisor 10 com tag de foice e 100 sem; modificadores do jogador preservados. Fontes alvo locais 26.2.0.93: getDestroyProgress, Player.getDestroySpeed, ItemInstance no parâmetro TOOL e onDestroyedByPlayer. Ciclo, farmland, migração e pagamentos permanecem existentes.
 
 Validação automatizada da fatia 13: build aprovado; 14 testes novos, 119 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado nesta entrega; aceite visual e manual pendente. Testes usam adaptadores, registros e serialização reais, sem simular cliente ou servidor dedicado.
+
+Em 14/11/2026 o responsável declarou a fatia 13 completa. Aceite global, sem atribuir execução individual de cenários ou testes ao agente. Cenário 8, indicadores do regador e dedicado/multiplayer permanecem pendentes; fadiga, desmaio e recuperação seguem para a fatia 14.
+
+## Correção obrigatória dos handlers
+
+A proposta anterior dizia que a busca não havia localizado associações de DropHandlerGrass/DropHandlerPotato e que abóbora não associava GrowthHandlerPumpkin. Essa conclusão era incorreta: `RegistryHelper.registerCrop → addHandlersToCrop` instancia classes por reflexão/convenção usando prefixos de HFModInfo. A anotação unused não indica código abandonado.
+
+- Grass: DropHandlerGrass e StateHandlerGrass associados; `setStages(11)` não troca state. Drop stage−5 desde 6. `maxHarvests=1` permanece. Registro/remoção precedem markSafe; não inferir rebrota ilimitada. Necessária validação real dos callbacks de topo/base na 18-B.
+- Potato: DropHandlerPotato associado e não sobrescrito em HFCrops; `setStages(Blocks.POTATOES,...)` troca apenas visual. Madura gera uma entrada, com 1/20 de segunda; cada entrada tem 1/50 de venenosa. Condição do laço sorteada a cada avaliação.
+- Pumpkin: GrowthHandlerPumpkin e StateHandlerPumpkin associados e preservados por `setStages(15)`. Herda GrowthHandlerSide; sem regrow, vira bloco na própria posição, orientação horizontal aleatória. É mecanismo ativo a portar, não restauração de funcionalidade abandonada.
+- Watermelon: StateHandlerWatermelon via reflexão; GrowthHandlerSide explícito. Sem regrow, mesma transformação, estágio 11. O nome Side não demonstra produção lateral.
+- Sobrescritas gerais: `setStages(int...)` instala StateHandlerBasic; `setStages(Block,int...)` instala StateHandlerBlock; inteiro único só muda total. Crescimento de nether wart substituído por SOUL_SAND. Plugins/scripts adiados não foram tratados como padrão.
+
+Caminhos efetivos: TileCrop → CropData.newDay/grow → growthHandler; BlockHFCrops → CropHelper → CropRegistry.harvestCrop → CropData.harvest → dropHandler. Evidência estática; não houve execução do original. Árvores, nabo tutorial e nether wart exigem recortes próprios.
+
+## Política vanilla pendente (15-V)
+
+HFCrops preserva itens vanilla. Defaults: DISABLE_VANILLA_SEEDS/GROWTH/DROPS/WHEAT_SEEDS/MOISTURE=true; DISABLE_VANILLA_HOE=false. DisableHandler aplica controles distintos; RegistryHelper também desliga ticks aleatórios de plantas quando growth está ativo. Blacklist de sementes é compartilhada, populada quando plantio ou drops da grama é bloqueado; isso não funde as duas opções.
+
+SeedRecipeHandler recebe saco HF como ingrediente e gera sementes vanilla (nove para trigo/beterraba/melão/abóbora). Cenoura/batata não recebem essa receita, pois produto e semente são o mesmo item. Receitas adicionais de HFCrops: trigo→1 semente vanilla, duas beterrabas→duas sementes vanilla, bloco de melancia→nove fatias. ItemHFSeeds planta 3×3 usando identidade de cultivo; crop provider não converte inventário.
+
+Aceite 15-V: testar cada chave isolada e combinações que compartilham blacklist/CROPS; mão principal/secundária, criativo/survival e itens vanilla existentes; negar plantio sem remover itens, preservar alimentação, distinguir crescimento aleatório/farinha de osso e colheita/drop, comprovar direção/quantidade de cada receita. Só então registrar relação vanilla concluída para os cultivos cobertos. Sem bloqueio global ou receita inversa na fatia 14.
+
+
+## Fatia 14 — cebola e espinafre
+
+Implementação aprovada pelo responsável em 14/11/2026; validação automatizada em 15/11/2026. IDs onion/onion_seeds e spinach/spinach_seeds, bloco genérico existente. Cebola: verão, limites 3/7/8, sete viradas regadas; espinafre: outono, 2/5/6, cinco viradas. Ambos iniciam em estágio 1/seca 1, água obrigatória, colheita única, sem foice/rebrota, um produto e preço 100 por c:crops/<espécie>. Compra original 350 documentada, sem loja implementada.
+
+Evidência por leitura de HFCrops, Crop, StateHandlerBasic, GrowthHandler, DropHandler, CropData, CropRegistry, TileCrop, BlockHFCrops e ItemHFSeeds. Mesmos contratos de plantio 3×3/centro arado, morte sazonal/seca, resgate, loot vazio, falha de escrita e remoção antes do drop. Integrado morre quando entra com seca >2; dedicado mantém o padrão sem morte por seca. Chuva/aspersores e substituição aleatória na morte continuam adiados. Nenhum bloqueio ou conversão de sementes vanilla adicionado.
+
+Slots 19–21 representam cebola em 1–3/4–7/8+; slots 22–24 representam espinafre em 1–2/3–5/6+. Faixa 0–18 preservada; nenhum campo novo em CropState. Mesma entidade/sincronização/ciclo, sem registro de bloco por espécie. Sementes entram após trigo na aba Sementes; produtos após nabo/pepino somente na busca, conforme abas aprovadas.
+
+Oito PNGs originais copiados byte a byte de textures/items/crops/{onion,spinach}.png e textures/blocks/crops/{onion,spinach}_{1,2,3}.png para diretórios modernos item/block. Todos os hashes conferidos iguais. Sacos reutilizam neck/body originais, tintas 0xDCC307/0x90AE15 em ambas as camadas; modelos usam crop_original existente. Licença MIT já empacotada preservada. Hash e inspeção de arquivos não constituem teste visual no jogo.
+
+Quatro testes novos de cultivos cobrem crescimento/limites visuais/estação/sementes, seca/resgate/dedicado, colheita/falhas/loot vazio/não duplicação e entidades em NBT comprimido. Um teste novo de remessas cobre nove unidades de cada produto, 900 por fila, rejeição de sementes e pagamento único após persistência. Testes existentes de abas/fixtures e limite inválido de aparência ajustados; regressões de nabo/pepino/trigo executadas. Produto de colheita é fornecido pelo adaptador; não simula sorteio de loot num mundo. Total da fatia: 20 testes novos, 139 totais executados e aprovados; sem execução manual atribuída.
+
+Preferência do responsável em 14/11/2026: não acumular arquivos de plano; roteiro manual somente na resposta final após implementação. Plano da fatia e proposta agrícola anterior removidos com autorização, após incorporar evidências, correção rastreável e sequência em FEATURES. Indicadores do regador confirmados funcionais; cenário 8, dedicado/multiplayer e validação manual desta entrega continuam pendentes.

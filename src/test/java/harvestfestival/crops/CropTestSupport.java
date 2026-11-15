@@ -26,6 +26,17 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/onion.json",
+        "harvestfestival/loot_table/crops/onion.json",
+        "harvestfestival/tags/item/seeds/onion.json",
+        "c/tags/item/crops/onion.json",
+        "harvestfestival/shipping_prices/tags/c/crops/onion.json",
+        "harvestfestival/crops/spinach.json",
+        "harvestfestival/loot_table/crops/spinach.json",
+        "harvestfestival/tags/item/seeds/spinach.json",
+        "c/tags/item/crops/spinach.json",
+        "harvestfestival/shipping_prices/tags/c/crops/spinach.json",
+
         "harvestfestival/crops/wheat.json", "harvestfestival/loot_table/crops/wheat.json",
         "harvestfestival/tags/item/seeds/wheat.json", "harvestfestival/tags/item/sickles.json",
         "harvestfestival/shipping_prices/tags/c/crops/wheat.json", "harvestfestival/tool_settings/sickle.json",
@@ -66,7 +77,7 @@ public final class CropTestSupport implements AutoCloseable {
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
-        for (var item : List.of(CropContent.TURNIP.get(), CropContent.TURNIP_SEEDS.get(),
+        for (var item : List.of(CropContent.ONION.get(), CropContent.ONION_SEEDS.get(), CropContent.SPINACH.get(), CropContent.SPINACH_SEEDS.get(), CropContent.TURNIP.get(), CropContent.TURNIP_SEEDS.get(),
                 CropContent.CUCUMBER.get(), CropContent.CUCUMBER_SEEDS.get(),
                 CropContent.WHEAT_SEEDS.get(), net.minecraft.world.item.Items.WHEAT, net.minecraft.world.item.Items.WHEAT_SEEDS,
                 harvestfestival.ShippingContent.SHIPPING_BOX.get().asItem(),

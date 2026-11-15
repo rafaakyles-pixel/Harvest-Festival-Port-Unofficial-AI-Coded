@@ -1,1 +1,8 @@
-{"values":["#c:crops/turnip","#c:crops/cucumber"]}
+{
+  "values": [
+    "#c:crops/turnip",
+    "#c:crops/cucumber",
+    "harvestfestival:onion",
+    "harvestfestival:spinach"
+  ]
+}

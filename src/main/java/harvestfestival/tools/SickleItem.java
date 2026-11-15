@@ -55,10 +55,10 @@ public final class SickleItem extends Item {
         return true;
     }
     @Override public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity owner) {
-        if (level instanceof ServerLevel server && owner instanceof Player player && state.is(CropContent.CROPS)) {
+        if (level instanceof ServerLevel server && owner instanceof net.minecraft.server.level.ServerPlayer player && state.is(CropContent.CROPS)) {
             performTask(stack, player.isCreative(), SickleRules.INSTANCE.rule(),
                     damage -> EnchantmentHelper.processDurabilityChange(server, stack, damage),
-                    amount -> player.getFoodData().addExhaustion(amount));
+                    amount -> ToolEffort.consume(player, amount));
         }
         return true;
     }

@@ -34,5 +34,13 @@
   "commands.harvestfestival.calendar.next_day": "Horário movido para o último tick do dia. O próximo dia começa quando o relógio do Overworld avançar.",
   "item.harvestfestival.wheat_seeds": "Sementes de trigo HF",
   "item.harvestfestival.sickle": "Foice",
-  "item.harvestfestival.sickle.broken": "%s quebrada"
+  "item.harvestfestival.sickle.broken": "%s quebrada",
+  "item.harvestfestival.onion": "Cebola",
+  "item.harvestfestival.onion_seeds": "Sementes de Cebola",
+  "item.harvestfestival.spinach": "Espinafre",
+  "item.harvestfestival.spinach_seeds": "Sementes de Espinafre",
+  "effect.harvestfestival.fatigue": "Fadiga",
+  "effect.harvestfestival.exhaustion": "Exaustão",
+  "death.attack.harvestfestival.exhausted": "%1$s sucumbiu à exaustão",
+  "death.attack.harvestfestival.exhausted.player": "%1$s sucumbiu à exaustão"
 }

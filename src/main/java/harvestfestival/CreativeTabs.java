@@ -29,6 +29,8 @@ public final class CreativeTabs {
         output.accept(CropContent.TURNIP_SEEDS.get());
         output.accept(CropContent.CUCUMBER_SEEDS.get());
         output.accept(CropContent.WHEAT_SEEDS.get());
+        output.accept(CropContent.ONION_SEEDS.get());
+        output.accept(CropContent.SPINACH_SEEDS.get());
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
@@ -37,5 +39,7 @@ public final class CreativeTabs {
         output.accept(ShippingContent.SHIPPING_BOX.get());
         output.accept(CropContent.TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.CUCUMBER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.ONION.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.SPINACH.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
     }
 }

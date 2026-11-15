@@ -56,6 +56,24 @@
     },
     "appearance=18": {
       "model": "minecraft:block/wheat_stage7"
+    },
+    "appearance=19": {
+      "model": "harvestfestival:block/onion_1"
+    },
+    "appearance=20": {
+      "model": "harvestfestival:block/onion_2"
+    },
+    "appearance=21": {
+      "model": "harvestfestival:block/onion_3"
+    },
+    "appearance=22": {
+      "model": "harvestfestival:block/spinach_1"
+    },
+    "appearance=23": {
+      "model": "harvestfestival:block/spinach_2"
+    },
+    "appearance=24": {
+      "model": "harvestfestival:block/spinach_3"
     }
   }
 }

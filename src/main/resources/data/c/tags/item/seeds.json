@@ -2,6 +2,8 @@
   "values": [
     "harvestfestival:turnip_seeds",
     "harvestfestival:cucumber_seeds",
-    "harvestfestival:wheat_seeds"
+    "harvestfestival:wheat_seeds",
+    "harvestfestival:onion_seeds",
+    "harvestfestival:spinach_seeds"
   ]
 }

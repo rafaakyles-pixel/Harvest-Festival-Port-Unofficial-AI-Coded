@@ -70,6 +70,8 @@ public final class ToolActions {
             public boolean canEdit() { return true; } // Checked against the real player above.
             public boolean set(BlockState state) { return level.setBlock(pos, state, Block.UPDATE_ALL); }
         }, stack, player.isCreative());
+        if (result == Result.CHANGED && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)
+            ToolEffort.basicAction(serverPlayer);
         return result == Result.CHANGED ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 

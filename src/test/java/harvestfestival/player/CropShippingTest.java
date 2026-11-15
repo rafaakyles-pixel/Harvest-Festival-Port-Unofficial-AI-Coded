@@ -24,6 +24,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void onionAndSpinachEachPay900AfterQueueSaveWithoutSeedPrices() throws Exception {
+        try(var fixture=new CropTestSupport(directory.resolve("pack"))) {
+            var prices=new ShippingPrices();prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+            var registry=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            for(var item:List.of(CropContent.ONION.get(),CropContent.SPINACH.get())) {
+                var holder=new SavedHolder();
+                var stack=new ItemStack(item,9);
+                for(int i=0;i<9;i++) assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                assertTrue(stack.isEmpty());assertEquals(900,holder.getData(PlayerShipping.QUEUE).total());
+                var output=TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry);holder.serializeAttachments(output);
+                var file=directory.resolve(BuiltInRegistries.ITEM.getKey(item).getPath()+".nbt");NbtIo.writeCompressed(output.buildResult(),file);
+                var copy=new SavedHolder();copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+                PlayerShipping.pay(copy);PlayerShipping.pay(copy);assertEquals(900,copy.getData(PlayerGold.GOLD));
+            }
+            for(var seed:List.of(CropContent.ONION_SEEDS.get(),CropContent.SPINACH_SEEDS.get()))
+                assertFalse(PlayerShipping.depositInto(new SavedHolder(),new ItemStack(seed),prices));
+        }
+    }
     @Test void wheatUsesExistingVanillaProductAndPriceThenPaysOnceAfterSave() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var definition = harvestfestival.crops.CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:wheat"));

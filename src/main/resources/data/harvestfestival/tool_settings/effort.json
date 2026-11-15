@@ -1,0 +1,14 @@
+{
+  "consume_hunger": true,
+  "actions_per_half_haunch": 27,
+  "restore_hunger_on_sleep": true,
+  "restore_hunger_on_fainting": true,
+  "enable_fainting": true,
+  "early_fainting": false,
+  "death_fainting": false,
+  "instant_fainting_sleep": true,
+  "attack_fainting": false,
+  "block_fainting": false,
+  "sleep_anytime": true,
+  "sleep_only_at_night": false
+}

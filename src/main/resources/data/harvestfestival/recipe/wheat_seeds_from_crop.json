@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W"
+  ],
+  "key": {
+    "W": "#c:crops/wheat"
+  },
+  "result": {
+    "id": "minecraft:wheat_seeds",
+    "count": 1
+  }
+}

@@ -61,8 +61,33 @@ class ToolAreaTest {
             assertEquals(0,stack.getDamageValue());
             assertEquals(0,water(world,p,stack,false,rules,costs));
             assertEquals(9,costs.size());
-            assertTrue(ToolActions.waterAnchor(world.get(p))); assertTrue(ToolActions.waterAnchor(world.get(p.below())));
-            assertFalse(ToolActions.waterAnchor(Blocks.STONE.defaultBlockState()));
+        }
+    }
+    @Test void vanillaCropOrUnrelatedBlockClickWatersOnlyEligibleSoilsInsideRectangle() throws Exception {
+        try(var fixture=new CropTestSupport(directory)) {
+            var rules=new ToolActionRules(); rules.apply(rules.prepare(fixture.manager,null),fixture.manager,null);
+            var p=new BlockPos(0,70,0);
+            for(var clicked:List.of(Blocks.WHEAT,Blocks.CARROTS,Blocks.BEETROOTS,Blocks.POTATOES,Blocks.STONE)) {
+                var world=new HashMap<BlockPos,BlockState>();
+                world.put(p,clicked.defaultBlockState());
+                world.put(p.below(),Blocks.FARMLAND.defaultBlockState());
+                world.put(p.below().east(),Blocks.FARMLAND.defaultBlockState());
+                world.put(p.below().south(),Blocks.FARMLAND.defaultBlockState().setValue(FarmlandBlock.MOISTURE,7));
+                world.put(p.below().west(),Blocks.DIRT.defaultBlockState());
+                world.put(p.below().north(),Blocks.FARMLAND.defaultBlockState()); // Behind the rectangle.
+                world.put(p.below(2),Blocks.FARMLAND.defaultBlockState()); // Outside its two planes.
+                var can=new ItemStack(ToolContent.WATERING_CAN_SILVER.get()); WateringCanState.fill(can);
+                var costs=new ArrayList<Float>();
+                assertEquals(2,water(world,p,can,false,rules,costs));
+                assertEquals(126,WateringCanState.get(can).water()); assertEquals(2,costs.size());
+                assertEquals(2*ToolTier.SILVER.levelIncrease(),FarmToolState.get(can).level(),1e-12);
+                assertEquals(clicked.defaultBlockState(),world.get(p));
+                assertEquals(Blocks.DIRT.defaultBlockState(),world.get(p.below().west()));
+                assertEquals(0,world.get(p.below().north()).getValue(FarmlandBlock.MOISTURE));
+                assertEquals(0,world.get(p.below(2)).getValue(FarmlandBlock.MOISTURE));
+                assertEquals(0,water(world,p,can,false,rules,costs)); assertEquals(2,costs.size());
+                assertEquals(126,WateringCanState.get(can).water());
+            }
         }
     }
     @Test void partialWaterFollowsOrderAndCreativeStillRequiresWater() throws Exception {

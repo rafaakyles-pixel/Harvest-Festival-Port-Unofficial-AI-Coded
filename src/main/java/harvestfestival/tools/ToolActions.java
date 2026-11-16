@@ -12,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +27,6 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 
 public final class ToolActions {
     private ToolActions() {}
-    private static final TagKey<Block> WATERABLE = TagKey.create(Registries.BLOCK, Identifier.parse("harvestfestival:waterable"));
 
     public enum Result { CHANGED, NO_MATCH, BLOCKED, EMPTY, UNCHANGED, AMBIGUOUS, FAILED }
 
@@ -73,7 +70,6 @@ public final class ToolActions {
         if (hit.getType() != HitResult.Type.BLOCK || !level.hasChunkAt(clicked)
                 || !FarmToolTasks.canUse(stack, itemTier, action)
                 || !allowed(level, player, stack, clicked, hit.getDirection())) return InteractionResult.PASS;
-        if (action == ToolAction.WATER && !waterAnchor(level.getBlockState(clicked))) return InteractionResult.PASS;
         // The client predicts only acceptance; all state and costs are authoritative on the server.
         if (!(level instanceof ServerLevel server) || !(player instanceof ServerPlayer serverPlayer)) return InteractionResult.SUCCESS;
         var face = action == ToolAction.HOE ? Direction.UP : hit.getDirection();
@@ -105,7 +101,6 @@ public final class ToolActions {
                         damage -> EnchantmentHelper.processDurabilityChange(server, stack, damage), amount -> ToolEffort.consume(serverPlayer, amount)));
         return changes > 0 ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
-    static boolean waterAnchor(BlockState state) { return state.is(WATERABLE) || state.is(CropContent.CROPS); }
     private static boolean allowed(Level level, Player player, ItemStack stack, BlockPos pos, Direction face) {
         return face != Direction.DOWN && level.mayInteract(player, pos) && player.mayUseItemAt(pos, face, stack);
     }

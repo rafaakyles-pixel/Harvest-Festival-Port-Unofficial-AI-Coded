@@ -24,11 +24,13 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
-| Bloco genérico de cultivo, sementes, crescimento diário, morte, colheita/rebrota e loot especial da batata | [Cultivos](porting/cultivos.md) |
+| Bloco genérico de cultivo, ciclo HF, loot da batata, política vanilla delimitada, receitas de sementes e sincronização transitória das regras | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
 Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
+
+Aceite global da fatia 15, incluindo ampliação da rega, registrado em [STATUS](STATUS.md) em 16/11/2026. Levantamentos independentes da 16 nos contratos de [Cultivos](porting/cultivos.md#levantamento-original-da-16-a--16112026) e [Ferramentas](porting/ferramentas.md#levantamento-original-da-16-f--16112026); implementação depende de aprovação dos planos na conversa.
 
 ### Contratos transversais e decisões obrigatórias
 
@@ -41,6 +43,7 @@ Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente);
 - Remessas fixam preço no depósito e pagam na próxima virada com o jogador conectado. Não pagam offline nem ao reconectar; comportamento aceito em 08/11/2026.
 - A futura escolha de aniversário pelo jogador deve reutilizar API/attachment existentes, validando autorização; escolha e efeitos continuam adiados.
 - Cultivos avaliam farmland com `moisture=7` antes da secagem diária 7→3→0; solo já seco sem planta pode voltar à terra. Migração de prepared_soil e pisoteio por queda autorizados na fatia 11; sem compensação retroativa. Chuva/clima continuam pendentes. Contrato em [Ferramentas](porting/ferramentas.md).
+- Rega ampliada por autorização de 16/11/2026: qualquer bloco pode iniciar a área existente, com alterações/custos somente em solos aceitos pelas regras; regadores são exceção à negação de uso da política vanilla. Geometria, permissões e limites em [Ferramentas](porting/ferramentas.md#ampliação-autorizada-da-rega--16112026).
 
 ## Validação e pendências obrigatórias
 

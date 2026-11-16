@@ -27,6 +27,9 @@ public final class HarvestFestival {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public HarvestFestival(IEventBus modBus) {
+        harvestfestival.crops.VanillaCropPolicy.register(modBus);
+        harvestfestival.crops.VanillaCropLootModifier.register(modBus);
+        harvestfestival.crops.VanillaCropEvents.register();
         harvestfestival.tools.ToolEffects.register(modBus);
         harvestfestival.tools.ToolEffortEvents.register();
         CreativeTabs.register(modBus);

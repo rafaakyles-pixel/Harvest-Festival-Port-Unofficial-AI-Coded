@@ -1,5 +1,25 @@
 # Cultivos — contrato vigente
 
+Aceite global da fatia 15 informado pelo responsável em 16/11/2026, incluindo 15-A, 15-V e ampliação da rega. Sucede as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais de testes ou execução de cliente ao agente. Cenário 8 e dedicado/multiplayer permanecem pendentes; indicadores do regador funcionais e memória de camas por dimensão adiada.
+
+## Levantamento original da 16-A — 16/11/2026
+
+Somente evidência por leitura, sem execução do original ou implementação da 16. Plano e decisões de recorte permanecem na conversa, aguardando aprovação independente de 16-F.
+
+| Espécie | Estação | Limites visuais / maturidade | Retorno / máximo total | Compra / venda / cor |
+| --- | --- | --- | --- | --- |
+| strawberry | Primavera | 3/6/8/9 | 7 / 12 | 800 / 50 / 0xFF7BEA |
+| tomato | Verão | 2/4/6/9/10 | 7 / 8 | 500 / 70 / 0xE60820 |
+| eggplant | Outono | 3/6/9/10 | 7 / 8 | 600 / 80 / 0xA25CC4 |
+
+- Fontes: `HFCrops`, `Crop`, `RegistryHelper.addHandlersToCrop`, prefixos de `HFModInfo` e diretórios `crops/handlers/{drop,growth,state,rules}`. Não existem classes convencionadas Strawberry/Tomato/Eggplant nesses diretórios; permanecem DropHandler/GrowthHandler padrões. `setStages(int...)` instala StateHandlerBasic, e as regras comerciais explícitas são YEAR3/YEAR2/YEAR2. Busca dirigida dos usos não encontrou sobrescrita posterior no núcleo; integrações/scripts continuam adiados.
+- `ItemHFSeeds`, `CropData`, `GrowthHandler`: estágio inicial 1, seca 1, colheitas zero; água obrigatória, um bloco, sem requiresSickle/double. Primeira maturidade em 8/9/9 viradas regadas; rebrota em 2/3/3. StateHandlerBasic usa limites inclusivos: retorno 7 seleciona imagem 3 do morango/berinjela e imagem 4 do tomate. Ciclo completo exige 30 viradas em cada espécie (8+11×2 ou 9+7×3), além do limite da estação se plantado no dia 1; teste administrativo não autoriza mudar calendário.
+- `TileCrop`, `WateringHandler`, `CropData.newDay`: umidade 7 ou chuva HF hidrata antes de avaliar morte/crescimento; fora da estação morre, mesmo regado. Seca >2 mata quando opção habilitada (integrado true/dedicado false); água zera seca, crescimento diário padrão true, farinha de osso padrão false. Chuva e substituição aleatória na morte continuam fora do contrato entregue, sem alegar paridade dessas partes.
+- `CropData.harvest`, `CropRegistry.harvestCrop`, `CropHelper`, `BlockHFCrops`: produto maduro único; incrementa contador antes de comparar máximo, inclusive lista vazia elegível. Interação sem agachar retorna a 7 até a última, que remove; quebrar remove mesmo com foice, sem preservar rebrota. Murcho/imaturo não entrega produto. Criativo também passa por removedByPlayer; callback da ferramenta não é executado no caminho criativo normal (patch oficial Forge 1.12.x de PlayerInteractionManager). Proteção contra falha de escrita/snapshot e política advance são adaptações já contratadas, não garantias do original.
+- Recursos conferidos: blockstates `crops_strawberry/tomato/eggplant.json` apontam a `tinted_crop`, com 4/5/4 texturas em `textures/blocks/crops`; produtos em `textures/items/crops`. `crops_seeds.json` usa neck/body e HFCrops.initClient colore ambas as camadas. Nomes en_us/pt_br: Strawberry/Morango, Tomato/Tomate, Eggplant/Berinjela. HFCrops.preInit registra cropStrawberry/cropTomato/cropEggplant e venda; tags modernas são adaptação do OreDictionary. Inspeção de arquivos não comprova aparência em jogo.
+- `HFShops` registra sementes de custo positivo no supermercado; `PurchasableCropSeeds` exige estação e regra. `SpecialRulesYear` consulta aniversário da cidade mais próxima e CalendarHelper.getYearsPassed: diferença não negativa entre pisos dos totais de dias divididos pela duração do ano, exigindo 2/1/1. Não equivale simplesmente ao ano global nem a contagem de aniversários completos. Aquisição por comandos/abas não implementa estes serviços.
+- `ItemCrop` também define alimentação original: morango 2/0,6, tomate 2/0,5, berinjela 1/0,5 (fome/modificador de saturação). Produtos HF atuais não implementam alimentação; inclusão ou adiamento explícito dessas propriedades integra a decisão de recorte, não deve ser presumido pela semelhança com pepino.
+
 Fatias 10–15-A; atualização em 15/11/2026. Pacote `harvestfestival.crops` aprovado em produção e testes. Dependências: etapas 5/6 de `DEPENDENCIES.md`, [Ferramentas](ferramentas.md), [Calendário](calendario.md) e [Remessas](remessas.md). Contrato anterior integral em [histórico da fatia 12](../archive/fatia-12-cultivos-anterior.md).
 
 ## Decisões e comportamento
@@ -158,7 +178,7 @@ A proposta anterior dizia que a busca não havia localizado associações de Dro
 
 Caminhos efetivos: TileCrop → CropData.newDay/grow → growthHandler; BlockHFCrops → CropHelper → CropRegistry.harvestCrop → CropData.harvest → dropHandler. Evidência estática; não houve execução do original. Árvores, nabo tutorial e nether wart exigem recortes próprios.
 
-## Política vanilla pendente (15-V)
+## Política vanilla — evidências do levantamento
 
 HFCrops preserva itens vanilla. Defaults: DISABLE_VANILLA_SEEDS/GROWTH/DROPS/WHEAT_SEEDS/MOISTURE=true; DISABLE_VANILLA_HOE=false. DisableHandler aplica controles distintos; RegistryHelper também desliga ticks aleatórios de plantas quando growth está ativo. Blacklist de sementes é compartilhada, populada quando plantio ou drops da grama é bloqueado; isso não funde as duas opções.
 
@@ -214,3 +234,59 @@ Testes novos cobrem três ciclos completos, estações/água/seca/resgate/dedica
 Limites: adaptadores não simulam cliques de cliente, `ServerPlayerGameMode`, servidor real, renderização ou loot de mundo; decodificação da tabela e execução do laço não equivalem a sorteio em jogo. runClient/aceite manual da 15-A, cenário 8 e dedicado/multiplayer permanecem pendentes. Indicadores do regador já confirmados funcionais; memória de camas por dimensão adiada. 15-V continua separada: sem conversão automática de sementes, bloqueio global, receitas ou mudança de alimentação vanilla.
 
 Validação automatizada da 15-A: build aprovado, 9 testes novos (8 de cultivos/loot/recursos e 1 de remessas), 160 totais efetivamente executados, zero falhas/erros/ignorados. `compileJava`/recursos reutilizados no build aprovado após compilação nesta implementação; `compileTestJava` e `test` executados. Não atribuir resultado em cache à execução dos testes.
+
+Aceite posterior: responsável informou «Testes aprovados» e solicitou seguir à 15-V. Encerra o aceite global da 15-A, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8, dedicado/multiplayer e memória de camas por dimensão permanecem pendentes; a política 15-V exige recorte aprovado antes da implementação.
+
+## Fatia 15-V — política dos quatro cultivos presentes
+
+Plano aprovado explicitamente após o aceite da 15-A. Escopo padrão: blocos vanilla wheat, carrots, beetroots e potatoes; itens wheat_seeds, beetroot_seeds, carrot e potato. Melão/abóbora aguardam a 18-A; nether wart e outras plantas não foram incluídos. Não conclui toda a política vanilla. Nenhum item/bloco/aba/textura, pacote ou mixin novo; não altera ferramentas, esforço, solo diário ou preços.
+
+### Regras e fontes
+
+Fonte original, leitura estática: `core/handlers/DisableHandler` (VanillaSeeds, VanillaGrowth, VanillaDrops, SeedDrops), `core/helpers/RegistryHelper.addSeeds/registerVanillaCrop`, `crops/HFCrops.configure/preInit/init` e `crops/handlers/SeedRecipeHandler`. A blacklist é compartilhada, mas a inscrição dos handlers depende de opções independentes. `CROPS` é preenchido quando growth ou drops estão ativos; isso não implica bloquear ambos. Não houve execução do original.
+
+`data/harvestfestival/crop_settings/vanilla.json` contém quatro booleanos estritos, todos true por padrão:
+
+| Campo | Efeito |
+| --- | --- |
+| disable_planting | Nega somente uso do item no bloco se estiver em harvestfestival:vanilla_crop_seeds; não remove/converte inventário nem cancela genericamente interação do bloco/uso no ar |
+| disable_growth | Nega avanço aleatório de blocos em harvestfestival:vanilla_crops e uso de itens sobre eles; desde a ampliação autorizada de 16/11/2026, regadores em harvestfestival:watering_cans são exceção para hidratar o solo. Farinha de osso continua bloqueada |
+| disable_drops | Esvazia loot de blocos em harvestfestival:vanilla_crops, inclusive produtos e sementes |
+| disable_grass_seeds | Em harvestfestival:vanilla_seed_drop_sources, remove apenas itens em vanilla_crop_seeds, preservando demais produtos/plantas de tesoura |
+
+Tags padrão são recursos separados, não uso genérico de c:seeds/c:crops. Fontes de grama: short_grass, fern, tall_grass, large_fern, sunflower, lilac, rose_bush e peony, correspondentes aos grupos TALLGRASS/DOUBLE_PLANT do original. Bloco HF e sementes HF ficam fora das tags restritivas. Tags podem ser substituídas/ampliadas por datapack; não há cache de membros nem listas de IDs em Java. Sem filtro de modo de jogo ou mão; restrições da interação aplicam-se nos dois lados com servidor autoritativo. Comer no ar, receitas, inventários e remessas não recebem bloqueio novo. Farinha de osso por dispensador/chamada externa não recebe bloqueio global; recorte preserva o caminho de interação comprovado.
+
+Recurso de maior precedência fornece o arquivo inteiro. Ausente/inválido: publica política com quatro false e aviso; não conserva versão anterior nem usa fallback do pack inferior. Restauração + recarga reaplica o recurso. Recarregar não destrói plantas existentes nem altera inventários. Política do servidor é limpa ao encerrar; tags seguem recarga/sincronização vanilla.
+
+### Adaptações aprovadas e sincronização
+
+`CropGrowEvent.Pre` impede avanço, sem modificar o registro vanilla ou prometer a mesma sequência de consumo de aleatoriedade de setTickRandomly(false). `RightClickBlock.setUseItem(FALSE)` nega somente o caminho de uso do item, como o DENY original. [Patch Forge 1.12.x de PlayerInteractionManager](https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/1.12.x/patches/minecraft/net/minecraft/server/management/PlayerInteractionManager.java.patch) conferido no levantamento.
+
+Loot passa por `VanillaCropLootModifier` com guarda de BLOCK_STATE/tag. `BlockDropsEvent` sozinho não cobre `BlockBehaviour.onExplosionHit` no alvo; por isso o modificador cobre loot de quebra, perda de suporte, explosões e consultas que forneçam o estado correspondente. **Efeito sobre /loot aprovado explicitamente no plano**; não atribuir equivalência de comando ao original. Contextos sem estado e blocos fora das tags são preservados. Não altera experiência, cancela explosões ou elimina entidades de item já existentes. O [patch Forge 1.12.x de Block](https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/1.12.x/patches/minecraft/net/minecraft/block/Block.java.patch) confirma filtragem anterior à emissão; ordem de modificadores externos não foi validada.
+
+Attachment `harvestfestival:vanilla_crop_policy`: quatro booleanos, somente sincronização ao titular, sem serialização em save e sem copyOnDeath. `OnDatapackSyncEvent` atualiza os jogadores relevantes na entrada/recarga; `PlayerRespawnEvent` e `PlayerChangedDimensionEvent` republicam regras vigentes na entidade atual. No servidor, interação lê a regra autoritativa; no cliente, a cópia transitória do jogador. Não há cache estático cliente atravessando mundos, payload manual ou gravação de configuração no jogador. Estado inicial sem sincronização é aberto; servidor continua decidindo. Esse espelho técnico não comprova nem encerra cenário 8 (ouro/aniversário).
+
+### Receitas
+
+| Recurso em recipe/ | Ingrediente por tag | Resultado vanilla | Forma |
+| --- | --- | --- | --- |
+| wheat_seeds_from_hf.json | harvestfestival:seeds/wheat | 9 wheat_seeds | Sem formato |
+| beetroot_seeds_from_hf.json | harvestfestival:seeds/beetroot | 9 beetroot_seeds | Sem formato |
+| wheat_seeds_from_crop.json | c:crops/wheat | 1 wheat_seeds | 1×1 |
+| beetroot_seeds_from_crop.json | c:crops/beetroot, duas posições | 2 beetroot_seeds | Sem formato |
+
+Receitas independem das opções de bloqueio, como no original; não alteram outras receitas vanilla. Não há conversão vanilla→HF, conversão automática, saco de cenoura/batata→produto, receita de melão/abóbora ou obtenção por lojas. Produtos e sementes existentes mantêm destinos criativos aprovados.
+
+### APIs e verificação
+
+Fontes locais exatas Minecraft/NeoForge 26.2.0.93: `RightClickBlock`/`TriState`, `CropGrowEvent.Pre.Result.DO_NOT_GROW`, chamadas em CropBlock/BeetrootBlock; `LootModifier.codecStart` com condições/prioridade, `IGlobalLootModifier`/registro de MapCodec, `LootContext`/BLOCK_STATE/EXPLOSION_RADIUS, `LootModifierManager`; `SimplePreparableReloadListener`, `ResourceManager.getResource`; attachment sync sem serialize, `OnDatapackSyncEvent.getRelevantPlayers`, eventos de respawn/dimensão; `Recipe.CODEC`, `ShapedRecipe`, `ShapelessRecipe`, `CraftingInput`, `ItemStackTemplate`.
+
+**Particularidade da versão:** `LootModifierManager` carrega diretamente instâncias em loot_modifiers/ e ordena por prioridade decrescente. Não usa índice global_loot_modifiers.json de versões anteriores, apesar de comentário antigo na interface. Instância empacotada: harvestfestival:vanilla_crop_policy, priority=1000 em JSON. Teste usa o carregador real, não apenas o codec isolado.
+
+Testes automatizados: 16 combinações das opções, escopo/exclusões, não consumo no predicado, preservação de produtos de tesoura, evento de crescimento, precedência/invalidez/ausência/restauração das regras, substituição real de tags, codec de sincronização e attachment não persistido, atualização de titulares novos/anteriores; carregador real do modificador com contextos de bloco/explosão/sem estado/HF, alteração das regras após carga; quatro receitas decodificadas com matches/assemble, ingredientes errados/adicionais, quantidades e duas posições de beterraba.
+
+Limites: contextos de loot são construídos em teste com o construtor vanilla via reflexão, exclusivamente em src/test, sem ServerLevel; listas de produtos são fornecidas ao modificador. Isso não simula destruição, explosão, água, dispensador ou servidor real. Titulares de attachment não são jogadores em sessão; codec/refresh não comprovam tráfego, morte ou reconexão. Cliques nas duas mãos/modos, alimentação e ausência de previsão visual incorreta precisam do roteiro manual. runClient não executado pelo agente. Aceite manual da 15-V, cenário 8 e dedicado/multiplayer pendentes; indicadores do regador já confirmados funcionais e memória de camas por dimensão adiada.
+
+Validação automatizada da 15-V: 11 testes novos (7 de política/recarga/tags/attachment, 2 de modificador e 2 de receitas), 171 totais efetivamente executados, zero falhas/erros/ignorados. Build aprovado; `test` executou, enquanto produção/recursos estavam UP-TO-DATE após compilação nesta implementação. Regressões de cultivos HF, ferramentas, calendário e remessas passaram. Nenhum resultado de cliente ou servidor dedicado atribuído ao build.
+
+Em 16/11/2026 o responsável confirmou que, após corrigir a localização do vanilla.json para dentro do datapack, plantio/crescimento/drops/sementes da grama funcionaram. Não atribui execução individual adicional ao agente. Solicitou ampliação da rega: qualquer bloco pode iniciar a área existente e regadores ficam isentos somente da negação de interação por disable_growth. A implementação inicial negava qualquer item, fiel ao handler original; a exceção agora é divergência autorizada para compatibilidade. Detalhes e limites em [Ferramentas](ferramentas.md#ampliação-autorizada-da-rega--16112026). Cenário 8 e dedicado/multiplayer preservados.

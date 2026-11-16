@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:crops/beetroot",
+    "#c:crops/beetroot"
+  ],
+  "result": {
+    "id": "minecraft:beetroot_seeds",
+    "count": 2
+  }
+}

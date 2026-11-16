@@ -26,6 +26,12 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crop_settings/vanilla.json",
+        "harvestfestival/tags/item/vanilla_crop_seeds.json", "harvestfestival/tags/block/vanilla_crops.json",
+        "harvestfestival/tags/block/vanilla_seed_drop_sources.json",
+        "harvestfestival/loot_modifiers/vanilla_crop_policy.json",
+        "harvestfestival/recipe/wheat_seeds_from_hf.json", "harvestfestival/recipe/beetroot_seeds_from_hf.json",
+        "harvestfestival/recipe/wheat_seeds_from_crop.json", "harvestfestival/recipe/beetroot_seeds_from_crop.json",
         "harvestfestival/crops/carrot.json", "harvestfestival/loot_table/crops/carrot.json",
         "harvestfestival/tags/item/seeds/carrot.json", "c/tags/item/crops/carrot.json",
         "harvestfestival/shipping_prices/tags/c/crops/carrot.json",

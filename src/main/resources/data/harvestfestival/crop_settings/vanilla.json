@@ -1,0 +1,6 @@
+{
+  "disable_planting": true,
+  "disable_growth": true,
+  "disable_drops": true,
+  "disable_grass_seeds": true
+}

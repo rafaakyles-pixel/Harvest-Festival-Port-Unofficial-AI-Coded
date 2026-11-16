@@ -34,6 +34,9 @@ public final class CreativeTabs {
         output.accept(CropContent.CARROT_SEEDS.get());
         output.accept(CropContent.BEETROOT_SEEDS.get());
         output.accept(CropContent.POTATO_SEEDS.get());
+        output.accept(CropContent.STRAWBERRY_SEEDS.get());
+        output.accept(CropContent.TOMATO_SEEDS.get());
+        output.accept(CropContent.EGGPLANT_SEEDS.get());
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
@@ -43,10 +46,15 @@ public final class CreativeTabs {
         output.accept(ToolContent.WATERING_CAN_COPPER.get());
         output.accept(ToolContent.WATERING_CAN_SILVER.get());
         output.accept(ToolContent.SICKLE.get());
+        output.accept(ToolContent.SICKLE_COPPER.get());
+        output.accept(ToolContent.SICKLE_SILVER.get());
         output.accept(ShippingContent.SHIPPING_BOX.get());
         output.accept(CropContent.TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.CUCUMBER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.ONION.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.SPINACH.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.STRAWBERRY.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.TOMATO.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.EGGPLANT.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
     }
 }

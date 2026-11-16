@@ -23,17 +23,18 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Ouro, attachments, sincronização, aniversários do jogador/NPCs | [Jogador](porting/jogador.md) |
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
-| Enxada/regador até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
+| Enxada/regador/foice até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
 | Bloco genérico de cultivo, ciclo HF, loot da batata, política vanilla delimitada, receitas de sementes e sincronização transitória das regras | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
 Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
 
-Aceite global da fatia 15, incluindo ampliação da rega, registrado em [STATUS](STATUS.md) em 16/11/2026. Levantamentos independentes da 16 nos contratos de [Cultivos](porting/cultivos.md#levantamento-original-da-16-a--16112026) e [Ferramentas](porting/ferramentas.md#levantamento-original-da-16-f--16112026); implementação depende de aprovação dos planos na conversa.
+Aceites globais das fatias 15 e 16 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
 
 ### Contratos transversais e decisões obrigatórias
 
+- Estrutura de alimentação de todos os alimentos será implementada conjuntamente em uma fatia posterior, por decisão explícita do responsável ao aprovar a fatia 16. Produtos HF desta expansão permanecem sem alimentação; isso não representa paridade alimentar com o original.
 - Todo item novo adicionado em uma fatia deve incluir textura do original, conforme condição explícita do responsável em 13/11/2026. Registrar proveniência/licença e distinguir inspeção de arquivo de validação em jogo. Não alterar AGENTS.md sem autorização específica.
 - Plantio de sementes exige solo arado válido no bloco clicado antes de tentar o 3×3, por solicitação explícita de 14/11/2026. É divergência autorizada do original, que valida cada destino sem essa condição central; contrato e evidência em [Cultivos](porting/cultivos.md).
 - A Fase 3 deve completar o gameplay de cada sistema em fatias verificáveis; mínimos aprovados não equivalem a sistema completo. Pendências agrícolas, incluindo relação com ferramentas vanilla e solo compartilhado, pertencem à Fase 3, não ao polimento. Diretriz reafirmada em 12/11/2026; detalhes em [Ferramentas](porting/ferramentas.md).

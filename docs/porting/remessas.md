@@ -1,5 +1,7 @@
 # Remessas e preços — contratos vigentes
 
+Responsável confirmou a fatia 16 finalizada ao solicitar a 17. Aceite global inclui seu recorte econômico, sem atribuir resultados individuais de testes nem ampliar cobertura de dedicado/multiplayer ou cenário 8.
+
 Consultar para vendas, fila, preços e pagamentos.
 
 ### Comportamento desta fatia
@@ -31,6 +33,8 @@ No original, ShippingRegistry consulta SellValue antes do registro. A precedênc
 APIs conferidas nos artefatos locais de 26.2.0.93 e exercitadas pelo build: AddServerReloadListenersEvent, SortedReloadListenerEvent.addListener, SimplePreparableReloadListener.prepare/apply, ResourceManager.listResources, BuiltInRegistries.ITEM.getOptional e Holder.is(TagKey). A busca opcional permite rejeitar um identificador desconhecido antes da inclusão na tabela.
 
 ## Atualizações e validação
+
+16-A: produtos `strawberry`, `tomato`, `eggplant` integram `c:crops/<espécie>` e `c:crops`, com preços 50/70/80 e prioridade zero. Sementes sem preço, recusadas sem consumo. Um teste novo percorre os máximos 12/8/8, deposita produtos, persiste fila em NBT comprimido e comprova pagamento único de 600/560/640 após descartar preços ativos. Produto fornecido pelo adaptador de colheita; não comprova mundo completo. Integra 19 novos/192 totais da fatia 16, sem falhas/erros/ignorados; build final aprovado reutilizando testes executados na implementação. Algoritmo econômico e política offline preservados; aquisição comercial e alimentação permanecem adiadas.
 
 Fatia 12: produto `harvestfestival:cucumber` integra `c:crops/cucumber` e `c:crops`, com preço 40/prioridade 0; semente integra `c:seeds`, sem preço. Sem mudança no código econômico. Um teste novo percorre oito colheitas, depósito de oito produtos a 40, descarte da tabela de preços após depósito, persistência da fila em NBT comprimido e pagamento único de 320. Integra os 15 novos/102 totais executados e aprovados da fatia 12. Produto primário fornecido pelo adaptador de teste; não comprova sorteio de loot em mundo, cliente, dedicado ou multiplayer. Aceite manual pendente; detalhes em [Cultivos](cultivos.md).
 

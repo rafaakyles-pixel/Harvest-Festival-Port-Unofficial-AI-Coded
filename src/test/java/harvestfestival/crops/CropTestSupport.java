@@ -26,6 +26,15 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/strawberry.json", "harvestfestival/loot_table/crops/strawberry.json",
+        "harvestfestival/tags/item/seeds/strawberry.json", "c/tags/item/crops/strawberry.json",
+        "harvestfestival/shipping_prices/tags/c/crops/strawberry.json",
+        "harvestfestival/crops/tomato.json", "harvestfestival/loot_table/crops/tomato.json",
+        "harvestfestival/tags/item/seeds/tomato.json", "c/tags/item/crops/tomato.json",
+        "harvestfestival/shipping_prices/tags/c/crops/tomato.json",
+        "harvestfestival/crops/eggplant.json", "harvestfestival/loot_table/crops/eggplant.json",
+        "harvestfestival/tags/item/seeds/eggplant.json", "c/tags/item/crops/eggplant.json",
+        "harvestfestival/shipping_prices/tags/c/crops/eggplant.json",
         "harvestfestival/crop_settings/vanilla.json",
         "harvestfestival/tags/item/vanilla_crop_seeds.json", "harvestfestival/tags/block/vanilla_crops.json",
         "harvestfestival/tags/block/vanilla_seed_drop_sources.json",
@@ -93,6 +102,10 @@ public final class CropTestSupport implements AutoCloseable {
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
+        for (var item : List.of(CropContent.STRAWBERRY.get(), CropContent.STRAWBERRY_SEEDS.get(),
+                CropContent.TOMATO.get(), CropContent.TOMATO_SEEDS.get(), CropContent.EGGPLANT.get(), CropContent.EGGPLANT_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
         for (var item : List.of(CropContent.CARROT_SEEDS.get(), CropContent.BEETROOT_SEEDS.get(), CropContent.POTATO_SEEDS.get(),
                 net.minecraft.world.item.Items.CARROT, net.minecraft.world.item.Items.BEETROOT, net.minecraft.world.item.Items.BEETROOT_SEEDS,
                 net.minecraft.world.item.Items.POTATO, net.minecraft.world.item.Items.POISONOUS_POTATO)) {
@@ -107,6 +120,10 @@ public final class CropTestSupport implements AutoCloseable {
         }
         harvestfestival.tools.ToolContent.SICKLE.get().builtInRegistryHolder().bindComponents(DataComponentMap.builder()
                 .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, 128).set(DataComponents.DAMAGE, 0).build());
+        for (var sickle : List.of(harvestfestival.tools.ToolContent.SICKLE_COPPER.get(),harvestfestival.tools.ToolContent.SICKLE_SILVER.get())) {
+            sickle.builtInRegistryHolder().bindComponents(DataComponentMap.builder()
+                    .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, sickle.tier().durability()).set(DataComponents.DAMAGE, 0).build());
+        }
         for (var item : List.of(harvestfestival.tools.ToolContent.HOE.get(), harvestfestival.tools.ToolContent.HOE_COPPER.get(),
                 harvestfestival.tools.ToolContent.HOE_SILVER.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 1)

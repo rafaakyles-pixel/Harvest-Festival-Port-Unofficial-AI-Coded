@@ -12,7 +12,8 @@ import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 public final class SickleRules extends SimplePreparableReloadListener<SickleRules.Rule> {
     public record Rule(boolean consumeHunger, int actionsPerHalfHaunch) {
         public Rule { if (actionsPerHalfHaunch <= 0) throw new IllegalArgumentException("actions_per_half_haunch must be positive"); }
-        public float exhaustion() { return 4F / actionsPerHalfHaunch * 3F; }
+        public float exhaustion() { return exhaustion(ToolTier.BASIC); }
+        public float exhaustion(ToolTier tier) { return 4F / actionsPerHalfHaunch * tier.effort(); }
     }
     public static final SickleRules INSTANCE = new SickleRules();
     public static final Identifier RESOURCE = Identifier.parse("harvestfestival:tool_settings/sickle.json");

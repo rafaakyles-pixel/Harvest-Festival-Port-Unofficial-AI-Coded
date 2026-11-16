@@ -254,7 +254,13 @@ Raiz Java: `HarvestFestival.java`, `InitMixins.java`. Interfaces externas em `sr
 
 ## Sequência agrícola pendente
 
-Em 16/11/2026 o responsável aceitou 15-F, 15-A, 15-V no recorte delimitado e a ampliação da rega. Substitui as pendências de aceite das entregas na tabela abaixo, sem ampliar cobertura individual de testes. 16-A e 16-F estão em levantamento, com aprovação independente e sem implementação autorizada. Cenário 8 e dedicado/multiplayer permanecem pendentes; memória de camas por dimensão adiada.
+Responsável confirmou a fatia 16 finalizada e solicitou avanço ao levantamento da 17. Aceite global de 16-A/16-F1/16-F2 sucede pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais. Recortes da 17 apresentados somente na conversa antes da implementação.
+
+Melhoria futura solicitada, sem prioridade e fora da 17: área da foice também afetar mato, flores e folhas vanilla. O original já admite IPlantable/ferramenta eficaz, mas isso não comprova toda a lista desejada; conferir alvos por tags, plantas duplas, loot normal versus tesoura, permissões, custos e duplicação em tarefa própria. Divergências intencionais serão delimitadas nessa tarefa; não ampliar automaticamente política vanilla ou integração com outros mods.
+
+16-A e repartições 16-F1/16-F2 aprovadas explicitamente pelo responsável após o levantamento. Estrutura de alimentação de todos os alimentos adiada para uma única fatia posterior, incluindo os produtos HF anteriores e novos; não antecipar alimentação parcial na 16.
+
+Em 16/11/2026 o responsável aceitou 15-F, 15-A, 15-V no recorte delimitado e a ampliação da rega. Substitui as pendências de aceite das entregas na tabela abaixo, sem ampliar cobertura individual de testes. 16-A, 16-F1 e 16-F2 foram posteriormente aprovadas e implementadas; validação manual independente pendente. Cenário 8 e dedicado/multiplayer permanecem pendentes; memória de camas por dimensão adiada.
 
 | Fatia | Recorte | Aceite próprio |
 | --- | --- | --- |
@@ -262,14 +268,14 @@ Em 16/11/2026 o responsável aceitou 15-F, 15-A, 15-V no recorte delimitado e a 
 | 15-F | Implementada: enxada/regador até prata, anterior aos cultivos | Carga persistente da enxada até 1×3; regador sem carga até 3×3; custos/nível/dano/água por alteração. 12 novos/151 testes executados; aceite manual pendente. Recorte de alvos aprovado em Ferramentas |
 | 15-A | Implementada e aceita: cenoura e beterraba comuns; batata com drop especial | Produtos/visuais vanilla com sementes HF; uma/duas entradas, substituição individual por venenosa, sorteio em cada avaliação do laço e preço 1. Build aprovado, 9 novos/160 testes executados; responsável informou testes aprovados e solicitou avanço ao levantamento da 15-V |
 | 15-V | Plano aprovado e implementado para trigo/cenoura/beterraba/batata vanilla; aceite manual pendente | Opções independentes de plantio, crescimento/uso no bloco, drops e sementes da grama; quatro receitas HF/produto→sementes vanilla, tags e recarga com política transitória sincronizada. Melão/abóbora aguardam 18-A; umidade/enxadas opcionais exigem recorte próprio. Não conclui toda a política vanilla |
-| 16-A | Morango, tomate e berinjela | Rebrota comum com limites 12/8/8, dados individuais, persistência e sazonalidade; desbloqueios comerciais continuam dependentes de lojas/cidade |
-| 16-F | Foice cobre/prata | Carga e áreas próprias 3×1/3×2, ordem dos callbacks de quebra, custos e ausência de duplicação; exige levantamento fechado e aprovação |
+| 16-A | Implementada: morango, tomate e berinjela | Rebrota comum 12/8/8, dados/recursos, persistência, sazonalidade e remessas. Sete testes novos; aceite manual pendente. Comércio e alimentação adiados |
+| 16-F1/F2 | Implementadas: foice cobre e foice prata | Carga persistente e áreas próprias 3×1/3×2, callbacks/permissões/custos por candidato. Oito/quatro testes novos; aceites manuais independentes pendentes. Suíte conjunta 192, build final aprovado com testes reutilizados |
 | 17-A/B | Repolho; depois abacaxi, milho, batata-doce e pimentão verde | Repolho de colheita única; demais rebrota limitada 3/7/14/9. Entregas separadas se necessário, sem misturar mecanismos novos |
 | 17-F | Enxada/regador ouro/mystril; foice ouro/mystril em recorte próprio se necessário | Áreas/carga/custos/durabilidade por ferramenta, com testes próprios; sem herdar geometria do regador |
 | 18-A | Melancia e abóbora | Transformação na própria posição em bloco ao amadurecer, sem regrow; aparência de haste e orientação aleatória da abóbora; conferir drops do bloco convertido e ausência de segunda emissão HF |
 | 18-B | Grama/forragem | Planta dupla desde estágio 6, sem água, corte mínimo 6 e quantidade por estágio; comprovar ordem de remoção/markSafe/replantio e resultado efetivo do limite antes de aprovar preservação |
 
-15-F, 15-A e o recorte delimitado da 15-V tiveram implementação autorizada nesta sequência após a fatia 14. Os demais recortes exigem aprovação própria; não há promessa de concluir o catálogo em cinco implementações. Trigo da fatia 13 não concluiu 15-V; a entrega atual também não encerra suas extensões pendentes. Tiers amaldiçoados/abençoados/míticos, reparos e obtenção por serviços ficam em recortes posteriores com dependências próprias; árvores/aspersores mantêm mecanismos separados.
+15-F, 15-A e o recorte delimitado da 15-V tiveram implementação autorizada nesta sequência após a fatia 14. A 16 também foi aprovada; os recortes posteriores exigem aprovação própria; não há promessa de concluir o catálogo em cinco implementações. Trigo da fatia 13 não concluiu 15-V; a entrega atual também não encerra suas extensões pendentes. Tiers amaldiçoados/abençoados/míticos, reparos e obtenção por serviços ficam em recortes posteriores com dependências próprias; árvores/aspersores mantêm mecanismos separados.
 
 
 Fatia 14 implementada em 15/11/2026 conforme aprovação: efeitos próprios, desmaio padrão sem morte, recuperação e esforço nas ações existentes de foice/enxada/regador; cebola e espinafre com recursos originais/remessas/abas. Contratos em [Ferramentas](porting/ferramentas.md) e [Cultivos](porting/cultivos.md). Memória de camas por dimensão mantida pendente pelo responsável; accessor mínimo de sono autorizado. Não conclui maldição, ferramentas completas, política vanilla, cenário 8, dedicado/multiplayer ; aceite global do responsável em 15/11/2026. Planos transitórios removidos a pedido; roteiro manual somente na resposta final.

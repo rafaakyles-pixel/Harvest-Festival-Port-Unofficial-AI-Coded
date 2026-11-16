@@ -22,6 +22,20 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ---
 ## Acompanhamento de Tarefas
 
+### Fatia 17 — levantamento e recortes para aprovação
+- Responsável confirmou «Tudo certo», considerou a 16 finalizada e solicitou avanço à 17. Aceite global de 16-A/16-F1/16-F2, sem atribuir resultados individuais de testes. Os registros de pendência de aceite da 16 abaixo ficam sucedidos por esta confirmação.
+- Levantamento de repolho, abacaxi, milho, batata-doce, pimentão verde e tiers ouro/mystril nos contratos de Cultivos/Ferramentas; proposta na conversa, sem arquivo de plano e sem implementação da 17 nesta etapa.
+- Solicitada para o futuro, sem prioridade: ampliar área da foice a mato, flores e folhas vanilla, mesmo quando exigir divergência do original. Não integra a 17; alvos, drops, plantas duplas, custos e permissões precisarão de recorte próprio.
+- Alimentação conjunta permanece adiada. Cenário 8 e dedicado/multiplayer explicitamente pendentes; indicadores do regador funcionais e memória de camas por dimensão adiada.
+- Validação desta atualização documental: build aprovado, `test UP-TO-DATE`, sem testes novos ou reexecução; suíte existente de 192 testes. runClient não executado. Somente sete documentos atualizados, sem alteração de código da 16 ou implementação da 17.
+
+### Fatia 16 — aceita globalmente pelo responsável
+- Responsável aprovou 16-A e as repartições 16-F1 (cobre) e 16-F2 (prata), autorizando seguir com a implementação após o registro documental. Aprovação inclui domínio agrícola HF, permissões/evento por vizinho, custo da foice antes da tentativa autorizada de remoção e execução de área sem recursão/duplicação. Não requer nova autorização entre as repartições.
+- Estrutura de alimentação de todos os alimentos adiada explicitamente para uma única fatia posterior; a 16 não implementa alimentação parcial nos três novos produtos. Cenário 8 e dedicado/multiplayer permanecem pendentes; memória de camas por dimensão adiada.
+- 16-A entrega morango/tomate/berinjela com limites 12/8/8, recursos originais, sementes/produtos/tags/preços/remessas e destinos aprovados. 16-F1/F2 entregam foices cobre/prata com carga persistente e áreas próprias 3×1/3×2. Contratos em [Cultivos](porting/cultivos.md), [Ferramentas](porting/ferramentas.md), [Remessas](porting/remessas.md) e [Abas](porting/abas-criativas.md).
+- Validação: 19 testes novos, 192 totais nos relatórios, zero falhas/erros/ignorados; executados durante implementação. Build final aprovado com `test UP-TO-DATE`, sem nova execução nessa confirmação. runClient não executado pelo agente; testes de adaptadores não comprovam cliques, renderização, cancelamentos externos ou mundo completo. Aceites manuais das repartições continuam independentes.
+- Rega autorizada na 15, carga/durabilidade das enxadas, política vanilla dos quatro cultivos e ausência de conversão automática preservadas. Indicadores do regador confirmados funcionais não encerram cenário 8; não houve alteração de AGENTS.md ou comando Git mutador.
+
 ### Aceite da fatia 15 e levantamento da 16 — 16/11/2026
 - Responsável aceitou globalmente 15-F (enxada/regador até prata), 15-A (incluindo DropHandlerPotato), 15-V no recorte dos quatro cultivos e receitas aprovadas, e a ampliação da rega. Este aceite sucede as pendências de aceite dessas entregas abaixo; não atribui resultados individuais de testes nem execução de cliente ao agente.
 - Levantamento de 16-A e 16-F solicitado, com planos e aprovações independentes na conversa. Nenhuma implementação autorizada nesta etapa e nenhum arquivo de plano criado. Evidências estáticas nos contratos de Cultivos e Ferramentas.

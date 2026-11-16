@@ -28,6 +28,10 @@ public final class ToolContent {
                     .networkSynchronized(ByteBufCodecs.fromCodec(FarmToolState.CODEC)).build());
     public static final DeferredItem<SickleItem> SICKLE = ITEMS.registerItem("sickle", SickleItem::new,
             props -> props.durability(SickleItem.MAX_DAMAGE));
+    public static final DeferredItem<SickleItem> SICKLE_COPPER = ITEMS.registerItem("sickle_copper",
+            props -> new SickleItem(props, ToolTier.COPPER), props -> props.durability(ToolTier.COPPER.durability()));
+    public static final DeferredItem<SickleItem> SICKLE_SILVER = ITEMS.registerItem("sickle_silver",
+            props -> new SickleItem(props, ToolTier.SILVER), props -> props.durability(ToolTier.SILVER.durability()));
     public static final DeferredBlock<PreparedSoilBlock> PREPARED_SOIL = BLOCKS.registerBlock(
             "prepared_soil", PreparedSoilBlock::new, props -> props.strength(0.6F).sound(SoundType.GRAVEL));
     public static final DeferredItem<HoeItem> HOE = hoe("hoe", ToolTier.BASIC);
@@ -49,6 +53,7 @@ public final class ToolContent {
     public static void register(IEventBus bus) {
         bus.addListener(WateringCanItem::registerTooltips);
         bus.addListener(HoeItem::registerTooltips);
+        bus.addListener(SickleItem::registerTooltips);
         COMPONENTS.register(bus);
         BLOCKS.register(bus);
         ITEMS.register(bus);

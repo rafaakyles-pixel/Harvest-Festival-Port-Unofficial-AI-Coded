@@ -1,0 +1,16 @@
+{
+  "seed_tag": "harvestfestival:seeds/tomato",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": ["summer"],
+  "stages": [2, 4, 6, 9, 10],
+  "appearances": [41, 42, 43, 44, 45],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/tomato",
+  "regrow_stage": 7,
+  "max_harvests": 8,
+  "empty_harvest_policy": "advance"
+}

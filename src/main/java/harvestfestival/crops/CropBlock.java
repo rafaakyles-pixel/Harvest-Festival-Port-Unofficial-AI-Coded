@@ -39,7 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class CropBlock extends BaseEntityBlock {
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CropBlock::new);
     // Visual cache only. Logical stage lives in the block entity and has no blockstate bound.
-    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 36);
+    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 49);
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
     public CropBlock(Properties properties) {
         super(properties);

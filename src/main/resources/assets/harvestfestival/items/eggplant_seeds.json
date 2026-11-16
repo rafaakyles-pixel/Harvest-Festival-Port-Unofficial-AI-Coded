@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/eggplant_seeds",
+    "tints": [
+      {"type": "minecraft:constant", "value": 10640580},
+      {"type": "minecraft:constant", "value": 10640580}
+    ]
+  }
+}

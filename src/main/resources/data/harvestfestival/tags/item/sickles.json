@@ -1,1 +1,8 @@
-{"replace":false,"values":["harvestfestival:sickle"]}
+{
+  "replace": false,
+  "values": [
+    "harvestfestival:sickle",
+    "harvestfestival:sickle_copper",
+    "harvestfestival:sickle_silver"
+  ]
+}

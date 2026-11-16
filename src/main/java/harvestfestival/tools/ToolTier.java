@@ -19,9 +19,12 @@ public enum ToolTier {
     public int hoeFront() { return definition.hoeFront; }
     public int waterFront() { return definition.waterFront; }
     public int waterSides() { return definition.waterSides; }
+    public int sickleFront() { return definition.sickleFront; }
+    public int sickleSides() { return definition.sickleSides; }
     public static ToolTier charged(int charge) { return values()[charge]; }
 
-    private record Definition(int durability, float effort, double levelIncrease, int hoeFront, int waterFront, int waterSides) {}
+    private record Definition(int durability, float effort, double levelIncrease, int hoeFront, int waterFront, int waterSides,
+            int sickleFront, int sickleSides) {}
     private static final class Definitions {
         private static final JsonObject DATA = load();
         private static JsonObject load() {
@@ -36,10 +39,12 @@ public enum ToolTier {
             var json = DATA.getAsJsonObject(name);
             var result = new Definition(json.get("durability").getAsInt(), json.get("effort").getAsFloat(),
                     json.get("level_increase").getAsDouble(), json.get("hoe_front").getAsInt(),
-                    json.get("water_front").getAsInt(), json.get("water_sides").getAsInt());
+                    json.get("water_front").getAsInt(), json.get("water_sides").getAsInt(),
+                    json.get("sickle_front").getAsInt(), json.get("sickle_sides").getAsInt());
             if (result.durability <= 0 || !Float.isFinite(result.effort) || result.effort <= 0
                     || !Double.isFinite(result.levelIncrease) || result.levelIncrease <= 0
-                    || result.hoeFront < 0 || result.waterFront < 0 || result.waterSides < 0)
+                    || result.hoeFront < 0 || result.waterFront < 0 || result.waterSides < 0
+                    || result.sickleFront < 0 || result.sickleSides < 0)
                 throw new IllegalStateException("Invalid bundled tier " + name);
             return result;
         }

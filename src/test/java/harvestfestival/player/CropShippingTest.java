@@ -24,6 +24,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void commonRegrowthProductsPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var products = List.of(CropContent.STRAWBERRY.get(), CropContent.TOMATO.get(), CropContent.EGGPLANT.get());
+            var seeds = List.of(CropContent.STRAWBERRY_SEEDS.get(), CropContent.TOMATO_SEEDS.get(), CropContent.EGGPLANT_SEEDS.get());
+            int[] counts = {12,8,8}; long[] totals = {600,560,640};
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            for (int i=0;i<products.size();i++) {
+                var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+                var holder = new SavedHolder(); var stack = new ItemStack(products.get(i),counts[i]);
+                for (int j=0;j<counts[i];j++) assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                assertTrue(stack.isEmpty()); assertEquals(totals[i],holder.getData(PlayerShipping.QUEUE).total());
+                var seed = new ItemStack(seeds.get(i)); assertFalse(PlayerShipping.depositInto(holder,seed,prices)); assertEquals(1,seed.getCount());
+                prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+                var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry); holder.serializeAttachments(output);
+                var file = directory.resolve("regrowth-"+i+".nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+                var copy = new SavedHolder(); copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+                PlayerShipping.pay(copy); PlayerShipping.pay(copy); assertEquals(totals[i],copy.getData(PlayerGold.GOLD));
+                assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+            }
+        }
+    }
     @Test void vanillaProductsUseSeparateTagPricesAndPersistPaymentWithoutSeedConversion() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager, null), fixture.manager, null);

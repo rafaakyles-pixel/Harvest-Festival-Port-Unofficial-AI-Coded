@@ -56,5 +56,17 @@
   "tooltip.harvestfestival.watering_can.area": "Waters a %s×%s area",
   "item.harvestfestival.carrot_seeds": "HF Carrot Seeds",
   "item.harvestfestival.beetroot_seeds": "HF Beetroot Seeds",
-  "item.harvestfestival.potato_seeds": "HF Potato Seeds"
+  "item.harvestfestival.potato_seeds": "HF Potato Seeds",
+  "item.harvestfestival.strawberry": "Strawberry",
+  "item.harvestfestival.strawberry_seeds": "Strawberry Seeds",
+  "item.harvestfestival.tomato": "Tomato",
+  "item.harvestfestival.tomato_seeds": "Tomato Seeds",
+  "item.harvestfestival.eggplant": "Eggplant",
+  "item.harvestfestival.eggplant_seeds": "Eggplant Seeds",
+  "item.harvestfestival.sickle_copper": "Copper Sickle",
+  "tooltip.harvestfestival.sickle.area": "Charged area: %s×%s",
+  "tooltip.harvestfestival.sickle.charge": "Hold use and release to charge; break a crop to cut.",
+  "tooltip.harvestfestival.sickle.discharge": "Sneak and use to discharge.",
+  "tooltip.harvestfestival.sickle.discharged": "Sickle discharged",
+  "item.harvestfestival.sickle_silver": "Silver Sickle"
 }

@@ -1,0 +1,16 @@
+{
+  "seed_tag": "harvestfestival:seeds/strawberry",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": ["spring"],
+  "stages": [3, 6, 8, 9],
+  "appearances": [37, 38, 39, 40],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/strawberry",
+  "regrow_stage": 7,
+  "max_harvests": 12,
+  "empty_harvest_policy": "advance"
+}

@@ -39,6 +39,13 @@ public final class CropContent {
     public static final DeferredItem<CropSeedItem> BEETROOT_SEEDS = ITEMS.registerItem("beetroot_seeds", CropSeedItem::new);
     public static final DeferredItem<CropSeedItem> POTATO_SEEDS = ITEMS.registerItem("potato_seeds", CropSeedItem::new);
 
+    public static final DeferredItem<CropSeedItem> STRAWBERRY_SEEDS = ITEMS.registerItem("strawberry_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> STRAWBERRY = ITEMS.registerSimpleItem("strawberry");
+    public static final DeferredItem<CropSeedItem> TOMATO_SEEDS = ITEMS.registerItem("tomato_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> TOMATO = ITEMS.registerSimpleItem("tomato");
+    public static final DeferredItem<CropSeedItem> EGGPLANT_SEEDS = ITEMS.registerItem("eggplant_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> EGGPLANT = ITEMS.registerSimpleItem("eggplant");
+
     private CropContent() {}
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

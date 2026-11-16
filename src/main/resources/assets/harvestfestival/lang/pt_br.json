@@ -56,5 +56,17 @@
   "tooltip.harvestfestival.watering_can.area": "Rega uma área de %s×%s",
   "item.harvestfestival.carrot_seeds": "Sementes de cenoura HF",
   "item.harvestfestival.beetroot_seeds": "Sementes de beterraba HF",
-  "item.harvestfestival.potato_seeds": "Sementes de batata HF"
+  "item.harvestfestival.potato_seeds": "Sementes de batata HF",
+  "item.harvestfestival.strawberry": "Morango",
+  "item.harvestfestival.strawberry_seeds": "Sementes de Morango",
+  "item.harvestfestival.tomato": "Tomate",
+  "item.harvestfestival.tomato_seeds": "Sementes de Tomate",
+  "item.harvestfestival.eggplant": "Berinjela",
+  "item.harvestfestival.eggplant_seeds": "Sementes de Berinjela",
+  "item.harvestfestival.sickle_copper": "Foice de Cobre",
+  "tooltip.harvestfestival.sickle.area": "Área carregada: %s×%s",
+  "tooltip.harvestfestival.sickle.charge": "Segure usar e solte para carregar; quebre um cultivo para cortar.",
+  "tooltip.harvestfestival.sickle.discharge": "Agache e use para descarregar.",
+  "tooltip.harvestfestival.sickle.discharged": "Foice descarregada",
+  "item.harvestfestival.sickle_silver": "Foice de Prata"
 }

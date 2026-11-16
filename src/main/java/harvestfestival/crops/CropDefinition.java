@@ -33,8 +33,8 @@ public record CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> 
         stages = List.copyOf(stages);
         appearances = List.copyOf(appearances);
         if (!appearances.isEmpty() && (appearances.size() != stages.size()
-                || appearances.stream().anyMatch(value -> value < 0 || value > 36 || value == 3))) {
-            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..36 except 3");
+                || appearances.stream().anyMatch(value -> value < 0 || value > 49 || value == 3))) {
+            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..49 except 3");
         }
         if (seasons.isEmpty() || stages.isEmpty() || plantingRadius < 0 || plantingRadius > 1
                 || droughtLimit < 0 || droughtLimit >= 1_000_000) {

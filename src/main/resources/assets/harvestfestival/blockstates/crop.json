@@ -110,6 +110,45 @@
     },
     "appearance=36": {
       "model": "minecraft:block/potatoes_stage3"
+    },
+    "appearance=37": {
+      "model": "harvestfestival:block/strawberry_1"
+    },
+    "appearance=38": {
+      "model": "harvestfestival:block/strawberry_2"
+    },
+    "appearance=39": {
+      "model": "harvestfestival:block/strawberry_3"
+    },
+    "appearance=40": {
+      "model": "harvestfestival:block/strawberry_4"
+    },
+    "appearance=41": {
+      "model": "harvestfestival:block/tomato_1"
+    },
+    "appearance=42": {
+      "model": "harvestfestival:block/tomato_2"
+    },
+    "appearance=43": {
+      "model": "harvestfestival:block/tomato_3"
+    },
+    "appearance=44": {
+      "model": "harvestfestival:block/tomato_4"
+    },
+    "appearance=45": {
+      "model": "harvestfestival:block/tomato_5"
+    },
+    "appearance=46": {
+      "model": "harvestfestival:block/eggplant_1"
+    },
+    "appearance=47": {
+      "model": "harvestfestival:block/eggplant_2"
+    },
+    "appearance=48": {
+      "model": "harvestfestival:block/eggplant_3"
+    },
+    "appearance=49": {
+      "model": "harvestfestival:block/eggplant_4"
     }
   }
 }

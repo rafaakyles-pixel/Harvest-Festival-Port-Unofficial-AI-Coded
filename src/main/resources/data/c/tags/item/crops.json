@@ -7,6 +7,9 @@
     "#c:crops/carrot",
     "#c:crops/beetroot",
     "#c:crops/potato",
-    "#c:crops/poisonous_potato"
+    "#c:crops/poisonous_potato",
+    "#c:crops/strawberry",
+    "#c:crops/tomato",
+    "#c:crops/eggplant"
   ]
 }

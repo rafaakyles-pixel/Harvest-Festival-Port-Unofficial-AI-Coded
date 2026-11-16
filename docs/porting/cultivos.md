@@ -1,10 +1,31 @@
 # Cultivos — contrato vigente
 
+Aceite posterior global da 16-A informado pelo responsável ao declarar a fatia 16 finalizada e solicitar a 17. Substitui pendência de aceite abaixo, sem atribuir testes individuais, execução do original, cenário 8 ou dedicado/multiplayer.
+
+## Evidências para a continuidade 17-A/B
+
+Leitura estática de `HFCrops`, `Crop`, `RegistryHelper.addHandlersToCrop`, `HFModInfo`, diretórios de handlers, `GrowthHandler`, `DropHandler`, `StateHandlerBasic`, `CropData`, `SpecialRulesQuest` e recursos originais. Nenhum código da 17 implementado; recortes/aprovação ficam na conversa.
+
+| Cultivo | Estação | Limites visuais | Inicial / madura / retorno / máximo | Compra / venda / cor | Regra comercial |
+| --- | --- | --- | --- | --- | --- | --- |
+| cabbage | primavera (default de Crop) | 4/9/14/15 | 1 / 15 / sem rebrota / 1 | 1500 / 450 / 8FFF40 | missão seeds.cabbage concluída |
+| pineapple | verão | 5/10/15/20/21 | 1 / 21 / 16 / 3 | 2000 / 420 / D7CF00 | missão seeds.pineapple concluída |
+| corn | verão | 3/8/12/14/15 | 1 / 15 / 12 / 7 | 850 / 110 / D4BD45 | YEAR3 |
+| sweet_potato | outono | 3/5/6 | 1 / 6 / 4 / 14 | 1000 / 60 / D82AAC | missão seeds.sweetpotato concluída |
+| green_pepper | outono | 1/3/4/7/8 | 1 / 8 / 5 / 9 | 900 / 80 / 56D213 | YEAR3 |
+
+- Reflexão normaliza underscores para SweetPotato/GreenPepper; nenhuma das cinco espécies tem classe própria nos diretórios convencionados. `setStages(int...)` instala StateHandlerBasic; DropHandler e crescimento sazonal permanecem padrões, sem sobrescrita posterior encontrada nos usos do núcleo. Milho não é planta dupla e batata-doce não usa DropHandlerPotato.
+- Primeira maturidade exige 14/20/14/5/7 viradas regadas. Rebrota de abacaxi/milho/batata-doce/pimentão exige 5/3/2/3, com totais de 30/32/31/31 viradas para esgotamento. São cálculos dos estágios conferidos, não observação em jogo; testes completos precisam controlar calendário sem modificar duração sazonal.
+- Todos exigem água, iniciam com seca 1 e contador zero, não exigem foice nem têm transformação em bloco. Aplicam-se ciclo, morte sazonal/seca, interação/quebra/criativo e limitações herdadas já documentados. Limites visuais são inclusivos; retornos selecionam imagens 4/3/2/4. Produtos maduros unitários pelo DropHandler padrão; sem sorteio especial.
+- SpecialRulesQuest consulta `HFApi.quests.hasCompleted` da missão prefixada com seeds.; YEAR3 continua condicionado à cidade mais próxima conforme contrato da 16. Requisitos comerciais não impedem obtenção de teste por comandos/abas; não antecipar missões/lojas/cidade.
+- Recursos originais: 4/5/5/3/5 texturas de planta em `textures/blocks/crops`, modelos tinted_crop; cinco produtos, sacos neck/body com tintas da tabela. `blockstates/crops.json` usa corn.png, não corn_alt.png. Alimentação original em ItemCrop: 1/0,5; 2/0,6; 1/0,3; 1/0,35; 1/0,5, respectivamente; estrutura alimentar conjunta permanece adiada por decisão do responsável.
+- Implementação proposta reutiliza APIs já verificadas em Minecraft/NeoForge 26.2.0.93: registros, propriedades/entidade, loot, tags, preços, modelos/tintas e abas; sem API nova requerida ou alteração prevista no formato CropState. Conferência futura da implementação não será substituída por esta leitura.
+
 Aceite global da fatia 15 informado pelo responsável em 16/11/2026, incluindo 15-A, 15-V e ampliação da rega. Sucede as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais de testes ou execução de cliente ao agente. Cenário 8 e dedicado/multiplayer permanecem pendentes; indicadores do regador funcionais e memória de camas por dimensão adiada.
 
 ## Levantamento original da 16-A — 16/11/2026
 
-Somente evidência por leitura, sem execução do original ou implementação da 16. Plano e decisões de recorte permanecem na conversa, aguardando aprovação independente de 16-F.
+Evidência por leitura, sem execução do original. Levantamento antecedeu a aprovação independente de 16-A e 16-F; implementação autorizada posteriormente e registrada abaixo. Plano permaneceu somente na conversa.
 
 | Espécie | Estação | Limites visuais / maturidade | Retorno / máximo total | Compra / venda / cor |
 | --- | --- | --- | --- | --- |
@@ -18,7 +39,16 @@ Somente evidência por leitura, sem execução do original ou implementação da
 - `CropData.harvest`, `CropRegistry.harvestCrop`, `CropHelper`, `BlockHFCrops`: produto maduro único; incrementa contador antes de comparar máximo, inclusive lista vazia elegível. Interação sem agachar retorna a 7 até a última, que remove; quebrar remove mesmo com foice, sem preservar rebrota. Murcho/imaturo não entrega produto. Criativo também passa por removedByPlayer; callback da ferramenta não é executado no caminho criativo normal (patch oficial Forge 1.12.x de PlayerInteractionManager). Proteção contra falha de escrita/snapshot e política advance são adaptações já contratadas, não garantias do original.
 - Recursos conferidos: blockstates `crops_strawberry/tomato/eggplant.json` apontam a `tinted_crop`, com 4/5/4 texturas em `textures/blocks/crops`; produtos em `textures/items/crops`. `crops_seeds.json` usa neck/body e HFCrops.initClient colore ambas as camadas. Nomes en_us/pt_br: Strawberry/Morango, Tomato/Tomate, Eggplant/Berinjela. HFCrops.preInit registra cropStrawberry/cropTomato/cropEggplant e venda; tags modernas são adaptação do OreDictionary. Inspeção de arquivos não comprova aparência em jogo.
 - `HFShops` registra sementes de custo positivo no supermercado; `PurchasableCropSeeds` exige estação e regra. `SpecialRulesYear` consulta aniversário da cidade mais próxima e CalendarHelper.getYearsPassed: diferença não negativa entre pisos dos totais de dias divididos pela duração do ano, exigindo 2/1/1. Não equivale simplesmente ao ano global nem a contagem de aniversários completos. Aquisição por comandos/abas não implementa estes serviços.
-- `ItemCrop` também define alimentação original: morango 2/0,6, tomate 2/0,5, berinjela 1/0,5 (fome/modificador de saturação). Produtos HF atuais não implementam alimentação; inclusão ou adiamento explícito dessas propriedades integra a decisão de recorte, não deve ser presumido pela semelhança com pepino.
+- `ItemCrop` também define alimentação original: morango 2/0,6, tomate 2/0,5, berinjela 1/0,5 (fome/modificador de saturação). Responsável decidiu adiar a estrutura de alimentação de todos os alimentos para uma única fatia posterior, incluindo produtos anteriores; ausência atual não equivale ao original.
+
+### Entrega da 16-A
+
+- Aprovada e implementada nos pacotes existentes: IDs `strawberry`, `tomato`, `eggplant` e respectivas sementes `_seeds`; dados individuais seguem a tabela e os handlers comprovados acima. Reutiliza ciclo, confirmação de escrita, política `advance`, quebra definitiva e sincronização existentes, sem novos campos persistidos ou handlers presumidos por espécie.
+- Aparência ampliada de 0–36 para 0–49, preservando slots anteriores: morango 37–40, tomate 41–45, berinjela 46–49. Treze modelos de planta usam `crop_original`; dezesseis PNGs (plantas/produtos) copiados do original e conferidos por SHA256. Sacos reutilizam neck/body originais, com ambas as camadas nas cores da tabela. Licença MIT existente preservada. Conferência de arquivos não comprova renderização.
+- Tags de sementes HF e `c:seeds`; produtos em `c:crops/<espécie>` e `c:crops`; loot de um produto, preços 50/70/80. Sementes depois da batata na aba aprovada; produtos somente na busca. Sem aquisição comercial, receitas novas, alimentação ou expansão da política vanilla.
+- APIs reutilizadas: registros, `IntegerProperty`, modelos/tintas JSON, `BlockState.getDrops(LootParams.Builder)`, codecs de entidade/ItemStack e tags; conferidas nas fontes locais Minecraft/NeoForge 26.2.0.93 e compiladas. Sem novo mixin ou formato persistido agrícola.
+- Sete testes novos: seis em `CommonRegrowthExpansionTest` cobrem ciclo de 30 viradas/limites 12–8–8, água/seca/estações, falhas/loot vazio/segunda passagem de drops, NBT comprimido/recarga e recursos/visuais; um em `CropShippingTest` cobre preços, sementes recusadas e pagamento único 600/560/640 após persistência. Testes existentes de abas, fixtures e limite inválido de aparência atualizados.
+- Validação conjunta da 16: 19 testes novos/192 totais nos relatórios, zero falhas/erros/ignorados. Testes executados durante implementação; build final aprovado com `test UP-TO-DATE`, reutilizando esses resultados. Adaptadores e codecs não comprovam interação/renderização no jogo, nem mundo completo salvo. runClient e aceite manual pendentes; cenário 8, dedicado/multiplayer e memória de camas por dimensão preservados.
 
 Fatias 10–15-A; atualização em 15/11/2026. Pacote `harvestfestival.crops` aprovado em produção e testes. Dependências: etapas 5/6 de `DEPENDENCIES.md`, [Ferramentas](ferramentas.md), [Calendário](calendario.md) e [Remessas](remessas.md). Contrato anterior integral em [histórico da fatia 12](../archive/fatia-12-cultivos-anterior.md).
 

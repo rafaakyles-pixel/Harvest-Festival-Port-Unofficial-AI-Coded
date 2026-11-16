@@ -7,6 +7,9 @@
     "harvestfestival:spinach_seeds",
     "harvestfestival:carrot_seeds",
     "harvestfestival:beetroot_seeds",
-    "harvestfestival:potato_seeds"
+    "harvestfestival:potato_seeds",
+    "harvestfestival:strawberry_seeds",
+    "harvestfestival:tomato_seeds",
+    "harvestfestival:eggplant_seeds"
   ]
 }

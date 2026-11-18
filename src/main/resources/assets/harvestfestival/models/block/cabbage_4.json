@@ -1,0 +1,6 @@
+{
+  "parent": "harvestfestival:block/crop_original",
+  "textures": {
+    "crop": "harvestfestival:block/crops/cabbage_4"
+  }
+}

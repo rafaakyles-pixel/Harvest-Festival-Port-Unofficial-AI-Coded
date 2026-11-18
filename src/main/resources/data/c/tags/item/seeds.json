@@ -10,6 +10,11 @@
     "harvestfestival:potato_seeds",
     "harvestfestival:strawberry_seeds",
     "harvestfestival:tomato_seeds",
-    "harvestfestival:eggplant_seeds"
+    "harvestfestival:eggplant_seeds",
+    "harvestfestival:cabbage_seeds",
+    "harvestfestival:pineapple_seeds",
+    "harvestfestival:corn_seeds",
+    "harvestfestival:sweet_potato_seeds",
+    "harvestfestival:green_pepper_seeds"
   ]
 }

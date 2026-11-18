@@ -2,7 +2,9 @@
   "values": [
     "harvestfestival:watering_can",
     "harvestfestival:watering_can_copper",
-    "harvestfestival:watering_can_silver"
+    "harvestfestival:watering_can_silver",
+    "harvestfestival:watering_can_gold",
+    "harvestfestival:watering_can_mystril"
   ],
   "replace": false
 }

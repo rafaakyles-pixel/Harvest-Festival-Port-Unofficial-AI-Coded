@@ -149,6 +149,72 @@
     },
     "appearance=49": {
       "model": "harvestfestival:block/eggplant_4"
+    },
+    "appearance=50": {
+      "model": "harvestfestival:block/cabbage_1"
+    },
+    "appearance=51": {
+      "model": "harvestfestival:block/cabbage_2"
+    },
+    "appearance=52": {
+      "model": "harvestfestival:block/cabbage_3"
+    },
+    "appearance=53": {
+      "model": "harvestfestival:block/cabbage_4"
+    },
+    "appearance=54": {
+      "model": "harvestfestival:block/pineapple_1"
+    },
+    "appearance=55": {
+      "model": "harvestfestival:block/pineapple_2"
+    },
+    "appearance=56": {
+      "model": "harvestfestival:block/pineapple_3"
+    },
+    "appearance=57": {
+      "model": "harvestfestival:block/pineapple_4"
+    },
+    "appearance=58": {
+      "model": "harvestfestival:block/pineapple_5"
+    },
+    "appearance=59": {
+      "model": "harvestfestival:block/corn_1"
+    },
+    "appearance=60": {
+      "model": "harvestfestival:block/corn_2"
+    },
+    "appearance=61": {
+      "model": "harvestfestival:block/corn_3"
+    },
+    "appearance=62": {
+      "model": "harvestfestival:block/corn_4"
+    },
+    "appearance=63": {
+      "model": "harvestfestival:block/corn_5"
+    },
+    "appearance=64": {
+      "model": "harvestfestival:block/sweet_potato_1"
+    },
+    "appearance=65": {
+      "model": "harvestfestival:block/sweet_potato_2"
+    },
+    "appearance=66": {
+      "model": "harvestfestival:block/sweet_potato_3"
+    },
+    "appearance=67": {
+      "model": "harvestfestival:block/green_pepper_1"
+    },
+    "appearance=68": {
+      "model": "harvestfestival:block/green_pepper_2"
+    },
+    "appearance=69": {
+      "model": "harvestfestival:block/green_pepper_3"
+    },
+    "appearance=70": {
+      "model": "harvestfestival:block/green_pepper_4"
+    },
+    "appearance=71": {
+      "model": "harvestfestival:block/green_pepper_5"
     }
   }
 }

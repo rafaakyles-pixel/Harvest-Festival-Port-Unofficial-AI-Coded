@@ -10,6 +10,11 @@
     "#c:crops/poisonous_potato",
     "#c:crops/strawberry",
     "#c:crops/tomato",
-    "#c:crops/eggplant"
+    "#c:crops/eggplant",
+    "#c:crops/cabbage",
+    "#c:crops/pineapple",
+    "#c:crops/corn",
+    "#c:crops/sweet_potato",
+    "#c:crops/green_pepper"
   ]
 }

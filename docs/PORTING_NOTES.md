@@ -23,14 +23,14 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Ouro, attachments, sincronização, aniversários do jogador/NPCs | [Jogador](porting/jogador.md) |
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
-| Enxada/regador/foice até prata, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
-| Bloco genérico de cultivo, ciclo HF, loot da batata, política vanilla delimitada, receitas de sementes e sincronização transitória das regras | [Cultivos](porting/cultivos.md) |
+| Enxada/regador/foice até mystril, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
+| Bloco genérico e cultivos até a 17, ciclo HF, loot da batata, política vanilla delimitada, receitas de sementes e sincronização transitória das regras | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
 Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
 
-Aceites globais das fatias 15 e 16 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
+Aceites globais das fatias 15, 16 e 17 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
 
 ### Contratos transversais e decisões obrigatórias
 

@@ -24,11 +24,11 @@ class FarmToolTest {
         return new ToolEffortSettings.Rule(consume, 27, true, true, true, false, false, true, false, false, true, false);
     }
     @Test void bundledTiersHaveIndependentAreasCostsAndDurability() {
-        assertEquals(List.of(128,256,768), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::durability).toList());
-        assertEquals(List.of(0,1,2), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::hoeFront).toList());
-        assertEquals(List.of(0,0,2), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::waterFront).toList());
-        assertEquals(List.of(0,1,1), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::waterSides).toList());
-        assertEquals(List.of(3F,2.5F,2F), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::effort).toList());
+        assertEquals(List.of(128,256,768,1152,3456), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::durability).toList());
+        assertEquals(List.of(0,1,2,3,5), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::hoeFront).toList());
+        assertEquals(List.of(0,0,2,2,2), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::waterFront).toList());
+        assertEquals(List.of(0,1,1,2,3), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::waterSides).toList());
+        assertEquals(List.of(3F,2.5F,2F,2F,1.5F), java.util.Arrays.stream(ToolTier.values()).map(ToolTier::effort).toList());
     }
     @Test void chargeAccumulatesOnlyCompleteSecondsAndPersistsThroughTasks() {
         var initial = new FarmToolState(42,0,false);
@@ -56,8 +56,8 @@ class FarmToolTest {
     @Test void allHoesRetainBrokenItemAndUsePhysicalTierForCostAndLevel() throws Exception {
         try (var fixture = new CropTestSupport(directory)) {
             int index = 0;
-            double[] increases = {0.39215682745098,0.196078431372549,0.130718954248366};
-            for (var item : List.of(ToolContent.HOE.get(),ToolContent.HOE_COPPER.get(),ToolContent.HOE_SILVER.get())) {
+            double[] increases = {0.39215682745098,0.196078431372549,0.130718954248366,0.130718954248366,0.0980392156862745};
+            for (var item : List.of(ToolContent.HOE.get(),ToolContent.HOE_COPPER.get(),ToolContent.HOE_SILVER.get(),ToolContent.HOE_GOLD.get(),ToolContent.HOE_MYSTRIL.get())) {
                 var stack = new ItemStack(item);
                 assertTrue(stack.canPerformAction(net.neoforged.neoforge.common.ItemAbilities.HOE_TILL));
                 assertFalse(stack.canPerformAction(net.neoforged.neoforge.common.ItemAbilities.SHOVEL_FLATTEN));
@@ -97,7 +97,7 @@ class FarmToolTest {
     @Test void corruptOrIncompatibleChargeDoesNotResetOrEnableTool() throws Exception {
         try (var fixture = new CropTestSupport(directory)) {
             for (String json : List.of("{}","null","[]","{\"level\":1,\"charge\":true}","{\"level\":1,\"charge\":1.5}",
-                    "{\"level\":1,\"charge\":\"1\"}","{\"level\":1,\"charge\":3}","{\"level\":101,\"charge\":0}",
+                    "{\"level\":1,\"charge\":\"1\"}","{\"level\":1,\"charge\":5}","{\"level\":101,\"charge\":0}",
                     "{\"level\":true,\"charge\":0}","{\"level\":\"1\",\"charge\":0}","{\"level\":1e999,\"charge\":0}")) {
                 var state=FarmToolState.CODEC.parse(JsonOps.INSTANCE,JsonParser.parseString(json)).getOrThrow();
                 assertEquals(FarmToolState.INVALID,state,json);
@@ -112,8 +112,8 @@ class FarmToolTest {
     @Test void actualStacksPersistWaterLevelChargeDamageAndIndependentCopies() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var ops=RegistryOps.create(NbtOps.INSTANCE,RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
-            for (var item : List.of(ToolContent.HOE.get(),ToolContent.HOE_COPPER.get(),ToolContent.HOE_SILVER.get(),
-                    ToolContent.WATERING_CAN.get(),ToolContent.WATERING_CAN_COPPER.get(),ToolContent.WATERING_CAN_SILVER.get())) {
+            for (var item : List.of(ToolContent.HOE.get(),ToolContent.HOE_COPPER.get(),ToolContent.HOE_SILVER.get(),ToolContent.HOE_GOLD.get(),ToolContent.HOE_MYSTRIL.get(),
+                    ToolContent.WATERING_CAN.get(),ToolContent.WATERING_CAN_COPPER.get(),ToolContent.WATERING_CAN_SILVER.get(),ToolContent.WATERING_CAN_GOLD.get(),ToolContent.WATERING_CAN_MYSTRIL.get())) {
                 var stack=new ItemStack(item);
                 assertEquals(FarmToolState.NEW,FarmToolState.get(stack));
                 boolean hoe=item instanceof HoeItem;

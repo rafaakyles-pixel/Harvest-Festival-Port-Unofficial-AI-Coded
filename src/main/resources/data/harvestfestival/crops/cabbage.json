@@ -1,0 +1,29 @@
+{
+  "seed_tag": "harvestfestival:seeds/cabbage",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "spring"
+  ],
+  "stages": [
+    4,
+    9,
+    14,
+    15
+  ],
+  "appearances": [
+    50,
+    51,
+    52,
+    53
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/cabbage",
+  "regrow_stage": 0,
+  "max_harvests": 1,
+  "empty_harvest_policy": "advance",
+  "harvest_on_player_break": true
+}

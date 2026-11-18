@@ -22,7 +22,16 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ---
 ## Acompanhamento de Tarefas
 
-### Fatia 17 — levantamento e recortes para aprovação
+### Fatia 17 — concluída e aceita globalmente pelo responsável
+- Em 17/11/2026, o responsável informou que tudo ocorreu bem e declarou a fatia 17 concluída. Aceite global de 17-A/17-B1/17-B2/17-F1/17-F2/17-F3/17-F4, sucedendo as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
+- Solicitado o prompt de início da fatia 18: levantamento dos recortes 18-A (melancia/abóbora) e 18-B (grama/forragem), com critérios e decisões antes de implementar; nenhum código da 18 incluído nesta atualização.
+- Solicitação autorizou explicitamente a sequência 17-A → 17-B1 → 17-B2 → 17-F1 → 17-F2 → 17-F3 → 17-F4. Executada nos pacotes já aprovados, sem novas divergências de gameplay, alimentação parcial, lojas/serviços ou ampliação da foice para vegetação vanilla.
+- Entregas agrícolas: repolho; abacaxi/milho; batata-doce/pimentão verde. Recursos originais, dados/loot/tags/preços/remessas, traduções e abas; slots 0–49 preservados, novos 50–71. Contratos em [Cultivos](porting/cultivos.md), [Remessas](porting/remessas.md) e [Abas](porting/abas-criativas.md).
+- Entregas de ferramentas: enxada/regador ouro, enxada/regador mystril, foice ouro, foice mystril; carga até 4 com rejeição acima do tier físico e compatibilidade antiga. Rega autorizada, durabilidade/carga, custos e domínio/callbacks da foice preservados. Contrato em [Ferramentas](porting/ferramentas.md).
+- Build por entrega aprovado: 17-A 7 novos/199 totais; 17-B1 7/206; 17-B2 7/213; 17-F1 4/217; 17-F2 4/221; 17-F3 4/225; 17-F4 4/229. Total de 37 testes novos; cada build de entrega executou test, sem falhas/erros/ignorados. Build documental final aprovado com test UP-TO-DATE, reutilizando os 229 resultados anteriores. Adaptadores não comprovam sessão real; runClient não executado pelo agente. Aceites manuais das sete entregas permanecem independentes.
+- Cenário 8 **não executado**, dedicado/multiplayer pendentes; indicadores do regador confirmados funcionais anteriormente, sem encerrar espelho de ouro/aniversário. Memória de camas por dimensão e alimentação conjunta adiadas. Nenhum AGENTS.md alterado ou comando Git mutador executado.
+
+### Fatia 17 — levantamento anterior à autorização
 - Responsável confirmou «Tudo certo», considerou a 16 finalizada e solicitou avanço à 17. Aceite global de 16-A/16-F1/16-F2, sem atribuir resultados individuais de testes. Os registros de pendência de aceite da 16 abaixo ficam sucedidos por esta confirmação.
 - Levantamento de repolho, abacaxi, milho, batata-doce, pimentão verde e tiers ouro/mystril nos contratos de Cultivos/Ferramentas; proposta na conversa, sem arquivo de plano e sem implementação da 17 nesta etapa.
 - Solicitada para o futuro, sem prioridade: ampliar área da foice a mato, flores e folhas vanilla, mesmo quando exigir divergência do original. Não integra a 17; alvos, drops, plantas duplas, custos e permissões precisarão de recorte próprio.

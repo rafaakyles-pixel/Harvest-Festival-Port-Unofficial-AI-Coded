@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "layer0": "harvestfestival:item/tools/hoe_mystril"
+  },
+  "parent": "minecraft:item/handheld"
+}

@@ -24,6 +24,69 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void summerLateCropTestPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var products = List.of(CropContent.PINEAPPLE.get(), CropContent.CORN.get());
+            var seeds = List.of(CropContent.PINEAPPLE_SEEDS.get(), CropContent.CORN_SEEDS.get());
+            int[] counts = {3,7}; long[] totals = {1260,770};
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            for (int i=0;i<products.size();i++) {
+                var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+                var holder = new SavedHolder(); var stack = new ItemStack(products.get(i),counts[i]);
+                for (int j=0;j<counts[i];j++) assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                assertTrue(stack.isEmpty()); assertEquals(totals[i],holder.getData(PlayerShipping.QUEUE).total());
+                var seed = new ItemStack(seeds.get(i)); assertFalse(PlayerShipping.depositInto(holder,seed,prices)); assertEquals(1,seed.getCount());
+                prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+                var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry); holder.serializeAttachments(output);
+                var file = directory.resolve("regrowth-"+i+".nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+                var copy = new SavedHolder(); copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+                PlayerShipping.pay(copy); PlayerShipping.pay(copy); assertEquals(totals[i],copy.getData(PlayerGold.GOLD));
+                assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+            }
+        }
+    }
+    @Test void autumnLateCropTestPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var products = List.of(CropContent.SWEET_POTATO.get(), CropContent.GREEN_PEPPER.get());
+            var seeds = List.of(CropContent.SWEET_POTATO_SEEDS.get(), CropContent.GREEN_PEPPER_SEEDS.get());
+            int[] counts = {14,9}; long[] totals = {840,720};
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            for (int i=0;i<products.size();i++) {
+                var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+                var holder = new SavedHolder(); var stack = new ItemStack(products.get(i),counts[i]);
+                for (int j=0;j<counts[i];j++) assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                assertTrue(stack.isEmpty()); assertEquals(totals[i],holder.getData(PlayerShipping.QUEUE).total());
+                var seed = new ItemStack(seeds.get(i)); assertFalse(PlayerShipping.depositInto(holder,seed,prices)); assertEquals(1,seed.getCount());
+                prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+                var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry); holder.serializeAttachments(output);
+                var file = directory.resolve("regrowth-"+i+".nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+                var copy = new SavedHolder(); copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+                PlayerShipping.pay(copy); PlayerShipping.pay(copy); assertEquals(totals[i],copy.getData(PlayerGold.GOLD));
+                assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+            }
+        }
+    }
+    @Test void lateProductsPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var products = List.of(CropContent.CABBAGE.get());
+            var seeds = List.of(CropContent.CABBAGE_SEEDS.get());
+            int[] counts = {1}; long[] totals = {450};
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            for (int i=0;i<products.size();i++) {
+                var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+                var holder = new SavedHolder(); var stack = new ItemStack(products.get(i),counts[i]);
+                for (int j=0;j<counts[i];j++) assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                assertTrue(stack.isEmpty()); assertEquals(totals[i],holder.getData(PlayerShipping.QUEUE).total());
+                var seed = new ItemStack(seeds.get(i)); assertFalse(PlayerShipping.depositInto(holder,seed,prices)); assertEquals(1,seed.getCount());
+                prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+                var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry); holder.serializeAttachments(output);
+                var file = directory.resolve("regrowth-"+i+".nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+                var copy = new SavedHolder(); copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+                PlayerShipping.pay(copy); PlayerShipping.pay(copy); assertEquals(totals[i],copy.getData(PlayerGold.GOLD));
+                assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+            }
+        }
+    }
     @Test void commonRegrowthProductsPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var products = List.of(CropContent.STRAWBERRY.get(), CropContent.TOMATO.get(), CropContent.EGGPLANT.get());

@@ -1,0 +1,30 @@
+{
+  "seed_tag": "harvestfestival:seeds/pineapple",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "summer"
+  ],
+  "stages": [
+    5,
+    10,
+    15,
+    20,
+    21
+  ],
+  "appearances": [
+    54,
+    55,
+    56,
+    57,
+    58
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/pineapple",
+  "regrow_stage": 16,
+  "max_harvests": 3,
+  "empty_harvest_policy": "advance"
+}

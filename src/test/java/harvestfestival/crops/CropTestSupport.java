@@ -26,6 +26,36 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/green_pepper.json",
+        "harvestfestival/loot_table/crops/green_pepper.json",
+        "harvestfestival/tags/item/seeds/green_pepper.json",
+        "c/tags/item/crops/green_pepper.json",
+        "harvestfestival/shipping_prices/tags/c/crops/green_pepper.json",
+
+        "harvestfestival/crops/sweet_potato.json",
+        "harvestfestival/loot_table/crops/sweet_potato.json",
+        "harvestfestival/tags/item/seeds/sweet_potato.json",
+        "c/tags/item/crops/sweet_potato.json",
+        "harvestfestival/shipping_prices/tags/c/crops/sweet_potato.json",
+
+        "harvestfestival/crops/corn.json",
+        "harvestfestival/loot_table/crops/corn.json",
+        "harvestfestival/tags/item/seeds/corn.json",
+        "c/tags/item/crops/corn.json",
+        "harvestfestival/shipping_prices/tags/c/crops/corn.json",
+
+        "harvestfestival/crops/pineapple.json",
+        "harvestfestival/loot_table/crops/pineapple.json",
+        "harvestfestival/tags/item/seeds/pineapple.json",
+        "c/tags/item/crops/pineapple.json",
+        "harvestfestival/shipping_prices/tags/c/crops/pineapple.json",
+
+        "harvestfestival/crops/cabbage.json",
+        "harvestfestival/loot_table/crops/cabbage.json",
+        "harvestfestival/tags/item/seeds/cabbage.json",
+        "c/tags/item/crops/cabbage.json",
+        "harvestfestival/shipping_prices/tags/c/crops/cabbage.json",
+
         "harvestfestival/crops/strawberry.json", "harvestfestival/loot_table/crops/strawberry.json",
         "harvestfestival/tags/item/seeds/strawberry.json", "c/tags/item/crops/strawberry.json",
         "harvestfestival/shipping_prices/tags/c/crops/strawberry.json",
@@ -102,6 +132,21 @@ public final class CropTestSupport implements AutoCloseable {
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
+        for (var item : List.of(CropContent.GREEN_PEPPER.get(), CropContent.GREEN_PEPPER_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
+        for (var item : List.of(CropContent.SWEET_POTATO.get(), CropContent.SWEET_POTATO_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
+        for (var item : List.of(CropContent.CORN.get(), CropContent.CORN_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
+        for (var item : List.of(CropContent.PINEAPPLE.get(), CropContent.PINEAPPLE_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
+        for (var item : List.of(CropContent.CABBAGE.get(), CropContent.CABBAGE_SEEDS.get())) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
         for (var item : List.of(CropContent.STRAWBERRY.get(), CropContent.STRAWBERRY_SEEDS.get(),
                 CropContent.TOMATO.get(), CropContent.TOMATO_SEEDS.get(), CropContent.EGGPLANT.get(), CropContent.EGGPLANT_SEEDS.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
@@ -120,17 +165,17 @@ public final class CropTestSupport implements AutoCloseable {
         }
         harvestfestival.tools.ToolContent.SICKLE.get().builtInRegistryHolder().bindComponents(DataComponentMap.builder()
                 .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, 128).set(DataComponents.DAMAGE, 0).build());
-        for (var sickle : List.of(harvestfestival.tools.ToolContent.SICKLE_COPPER.get(),harvestfestival.tools.ToolContent.SICKLE_SILVER.get())) {
+        for (var sickle : List.of(harvestfestival.tools.ToolContent.SICKLE_COPPER.get(),harvestfestival.tools.ToolContent.SICKLE_SILVER.get(), harvestfestival.tools.ToolContent.SICKLE_GOLD.get(), harvestfestival.tools.ToolContent.SICKLE_MYSTRIL.get())) {
             sickle.builtInRegistryHolder().bindComponents(DataComponentMap.builder()
                     .set(DataComponents.MAX_STACK_SIZE, 1).set(DataComponents.MAX_DAMAGE, sickle.tier().durability()).set(DataComponents.DAMAGE, 0).build());
         }
         for (var item : List.of(harvestfestival.tools.ToolContent.HOE.get(), harvestfestival.tools.ToolContent.HOE_COPPER.get(),
-                harvestfestival.tools.ToolContent.HOE_SILVER.get())) {
+                harvestfestival.tools.ToolContent.HOE_SILVER.get(), harvestfestival.tools.ToolContent.HOE_GOLD.get(), harvestfestival.tools.ToolContent.HOE_MYSTRIL.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 1)
                     .set(DataComponents.MAX_DAMAGE, item.tier().durability()).set(DataComponents.DAMAGE, 0).build());
         }
         for (var item : List.of(harvestfestival.tools.ToolContent.WATERING_CAN.get(), harvestfestival.tools.ToolContent.WATERING_CAN_COPPER.get(),
-                harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get())) {
+                harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get(), harvestfestival.tools.ToolContent.WATERING_CAN_GOLD.get(), harvestfestival.tools.ToolContent.WATERING_CAN_MYSTRIL.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 1).build());
         }
     }

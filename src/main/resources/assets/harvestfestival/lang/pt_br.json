@@ -68,5 +68,21 @@
   "tooltip.harvestfestival.sickle.charge": "Segure usar e solte para carregar; quebre um cultivo para cortar.",
   "tooltip.harvestfestival.sickle.discharge": "Agache e use para descarregar.",
   "tooltip.harvestfestival.sickle.discharged": "Foice descarregada",
-  "item.harvestfestival.sickle_silver": "Foice de Prata"
+  "item.harvestfestival.sickle_silver": "Foice de Prata",
+  "item.harvestfestival.cabbage": "Repolho",
+  "item.harvestfestival.cabbage_seeds": "Sementes de repolho",
+  "item.harvestfestival.pineapple": "Abacaxi",
+  "item.harvestfestival.pineapple_seeds": "Sementes de abacaxi",
+  "item.harvestfestival.corn": "Milho",
+  "item.harvestfestival.corn_seeds": "Sementes de milho",
+  "item.harvestfestival.sweet_potato": "Batata-doce",
+  "item.harvestfestival.sweet_potato_seeds": "Sementes de batata-doce",
+  "item.harvestfestival.green_pepper": "Pimentão verde",
+  "item.harvestfestival.green_pepper_seeds": "Sementes de pimentão verde",
+  "item.harvestfestival.hoe_gold": "Enxada de ouro",
+  "item.harvestfestival.watering_can_gold": "Regador de ouro",
+  "item.harvestfestival.hoe_mystril": "Enxada de mystril",
+  "item.harvestfestival.watering_can_mystril": "Regador de mystril",
+  "item.harvestfestival.sickle_gold": "Foice de Ouro",
+  "item.harvestfestival.sickle_mystril": "Foice de Mystril"
 }

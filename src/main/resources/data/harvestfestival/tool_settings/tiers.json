@@ -1,5 +1,52 @@
 {
-  "basic": {"durability":128,"effort":3.0,"level_increase":0.39215682745098,"hoe_front":0,"water_front":0,"water_sides":0,"sickle_front":0,"sickle_sides":0},
-  "copper": {"durability":256,"effort":2.5,"level_increase":0.196078431372549,"hoe_front":1,"water_front":0,"water_sides":1,"sickle_front":0,"sickle_sides":1},
-  "silver": {"durability":768,"effort":2.0,"level_increase":0.130718954248366,"hoe_front":2,"water_front":2,"water_sides":1,"sickle_front":1,"sickle_sides":1}
+  "basic": {
+    "durability": 128,
+    "effort": 3,
+    "level_increase": 0.39215682745098,
+    "hoe_front": 0,
+    "water_front": 0,
+    "water_sides": 0,
+    "sickle_front": 0,
+    "sickle_sides": 0
+  },
+  "copper": {
+    "durability": 256,
+    "effort": 2.5,
+    "level_increase": 0.196078431372549,
+    "hoe_front": 1,
+    "water_front": 0,
+    "water_sides": 1,
+    "sickle_front": 0,
+    "sickle_sides": 1
+  },
+  "silver": {
+    "durability": 768,
+    "effort": 2,
+    "level_increase": 0.130718954248366,
+    "hoe_front": 2,
+    "water_front": 2,
+    "water_sides": 1,
+    "sickle_front": 1,
+    "sickle_sides": 1
+  },
+  "gold": {
+    "durability": 1152,
+    "effort": 2,
+    "level_increase": 0.130718954248366,
+    "hoe_front": 3,
+    "water_front": 2,
+    "water_sides": 2,
+    "sickle_front": 2,
+    "sickle_sides": 1
+  },
+  "mystril": {
+    "durability": 3456,
+    "effort": 1.5,
+    "level_increase": 0.0980392156862745,
+    "hoe_front": 5,
+    "water_front": 2,
+    "water_sides": 3,
+    "sickle_front": 4,
+    "sickle_sides": 2
+  }
 }

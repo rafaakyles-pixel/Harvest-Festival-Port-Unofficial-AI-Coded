@@ -8,7 +8,7 @@ import java.util.Locale;
 
 /** Bundled item definitions, loaded equally on both sides before item registration (not reloadable rules). */
 public enum ToolTier {
-    BASIC, COPPER, SILVER;
+    BASIC, COPPER, SILVER, GOLD, MYSTRIL;
 
     private final Definition definition;
     ToolTier() { definition = Definitions.read(name().toLowerCase(Locale.ROOT)); }

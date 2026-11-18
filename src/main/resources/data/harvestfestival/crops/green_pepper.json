@@ -1,0 +1,30 @@
+{
+  "seed_tag": "harvestfestival:seeds/green_pepper",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "autumn"
+  ],
+  "stages": [
+    1,
+    3,
+    4,
+    7,
+    8
+  ],
+  "appearances": [
+    67,
+    68,
+    69,
+    70,
+    71
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/green_pepper",
+  "regrow_stage": 5,
+  "max_harvests": 9,
+  "empty_harvest_policy": "advance"
+}

@@ -46,6 +46,21 @@ public final class CropContent {
     public static final DeferredItem<CropSeedItem> EGGPLANT_SEEDS = ITEMS.registerItem("eggplant_seeds", CropSeedItem::new);
     public static final DeferredItem<Item> EGGPLANT = ITEMS.registerSimpleItem("eggplant");
 
+    public static final DeferredItem<CropSeedItem> CABBAGE_SEEDS = ITEMS.registerItem("cabbage_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> CABBAGE = ITEMS.registerSimpleItem("cabbage");
+
+    public static final DeferredItem<CropSeedItem> PINEAPPLE_SEEDS = ITEMS.registerItem("pineapple_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> PINEAPPLE = ITEMS.registerSimpleItem("pineapple");
+
+    public static final DeferredItem<CropSeedItem> CORN_SEEDS = ITEMS.registerItem("corn_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> CORN = ITEMS.registerSimpleItem("corn");
+
+    public static final DeferredItem<CropSeedItem> SWEET_POTATO_SEEDS = ITEMS.registerItem("sweet_potato_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> SWEET_POTATO = ITEMS.registerSimpleItem("sweet_potato");
+
+    public static final DeferredItem<CropSeedItem> GREEN_PEPPER_SEEDS = ITEMS.registerItem("green_pepper_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> GREEN_PEPPER = ITEMS.registerSimpleItem("green_pepper");
+
     private CropContent() {}
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

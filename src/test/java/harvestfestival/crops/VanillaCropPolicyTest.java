@@ -33,7 +33,7 @@ class VanillaCropPolicyTest {
         try(var fixture=new CropTestSupport(directory)) {
             bindExtras(); var p=policy(15);
             for(var can:List.of(harvestfestival.tools.ToolContent.WATERING_CAN.get(),
-                    harvestfestival.tools.ToolContent.WATERING_CAN_COPPER.get(),harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get())) {
+                    harvestfestival.tools.ToolContent.WATERING_CAN_COPPER.get(),harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get(),harvestfestival.tools.ToolContent.WATERING_CAN_GOLD.get(),harvestfestival.tools.ToolContent.WATERING_CAN_MYSTRIL.get())) {
                 for(var block:List.of(Blocks.WHEAT,Blocks.CARROTS,Blocks.BEETROOTS,Blocks.POTATOES)) {
                     assertFalse(p.denyItemUse(new ItemStack(can),block.defaultBlockState()));
                     assertTrue(p.denyGrowth(block.defaultBlockState()));

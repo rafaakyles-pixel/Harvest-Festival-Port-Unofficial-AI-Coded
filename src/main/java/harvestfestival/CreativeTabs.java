@@ -37,17 +37,28 @@ public final class CreativeTabs {
         output.accept(CropContent.STRAWBERRY_SEEDS.get());
         output.accept(CropContent.TOMATO_SEEDS.get());
         output.accept(CropContent.EGGPLANT_SEEDS.get());
+        output.accept(CropContent.CABBAGE_SEEDS.get());
+        output.accept(CropContent.PINEAPPLE_SEEDS.get());
+        output.accept(CropContent.CORN_SEEDS.get());
+        output.accept(CropContent.SWEET_POTATO_SEEDS.get());
+        output.accept(CropContent.GREEN_PEPPER_SEEDS.get());
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
         output.accept(ToolContent.HOE_COPPER.get());
         output.accept(ToolContent.HOE_SILVER.get());
+        output.accept(ToolContent.HOE_GOLD.get());
+        output.accept(ToolContent.HOE_MYSTRIL.get());
         output.accept(ToolContent.WATERING_CAN.get());
         output.accept(ToolContent.WATERING_CAN_COPPER.get());
         output.accept(ToolContent.WATERING_CAN_SILVER.get());
+        output.accept(ToolContent.WATERING_CAN_GOLD.get());
+        output.accept(ToolContent.WATERING_CAN_MYSTRIL.get());
         output.accept(ToolContent.SICKLE.get());
         output.accept(ToolContent.SICKLE_COPPER.get());
         output.accept(ToolContent.SICKLE_SILVER.get());
+        output.accept(ToolContent.SICKLE_GOLD.get());
+        output.accept(ToolContent.SICKLE_MYSTRIL.get());
         output.accept(ShippingContent.SHIPPING_BOX.get());
         output.accept(CropContent.TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.CUCUMBER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
@@ -56,5 +67,10 @@ public final class CreativeTabs {
         output.accept(CropContent.STRAWBERRY.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.TOMATO.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.EGGPLANT.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.CABBAGE.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.PINEAPPLE.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.CORN.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.SWEET_POTATO.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.GREEN_PEPPER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
     }
 }

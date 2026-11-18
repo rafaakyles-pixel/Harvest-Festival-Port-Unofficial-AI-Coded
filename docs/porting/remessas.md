@@ -1,5 +1,7 @@
 # Remessas e preços — contratos vigentes
 
+Em 17/11/2026, o responsável informou que tudo ocorreu bem e declarou a fatia 17 concluída. Aceite global de 17-A/17-B1/17-B2/17-F1/17-F2/17-F3/17-F4, sucedendo as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
+
 Responsável confirmou a fatia 16 finalizada ao solicitar a 17. Aceite global inclui seu recorte econômico, sem atribuir resultados individuais de testes nem ampliar cobertura de dedicado/multiplayer ou cenário 8.
 
 Consultar para vendas, fila, preços e pagamentos.
@@ -33,6 +35,8 @@ No original, ShippingRegistry consulta SellValue antes do registro. A precedênc
 APIs conferidas nos artefatos locais de 26.2.0.93 e exercitadas pelo build: AddServerReloadListenersEvent, SortedReloadListenerEvent.addListener, SimplePreparableReloadListener.prepare/apply, ResourceManager.listResources, BuiltInRegistries.ITEM.getOptional e Holder.is(TagKey). A busca opcional permite rejeitar um identificador desconhecido antes da inclusão na tabela.
 
 ## Atualizações e validação
+
+17-A/B1/B2: cabbage/pineapple/corn/sweet_potato/green_pepper em c:crops/<espécie> e c:crops, preços 450/420/110/60/80, prioridade zero. Sementes sem preço; três testes novos, um por entrega, conferem fila persistida, preços fixados, pagamento único dos ciclos completos (450/1260/770/840/720) e rejeição sem consumo das sementes. Nenhum algoritmo econômico ou comportamento offline alterado. Builds por entrega aprovados com execução efetiva; limites dos adaptadores e aceites manuais em [Cultivos](cultivos.md).
 
 16-A: produtos `strawberry`, `tomato`, `eggplant` integram `c:crops/<espécie>` e `c:crops`, com preços 50/70/80 e prioridade zero. Sementes sem preço, recusadas sem consumo. Um teste novo percorre os máximos 12/8/8, deposita produtos, persiste fila em NBT comprimido e comprova pagamento único de 600/560/640 após descartar preços ativos. Produto fornecido pelo adaptador de colheita; não comprova mundo completo. Integra 19 novos/192 totais da fatia 16, sem falhas/erros/ignorados; build final aprovado reutilizando testes executados na implementação. Algoritmo econômico e política offline preservados; aquisição comercial e alimentação permanecem adiadas.
 

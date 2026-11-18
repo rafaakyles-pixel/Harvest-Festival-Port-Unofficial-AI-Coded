@@ -1,0 +1,30 @@
+{
+  "seed_tag": "harvestfestival:seeds/corn",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "summer"
+  ],
+  "stages": [
+    3,
+    8,
+    12,
+    14,
+    15
+  ],
+  "appearances": [
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/corn",
+  "regrow_stage": 12,
+  "max_harvests": 7,
+  "empty_harvest_policy": "advance"
+}

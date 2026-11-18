@@ -3,6 +3,8 @@
   "values": [
     "harvestfestival:sickle",
     "harvestfestival:sickle_copper",
-    "harvestfestival:sickle_silver"
+    "harvestfestival:sickle_silver",
+    "harvestfestival:sickle_gold",
+    "harvestfestival:sickle_mystril"
   ]
 }

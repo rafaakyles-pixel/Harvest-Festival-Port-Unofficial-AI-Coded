@@ -89,7 +89,7 @@ class SickleAreaTest {
             assertEquals(1,SickleState.get(stack).charge());
             assertEquals(0,SickleState.get(stack).discharge().charge());assertEquals(1,state.charge());
             for(String json:List.of("{\"level\":42,\"charge\":null}","{\"level\":42,\"charge\":1.5}",
-                    "{\"level\":42,\"charge\":\"1\"}","{\"level\":42,\"charge\":true}","{\"level\":42,\"charge\":3}"))
+                    "{\"level\":42,\"charge\":\"1\"}","{\"level\":42,\"charge\":true}","{\"level\":42,\"charge\":5}"))
                 assertEquals(SickleState.INVALID,SickleState.CODEC.parse(JsonOps.INSTANCE,JsonParser.parseString(json)).getOrThrow());
             assertEquals(new SickleState(42,0,false),SickleState.CODEC.parse(JsonOps.INSTANCE,JsonParser.parseString("{\"level\":42}")).getOrThrow());
             stack.set(ToolContent.SICKLE_STATE.get(),new SickleState(42,2,false)); assertFalse(SickleItem.canUse(stack));

@@ -1,0 +1,26 @@
+{
+  "seed_tag": "harvestfestival:seeds/sweet_potato",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "autumn"
+  ],
+  "stages": [
+    3,
+    5,
+    6
+  ],
+  "appearances": [
+    64,
+    65,
+    66
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/sweet_potato",
+  "regrow_stage": 4,
+  "max_harvests": 14,
+  "empty_harvest_policy": "advance"
+}

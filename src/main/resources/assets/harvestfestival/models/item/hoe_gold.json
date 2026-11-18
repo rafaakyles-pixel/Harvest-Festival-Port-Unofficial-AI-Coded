@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "layer0": "harvestfestival:item/tools/hoe_gold"
+  },
+  "parent": "minecraft:item/handheld"
+}

@@ -68,5 +68,21 @@
   "tooltip.harvestfestival.sickle.charge": "Hold use and release to charge; break a crop to cut.",
   "tooltip.harvestfestival.sickle.discharge": "Sneak and use to discharge.",
   "tooltip.harvestfestival.sickle.discharged": "Sickle discharged",
-  "item.harvestfestival.sickle_silver": "Silver Sickle"
+  "item.harvestfestival.sickle_silver": "Silver Sickle",
+  "item.harvestfestival.cabbage": "Cabbage",
+  "item.harvestfestival.cabbage_seeds": "Cabbage Seeds",
+  "item.harvestfestival.pineapple": "Pineapple",
+  "item.harvestfestival.pineapple_seeds": "Pineapple Seeds",
+  "item.harvestfestival.corn": "Corn",
+  "item.harvestfestival.corn_seeds": "Corn Seeds",
+  "item.harvestfestival.sweet_potato": "Sweet Potato",
+  "item.harvestfestival.sweet_potato_seeds": "Sweet Potato Seeds",
+  "item.harvestfestival.green_pepper": "Green Pepper",
+  "item.harvestfestival.green_pepper_seeds": "Green Pepper Seeds",
+  "item.harvestfestival.hoe_gold": "Gold Hoe",
+  "item.harvestfestival.watering_can_gold": "Gold Watering Can",
+  "item.harvestfestival.hoe_mystril": "Mystril Hoe",
+  "item.harvestfestival.watering_can_mystril": "Mystril Watering Can",
+  "item.harvestfestival.sickle_gold": "Gold Sickle",
+  "item.harvestfestival.sickle_mystril": "Mystril Sickle"
 }

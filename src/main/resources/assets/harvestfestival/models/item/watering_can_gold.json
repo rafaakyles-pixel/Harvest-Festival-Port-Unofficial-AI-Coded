@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "layer0": "harvestfestival:item/tools/wateringcan_gold"
+  },
+  "parent": "minecraft:item/generated"
+}

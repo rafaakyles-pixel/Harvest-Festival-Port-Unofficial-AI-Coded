@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/sweet_potato_seeds",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 14166700
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 14166700
+      }
+    ]
+  }
+}

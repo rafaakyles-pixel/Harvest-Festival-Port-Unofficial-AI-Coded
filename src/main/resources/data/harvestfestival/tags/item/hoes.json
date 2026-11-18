@@ -2,7 +2,9 @@
   "values": [
     "harvestfestival:hoe",
     "harvestfestival:hoe_copper",
-    "harvestfestival:hoe_silver"
+    "harvestfestival:hoe_silver",
+    "harvestfestival:hoe_gold",
+    "harvestfestival:hoe_mystril"
   ],
   "replace": false
 }

@@ -19,7 +19,7 @@ public record FarmToolState(double level, int charge, boolean invalid) {
         return new Dynamic<>(JsonOps.INSTANCE, json);
     });
     public FarmToolState {
-        if (!Double.isFinite(level) || level < 0 || level > 100 || charge < 0 || charge > 2)
+        if (!Double.isFinite(level) || level < 0 || level > 100 || charge < 0 || charge > 4)
             throw new IllegalArgumentException("Invalid farm tool state");
     }
     private static FarmToolState decode(Dynamic<?> value) {

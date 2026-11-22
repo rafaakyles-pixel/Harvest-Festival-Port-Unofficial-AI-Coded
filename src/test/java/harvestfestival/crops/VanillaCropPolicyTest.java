@@ -34,7 +34,7 @@ class VanillaCropPolicyTest {
             bindExtras(); var p=policy(15);
             for(var can:List.of(harvestfestival.tools.ToolContent.WATERING_CAN.get(),
                     harvestfestival.tools.ToolContent.WATERING_CAN_COPPER.get(),harvestfestival.tools.ToolContent.WATERING_CAN_SILVER.get(),harvestfestival.tools.ToolContent.WATERING_CAN_GOLD.get(),harvestfestival.tools.ToolContent.WATERING_CAN_MYSTRIL.get())) {
-                for(var block:List.of(Blocks.WHEAT,Blocks.CARROTS,Blocks.BEETROOTS,Blocks.POTATOES)) {
+                for(var block:List.of(Blocks.WHEAT,Blocks.CARROTS,Blocks.BEETROOTS,Blocks.POTATOES,Blocks.MELON_STEM,Blocks.ATTACHED_MELON_STEM,Blocks.PUMPKIN_STEM,Blocks.ATTACHED_PUMPKIN_STEM)) {
                     assertFalse(p.denyItemUse(new ItemStack(can),block.defaultBlockState()));
                     assertTrue(p.denyGrowth(block.defaultBlockState()));
                     assertTrue(p.denyItemUse(new ItemStack(Items.BONE_MEAL),block.defaultBlockState()));
@@ -49,13 +49,13 @@ class VanillaCropPolicyTest {
             bindExtras();
             for (int mask = 0; mask < 16; mask++) {
                 var p = policy(mask);
-                for (var seed : List.of(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.CARROT, Items.POTATO)) {
+                for (var seed : List.of(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.CARROT, Items.POTATO, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS)) {
                     var held = new ItemStack(seed, 3);
                     assertEquals(p.disablePlanting(), p.denyItemUse(held, Blocks.FARMLAND.defaultBlockState()));
                     assertEquals(p.disablePlanting() || p.disableGrowth(), p.denyItemUse(held, Blocks.WHEAT.defaultBlockState()));
                     assertEquals(3, held.getCount());
                 }
-                for (var block : List.of(Blocks.WHEAT, Blocks.CARROTS, Blocks.BEETROOTS, Blocks.POTATOES)) {
+                for (var block : List.of(Blocks.WHEAT, Blocks.CARROTS, Blocks.BEETROOTS, Blocks.POTATOES, Blocks.MELON_STEM, Blocks.ATTACHED_MELON_STEM, Blocks.PUMPKIN_STEM, Blocks.ATTACHED_PUMPKIN_STEM)) {
                     var state = block.defaultBlockState();
                     assertEquals(p.disableGrowth(), p.denyGrowth(state));
                     assertEquals(p.disableGrowth(), p.denyItemUse(new ItemStack(Items.BONE_MEAL), state));
@@ -75,9 +75,9 @@ class VanillaCropPolicyTest {
         try (var fixture = new CropTestSupport(directory)) {
             bindExtras(); var p = policy(15);
             for (var seed : List.of(CropContent.WHEAT_SEEDS.get(), CropContent.CARROT_SEEDS.get(), CropContent.BEETROOT_SEEDS.get(),
-                    CropContent.POTATO_SEEDS.get(), Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.NETHER_WART, Items.DIAMOND_HOE))
+                    CropContent.POTATO_SEEDS.get(), CropContent.WATERMELON_SEEDS.get(), CropContent.PUMPKIN_SEEDS.get(), CropContent.GRASS_SEEDS.get(), Items.NETHER_WART, Items.DIAMOND_HOE))
                 assertFalse(p.denyItemUse(new ItemStack(seed), Blocks.FARMLAND.defaultBlockState()));
-            for (var block : List.of(CropContent.CROP.get(), Blocks.MELON_STEM, Blocks.PUMPKIN_STEM, Blocks.NETHER_WART, Blocks.STONE)) {
+            for (var block : List.of(CropContent.CROP.get(), CropContent.CROP_TOP.get(), Blocks.MELON, Blocks.PUMPKIN, Blocks.NETHER_WART, Blocks.STONE)) {
                 assertFalse(p.denyGrowth(block.defaultBlockState()));
                 var drops = new ArrayList<>(List.of(new ItemStack(Items.POTATO), new ItemStack(Items.WHEAT_SEEDS)));
                 p.filterDrops(block.defaultBlockState(), drops); assertEquals(2, drops.size());
@@ -97,7 +97,7 @@ class VanillaCropPolicyTest {
                 VanillaCropRules.INSTANCE.apply(policy(15), null, null);
                 var event = new CropGrowEvent.Pre(null, BlockPos.ZERO, Blocks.CARROTS.defaultBlockState());
                 VanillaCropEvents.grow(event); assertEquals(CropGrowEvent.Pre.Result.DO_NOT_GROW, event.getResult());
-                var other = new CropGrowEvent.Pre(null, BlockPos.ZERO, Blocks.MELON_STEM.defaultBlockState());
+                var other = new CropGrowEvent.Pre(null, BlockPos.ZERO, Blocks.MELON.defaultBlockState());
                 other.setResult(CropGrowEvent.Pre.Result.GROW);
                 VanillaCropEvents.grow(other); assertEquals(CropGrowEvent.Pre.Result.GROW, other.getResult());
                 VanillaCropRules.INSTANCE.apply(policy(13), null, null);

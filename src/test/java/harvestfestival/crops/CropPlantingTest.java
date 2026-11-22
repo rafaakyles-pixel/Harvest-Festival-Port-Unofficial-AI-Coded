@@ -18,7 +18,7 @@ class CropPlantingTest {
     @TempDir Path directory;
     @Test void clickingGrassOrDirtCannotPlantNeighboringFarmlandOrConsumeSeeds() throws Exception {
         try (var resources = new CropTestSupport(directory)) {
-            for (var item : java.util.List.of(CropContent.TURNIP_SEEDS.get(), CropContent.CUCUMBER_SEEDS.get(),
+            for (var item : java.util.List.of(CropContent.TUTORIAL_TURNIP_SEEDS.get(), CropContent.TURNIP_SEEDS.get(), CropContent.CUCUMBER_SEEDS.get(),
                     CropContent.CARROT_SEEDS.get(), CropContent.BEETROOT_SEEDS.get(), CropContent.POTATO_SEEDS.get())) {
                 for (var centerSoil : java.util.List.of(net.minecraft.world.level.block.Blocks.GRASS_BLOCK,
                         net.minecraft.world.level.block.Blocks.DIRT)) {

@@ -35,6 +35,10 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
         var definitions = new HashMap<>(read(manager.listResources("crops", id -> id.getPath().endsWith(".json")),
                 message -> LogUtils.getLogger().warn(message)));
         definitions.values().removeIf(definition -> {
+            if (definition.form().transforms() && !net.minecraft.core.registries.BuiltInRegistries.BLOCK.containsKey(definition.form().matureBlock())) {
+                LogUtils.getLogger().warn("Ignoring crop definition {}: unknown mature block {}", definition.id(), definition.form().matureBlock());
+                return true;
+            }
             var loot = definition.harvestLoot();
             if (manager.getResource(Identifier.fromNamespaceAndPath(loot.getNamespace(), "loot_table/" + loot.getPath() + ".json")).isPresent()) return false;
             LogUtils.getLogger().warn("Ignoring crop definition {}: missing harvest loot {}", definition.id(), loot);
@@ -65,9 +69,6 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                     for (var value : json.getAsJsonArray("appearances")) appearances.add(integer(value));
                 }
                 var loot = Identifier.parse(string(json, "harvest_loot"));
-                if (json.has("minimum_cut") && integer(json.get("minimum_cut")) != 0) {
-                    throw new IllegalArgumentException("only minimum_cut=0 is supported");
-                }
                 definitions.put(id, new CropDefinition(id,
                         TagKey.create(Registries.ITEM, Identifier.parse(string(json, "seed_tag"))),
                         TagKey.create(Registries.BLOCK, Identifier.parse(string(json, "soil_tag"))), seasons, stages,
@@ -79,7 +80,13 @@ public final class CropDefinitions extends SimplePreparableReloadListener<Map<Id
                         emptyHarvestPolicy(json), appearances,
                         json.has("harvest_tool_tag") ? TagKey.create(Registries.ITEM,
                                 Identifier.parse(string(json, "harvest_tool_tag"))) : null,
-                        json.has("harvest_on_player_break") && bool(json, "harvest_on_player_break")));
+                        json.has("harvest_on_player_break") && bool(json, "harvest_on_player_break"),
+                        new CropForm(json.has("mature_block") ? Identifier.parse(string(json, "mature_block")) : null,
+                                json.has("fruit_tag") ? TagKey.create(Registries.BLOCK, Identifier.parse(string(json, "fruit_tag"))) : null,
+                                json.has("attached_appearance") ? integer(json.get("attached_appearance")) : 0,
+                                json.has("last_neighbor") && bool(json, "last_neighbor"),
+                                json.has("double_from") ? integer(json.get("double_from")) : 0,
+                                json.has("minimum_cut") ? integer(json.get("minimum_cut")) : 0)));
             } catch (IOException | RuntimeException ex) {
                 warn.accept("Ignoring crop definition " + entry.getKey() + ": " + ex.getMessage());
             }

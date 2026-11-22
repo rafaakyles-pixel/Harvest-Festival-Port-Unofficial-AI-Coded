@@ -1,0 +1,16 @@
+{
+  "model": {
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 14719545
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 14719545
+      }
+    ],
+    "model": "harvestfestival:item/pumpkin_seeds",
+    "type": "minecraft:model"
+  }
+}

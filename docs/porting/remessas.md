@@ -1,5 +1,29 @@
 # Remessas e preços — contratos vigentes
 
+Entrega 19-A autorizada: somente Nabo Robusto recebe tag c:crops/tutorial_turnip e preço 10/prioridade zero, separado do nabo comum (60). Saco HF recusado sem consumo; fila/precedência/pagamento offline intactos. A 19-B foi adiada integralmente: nenhuma regra de preço/tag de remessa para nether wart acrescentada. Levantamento econômico abaixo fica preservado como evidência, não como conteúdo entregue.
+
+Um teste novo percorre duas viradas de inverno e colheita pelo adaptador, deposita tutorial por 10 e nabo comum por 60, rejeita saco sem consumir, descarta preços ativos, persiste fila em NBT comprimido e paga 70 uma única vez. Executado no build de 251 testes (10 novos totais); não comprova sessão/offline/multiplayer real.
+
+## Evidências econômicas da 19 — levantamento, sem implementação
+
+HFCrops.TUTORIAL e NETHER_WART declaram compra 0/venda 10; preInit registra ambos os produtos no ShippingRegistry. Nabo robusto é produto HF distinto do nabo comum (60); nether wart é o item vanilla, sem distinção de origem, inclusive quando também usado para plantio vanilla. Sacos HF não recebem preço de remessa. HFShops filtra seedCost>0, excluindo ambos da listagem automática; a regra seeds.netherwart não comprova missão/loja disponível. Fontes e caminhos em [Cultivos](cultivos.md#evidências-da-fatia-19--levantamento-de-18112026).
+
+Adaptação proposta: tags separadas c:crops/tutorial_turnip e c:crops/nether_wart, preço 10/prioridade zero, sem inserir tutorial na tag de preço do nabo comum. Sem receita saco→nether wart ou vanilla→HF: registerVanillaCrop está comentado e provider não registra receita. Receitas/usos vanilla permanecem próprios; sem antecipar alquimia/culinária HF. Critérios futuros: rejeitar sacos sem consumir, fixar preço antes de recarga, persistir fila e pagar uma vez na próxima virada conectado; testar nabo comum por 60 e ambos os novos produtos por 10. Algoritmos, precedência e pagamento offline aceito permanecem intactos. Nenhum teste econômico novo executado nesta auditoria.
+
+Em 18/11/2026, o responsável declarou a fatia 18 aprovada: aceite global de 18-A1/A2, 18-V e 18-B, sucedendo as pendências de aceite dessas entregas abaixo. Relatou ter visto a grama crescer em duas camadas; não foram informados resultados individuais dos demais testes. Nenhuma execução em jogo é atribuída ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
+
+## Entrega econômica da 18
+
+Autorizada em 18/11/2026, com abóbora lisa vanilla. Tags separadas `c:crops/melon_slices`, `c:crops/melons`, `c:crops/pumpkins` e `c:crops/grass` fixam 20/180/220/1 por unidade. Somente minecraft:pumpkin recebe a nova regra de abóbora; carved_pumpkin não recebe preço adicional. Sacos de sementes não recebem preço de remessa. Teste novo usa depósito real, fila persistida em NBT comprimido, recarga de preços e pagamento idempotente (total 421), sem simular sessão ou pagamento offline. Nenhuma alteração no algoritmo de economia. Requisitos de loja continuam documentação, sem lojas/NPCs/missões implementados. Esta decisão sucede a representação pendente no levantamento abaixo.
+
+## Evidências econômicas da fatia 18 — sem implementação
+
+HFCrops define venda de watermelon (Items.MELON, fatia antiga) por 20, MELON_BLOCK explicitamente por 9×20=180, pumpkin por 220 e produto grass/forragem por 1. Sementes custam 250/450/500 na compra, respectivamente; isso não é preço de remessa. HFCrops.preInit registra os produtos no ShippingRegistry, não os sacos. Requisitos de aquisição registrados em [Cultivos](cultivos.md); não antecipar comércio.
+
+As tags modernas de fatia e bloco de melancia devem ser separadas para preços, embora o OreDictionary original agregue ambos em cropMelon/cropWatermelon: reutilizar a mesma tag de preço pagaria valor errado a um deles. Abóbora depende da decisão entre representação própria/pumpkin/carved_pumpkin; não conceder preço a ambos silenciosamente. Forragem é item HF distinto de hay_block. Nenhuma nova regra econômica foi implementada nesta auditoria.
+
+Critério futuro: depositar produtos reais dos recortes, fixar os valores 20/180/220/1 antes da recarga, persistir a fila e pagar uma única vez na próxima virada conectado; rejeitar sementes sem consumi-las. Algoritmos, precedência item>tag>SellValue e comportamento offline permanecem intactos. Teste de adaptador/codec não comprova sessão multiplayer.
+
 Em 17/11/2026, o responsável informou que tudo ocorreu bem e declarou a fatia 17 concluída. Aceite global de 17-A/17-B1/17-B2/17-F1/17-F2/17-F3/17-F4, sucedendo as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
 
 Responsável confirmou a fatia 16 finalizada ao solicitar a 17. Aceite global inclui seu recorte econômico, sem atribuir resultados individuais de testes nem ampliar cobertura de dedicado/multiplayer ou cenário 8.

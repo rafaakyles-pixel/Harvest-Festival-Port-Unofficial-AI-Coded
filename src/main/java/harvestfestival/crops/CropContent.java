@@ -23,6 +23,8 @@ public final class CropContent {
     public static final TagKey<Item> WATERING_CANS = TagKey.create(Registries.ITEM, Identifier.parse("harvestfestival:watering_cans"));
     public static final DeferredBlock<CropBlock> CROP = BLOCKS.registerBlock("crop", CropBlock::new,
             props -> props.noCollision().noOcclusion().strength(0.1F).sound(SoundType.CROP));
+    public static final DeferredBlock<CropTopBlock> CROP_TOP = BLOCKS.registerBlock("crop_top", CropTopBlock::new,
+            props -> props.noCollision().noOcclusion().strength(0.1F).sound(SoundType.CROP).noLootTable());
     public static final Supplier<BlockEntityType<CropBlockEntity>> CROP_ENTITY = ENTITIES.register("crop",
             () -> new BlockEntityType<>(CropBlockEntity::new, CROP.get()));
     public static final DeferredItem<CropSeedItem> TURNIP_SEEDS = ITEMS.registerItem("turnip_seeds", CropSeedItem::new);
@@ -62,6 +64,12 @@ public final class CropContent {
     public static final DeferredItem<Item> GREEN_PEPPER = ITEMS.registerSimpleItem("green_pepper");
 
     private CropContent() {}
+    public static final DeferredItem<CropSeedItem> WATERMELON_SEEDS = ITEMS.registerItem("watermelon_seeds", CropSeedItem::new);
+    public static final DeferredItem<CropSeedItem> PUMPKIN_SEEDS = ITEMS.registerItem("pumpkin_seeds", CropSeedItem::new);
+    public static final DeferredItem<CropSeedItem> GRASS_SEEDS = ITEMS.registerItem("grass_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> GRASS = ITEMS.registerSimpleItem("grass");
+    public static final DeferredItem<CropSeedItem> TUTORIAL_TURNIP_SEEDS = ITEMS.registerItem("tutorial_turnip_seeds", CropSeedItem::new);
+    public static final DeferredItem<Item> TUTORIAL_TURNIP = ITEMS.registerSimpleItem("tutorial_turnip");
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);
         ITEMS.register(bus);

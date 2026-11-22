@@ -1,0 +1,15 @@
+{
+  "seed_tag": "harvestfestival:seeds/tutorial_turnip",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": ["spring", "summer", "autumn", "winter"],
+  "stages": [1, 2, 3],
+  "appearances": [107, 108, 109],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/tutorial_turnip",
+  "empty_harvest_policy": "advance",
+  "harvest_on_player_break": true
+}

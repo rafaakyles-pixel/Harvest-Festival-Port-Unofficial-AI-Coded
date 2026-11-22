@@ -74,12 +74,19 @@ public final class SickleArea {
                         || player.blockActionRestricted(level,pos,player.gameMode.getGameModeForPlayer())) return null;
                 var state = level.getBlockState(pos);
                 var entity = level.getBlockEntity(pos);
+                if (!harvestfestival.crops.CropPair.permitted(level, pos, player, stack)) return null;
+                var partner = harvestfestival.crops.CropPair.partner(level, pos);
+                var partnerState = level.getBlockState(partner);
+                var partnerEntity = level.getBlockEntity(partner);
                 // Center already passed the engine's break event. Never post it twice.
                 if (!center && CommonHooks.fireBlockBreak(level,player.gameMode.getGameModeForPlayer(),player,pos,state).isCanceled()) return null;
-                if (level.getBlockState(pos) != state || level.getBlockEntity(pos) != entity) return null;
+                if (level.getBlockState(pos) != state || level.getBlockEntity(pos) != entity
+                        || level.getBlockState(partner) != partnerState || level.getBlockEntity(partner) != partnerEntity
+                        || !harvestfestival.crops.CropPair.permitted(level, pos, player, stack)) return null;
                 return new Candidate() {
                     private ItemStack tool;
-                    private boolean unchanged() { return level.getBlockState(pos) == state && level.getBlockEntity(pos) == entity; }
+                    private boolean unchanged() { return level.getBlockState(pos) == state && level.getBlockEntity(pos) == entity
+                            && level.getBlockState(partner) == partnerState && level.getBlockEntity(partner) == partnerEntity; }
                     @Override public boolean canHarvest() { return unchanged() && state.canHarvestBlock(level,pos,player); }
                     @Override public boolean remove() {
                         if (!unchanged()) return false;

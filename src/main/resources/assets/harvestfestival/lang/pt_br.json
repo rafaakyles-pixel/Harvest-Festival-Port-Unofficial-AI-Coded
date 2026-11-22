@@ -1,4 +1,6 @@
 {
+  "item.harvestfestival.tutorial_turnip": "Nabo Robusto",
+  "item.harvestfestival.tutorial_turnip_seeds": "Sementes de Nabo Robusto",
   "itemGroup.harvestfestival.seeds": "Harvest Festival — Sementes",
   "itemGroup.harvestfestival.tools_and_blocks": "Harvest Festival — Ferramentas e blocos",
   "item.harvestfestival.cucumber": "Pepino",
@@ -84,5 +86,9 @@
   "item.harvestfestival.hoe_mystril": "Enxada de mystril",
   "item.harvestfestival.watering_can_mystril": "Regador de mystril",
   "item.harvestfestival.sickle_gold": "Foice de Ouro",
-  "item.harvestfestival.sickle_mystril": "Foice de Mystril"
+  "item.harvestfestival.sickle_mystril": "Foice de Mystril",
+  "item.harvestfestival.watermelon_seeds": "Sementes de melancia",
+  "item.harvestfestival.pumpkin_seeds": "Sementes de abóbora",
+  "item.harvestfestival.grass_seeds": "Sementes de grama",
+  "item.harvestfestival.grass": "Feno"
 }

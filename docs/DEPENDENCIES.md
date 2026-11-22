@@ -106,6 +106,14 @@ Esta ordem propõe **fatias internas**, não a cópia sequencial dos pacotes aco
 14. **Cobertura final:** coleções/notas/avanços e recursos de interface restantes, configurações e comportamento multiplayer. Persistência e UI essenciais já devem acompanhar cada fatia anterior.
 15. **Integrações externas:** somente mediante solicitação explícita, na fase apropriada; não restaurar código comentado automaticamente.
 
+## Prioridade aprovada para as fatias 19–21
+
+Atualização posterior do responsável: executar apenas 19-A (Nabo Robusto), ampliada para ausência de estação no Nether/End em todos os cultivos HF. 19-B (nether wart HF, inclusive saco) adiada integralmente, preservando vanilla; decisões específicas reavaliadas se retomada. Esta revisão sucede o escopo da 19 no parágrafo abaixo, sem alterar 20-A/B/etc. nem início dos NPCs na 21.
+
+O responsável definiu a sequência executiva: 19 para nabo de tutorial e nether wart, com escopo do prompt aprovado e ajustes de recorte compatíveis com esta sequência; 20 para concluir árvores frutíferas e aspersores em subfatias 20-A, 20-B etc.; desenvolvimento de NPCs iniciado na 21. Essa decisão prevalece sobre a ordem sugerida acima quanto ao início de NPCs: animais, pesca, mineração e culinária completos não são pré-requisitos gerais para começar esse trabalho.
+
+O grafo estático permanece evidência das dependências originais. Antes de cada entrega, conferir os caminhos realmente consumidos e delimitar o mínimo necessário, particularmente o ciclo NPC–cidade–construções–missões. Não simular sistemas ausentes para forçar a nova ordem nem antecipá-los integralmente. Os subrecortes da 20 e o primeiro recorte concreto da 21 serão definidos após levantamento, com APIs verificadas, persistência e critérios de conclusão próprios. Novos pacotes concretos serão registrados em STATUS quando delimitados. A Fase 3 e as pendências existentes permanecem vigentes.
+
 ## Pontos de corte possíveis
 
 | Corte hipotético | Contratos que precisariam atravessar a fronteira | Custo/limite |

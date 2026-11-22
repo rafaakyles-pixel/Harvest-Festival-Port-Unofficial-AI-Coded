@@ -1,0 +1,13 @@
+{
+  "result": {
+    "id": "minecraft:melon_slice",
+    "count": 9
+  },
+  "pattern": [
+    "M"
+  ],
+  "key": {
+    "M": "#c:crops/melons"
+  },
+  "type": "minecraft:crafting_shaped"
+}

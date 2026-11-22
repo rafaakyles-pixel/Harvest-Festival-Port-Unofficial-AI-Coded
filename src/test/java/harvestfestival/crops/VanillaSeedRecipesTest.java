@@ -22,6 +22,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VanillaSeedRecipesTest {
     @TempDir Path directory;
+    @Test void fruitRecipesAreOneWayAndIndependentFromVanillaPolicy() throws Exception {
+        try (var fixture = new CropTestSupport(directory)) {
+            var melon=recipe("watermelon_seeds_from_hf"); var pumpkin=recipe("pumpkin_seeds_from_hf");
+            var slices=recipe("melon_slices_from_block");
+            assertInstanceOf(ShapelessRecipe.class,melon); assertInstanceOf(ShapelessRecipe.class,pumpkin);
+            assertInstanceOf(ShapedRecipe.class,slices);
+            for(int mask=0;mask<16;mask++) {
+                VanillaCropRules.INSTANCE.apply(VanillaCropPolicyTest.policy(mask),null,null);
+                result(melon,input(CropContent.WATERMELON_SEEDS.get()),Items.MELON_SEEDS,9);
+                result(pumpkin,input(CropContent.PUMPKIN_SEEDS.get()),Items.PUMPKIN_SEEDS,9);
+                result(slices,input(Items.MELON),Items.MELON_SLICE,9);
+                for(var recipe:List.of(melon,pumpkin,slices)) {
+                    for(var item:List.of(Items.MELON_SEEDS,Items.PUMPKIN_SEEDS,Items.MELON_SLICE,Items.PUMPKIN))
+                        assertFalse(recipe.matches(input(item),null));
+                }
+            }
+        } finally { VanillaCropEvents.stopped(null); }
+    }
     private CraftingRecipe recipe(String name) throws Exception {
         var json = JsonParser.parseString(Files.readString(directory.resolve("data/harvestfestival/recipe/" + name + ".json")));
         var ops = RegistryOps.create(JsonOps.INSTANCE, RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));

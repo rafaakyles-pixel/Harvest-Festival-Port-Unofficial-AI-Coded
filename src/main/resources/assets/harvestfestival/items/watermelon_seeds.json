@@ -1,0 +1,16 @@
+{
+  "model": {
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 13183806
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 13183806
+      }
+    ],
+    "model": "harvestfestival:item/watermelon_seeds",
+    "type": "minecraft:model"
+  }
+}

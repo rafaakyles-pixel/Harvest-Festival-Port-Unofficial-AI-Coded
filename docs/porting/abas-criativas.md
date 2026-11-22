@@ -1,5 +1,19 @@
 # Abas criativas
 
+Entrega 19-A autorizada: saco Nabo Robusto após grama na aba Sementes; produto somente na busca, ao final dos produtos HF. Recursos originais, ACA262 nas duas camadas e traduções incluídos. 19-B integralmente adiada, inclusive saco HF: nether wart permanece somente nos destinos vanilla preexistentes. Essa decisão sucede a proposta abaixo; exposição criativa não implementa aquisição pelo tutorial.
+
+## Destinos propostos da 19 — sem implementação
+
+Leitura de ItemHFSeeds.getSubItems/Crop.REGISTRY comprova exposição criativa original dos sacos tutorial_turnip e nether_wart; o campo privado de nether wart não impede enumeração. ItemCrop.getCreativeStack inclui produto tutorial próprio e exclui a variante HF legada de nether wart, cujo produto efetivo é vanilla. Essa exposição não comprova obtenção survival: tutorial depende de missões/trocas; saco nether wart não tem aquisição survival encontrada no núcleo.
+
+Proposta explícita para as abas já aprovadas: acrescentar saco Nabo Robusto após grama e saco nether wart após ele na aba Sementes; produto Nabo Robusto somente na busca, seguindo a divisão moderna já adotada. Item vanilla nether wart conserva abas/busca vanilla, sem duplicata HF; bloco genérico permanece técnico. Sacos neck/body nas cores ACA262/8B0000; produto tutorial usa PNG original. Exposição permite testes, mas não implementa lojas, recompensas, distribuição automática ou conversão vanilla→HF. Recurso visual vanilla 26.2 e nome derivado de seu produto são adaptação proposta para nether wart, não validação visual realizada. Cenário 8 permanece aberto.
+
+Em 18/11/2026, o responsável declarou a fatia 18 aprovada: aceite global de 18-A1/A2, 18-V e 18-B, sucedendo as pendências de aceite dessas entregas abaixo. Relatou ter visto a grama crescer em duas camadas; não foram informados resultados individuais dos demais testes. Nenhuma execução em jogo é atribuída ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
+
+Entrega da 18 autorizada em 18/11/2026: sementes de melancia/abóbora/grama acrescentadas ao final da aba; Feno somente na busca. Frutos vanilla preservam destinos vanilla e crop_top é técnico, sem item/aba. Sacos originais e item grass.png MIT incluídos; teste de ordem/destinos atualizado e tintas/recursos verificados por arquivo, sem aceite visual.
+
+Levantamento anterior da 18, sem registro novo naquela etapa: proposta de acrescentar sementes de melancia/abóbora/grama ao final da ordem vigente, preservando todos os destinos anteriores; forragem somente na busca. Produtos vanilla conservam suas abas, sem duplicatas HF. Representação/item final da abóbora depende de decisão explícita; se próprio, seu destino deve integrar essa aprovação. Sacos reutilizam neck/body originais, cores C92B3E/E09A39/7AC958. Forragem usa crops/grass.png original, nomes Fodder/Feno, sem prometer funcionalidade de cocho. Evidência por leitura de recursos, sem validação visual.
+
 Em 17/11/2026, o responsável informou que tudo ocorreu bem e declarou a fatia 17 concluída. Aceite global de 17-A/17-B1/17-B2/17-F1/17-F2/17-F3/17-F4, sucedendo as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
 
 Responsável confirmou a fatia 16 finalizada ao solicitar a 17. Aceite global sucede pendências da 16 abaixo, sem inferir testes individuais de idiomas/aparência ou encerrar cenário 8/dedicado/multiplayer.

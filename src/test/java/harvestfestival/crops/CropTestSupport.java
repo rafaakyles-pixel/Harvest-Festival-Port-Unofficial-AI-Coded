@@ -26,6 +26,31 @@ import net.minecraft.world.level.block.Block;
 /** Real bundled resources and registry tags; restores shared registries after each test. */
 public final class CropTestSupport implements AutoCloseable {
     public static final String[] RESOURCES = {
+        "harvestfestival/crops/tutorial_turnip.json", "harvestfestival/loot_table/crops/tutorial_turnip.json",
+        "harvestfestival/tags/item/seeds/tutorial_turnip.json", "c/tags/item/crops/tutorial_turnip.json",
+        "harvestfestival/shipping_prices/tags/c/crops/tutorial_turnip.json",
+        "harvestfestival/crops/watermelon.json",
+        "harvestfestival/loot_table/crops/watermelon.json",
+        "harvestfestival/tags/item/seeds/watermelon.json",
+        "harvestfestival/crops/pumpkin.json",
+        "harvestfestival/loot_table/crops/pumpkin.json",
+        "harvestfestival/tags/item/seeds/pumpkin.json",
+        "harvestfestival/crops/grass.json",
+        "harvestfestival/loot_table/crops/grass.json",
+        "harvestfestival/tags/item/seeds/grass.json",
+        "c/tags/item/crops/melon_slices.json",
+        "harvestfestival/shipping_prices/tags/c/crops/melon_slices.json",
+        "c/tags/item/crops/melons.json",
+        "harvestfestival/shipping_prices/tags/c/crops/melons.json",
+        "c/tags/item/crops/pumpkins.json",
+        "harvestfestival/shipping_prices/tags/c/crops/pumpkins.json",
+        "c/tags/item/crops/grass.json",
+        "harvestfestival/shipping_prices/tags/c/crops/grass.json",
+        "harvestfestival/tags/block/fruits/watermelon.json",
+        "harvestfestival/tags/block/fruits/pumpkin.json",
+        "harvestfestival/recipe/watermelon_seeds_from_hf.json",
+        "harvestfestival/recipe/pumpkin_seeds_from_hf.json",
+        "harvestfestival/recipe/melon_slices_from_block.json",
         "harvestfestival/crops/green_pepper.json",
         "harvestfestival/loot_table/crops/green_pepper.json",
         "harvestfestival/tags/item/seeds/green_pepper.json",
@@ -132,6 +157,12 @@ public final class CropTestSupport implements AutoCloseable {
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
+        for (var item : List.of(CropContent.TUTORIAL_TURNIP.get(), CropContent.TUTORIAL_TURNIP_SEEDS.get(), CropContent.WATERMELON_SEEDS.get(), CropContent.PUMPKIN_SEEDS.get(),
+                CropContent.GRASS_SEEDS.get(), CropContent.GRASS.get(), net.minecraft.world.item.Items.MELON,
+                net.minecraft.world.item.Items.MELON_SLICE, net.minecraft.world.item.Items.PUMPKIN,
+                net.minecraft.world.item.Items.MELON_SEEDS, net.minecraft.world.item.Items.PUMPKIN_SEEDS)) {
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        }
         for (var item : List.of(CropContent.GREEN_PEPPER.get(), CropContent.GREEN_PEPPER_SEEDS.get())) {
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         }

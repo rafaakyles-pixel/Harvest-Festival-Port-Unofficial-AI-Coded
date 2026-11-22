@@ -15,6 +15,10 @@
     "harvestfestival:pineapple_seeds",
     "harvestfestival:corn_seeds",
     "harvestfestival:sweet_potato_seeds",
-    "harvestfestival:green_pepper_seeds"
+    "harvestfestival:green_pepper_seeds",
+    "#harvestfestival:seeds/watermelon",
+    "#harvestfestival:seeds/pumpkin",
+    "#harvestfestival:seeds/grass",
+    "#harvestfestival:seeds/tutorial_turnip"
   ]
 }

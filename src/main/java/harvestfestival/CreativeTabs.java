@@ -42,6 +42,10 @@ public final class CreativeTabs {
         output.accept(CropContent.CORN_SEEDS.get());
         output.accept(CropContent.SWEET_POTATO_SEEDS.get());
         output.accept(CropContent.GREEN_PEPPER_SEEDS.get());
+        output.accept(CropContent.WATERMELON_SEEDS.get());
+        output.accept(CropContent.PUMPKIN_SEEDS.get());
+        output.accept(CropContent.GRASS_SEEDS.get());
+        output.accept(CropContent.TUTORIAL_TURNIP_SEEDS.get());
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
@@ -72,5 +76,7 @@ public final class CreativeTabs {
         output.accept(CropContent.CORN.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.SWEET_POTATO.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.GREEN_PEPPER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.GRASS.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(CropContent.TUTORIAL_TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
     }
 }

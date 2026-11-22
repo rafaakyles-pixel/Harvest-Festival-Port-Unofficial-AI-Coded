@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/tutorial_turnip_seeds",
+    "tints": [
+      {"type": "minecraft:constant", "value": 11313762},
+      {"type": "minecraft:constant", "value": 11313762}
+    ]
+  }
+}

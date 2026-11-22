@@ -51,11 +51,11 @@ class VanillaCropLootTest {
             assertEquals(1, java.util.stream.StreamSupport.stream(manager.getSortedModifiers().spliterator(), false).count());
             try {
                 VanillaCropRules.INSTANCE.apply(VanillaCropPolicyTest.policy(15), null, null);
-                for (boolean explosion : new boolean[]{false, true}) for (var block : List.of(Blocks.WHEAT, Blocks.CARROTS, Blocks.BEETROOTS, Blocks.POTATOES)) {
+                for (boolean explosion : new boolean[]{false, true}) for (var block : List.of(Blocks.WHEAT, Blocks.CARROTS, Blocks.BEETROOTS, Blocks.POTATOES, Blocks.MELON_STEM, Blocks.ATTACHED_MELON_STEM, Blocks.PUMPKIN_STEM, Blocks.ATTACHED_PUMPKIN_STEM)) {
                     var drops = new ObjectArrayList<>(List.of(new ItemStack(Items.POTATO), new ItemStack(Items.POISONOUS_POTATO)));
                     assertSame(drops, modifier.apply(drops, context(block.defaultBlockState(), explosion))); assertTrue(drops.isEmpty());
                 }
-                for (var block : List.of(CropContent.CROP.get(), Blocks.MELON_STEM, Blocks.STONE)) {
+                for (var block : List.of(CropContent.CROP.get(), CropContent.CROP_TOP.get(), Blocks.MELON, Blocks.PUMPKIN, Blocks.STONE)) {
                     var drops = new ObjectArrayList<>(List.of(new ItemStack(Items.POTATO)));
                     modifier.apply(drops, context(block.defaultBlockState(), false)); assertEquals(1, drops.size());
                 }
@@ -76,9 +76,9 @@ class VanillaCropLootTest {
                     VanillaCropRules.INSTANCE.apply(VanillaCropPolicyTest.policy(mask), null, null);
                     var drops = new ObjectArrayList<>(List.of(new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.FERN), new ItemStack(Items.MELON_SEEDS)));
                     modifier.apply(drops, context(Blocks.TALL_GRASS.defaultBlockState(), true));
-                    assertEquals((mask & 8) != 0 ? 2 : 3, drops.size());
+                    assertEquals((mask & 8) != 0 ? 1 : 3, drops.size());
                     assertTrue(drops.stream().anyMatch(stack -> stack.is(Items.FERN)));
-                    assertTrue(drops.stream().anyMatch(stack -> stack.is(Items.MELON_SEEDS)));
+                    assertEquals((mask & 8) == 0, drops.stream().anyMatch(stack -> stack.is(Items.MELON_SEEDS)));
                 }
             } finally { VanillaCropEvents.stopped(null); }
         }

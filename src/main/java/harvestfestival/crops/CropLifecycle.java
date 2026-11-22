@@ -11,7 +11,7 @@ public final class CropLifecycle {
         if (definition == null || !state.crop().equals(definition.id()) || state.dead()) return state;
         int dry = watered ? 0 : state.dryDays();
         boolean dieFromDrought = dedicated ? definition.diesWithoutWaterDedicated() : definition.diesWithoutWaterIntegrated();
-        if (!definition.seasons().contains(season)
+        if (season == null || !definition.seasons().contains(season)
                 || (definition.requiresWater() && dieFromDrought && dry > definition.droughtLimit())) {
             return new CropState(state.crop(), state.stage(), dry, true, state.harvests());
         }
@@ -22,7 +22,9 @@ public final class CropLifecycle {
 
     public static boolean canHarvest(CropState state, CropDefinition definition) {
         return definition != null && definition.id().equals(state.crop()) && !state.dead()
-                && state.stage() >= definition.maturity() && state.harvests() < definition.maxHarvests();
+                && !definition.form().transforms()
+                && state.stage() >= (definition.form().minimumCut() > 0 ? definition.form().minimumCut() : definition.maturity())
+                && state.harvests() < definition.maxHarvests();
     }
 
     /** Null means removal. Called only after canHarvest and before emitting any products. */

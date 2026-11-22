@@ -1,4 +1,6 @@
 {
+  "item.harvestfestival.tutorial_turnip": "Hardy Turnip",
+  "item.harvestfestival.tutorial_turnip_seeds": "Hardy Turnip Seeds",
   "itemGroup.harvestfestival.seeds": "Harvest Festival — Seeds",
   "itemGroup.harvestfestival.tools_and_blocks": "Harvest Festival — Tools and Blocks",
   "item.harvestfestival.cucumber": "Cucumber",
@@ -84,5 +86,9 @@
   "item.harvestfestival.hoe_mystril": "Mystril Hoe",
   "item.harvestfestival.watering_can_mystril": "Mystril Watering Can",
   "item.harvestfestival.sickle_gold": "Gold Sickle",
-  "item.harvestfestival.sickle_mystril": "Mystril Sickle"
+  "item.harvestfestival.sickle_mystril": "Mystril Sickle",
+  "item.harvestfestival.watermelon_seeds": "Watermelon Seeds",
+  "item.harvestfestival.pumpkin_seeds": "Pumpkin Seeds",
+  "item.harvestfestival.grass_seeds": "Grass Seeds",
+  "item.harvestfestival.grass": "Fodder"
 }

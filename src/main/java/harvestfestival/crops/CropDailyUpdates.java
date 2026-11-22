@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -112,11 +114,16 @@ public final class CropDailyUpdates {
                 // Non-loading lookup; freshly announced or unloaded chunks cannot participate.
                 if (level.getChunkSource().getChunkNow(pos.x(), pos.z()) == chunk) {
                     if (MIGRATION_PENDING.remove(chunk)) migrate(level, chunk);
-                    work.add(new WorldChunk(level, chunk, event.getCurrentDate().season()));
+                    work.add(new WorldChunk(level, chunk, seasonForDimension(level.dimension(), event.getCurrentDate().season())));
                 }
             }
         });
         process(event.getCycle(), work);
+    }
+
+    /** The original hidden season providers return null in the Nether and End. */
+    public static Season seasonForDimension(ResourceKey<Level> dimension, Season calendarSeason) {
+        return Level.NETHER.equals(dimension) || Level.END.equals(dimension) ? null : calendarSeason;
     }
 
     public static boolean watered(BlockState soil) {
@@ -154,7 +161,7 @@ public final class CropDailyUpdates {
                 var state = crop.crop();
                 var next = CropLifecycle.newDay(state, CropDefinitions.INSTANCE.get(state.crop()), season,
                         watered(chunk.getBlockState(pos.below())), level.getServer().isDedicatedServer());
-                crop.setCrop(next);
+                CropGrowth.advance(level, crop, CropDefinitions.INSTANCE.get(state.crop()), next);
             }
         }
         public void dry() {

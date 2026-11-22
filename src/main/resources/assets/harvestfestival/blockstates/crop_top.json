@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "stage=6": {
+      "model": "harvestfestival:block/grass_top_1"
+    },
+    "stage=7": {
+      "model": "harvestfestival:block/grass_top_2"
+    },
+    "stage=8": {
+      "model": "harvestfestival:block/grass_top_3"
+    },
+    "stage=9": {
+      "model": "harvestfestival:block/grass_top_4"
+    },
+    "stage=10": {
+      "model": "harvestfestival:block/grass_top_5"
+    },
+    "stage=11": {
+      "model": "harvestfestival:block/grass_top_6"
+    }
+  }
+}

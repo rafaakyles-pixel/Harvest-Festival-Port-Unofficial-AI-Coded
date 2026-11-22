@@ -1,0 +1,47 @@
+{
+  "seed_tag": "harvestfestival:seeds/grass",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn"
+  ],
+  "stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "appearances": [
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106
+  ],
+  "requires_water": false,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/grass",
+  "regrow_stage": 1,
+  "max_harvests": 1,
+  "double_from": 6,
+  "minimum_cut": 6,
+  "harvest_tool_tag": "harvestfestival:sickles",
+  "empty_harvest_policy": "advance"
+}

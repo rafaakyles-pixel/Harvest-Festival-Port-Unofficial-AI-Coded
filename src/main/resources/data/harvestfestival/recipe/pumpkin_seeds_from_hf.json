@@ -1,0 +1,10 @@
+{
+  "result": {
+    "id": "minecraft:pumpkin_seeds",
+    "count": 9
+  },
+  "ingredients": [
+    "#harvestfestival:seeds/pumpkin"
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

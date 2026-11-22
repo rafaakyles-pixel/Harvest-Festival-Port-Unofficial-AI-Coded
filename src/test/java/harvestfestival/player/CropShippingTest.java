@@ -24,6 +24,54 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void tutorialTurnipHasDistinctPriceAndSeedsAreRejectedAfterPersistedSingleHarvest() throws Exception {
+        try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
+            var d = harvestfestival.crops.CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:tutorial_turnip"));
+            var state = CropState.planted(d.id());
+            for (int day = 0; day < 2; day++) state = CropLifecycle.newDay(state, d, Season.WINTER, true, false);
+            var prices = new ShippingPrices(); prices.apply(prices.prepare(fixture.manager, null), fixture.manager, null);
+            var holder = new SavedHolder();
+            assertTrue(CropBlock.harvestOnce(state, d, () -> List.of(new ItemStack(CropContent.TUTORIAL_TURNIP.get())),
+                    next -> { assertNull(next); return true; }, stack -> assertTrue(PlayerShipping.depositInto(holder, stack, prices))));
+            assertEquals(10, holder.getData(PlayerShipping.QUEUE).total());
+            assertTrue(PlayerShipping.depositInto(holder, new ItemStack(CropContent.TURNIP.get()), prices));
+            assertEquals(70, holder.getData(PlayerShipping.QUEUE).total());
+            var seeds = new ItemStack(CropContent.TUTORIAL_TURNIP_SEEDS.get());
+            assertFalse(PlayerShipping.depositInto(holder, seeds, prices)); assertEquals(1, seeds.getCount());
+            prices.apply(ShippingPrices.read(java.util.Map.of(), message -> fail(message)), null, null);
+            var registry = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registry);
+            holder.serializeAttachments(output);
+            var file = directory.resolve("tutorial-shipping.nbt"); NbtIo.writeCompressed(output.buildResult(), file);
+            var restored = new SavedHolder();
+            restored.read(TagValueInput.create(ProblemReporter.DISCARDING, registry, NbtIo.readCompressed(file, NbtAccounter.unlimitedHeap())));
+            PlayerShipping.pay(restored); PlayerShipping.pay(restored);
+            assertEquals(70, restored.getData(PlayerGold.GOLD));
+            assertTrue(restored.getData(PlayerShipping.QUEUE).entries().isEmpty());
+        }
+    }
+    @Test void fruitAndForagePricesStayDistinctAndQueuedValuesSurviveReloadAndPayOnce() throws Exception {
+        try(var fixture=new CropTestSupport(directory.resolve("pack"))) {
+            var prices=new ShippingPrices(); prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+            var products=List.of(net.minecraft.world.item.Items.MELON_SLICE,net.minecraft.world.item.Items.MELON,
+                    net.minecraft.world.item.Items.PUMPKIN,CropContent.GRASS.get());
+            long[] expected={20,180,220,1}; var holder=new SavedHolder(); long total=0;
+            for(int i=0;i<products.size();i++) {
+                var stack=new ItemStack(products.get(i),2); assertTrue(PlayerShipping.depositInto(holder,stack,prices));
+                total+=expected[i]; assertEquals(total,holder.getData(PlayerShipping.QUEUE).total()); assertEquals(1,stack.getCount());
+            }
+            for(var seed:List.of(CropContent.WATERMELON_SEEDS.get(),CropContent.PUMPKIN_SEEDS.get(),CropContent.GRASS_SEEDS.get())) {
+                var stack=new ItemStack(seed); assertFalse(PlayerShipping.depositInto(holder,stack,prices)); assertEquals(1,stack.getCount());
+            }
+            prices.apply(ShippingPrices.read(java.util.Map.of(),message->fail(message)),null,null);
+            var registry=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+            var output=TagValueOutput.createWithContext(ProblemReporter.DISCARDING,registry); holder.serializeAttachments(output);
+            var file=directory.resolve("fruit-forage.nbt"); NbtIo.writeCompressed(output.buildResult(),file);
+            var copy=new SavedHolder();copy.read(TagValueInput.create(ProblemReporter.DISCARDING,registry,NbtIo.readCompressed(file,NbtAccounter.unlimitedHeap())));
+            PlayerShipping.pay(copy);PlayerShipping.pay(copy);assertEquals(421,copy.getData(PlayerGold.GOLD));
+            assertTrue(copy.getData(PlayerShipping.QUEUE).entries().isEmpty());
+        }
+    }
     @Test void summerLateCropTestPayTheirFullCyclesOnceAfterSaveWithNoSeedPrice() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var products = List.of(CropContent.PINEAPPLE.get(), CropContent.CORN.get());

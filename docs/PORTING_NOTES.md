@@ -10,7 +10,7 @@ Histórico não faz parte da leitura inicial. Regras de manutenção na seção 
 - Minecraft 26.2 / NeoForge 26.2.0.93; ModDevGradle 2.0.148, Gradle 9.2.1, toolchain Java 25.
 - Mod único `harvestfestival`, versão técnica `0.1.0-dev`. Fase e pacotes autorizados: [STATUS](STATUS.md).
 - Não prometer migração de saves 1.12.2; as fatias implementadas não realizam essa migração.
-- Grafo e ordem aprovados em [DEPENDENCIES](DEPENDENCIES.md); integrações específicas adiadas em [FEATURES](FEATURES.md).
+- Grafo e prioridade executiva em [DEPENDENCIES](DEPENDENCIES.md): 19 cultivos especiais, 20 árvores/aspersores em subfatias, NPCs a partir da 21, conforme sequência aprovada pelo responsável. Integrações específicas adiadas em [FEATURES](FEATURES.md).
 
 ## Consulta por sistema
 
@@ -24,13 +24,13 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador/foice até mystril, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
-| Bloco genérico e cultivos até a 17, ciclo HF, loot da batata, política vanilla delimitada, receitas de sementes e sincronização transitória das regras | [Cultivos](porting/cultivos.md) |
+| Cultivos até a 19-A, estação nula no Nether/End para todos os HF; 19-B integralmente adiada com levantamento preservado; transformação em vanilla, grama dupla, loot e política delimitada | [Cultivos](porting/cultivos.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
-Continuidade agrícola em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
+Continuidade agrícola e intenção futura de milho em duas camadas, adiada até texturas/recorte próprios, em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
 
-Aceites globais das fatias 15, 16 e 17 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
+Aceites globais das fatias 15, 16, 17 e 18 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
 
 ### Contratos transversais e decisões obrigatórias
 
@@ -40,6 +40,7 @@ Aceites globais das fatias 15, 16 e 17 registrados em [STATUS](STATUS.md), sem i
 - A Fase 3 deve completar o gameplay de cada sistema em fatias verificáveis; mínimos aprovados não equivalem a sistema completo. Pendências agrícolas, incluindo relação com ferramentas vanilla e solo compartilhado, pertencem à Fase 3, não ao polimento. Diretriz reafirmada em 12/11/2026; detalhes em [Ferramentas](porting/ferramentas.md).
 - Servidor é autoridade dos dados; ouro/aniversário sincronizam apenas ao titular. Comandos administrativos consultam o servidor.
 - O calendário deriva do relógio persistente do Overworld; não criar segundo calendário. A sequência técnica persistente de eventos aprovada na fatia 10 identifica atualizações, não mede dias ou tempo; contrato em [Calendário](porting/calendario.md).
+- Consumidor agrícola resolve estação nula no Nether/End para todos os cultivos HF, por aprovação ampliada da 19-A. Demais dimensões mantêm estação global; plantas existentes nessas duas dimensões murcham na próxima virada processada. Não altera relógio nem plantas vanilla. 19-B adiada integralmente; suas decisões específicas serão reavaliadas se retomada.
 - `NewDayEvent` notifica uma transição observada; não compensa dias pulados nem promete transação durável contra crash.
 - Remessas fixam preço no depósito e pagam na próxima virada com o jogador conectado. Não pagam offline nem ao reconectar; comportamento aceito em 08/11/2026.
 - A futura escolha de aniversário pelo jogador deve reutilizar API/attachment existentes, validando autorização; escolha e efeitos continuam adiados.
@@ -99,6 +100,8 @@ $env:TMP = $env:TEMP
 Direções arquiteturais não são aprovação de APIs concretas. Verificações exatas e suas evidências estão nos contratos por sistema.
 
 ## Mixins e itens não verificados
+
+- Abóbora vanilla lisa 26.2 e adaptações da grama aprovadas em 18/11/2026; fontes/APIs e diferenças em Cultivos. Alternativa de abóbora própria não adotada (suas APIs não foram verificadas). Ramo visual sazonal e callbacks originais da grama não observados em jogo; par coerente é adaptação aprovada. Sem mixin novo.
 
 - Original tem exatamente 2 mixins de cliente; levantamento completo em [mixins originais](archive/mixins-originais.md).
 - Chuva: candidata `CustomWeatherEffectRenderer#tickRain`, consultada na branch móvel 26.2.x. Paridade de partículas/sons, aplicação dinâmica ao Overworld e execução na versão exata 26.2.0.93 **não verificadas**.

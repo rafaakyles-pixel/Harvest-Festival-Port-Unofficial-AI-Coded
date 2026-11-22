@@ -2,6 +2,8 @@
 
 Consultar para relógio, datas e consumidores de NewDayEvent.
 
+19-A: responsável autorizou ausência de estação no Nether/End para todos os cultivos HF. A resolução ocorre no consumidor CropDailyUpdates a partir de Level.dimension; o evento continua carregando a data global do Overworld, sem mudar relógio, comandos, sono ou remessas. Demais dimensões recebem a estação global. Murchamento somente na próxima virada processada, não na carga; fontes e compatibilidade em [Cultivos](cultivos.md#19-a--entrega-autorizada-e-decisão-dimensional-ampliada). Nether wart vanilla permanece fora desse consumidor; 19-B integralmente adiada.
+
 Implementação aprovada: calendário derivado do relógio persistente do Overworld, com 30 dias por estação, quatro estações e início em segunda-feira, primavera, ano 1. Usa o padrão original de 24000 ticks por dia; configuração de duração, HUD, clima, festivais e notificações para sistemas futuros não fazem parte desta fatia.
 
 APIs conferidas nas fontes locais de Minecraft/NeoForge 26.2.0.93: `WorldClocks.OVERWORLD`, `MinecraftServer.clockManager()`, `ServerClockManager.getTotalTicks/setTotalTicks`. O próprio `ServerClockManager` é `SavedData`, carregado pelo servidor via `computeIfAbsent(ServerClockManager.TYPE)`; não há segundo calendário persistente do mod. Pausa, velocidade do relógio, sono e comandos vanilla afetam a data pela mesma fonte de tempo. A sequência técnica de eventos da fatia 10, abaixo, não mede tempo.

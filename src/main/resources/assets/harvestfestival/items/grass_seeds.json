@@ -1,0 +1,16 @@
+{
+  "model": {
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 8046936
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 8046936
+      }
+    ],
+    "model": "harvestfestival:item/grass_seeds",
+    "type": "minecraft:model"
+  }
+}

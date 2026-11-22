@@ -1,0 +1,10 @@
+{
+  "result": {
+    "id": "minecraft:melon_seeds",
+    "count": 9
+  },
+  "ingredients": [
+    "#harvestfestival:seeds/watermelon"
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

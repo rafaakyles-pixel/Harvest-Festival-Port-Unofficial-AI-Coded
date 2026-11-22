@@ -9,14 +9,26 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.level.block.Block;
 
-/** One data-defined, single-height crop. */
+/** Data-defined crop with optional fruit transformation or paired foliage. */
 public record CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> soilTag,
         Set<Season> seasons, List<Integer> stages, boolean requiresWater, int droughtLimit,
         boolean diesWithoutWaterIntegrated, boolean diesWithoutWaterDedicated,
         int plantingRadius, Identifier harvestLoot, int regrowStage, int maxHarvests,
         EmptyHarvestPolicy emptyHarvestPolicy, List<Integer> appearances, TagKey<Item> harvestToolTag,
-        boolean harvestOnPlayerBreak) {
+        boolean harvestOnPlayerBreak, CropForm form) {
     public enum EmptyHarvestPolicy { PRESERVE, ADVANCE }
+
+    public CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> soilTag,
+            Set<Season> seasons, List<Integer> stages, boolean requiresWater, int droughtLimit,
+            boolean diesWithoutWaterIntegrated, boolean diesWithoutWaterDedicated,
+            int plantingRadius, Identifier harvestLoot, int regrowStage, int maxHarvests,
+            EmptyHarvestPolicy emptyHarvestPolicy, List<Integer> appearances, TagKey<Item> harvestToolTag,
+            boolean harvestOnPlayerBreak) {
+        this(id, seedTag, soilTag, seasons, stages, requiresWater, droughtLimit,
+                diesWithoutWaterIntegrated, diesWithoutWaterDedicated, plantingRadius, harvestLoot,
+                regrowStage, maxHarvests, emptyHarvestPolicy, appearances, harvestToolTag,
+                harvestOnPlayerBreak, CropForm.SINGLE);
+    }
 
     public CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> soilTag,
             Set<Season> seasons, List<Integer> stages, boolean requiresWater, int droughtLimit,
@@ -33,8 +45,8 @@ public record CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> 
         stages = List.copyOf(stages);
         appearances = List.copyOf(appearances);
         if (!appearances.isEmpty() && (appearances.size() != stages.size()
-                || appearances.stream().anyMatch(value -> value < 0 || value > 71 || value == 3))) {
-            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..71 except 3");
+                || appearances.stream().anyMatch(value -> value < 0 || value > 109 || value == 3))) {
+            throw new IllegalArgumentException("appearances must match stages and use living visual slots 0..109 except 3");
         }
         if (seasons.isEmpty() || stages.isEmpty() || plantingRadius < 0 || plantingRadius > 1
                 || droughtLimit < 0 || droughtLimit >= 1_000_000) {
@@ -49,9 +61,14 @@ public record CropDefinition(Identifier id, TagKey<Item> seedTag, TagKey<Block> 
                 || (regrowStage == 0 && maxHarvests != 1) || emptyHarvestPolicy == null) {
             throw new IllegalArgumentException("invalid harvest limits or policy");
         }
-        if (harvestToolTag != null && regrowStage != 0) {
+        if (harvestToolTag != null && regrowStage != 0 && !(form.doubled() && maxHarvests == 1)) {
             throw new IllegalArgumentException("tool-required regrowth is not supported");
         }
+        if (form.doubleFrom() > stages.getLast() || form.minimumCut() > stages.getLast()
+                || (form.doubled() && (form.doubleFrom() != 6 || stages.getLast() != 11 || maxHarvests != 1))
+                || (form.minimumCut() > 0 && (!form.doubled() || harvestToolTag == null))
+                || (form.transforms() && (regrowStage != 0 || harvestToolTag != null || appearances.size() != 8)))
+            throw new IllegalArgumentException("unsupported crop form limits");
     }
 
     public int maturity() { return stages.getLast(); }

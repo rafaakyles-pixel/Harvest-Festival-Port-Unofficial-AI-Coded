@@ -29,16 +29,33 @@ public final class CropBlockEntity extends BlockEntity {
     }
 
     public void setCrop(CropState value) {
+        if (isRemoved()) return;
         crop = value;
         setChanged();
         if (level != null && !level.isClientSide()) {
             var definition = CropDefinitions.INSTANCE.get(value.crop());
-            int appearance = value.dead() ? 3 : definition == null ? getBlockState().getValue(CropBlock.APPEARANCE)
-                    : definition.appearance(value.stage());
-            var state = getBlockState().setValue(CropBlock.APPEARANCE, appearance);
+            int appearance = appearance(value, definition, getBlockState().getValue(CropBlock.APPEARANCE),
+                    direction -> level.getBlockState(worldPosition.relative(direction)).is(definition.form().fruitTag()));
+            var state = getBlockState().setValue(CropBlock.APPEARANCE, appearance).setValue(CropBlock.WITHERED, value.dead());
             if (!state.equals(getBlockState())) level.setBlock(worldPosition, state, Block.UPDATE_ALL);
             level.sendBlockUpdated(worldPosition, getBlockState(), state, Block.UPDATE_CLIENTS);
         }
+    }
+
+    static int appearance(CropState value, CropDefinition definition, int fallback,
+            java.util.function.Predicate<net.minecraft.core.Direction> fruitNeighbor) {
+        int appearance = value.dead() && (definition == null || definition.form().equals(CropForm.SINGLE)) ? 3
+                : definition == null ? fallback : definition.appearance(value.stage());
+        if (definition != null && definition.form().transforms() && appearance == definition.appearances().getLast()) {
+            // 1.12 horizontal iteration: north, east, south, west; pumpkin first, melon last.
+            var directions = new net.minecraft.core.Direction[] {net.minecraft.core.Direction.NORTH,
+                    net.minecraft.core.Direction.EAST, net.minecraft.core.Direction.SOUTH, net.minecraft.core.Direction.WEST};
+            for (int i = 0; i < directions.length; i++) if (fruitNeighbor.test(directions[i])) {
+                appearance = definition.form().attachedAppearance() + i;
+                if (!definition.form().lastNeighbor()) break;
+            }
+        }
+        return appearance;
     }
 
     @Override protected void loadAdditional(ValueInput input) {

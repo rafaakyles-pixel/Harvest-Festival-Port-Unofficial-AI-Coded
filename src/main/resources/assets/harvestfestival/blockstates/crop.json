@@ -1,5 +1,9 @@
 {
   "variants": {
+    "appearance=107": {"model":"harvestfestival:block/tutorial_turnip_1"},
+    "appearance=108": {"model":"harvestfestival:block/tutorial_turnip_2"},
+    "appearance=109": {"model":"harvestfestival:block/tutorial_turnip_3"},
+
     "appearance=0": {
       "model": "harvestfestival:block/crop_small"
     },
@@ -215,6 +219,119 @@
     },
     "appearance=71": {
       "model": "harvestfestival:block/green_pepper_5"
+    },
+    "appearance=72": {
+      "model": "harvestfestival:block/watermelon_stem_0"
+    },
+    "appearance=73": {
+      "model": "harvestfestival:block/watermelon_stem_1"
+    },
+    "appearance=74": {
+      "model": "harvestfestival:block/watermelon_stem_2"
+    },
+    "appearance=75": {
+      "model": "harvestfestival:block/watermelon_stem_3"
+    },
+    "appearance=76": {
+      "model": "harvestfestival:block/watermelon_stem_4"
+    },
+    "appearance=77": {
+      "model": "harvestfestival:block/watermelon_stem_5"
+    },
+    "appearance=78": {
+      "model": "harvestfestival:block/watermelon_stem_6"
+    },
+    "appearance=79": {
+      "model": "harvestfestival:block/watermelon_stem_7"
+    },
+    "appearance=80": {
+      "model": "harvestfestival:block/watermelon_stem_attached",
+      "y": 90
+    },
+    "appearance=81": {
+      "model": "harvestfestival:block/watermelon_stem_attached",
+      "y": 180
+    },
+    "appearance=82": {
+      "model": "harvestfestival:block/watermelon_stem_attached",
+      "y": 270
+    },
+    "appearance=83": {
+      "model": "harvestfestival:block/watermelon_stem_attached",
+      "y": 0
+    },
+    "appearance=84": {
+      "model": "harvestfestival:block/pumpkin_stem_0"
+    },
+    "appearance=85": {
+      "model": "harvestfestival:block/pumpkin_stem_1"
+    },
+    "appearance=86": {
+      "model": "harvestfestival:block/pumpkin_stem_2"
+    },
+    "appearance=87": {
+      "model": "harvestfestival:block/pumpkin_stem_3"
+    },
+    "appearance=88": {
+      "model": "harvestfestival:block/pumpkin_stem_4"
+    },
+    "appearance=89": {
+      "model": "harvestfestival:block/pumpkin_stem_5"
+    },
+    "appearance=90": {
+      "model": "harvestfestival:block/pumpkin_stem_6"
+    },
+    "appearance=91": {
+      "model": "harvestfestival:block/pumpkin_stem_7"
+    },
+    "appearance=92": {
+      "model": "harvestfestival:block/pumpkin_stem_attached",
+      "y": 90
+    },
+    "appearance=93": {
+      "model": "harvestfestival:block/pumpkin_stem_attached",
+      "y": 180
+    },
+    "appearance=94": {
+      "model": "harvestfestival:block/pumpkin_stem_attached",
+      "y": 270
+    },
+    "appearance=95": {
+      "model": "harvestfestival:block/pumpkin_stem_attached",
+      "y": 0
+    },
+    "appearance=96": {
+      "model": "harvestfestival:block/grass_bottom_1"
+    },
+    "appearance=97": {
+      "model": "harvestfestival:block/grass_bottom_2"
+    },
+    "appearance=98": {
+      "model": "harvestfestival:block/grass_bottom_3"
+    },
+    "appearance=99": {
+      "model": "harvestfestival:block/grass_bottom_4"
+    },
+    "appearance=100": {
+      "model": "harvestfestival:block/grass_bottom_5"
+    },
+    "appearance=101": {
+      "model": "harvestfestival:block/grass_bottom_6"
+    },
+    "appearance=102": {
+      "model": "harvestfestival:block/grass_bottom_7"
+    },
+    "appearance=103": {
+      "model": "harvestfestival:block/grass_bottom_8"
+    },
+    "appearance=104": {
+      "model": "harvestfestival:block/grass_bottom_9"
+    },
+    "appearance=105": {
+      "model": "harvestfestival:block/grass_bottom_10"
+    },
+    "appearance=106": {
+      "model": "harvestfestival:block/grass_bottom_11"
     }
   }
 }

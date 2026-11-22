@@ -39,18 +39,24 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class CropBlock extends BaseEntityBlock {
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CropBlock::new);
     // Visual cache only. Logical stage lives in the block entity and has no blockstate bound.
-    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 71);
+    public static final IntegerProperty APPEARANCE = IntegerProperty.create("appearance", 0, 109);
+    public static final net.minecraft.world.level.block.state.properties.BooleanProperty WITHERED =
+            net.minecraft.world.level.block.state.properties.BooleanProperty.create("withered");
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
     public CropBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(APPEARANCE, 0));
+        registerDefaultState(stateDefinition.any().setValue(APPEARANCE, 0).setValue(WITHERED, false));
     }
     @Override protected MapCodec<CropBlock> codec() { return CODEC; }
-    @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(APPEARANCE); }
+    @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(APPEARANCE, WITHERED); }
     @Override public BlockEntity newBlockEntity(BlockPos pos, BlockState state) { return new CropBlockEntity(pos, state); }
-    @Override protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) { return SHAPE; }
+    @Override protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        int appearance = state.getValue(APPEARANCE);
+        if (appearance >= 96 && appearance <= 106) return Block.box(0, 0, 0, 16, Math.min(1, .5 + (appearance - 96) * .1) * 16, 16);
+        return SHAPE;
+    }
     @Override protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        return destroyProgress(player.getDestroySpeed(state, pos), state.getValue(APPEARANCE) == 3,
+        return destroyProgress(player.getDestroySpeed(state, pos), state.getValue(APPEARANCE) == 3 || state.getValue(WITHERED),
                 player.getMainHandItem().is(SickleItem.SICKLES));
     }
     public static float destroyProgress(float speed, boolean dead, boolean sickle) {
@@ -117,6 +123,7 @@ public final class CropBlock extends BaseEntityBlock {
             ItemStack tool, boolean willHarvest, FluidState fluid) {
         // Legacy single-harvest crops keep their existing vanilla drop path.
         if (level instanceof ServerLevel server && level.getBlockEntity(pos) instanceof CropBlockEntity crop) {
+            if (!CropPair.permitted(server, pos, player, tool)) return false;
             var expected = crop.crop();
             var definition = CropDefinitions.INSTANCE.get(expected.crop());
             if (definition != null && (definition.regrowStage() > 0 || definition.requiresTool() || definition.harvestOnPlayerBreak())) {
@@ -127,6 +134,21 @@ public final class CropBlock extends BaseEntityBlock {
             }
         }
         return super.onDestroyedByPlayer(state, level, pos, player, tool, willHarvest, fluid);
+    }
+    @Override protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved) {
+        if (level.getBlockState(pos.above()).is(CropContent.CROP_TOP.get())) level.removeBlock(pos.above(), false);
+    }
+    @Override protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block,
+            net.minecraft.world.level.redstone.Orientation orientation, boolean moved) {
+        if (level instanceof ServerLevel && level.getBlockEntity(pos) instanceof CropBlockEntity crop) {
+            var definition = CropDefinitions.INSTANCE.get(crop.crop().crop());
+            if (definition != null && definition.form().transforms()) crop.setCrop(crop.crop());
+        }
+    }
+    @Override public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack tool) {
+        // Original mature grass harvest returns false after its own removal: no vanilla exhaustion pass.
+        if (state.getValue(APPEARANCE) >= 101 && !state.getValue(WITHERED) && tool.is(SickleItem.SICKLES)) return;
+        super.playerDestroy(level, player, pos, state, entity, tool);
     }
     @Override protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
         if (!(params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof CropBlockEntity crop)) return List.of();

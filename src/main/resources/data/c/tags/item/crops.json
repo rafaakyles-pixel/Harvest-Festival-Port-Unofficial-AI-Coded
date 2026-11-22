@@ -15,6 +15,11 @@
     "#c:crops/pineapple",
     "#c:crops/corn",
     "#c:crops/sweet_potato",
-    "#c:crops/green_pepper"
+    "#c:crops/green_pepper",
+    "#c:crops/melon_slices",
+    "#c:crops/melons",
+    "#c:crops/pumpkins",
+    "#c:crops/grass",
+    "#c:crops/tutorial_turnip"
   ]
 }

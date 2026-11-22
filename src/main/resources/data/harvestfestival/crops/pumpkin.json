@@ -1,0 +1,39 @@
+{
+  "seed_tag": "harvestfestival:seeds/pumpkin",
+  "soil_tag": "harvestfestival:crop_soils",
+  "seasons": [
+    "summer"
+  ],
+  "stages": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    11,
+    13,
+    15
+  ],
+  "appearances": [
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91
+  ],
+  "requires_water": true,
+  "drought_limit": 2,
+  "dies_without_water_integrated": true,
+  "dies_without_water_dedicated": false,
+  "planting_radius": 1,
+  "harvest_loot": "harvestfestival:crops/pumpkin",
+  "regrow_stage": 0,
+  "max_harvests": 1,
+  "mature_block": "minecraft:pumpkin",
+  "fruit_tag": "harvestfestival:fruits/pumpkin",
+  "attached_appearance": 92,
+  "last_neighbor": false
+}

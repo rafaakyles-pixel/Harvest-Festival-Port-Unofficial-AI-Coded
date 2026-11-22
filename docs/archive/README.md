@@ -11,6 +11,7 @@ Trechos integrais, em ordem, do PORTING_NOTES.md anterior. Propostas e pendênci
 - [fatia-07-aniversarios](fatia-07-aniversarios.md): linhas originais 361–471.
 - [fatia-08-validacao-integrada](fatia-08-validacao-integrada.md): linhas originais 472–688.
 - [fatia-09-ferramentas](fatia-09-ferramentas.md): linhas originais 689–837.
+- [fatias-10-18-historico](fatias-10-18-historico.md): histórico das fatias 10 a 18 e registros de encerramento da Fase 2 transferidos de STATUS.md em 22/11/2026.
 
 SHA-256 original: 666420CC338CA01562128754C8AFEACF64A5DA74DE95E06B6CB2CD745A60B1EA.
 

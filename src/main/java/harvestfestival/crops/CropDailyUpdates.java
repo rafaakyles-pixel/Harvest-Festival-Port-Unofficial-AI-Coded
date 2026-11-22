@@ -61,10 +61,12 @@ public final class CropDailyUpdates {
     public static void migrateLoaded(ServerTickEvent.Pre event) {
         LOADED.forEach((level, chunks) -> {
             if (level.getServer() != event.getServer()) return;
+            OrchardDaily.refreshIfChanged(level, chunks);
             for (var chunk : chunks) {
                 var pos = chunk.getPos();
                 if (MIGRATION_PENDING.contains(chunk) && level.getChunkSource().getChunkNow(pos.x(), pos.z()) == chunk) {
                     migrate(level, chunk);
+                    OrchardDaily.refresh(new OrchardDaily.Work(level, chunk), harvestfestival.calendar.WorldCalendar.get(level.getServer()).season());
                     MIGRATION_PENDING.remove(chunk);
                 }
             }
@@ -107,6 +109,7 @@ public final class CropDailyUpdates {
 
     public static void newDay(NewDayEvent event) {
         var work = new ArrayList<ChunkWork>();
+        var orchard = new ArrayList<OrchardDaily.Work>();
         LOADED.forEach((level, chunks) -> {
             if (level.getServer() != event.getServer()) return;
             for (var chunk : chunks) {
@@ -115,10 +118,13 @@ public final class CropDailyUpdates {
                 if (level.getChunkSource().getChunkNow(pos.x(), pos.z()) == chunk) {
                     if (MIGRATION_PENDING.remove(chunk)) migrate(level, chunk);
                     work.add(new WorldChunk(level, chunk, seasonForDimension(level.dimension(), event.getCurrentDate().season())));
+                    orchard.add(new OrchardDaily.Work(level, chunk));
                 }
             }
         });
+        OrchardDaily.grow(event, orchard);
         process(event.getCycle(), work);
+        OrchardDaily.post(event, orchard);
     }
 
     /** The original hidden season providers return null in the Nether and End. */

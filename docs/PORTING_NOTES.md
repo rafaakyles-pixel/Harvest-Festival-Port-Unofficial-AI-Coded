@@ -25,12 +25,14 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador/foice até mystril, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
 | Cultivos até a 19-A, estação nula no Nether/End para todos os HF; 19-B integralmente adiada com levantamento preservado; transformação em vanilla, grama dupla, loot e política delimitada | [Cultivos](porting/cultivos.md) |
+| Árvores frutíferas: ciclo próprio, templates, folhas/frutos e exceções propostas; levantamento sem implementação | [Árvores frutíferas](porting/arvores-frutiferas.md) |
+| Aspersores velho/ferro: ordem diária, tanque, transferência e aquisição; levantamento sem implementação | [Aspersores](porting/aspersores.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
 Continuidade agrícola e intenção futura de milho em duas camadas, adiada até texturas/recorte próprios, em [FEATURES](FEATURES.md#sequência-agrícola-pendente); evidências corrigidas de reflexão/handlers em [Cultivos](porting/cultivos.md). Planos transitórios removidos após implementação por autorização do responsável; roteiros manuais somente na resposta final.
 
-Aceites globais das fatias 15, 16, 17 e 18 registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla é solicitação não prioritária, fora da 17; cenário 8 e dedicado/multiplayer permanecem pendentes.
+Aceites globais das fatias 15, 16, 17, 18 e 19-A registrados em [STATUS](STATUS.md), sem inferir resultados individuais de testes; na 19-A o responsável relatou plantio normal do Nabo Robusto. Evidências, contratos implementados e levantamento da continuidade agrícola nos contratos de [Cultivos](porting/cultivos.md) e [Ferramentas](porting/ferramentas.md). Ampliação futura da foice para vegetação vanilla permanece fora da 20; cenário 8 e dedicado/multiplayer permanecem pendentes.
 
 ### Contratos transversais e decisões obrigatórias
 
@@ -107,6 +109,7 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Chuva: candidata `CustomWeatherEffectRenderer#tickRain`, consultada na branch móvel 26.2.x. Paridade de partículas/sons, aplicação dinâmica ao Overworld e execução na versão exata 26.2.0.93 **não verificadas**.
 - Anzol: equivalente para reconhecer vara HF no renderizador **não verificado**. Investigar extensão moderna; renderizador próprio é alternativa, sem decisão aprovada.
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
+- Árvores/aspersores: revisão dos contratos fecha por leitura Plains, quebra/encantamentos, folhas/templates, transferência transacional e sincronização no alvo exato. Integração em execução ainda **não verificada**, pois não há implementação. Estação nula/Plains, proteções e chunks, atuação autônoma, correção dos bits de espécie das folhas, notificação integral do tanque e destinos/remessa permanecem decisões específicas. A 20-A terá consumidores reais de ambos; B/C agrupam árvores por estação, D completa variantes e E fecha lacunas internas; aquisição externa não será simulada.
 - Fatia 11: `harvestfestival.tools.mixin.FarmlandBlockMixin`, subpacote aprovado explicitamente pelo responsável. Alvo `FarmlandBlock.randomTick`, injeção HEAD cancelável para solos participantes por tag; impede hidratação/secagem aleatória concorrendo com o ciclo diário. A fonte exata 26.2.0.93 não oferece evento cancelável nesse método. Queda e ticks de obstrução permanecem vanilla/NeoForge. Evidências, limites e migração em [Ferramentas](porting/ferramentas.md).
 
 - Fatia 14: `harvestfestival.tools.mixin.PlayerSleepAccessor`, autorizado explicitamente pelo responsável, escreve somente `Player.sleepCounter` no desmaio com sono instantâneo. Fonte exata 26.2.0.93 não expõe setter/evento equivalente; decisão coletiva de sono continua no motor. Aplicação à classe transformada testada; aceite global da fatia 14 informado pelo responsável em 15/11/2026, sem detalhamento individual do sono. Contrato em [Ferramentas](porting/ferramentas.md).

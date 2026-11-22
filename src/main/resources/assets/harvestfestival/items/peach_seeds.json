@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/peach_seeds",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16756901
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 16756901
+      }
+    ]
+  }
+}

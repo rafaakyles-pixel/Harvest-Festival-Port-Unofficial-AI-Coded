@@ -46,6 +46,7 @@ public final class CreativeTabs {
         output.accept(CropContent.PUMPKIN_SEEDS.get());
         output.accept(CropContent.GRASS_SEEDS.get());
         output.accept(CropContent.TUTORIAL_TURNIP_SEEDS.get());
+        harvestfestival.crops.OrchardContent.TREES.values().forEach(tree -> output.accept(tree.seed().get()));
     }
     static void toolsAndBlocks(CreativeModeTab.Output output) {
         output.accept(ToolContent.HOE.get());
@@ -78,5 +79,10 @@ public final class CreativeTabs {
         output.accept(CropContent.GREEN_PEPPER.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.GRASS.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.TUTORIAL_TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        output.accept(harvestfestival.crops.OrchardContent.OLD.get());
+        harvestfestival.crops.OrchardContent.TREES.forEach((species, tree) -> {
+            if (!species.equals("apple")) output.accept(tree.product().get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+            output.accept(tree.leaves().get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
+        });
     }
 }

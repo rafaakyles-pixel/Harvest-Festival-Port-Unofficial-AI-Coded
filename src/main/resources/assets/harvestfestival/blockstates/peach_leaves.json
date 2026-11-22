@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "harvestfestival:block/peach_leaves"
+      }
+    },
+    {
+      "when": {
+        "bloom": "true"
+      },
+      "apply": {
+        "model": "harvestfestival:block/peach_bloom"
+      }
+    }
+  ]
+}

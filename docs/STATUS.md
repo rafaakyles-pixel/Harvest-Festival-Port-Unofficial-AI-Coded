@@ -22,18 +22,23 @@ O desenvolvimento segue uma ordem estrita. O avanço para a próxima fase só é
 ---
 ## Acompanhamento de Tarefas
 
-### Fatia 19 — 19-A implementada; 19-B integralmente adiada
+### Fatia 20 — implementação autorizada, 20-A em andamento
+
+Responsável confirmou as decisões específicas de dimensões/Plains, atuação sem proprietário, correção da espécie das folhas, atualização integral do tanque e destinos/remessa. Após esclarecimento, aprovou exigir espaço para crescer, incluindo copa integral antes de amadurecer, sem sobrescrever obstáculos. Implementação de 20-A–E autorizada; critérios e fronteiras nos contratos. Aprovação não registra execução de testes ainda não realizados.
+
+Revisão de 21/11/2026 por leitura do original, herança Forge e fontes exatas do alvo: [Árvores frutíferas](porting/arvores-frutiferas.md) e [Aspersores](porting/aspersores.md). Escopo geral da 20 aprovado: completar cinco árvores e ambos os aspersores, sem infraestrutura sem consumidor. Proposta vigente: 20-A infraestrutura funcional de ambos com pessegueiro e aspersor velho definitivos; 20-B completa verão (B1 laranja, B2 banana, incluindo regressão do pêssego); 20-C outono (C1 maçã, C2 uva); 20-D ferro completo e fechamento das duas variantes; 20-E integração/correções internas. Cada entrega tem comportamento testável, dados/recursos, persistência e validação próprios. Proposta anterior A–G preservada nos contratos como substituída; sem arquivo de plano, compactação ou código novo.
+
+Decisões específicas abertas: árvores com estação nula/Plains, proteção do topo/template/limpeza acima e chunks, atuação autônoma sem dono versus permissões por proprietário, correção da espécie nos bits antigos de folhas, sincronização do tanque após toda alteração e destinos criativos/remessa da maçã. Suporte Plains, quebra/Silk Touch, callbacks de folhas/templates, clamp e transferência transacional foram conferidos por leitura; critérios concretos nos contratos, sem alegar teste em jogo. Hidratação da máquina original independe de disable_growth por caminho próprio; não é extensão automática da exceção dos regadores. Lojas, NPCs/missões e aquisição normal permanecem excluídos; NPCs começam na 21. 19-B integralmente adiada, inclusive saco HF, sem tocar nether wart vanilla; decisões específicas “reavaliar se retomada”.
+
+Validação documental inicial: build aprovado, uma tarefa executada e oito UP-TO-DATE; test reutilizou 251 resultados anteriores. **Revisão vigente:** build aprovado, nove tarefas UP-TO-DATE, inclusive test; 251 resultados anteriores reutilizados, zero falhas/erros/ignorados, nenhum teste novo ou reexecutado. Nenhum jogo executado nesta preparação. Cenário 8 não executado, dedicado/multiplayer pendentes, indicadores do regador funcionais e camas por dimensão adiadas permanecem. Não declara sistema agrícola inteiro concluído.
+
+### Fatia 19 — 19-A aceita globalmente; 19-B integralmente adiada
+
+**Aceite global informado nesta revisão pelo responsável:** 19-A completamente aprovada; Nabo Robusto plantado normalmente. Sucede a pendência manual da entrega abaixo, sem inventar resultados individuais dos demais testes nem atribuir execução ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e camas por dimensão adiadas permanecem.
 
 **Decisão posterior do responsável:** implementar somente 19-A completa, ampliada para estação nula no Nether/End em todos os cultivos HF. 19-B integralmente adiada, inclusive saco HF; manter crescimento vanilla. Modelos vanilla e recusa de estágios HF 3/4: **“reavaliar se retomada”**. Essa decisão sucede o escopo anterior abaixo, cujo levantamento fica preservado. Implementação e cobertura vigentes em [Cultivos](porting/cultivos.md#19-a--entrega-autorizada-e-decisão-dimensional-ampliada).
 
 19-A entregue nos pacotes existentes: semente/produto Nabo Robusto, dados/loot/tags/preço 10, recursos originais, abas e slots 107–109; estação nula para todos os HF no Nether/End, sem alterar calendário/vanilla. Build aprovado com 251 testes efetivamente executados (10 novos), zero falhas/erros/ignorados; cinco tarefas executadas e quatro UP-TO-DATE. Cliente/original não executados; aceite manual pendente. Cenário 8 não executado, dedicado/multiplayer pendentes e camas por dimensão adiadas permanecem. Não conclui agricultura inteira.
-
-Levantamento anterior preservado:
-
-- Escopo geral já aprovado; recortes concretos 19-A (nabo robusto) e 19-B (nether wart) apresentados na conversa. Evidências por código/bytecode/recursos em [Cultivos](porting/cultivos.md#evidências-da-fatia-19--levantamento-de-18112026), com fronteiras em Ferramentas, Remessas e Abas. Não foi criado arquivo de plano.
-- Conclusões específicas: tutorial cresce em duas viradas regadas; original exclui Nether/End por estação nula. Nether wart possui saco criativo ativo e provider de produto, mas não conversão vanilla→HF nem venda automática; primeiro crescimento HF transforma em vanilla AGE=2, sem rebrota HF efetiva. Política vanilla não deve ser estendida implicitamente.
-- Decisões específicas antes do código: tratamento dimensional do tutorial frente ao calendário global vigente; representação vanilla 26.2 do nether wart e tratamento de estágio HF anômalo que produziria metadata inválida. A aprovação geral não será solicitada novamente. Recortes não antecipam árvores/aspersores/NPCs; sequência 20-A/B/etc. e 21 preservada.
-- Build do levantamento aprovado: nove tarefas UP-TO-DATE, incluindo test; 241 resultados anteriores reutilizados, nenhum teste novo/reexecutado. Nenhum cliente/original executado. Cenário 8 não executado, dedicado/multiplayer pendentes; indicadores do regador funcionais não encerram cenário 8; memória de camas por dimensão adiada. Agricultura inteira permanece incompleta.
 
 ### Sequência aprovada pelo responsável — 19 → 20 → 21
 
@@ -44,97 +49,30 @@ Levantamento anterior preservado:
 
 Validação desta atualização de sequência: build aprovado, nove tarefas UP-TO-DATE, incluindo test; nenhum teste novo ou reexecutado, 241 resultados anteriores reutilizados. Somente STATUS, FEATURES, DEPENDENCIES e PORTING_NOTES alterados nesta atualização; sem implementação ou execução de cliente.
 
-### Fatia 18 — concluída e aceita globalmente
-- Em 18/11/2026, o responsável declarou a fatia 18 aprovada: aceite global de 18-A1/A2, 18-V e 18-B, sucedendo as pendências de aceite dessas entregas abaixo. Relatou ter visto a grama crescer em duas camadas; não foram informados resultados individuais dos demais testes. Nenhuma execução em jogo é atribuída ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
-- Intenção futura registrada em 18/11/2026: milho com duas camadas, após o responsável preparar as texturas correspondentes. Não altera o milho atual nem autoriza implementação nesta etapa ou na 19. Estágio de formação do topo, aparência na rebrota, permissões, remoção do par e compatibilidade precisarão de recorte e decisões próprios; não copiar automaticamente o ciclo de corte único da grama.
-- Solicitado o prompt da 19: proposta de levantamento dos cultivos especiais restantes (nabo de tutorial e nether wart), sem implementação autorizada por este registro.
-- Validação do registro de aceite: build aprovado; test UP-TO-DATE, sem testes novos ou reexecução, reutilizando os 241 resultados anteriores. Somente documentação alterada nesta confirmação; runClient não executado.
-- Aprovação de 18/11/2026: seguir os recortes apresentados (18-A1, 18-A2, 18-V e 18-B), com abóbora vanilla lisa da 26.2. Inclui proteção de obstrução, permissões do par e murchamento coerente propostos para grama. Implementação entregue; aceite manual pendente.
-- Solicitação de 17/11/2026: conferir original e apresentar recortes concretos antes de implementar; proposta somente na conversa, sem arquivo de plano. Aceite global da 17 preservado, sem resultados individuais atribuídos.
-- Evidências nos contratos de [Cultivos](porting/cultivos.md), [Ferramentas](porting/ferramentas.md), [Remessas](porting/remessas.md) e [Abas](porting/abas-criativas.md), incluindo bytecode oficial Minecraft 1.12.2, patches Forge 14.23.5.2846 e fontes/recursos locais Minecraft 26.2 / NeoForge 26.2.0.93.
-- Entregues 18-A1/A2 (frutos na própria posição), 18-V (somente sementes/hastes de melancia/abóbora e três receitas) e 18-B (grama dupla, corte único 1–6). Decisões antes pendentes foram aprovadas em 18/11: abóbora lisa moderna, obstrução protegida, permissões do par e murchamento coerente.
-- Pacotes existentes, sem mixin novo ou compactação documental. CropState/componentes e slots anteriores preservados; campos opcionais e topo técnico documentados em Cultivos. Cenário 8 não executado, dedicado/multiplayer pendentes; indicadores do regador funcionais, abas/regras vanilla não encerram cenário 8; memória de camas por dimensão adiada.
-- Validação da auditoria anterior: build aprovado com nove tarefas UP-TO-DATE; 229 resultados reutilizados. Validação final da implementação: build aprovado, test executado, 12 novos/241 totais, sem falhas/erros/ignorados; seis tarefas UP-TO-DATE. Cobertura e limites no contrato de Cultivos. runClient e jogo original não executados pelo agente; testes automatizados não constituem aceite manual.
+### Resumo de Fatias Concluídas
 
-### Fatia 17 — concluída e aceita globalmente pelo responsável
-- Em 17/11/2026, o responsável informou que tudo ocorreu bem e declarou a fatia 17 concluída. Aceite global de 17-A/17-B1/17-B2/17-F1/17-F2/17-F3/17-F4, sucedendo as pendências de aceite dessas entregas abaixo, sem atribuir resultados individuais ou execução de cliente ao agente. Cenário 8 não executado, dedicado/multiplayer pendentes e memória de camas por dimensão adiada permanecem explícitos.
-- Solicitado o prompt de início da fatia 18: levantamento dos recortes 18-A (melancia/abóbora) e 18-B (grama/forragem), com critérios e decisões antes de implementar; nenhum código da 18 incluído nesta atualização.
-- Solicitação autorizou explicitamente a sequência 17-A → 17-B1 → 17-B2 → 17-F1 → 17-F2 → 17-F3 → 17-F4. Executada nos pacotes já aprovados, sem novas divergências de gameplay, alimentação parcial, lojas/serviços ou ampliação da foice para vegetação vanilla.
-- Entregas agrícolas: repolho; abacaxi/milho; batata-doce/pimentão verde. Recursos originais, dados/loot/tags/preços/remessas, traduções e abas; slots 0–49 preservados, novos 50–71. Contratos em [Cultivos](porting/cultivos.md), [Remessas](porting/remessas.md) e [Abas](porting/abas-criativas.md).
-- Entregas de ferramentas: enxada/regador ouro, enxada/regador mystril, foice ouro, foice mystril; carga até 4 com rejeição acima do tier físico e compatibilidade antiga. Rega autorizada, durabilidade/carga, custos e domínio/callbacks da foice preservados. Contrato em [Ferramentas](porting/ferramentas.md).
-- Build por entrega aprovado: 17-A 7 novos/199 totais; 17-B1 7/206; 17-B2 7/213; 17-F1 4/217; 17-F2 4/221; 17-F3 4/225; 17-F4 4/229. Total de 37 testes novos; cada build de entrega executou test, sem falhas/erros/ignorados. Build documental final aprovado com test UP-TO-DATE, reutilizando os 229 resultados anteriores. Adaptadores não comprovam sessão real; runClient não executado pelo agente. Aceites manuais das sete entregas permanecem independentes.
-- Cenário 8 **não executado**, dedicado/multiplayer pendentes; indicadores do regador confirmados funcionais anteriormente, sem encerrar espelho de ouro/aniversário. Memória de camas por dimensão e alimentação conjunta adiadas. Nenhum AGENTS.md alterado ou comando Git mutador executado.
+| Fatia | Sistema / Escopo | Aceite / Data | Documento de referência |
+| --- | --- | --- | --- |
+| 1 | Saldo por jogador (`PlayerGold`) e comandos administrativos | 02/11/2026 | [fatia-01-ouro.md](archive/fatia-01-ouro.md) |
+| 2–3 | Calendário básico persistente e transição diária (`NewDayEvent`) | 02/11/2026 | [fatias-02-03-calendario.md](archive/fatias-02-03-calendario.md) |
+| 4 | Sincronização de saldo com o titular | 04/11/2026 | [fatia-04-sincronizacao.md](archive/fatia-04-sincronizacao.md) |
+| 5 | Caixa de remessas e pagamento na virada do dia | 05/11/2026 | [fatia-05-remessas.md](archive/fatia-05-remessas.md) |
+| 6 | Preços por datapack recarregáveis e tags de item | 06/11/2026 | [fatia-06-precos.md](archive/fatia-06-precos.md) |
+| 7 | Aniversário do jogador e comandos de consulta | 08/11/2026 | [fatia-07-aniversarios.md](archive/fatia-07-aniversarios.md) |
+| 8 | Validação integrada dedicada/multiplayer (2 clientes, Fase 2 encerrada) | 08/11/2026 | [fatia-08-validacao-integrada.md](archive/fatia-08-validacao-integrada.md) |
+| 9 | Enxada e regador básicos, solo preparado (`PreparedSoil`) | 09/11/2026 | [fatia-09-ferramentas.md](archive/fatia-09-ferramentas.md) |
+| 10 | Nabo comum, ciclo de cultivo de 4 dias e colheita | 12/11/2026 | [cultivos.md](porting/cultivos.md) |
+| 11 | Farmland compartilhada e mixin de umidade (`FarmlandBlockMixin`) | 12/11/2026 | [ferramentas.md](porting/ferramentas.md) |
+| 12 | Pepino, rebrota limitada (8 colheitas) e correções de estágio | 14/11/2026 | [cultivos.md](porting/cultivos.md) |
+| 13 | Trigo, corte por foice e abas criativas | 14/11/2026 | [cultivos.md](porting/cultivos.md) |
+| 14 | Cebola, espinafre, esforço, desmaio e sono instantâneo | 15/11/2026 | [ferramentas.md](porting/ferramentas.md) |
+| 15 | Tiers de enxada/regador até prata (15-F), cenoura/beterraba/batata (15-A), política vanilla (15-V) | 16/11/2026 | [ferramentas.md](porting/ferramentas.md) / [cultivos.md](porting/cultivos.md) |
+| 16 | Morango, tomate, berinjela e foices de cobre/prata | 16/11/2026 | [cultivos.md](porting/cultivos.md) / [ferramentas.md](porting/ferramentas.md) |
+| 17 | Repolho, abacaxi, milho, batata-doce, pimentão e ferramentas ouro/mystril | 17/11/2026 | [cultivos.md](porting/cultivos.md) / [ferramentas.md](porting/ferramentas.md) |
+| 18 | Melancia, abóbora e grama dupla de corte único | 18/11/2026 | [cultivos.md](porting/cultivos.md) |
+| 19 | Nabo Robusto (19-A) com estação nula dimensional; 19-B adiada | 21/11/2026 | [cultivos.md](porting/cultivos.md#19-a--entrega-autorizada-e-decisão-dimensional-ampliada) |
 
-### Fatia 17 — levantamento anterior à autorização
-- Responsável confirmou «Tudo certo», considerou a 16 finalizada e solicitou avanço à 17. Aceite global de 16-A/16-F1/16-F2, sem atribuir resultados individuais de testes. Os registros de pendência de aceite da 16 abaixo ficam sucedidos por esta confirmação.
-- Levantamento de repolho, abacaxi, milho, batata-doce, pimentão verde e tiers ouro/mystril nos contratos de Cultivos/Ferramentas; proposta na conversa, sem arquivo de plano e sem implementação da 17 nesta etapa.
-- Solicitada para o futuro, sem prioridade: ampliar área da foice a mato, flores e folhas vanilla, mesmo quando exigir divergência do original. Não integra a 17; alvos, drops, plantas duplas, custos e permissões precisarão de recorte próprio.
-- Alimentação conjunta permanece adiada. Cenário 8 e dedicado/multiplayer explicitamente pendentes; indicadores do regador funcionais e memória de camas por dimensão adiada.
-- Validação desta atualização documental: build aprovado, `test UP-TO-DATE`, sem testes novos ou reexecução; suíte existente de 192 testes. runClient não executado. Somente sete documentos atualizados, sem alteração de código da 16 ou implementação da 17.
-
-### Fatia 16 — aceita globalmente pelo responsável
-- Responsável aprovou 16-A e as repartições 16-F1 (cobre) e 16-F2 (prata), autorizando seguir com a implementação após o registro documental. Aprovação inclui domínio agrícola HF, permissões/evento por vizinho, custo da foice antes da tentativa autorizada de remoção e execução de área sem recursão/duplicação. Não requer nova autorização entre as repartições.
-- Estrutura de alimentação de todos os alimentos adiada explicitamente para uma única fatia posterior; a 16 não implementa alimentação parcial nos três novos produtos. Cenário 8 e dedicado/multiplayer permanecem pendentes; memória de camas por dimensão adiada.
-- 16-A entrega morango/tomate/berinjela com limites 12/8/8, recursos originais, sementes/produtos/tags/preços/remessas e destinos aprovados. 16-F1/F2 entregam foices cobre/prata com carga persistente e áreas próprias 3×1/3×2. Contratos em [Cultivos](porting/cultivos.md), [Ferramentas](porting/ferramentas.md), [Remessas](porting/remessas.md) e [Abas](porting/abas-criativas.md).
-- Validação: 19 testes novos, 192 totais nos relatórios, zero falhas/erros/ignorados; executados durante implementação. Build final aprovado com `test UP-TO-DATE`, sem nova execução nessa confirmação. runClient não executado pelo agente; testes de adaptadores não comprovam cliques, renderização, cancelamentos externos ou mundo completo. Aceites manuais das repartições continuam independentes.
-- Rega autorizada na 15, carga/durabilidade das enxadas, política vanilla dos quatro cultivos e ausência de conversão automática preservadas. Indicadores do regador confirmados funcionais não encerram cenário 8; não houve alteração de AGENTS.md ou comando Git mutador.
-
-### Aceite da fatia 15 e levantamento da 16 — 16/11/2026
-- Responsável aceitou globalmente 15-F (enxada/regador até prata), 15-A (incluindo DropHandlerPotato), 15-V no recorte dos quatro cultivos e receitas aprovadas, e a ampliação da rega. Este aceite sucede as pendências de aceite dessas entregas abaixo; não atribui resultados individuais de testes nem execução de cliente ao agente.
-- Levantamento de 16-A e 16-F solicitado, com planos e aprovações independentes na conversa. Nenhuma implementação autorizada nesta etapa e nenhum arquivo de plano criado. Evidências estáticas nos contratos de Cultivos e Ferramentas.
-- Validação documental: build aprovado, test UP-TO-DATE; 173 testes nos relatórios existentes, zero falhas/erros/ignorados, sem reexecução e sem testes novos nesta etapa. runClient não executado pelo agente.
-- Cenário 8 permanece não executado; dedicado/multiplayer explicitamente pendentes e memória de camas por dimensão adiada. Indicadores do regador confirmados funcionais; abas e sincronização das regras vanilla não encerram cenário 8.
-
-### Ampliação da rega — 16/11/2026
-- Solicitada e autorizada pelo responsável: clicar em qualquer bloco inicia a área existente, hidratando somente solos elegíveis, com água/esforço/nível por alteração confirmada. Regadores isentos da negação de interação da 15-V; crescimento/plantio/drops continuam independentes. Contrato em [Ferramentas](porting/ferramentas.md#ampliação-autorizada-da-rega--16112026). Aceite manual deste ajuste pendente; não altera durabilidade/carga ou amplia tiers.
-- Responsável confirmou plantio, crescimento, drops e sementes da grama após corrigir a localização do JSON no datapack de teste. Não atribui cobertura adicional ao agente. Cenário 8, dedicado/multiplayer e memória de camas por dimensão seguem pendentes; indicadores do regador funcionais.
-- Build aprovado: 2 testes novos/173 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado pelo agente; testes de adaptadores não comprovam interação em mundo ou integrações externas.
-
-### 15-V — aceita pelo responsável no recorte aprovado
-- Plano aprovado explicitamente pelo responsável: trigo/cenoura/beterraba/batata vanilla, quatro opções independentes por JSON/tags, quatro receitas e política transitória sincronizada. Aprovação inclui recarga ausente/inválida abrindo restrições e filtragem de consultas de loot com estado de bloco. Evidências, APIs e limites em [Cultivos](porting/cultivos.md#fatia-15-v--política-dos-quatro-cultivos-presentes).
-- Sem bloqueio global de plantas, conversão inversa/automática ou mudanças nas ferramentas. Melão/abóbora e opções adicionais de umidade/enxadas permanecem pendentes; não declara equivalência vanilla completa. runClient não executado pelo agente; cenário 8, dedicado/multiplayer e memória de camas por dimensão preservados. Indicadores do regador já confirmados funcionais.
-- Build aprovado: 11 testes novos/171 totais efetivamente executados, zero falhas/erros/ignorados. `compileTestJava` e `test` executados; compilação de produção/recursos reutilizada após compilação nesta implementação. Testes não substituem aceite manual nem validam tráfego/reconexão.
-
-### 15-A — aceita pelo responsável
-- Continuidade explicitamente autorizada pelo responsável em 15/11/2026 após o plano da expansão agrícola: cenoura/beterraba e batata com sorteio próprio. Sementes HF, produtos/visuais vanilla, ciclo, tags/preços/remessas e abas entregues; fontes, APIs e limites em [Cultivos](porting/cultivos.md#fatia-15-a--cenoura-beterraba-e-batata).
-- Build da implementação aprovado: 9 testes novos/160 totais efetivamente executados, zero falhas/erros/ignorados; `test` executado, sem resultado em cache. Recursos/API de loot decodificados por registros reais; adaptadores não substituem jogo. Responsável informou «Testes aprovados» e solicitou seguir à 15-V; aceite global da 15-A, sem atribuir execução individual ao agente. runClient não executado pelo agente.
-- Ferramentas/fome/carga/durabilidade não alteradas nesta fatia. Na entrega da 15-A, 15-V permaneceu separada; seu recorte foi posteriormente aprovado e entregue acima. Cenário 8, dedicado/multiplayer e memória de camas por dimensão continuam pendentes. Indicadores do regador já confirmados funcionais.
-
-### 15-F — aceita pelo responsável
-- Plano aprovado pelo responsável em 15/11/2026 somente para enxada/regador até prata, anterior à expansão agrícola. Carga/áreas, custos por tarefa, nível e durabilidade da enxada, persistência, texturas originais e destinos criativos implementados nos pacotes existentes; recorte e evidências em [Ferramentas](porting/ferramentas.md#contrato-atual--15-f-enxada-e-regador-até-prata).
-- Build aprovado: 12 novos/151 testes totais executados, sem falhas/erros/ignorados. runClient não executado pelo agente; aceite manual da 15-F pendente. Cenário 8, dedicado/multiplayer e memória de camas por dimensão permanecem pendentes; indicadores anteriores do regador confirmados funcionais. 15-A e o recorte da 15-V posteriormente autorizados e entregues acima.
-
-### ✅ Pronto
-- Fatia 14 aceita pelo responsável em 15/11/2026: testes aprovados, sem atribuir execução individual ao agente. Conferência solicitada da semente de cebola confirmou desenho compartilhado e tintas originais distintas do trigo; sem alteração visual. Build da implementação: 20 novos/139 totais executados. Memória de camas por dimensão, cenário 8 e dedicado/multiplayer continuam pendentes. Indicadores do regador funcionais.
-- Em 14/11/2026 o responsável declarou a fatia 13 completa. Aceite global, sem atribuir execução individual de cenários ou testes ao agente. Cenário 8, indicadores do regador e dedicado/multiplayer permanecem pendentes; fadiga, desmaio e recuperação seguem para a fatia 14.
-- Fatia 12 e correções confirmadas pelo responsável em 14/11/2026: «Confirmado a fatia». Aceite global single player de pepino/rebrota/limite, aparência dos cultivos e itens do nabo, e restrição do clique de plantio, sem ampliar execução individual de cenários. Build das correções aprovado: 3 testes novos/105 totais executados; implementação inicial teve 15 novos/102 totais. Contrato em [Cultivos](porting/cultivos.md). Cenário 8, indicadores, dedicado e multiplayer permanecem pendentes.
-- Texturas da enxada e do regador confirmadas pelo responsável em 12/11/2026 como correspondentes ao original. Encerra a pendência de aparência dessas texturas; não valida barra/tooltip nem cenário 8. Proveniência em [Ferramentas](porting/ferramentas.md).
-- Fatia 11 aceita pelo responsável em 12/11/2026: «Testado e aprovado». Aceite global da farmland compartilhada em single player, sem atribuir resultados individuais não relatados. Build da implementação aprovado, 6 testes novos/87 totais executados. Contrato em [Ferramentas](porting/ferramentas.md); histórico em [solo anterior](archive/fatia-11-solo-anterior.md). Cenário 8, indicadores, dedicado e multiplayer permanecem pendentes; texturas tiveram confirmação separada.
-- Fatia 10 aceita pelo responsável em 12/11/2026: «Teste finalizado e aprovado». Aceite do ciclo single player entregue, sem atribuir resultados individuais adicionais, dedicado/multiplayer ou cenário 8. Implementação e limites em [Cultivos](porting/cultivos.md); suíte anterior de 81 testes, 24 novos, executada e aprovada.
-- Registro final em 08/11/2026: build `BUILD SUCCESSFUL in 7s`; 38 testes nos relatórios, zero falhas, erros ou ignorados. A tarefa de testes estava `UP-TO-DATE` neste build documental, reutilizando a execução aprovada da correção. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`.
-- Correção e validação da sétima fatia: `NpcBirthdayCommands` envia o resultado booleano como texto, preservando `true`/`false` na mensagem recebida. Novo teste de serialização da mensagem. Em 07/11/2026, o agente verificou no cliente a sobreposição por datapack, descarte de regra inválida com aviso, continuidade de regra válida, retorno do exemplo após desativar o pack, definição do aniversário, rejeição do dia 31, morte e salvar/reabrir. Em 08/11/2026, o responsável confirmou ausência após limpar e reabrir usando `/hf birthday get`. Não representa execução de todas as variações do roteiro nem inspeção do espelho cliente.
-- Sétima fatia implementada em 07/11/2026: attachment opcional de aniversário com `copyOnDeath`, comandos administrativos, tabela recarregável de datas por identificador e exemplo de teste. A base independente de NPCs por datapack é extensão decidida pelo responsável; nenhum NPC foi implementado. Build `BUILD SUCCESSFUL in 28s`, 37 testes, zero falhas, erros ou ignorados. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`.
-- Sexta fatia implementada em 06/11/2026. Regras de datapack recarregáveis com prioridade e desempate entre tags, rejeição de regras inválidas e de IDs de item desconhecidos. Sete novos testes aprovados. O trigo foi aceito pela tag `c:crops/wheat`. O pagamento após `/reload` e `/hf newDay` foi de 240, e o responsável conferiu os avisos sobre arquivos inválidos em `latest.log`.
-- Quinta fatia concluída conforme validação manual informada pelo responsável em 05/11/2026, com `runClient` em mundo single player: `/hf gold set`, colocação da caixa no chão, graveto validado e consulta por `/hf gold get`; valor mantido após morte e destruição da caixa; sair/reabrir o mundo; `/hf newDay` com valores corretos e sem duplicação, inclusive após sair e entrar. O relato não amplia a cobertura para servidor dedicado ou reconexão multiplayer.
-- Quinta fatia implementada em 04/11/2026: caixa `harvestfestival:shipping_box`, depósito manual de uma unidade por clique, attachment persistente `shipping_queue` com `copyOnDeath` e pagamento pelo consumidor de `NewDayEvent`, reutilizando a soma de `PlayerGold`. Sem novos pacotes de sistema. Seis testes novos de remessas; total de 19 testes, zero falhas e zero erros. Build aprovado (`BUILD SUCCESSFUL in 13s`). Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. Roteiro e limitações em `PORTING_NOTES.md`.
-- Quarta fatia concluída em 04/11/2026: sincronização de saldo de ouro com o jogador proprietário. Validação manual no jogo pelo responsável, com runClient em mundo single player: `/hf gold set` e `/hf gold add`, consultados por `/hf gold get`; renascimento após morte; atravessar portal e voltar; sair e reabrir o mundo.
-- Build desta validação (última linha fornecida pelo responsável): **não informado**. Testes automatizados (quantidade informada pelo responsável): **não informado**.
-- Cenários pendentes da quarta fatia: servidor dedicado, dois jogadores e reconexão. Sair e reabrir o mundo single player não encerra a pendência de reconexão.
-- Terceira fatia concluída: atualização diária interna. Usuário confirmou todos os testes manuais do roteiro e build bem-sucedido após runClient; commit realizado pelo usuário.
-- Segunda fatia da Fase 2 concluída em 02/11/2026: calendário básico persistente. Usuário confirmou aprovação dos testes manuais de comandos, troca de estação, virada do ano, salvar/reabrir e passagem natural do tempo. Cinco testes automatizados de calendário e três de ouro aprovados.
-- Estrutura inicial do repositório (`.gitignore`, `AGENTS.md`, `docs/`).
-- Definição das regras permanentes de desenvolvimento em `AGENTS.md`.
-- Auditoria documental da Fase 0: inventário dos 19 diretórios imediatos do Java, 123 missões anotadas, recursos, integrações adiadas e os 2 mixins do original.
-- Separação dos quatro catálogos em `docs/catalogs/`, com índice em `FEATURES.md`; conteúdo original preservado integralmente, incluindo cabeçalhos e linhas em branco, verificado por reconstrução.
-- `DEPENDENCIES.md` aprovado explicitamente pelo usuário em 30/10/2026; grafo, ciclos, ordem de portagem e pontos de corte disponíveis para as próximas fases.
-- Conferência de encerramento da Fase 0: todos os diretórios Java cobertos, 123 missões anotadas presentes e os 2 mixins documentados; nenhuma lacuna de cobertura encontrada que bloqueasse a Fase 1.
-- Esqueleto da Fase 1: wrapper Gradle 9.2.1, ModDevGradle 2.0.148, Java 25, NeoForge 26.2.0.93, classe `harvestfestival.HarvestFestival` e metadados, sem registros de gameplay.
-- Build aprovado em 30/10/2026: `build/libs/harvestfestival-0.1.0-dev.jar` gerado. Não há testes automatizados de gameplay nesta fase sem conteúdo.
-- `runClient` validado no menu principal: Minecraft 26.2, NeoForge 26.2.0.93 e 3 mods; log confirma `Harvest Festival 0.1.0-dev` e a execução da classe de entrada.
-- Primeira fatia da Fase 2, validada em 02/11/2026: saldo por jogador com attachment persistente, preservação no renascimento e comandos administrativos `/hf gold [player] <get|set|add>` (`set`/`add` recebem valor).
-- Três testes automatizados: zero inicial/dados ausentes, isolamento entre titulares e gravação/releitura comprimida com valores negativos e extremos de `long`.
-- Cliente/servidor integrado: saldo inicial zero, `set 3000000000`, `Dev add -25`, saída/reabertura do mundo e morte/renascimento; saldo final `2999999975` preservado. Mundo local `run/saves/HF Gold Validation`, fora dos entregáveis versionados.
-- Build final aprovado em 02/11/2026: `BUILD SUCCESSFUL`, três testes sem falhas; `runClient` encerrado normalmente com sucesso. Ajustes locais de codificação e diretório temporário documentados em `PORTING_NOTES.md`.
+> Histórico detalhado das fatias 10 a 18 e registros de encerramento da Fase 2 preservados em [fatias-10-18-historico.md](archive/fatias-10-18-historico.md).
 
 ### 🔄 Em Andamento
 - Atualização do responsável em 14/11/2026 nesta solicitação: indicadores do regador já conferidos e funcionais. Substitui a pendência visual nos registros anteriores, sem atribuir testes individuais ao agente. Cenário 8 e dedicado/multiplayer continuam pendentes.
@@ -142,17 +80,12 @@ Validação desta atualização de sequência: build aprovado, nove tarefas UP-T
 - Complemento visual autorizado após o aceite da fatia 9: barra de água no item e quantidade exata no tooltip do regador. Sem novo pacote ou alteração do estado persistido. Por introduzir interface, seus critérios de aceite incluem o cenário 8 de espelho cliente de ouro/aniversário, ainda não executado; o indicador de água não comprova esse cenário.
 
 ### ⏳ Próximos passos
-- Próximo passo: decidir os recortes da 18 apresentados na conversa e a representação da abóbora, após o aceite global da 17. Complementos vanilla continuam separados em [FEATURES](FEATURES.md#sequência-agrícola-pendente); não antecipar implementação sem aprovação.
+- Próximo passo: responder somente às decisões específicas da 20 registradas nos contratos e implementar a 20-A funcional de árvores/aspersores conforme recorte apresentado na conversa. Escopo geral da 20 já aprovado; 19-A aceita globalmente e 19-B integralmente adiada. Complementos vanilla continuam separados em [FEATURES](FEATURES.md#sequência-agrícola-pendente).
 - Executar cenário 8, ainda vinculado ao complemento visual do regador. Indicadores funcionais e texturas confirmados não comprovam o espelho cliente de ouro/aniversário.
 - Obrigação da Fase 3 reafirmada pelo responsável em 12/11/2026: completar o sistema agrícola e seus itens/ferramentas, procurando paridade de gameplay com o original. Fatias continuam pequenas e verificáveis, mas seus mínimos não encerram o sistema nem transferem funções faltantes ao polimento. Próximas fatias devem tratar ferramentas/sementes vanilla, solo compartilhado, itens e comportamentos agrícolas restantes conforme FEATURES/DEPENDENCIES; dependências de lojas/NPCs permanecem ordenadas pelo grafo.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.
 - HUD/calendário visual continuam adiados por decisão do usuário.
 
-### Leitura utilizada na sétima fatia — aniversário do jogador
-1. Ler `AGENTS.md`, `docs/STATUS.md` e `docs/PORTING_NOTES.md`, nessa ordem.
-2. Consultar `docs/DEPENDENCIES.md` (dados básicos do jogador e relógio) e `docs/FEATURES.md` (calendário e dados por UUID).
-3. No port, ler `CalendarDate.java` e `Season.java` para a representação da data, e `PlayerGold.java` e `PlayerGoldPersistenceTest.java` para a persistência do jogador e a sincronização com o titular.
-4. No original, consultar os trechos de aniversário em `player/stats/StatsServer.java`, `player/stats/StatsClient.java` e `player/packet/PacketSyncBirthday.java` para conferir definição da data, gravação, leitura e envio ao jogador.
 ---
 
 ## Registro de Decisões
@@ -177,81 +110,8 @@ Validação desta atualização de sequência: build aprovado, nove tarefas UP-T
 - **Controle de Versão:** Commits, pushes e demais alterações de repositório Git serão executados de forma manual e exclusiva pelo desenvolvedor humano.
 - **Controle de Ambiente (02/11/2026):** Projeto movido para `C:\dev\harvest-festival-port`; diretório `C:\dev` oculto, sem impedir o acesso. Eclipse Temurin 21.0.13+9 instalado para iniciar o Gradle 9.2.1; a toolchain do projeto permanece Java 25. Build e três testes reexecutados com sucesso no novo caminho, usando `TEMP`/`TMP` locais e override `file.encoding=COMPAT`; procedimento atual em `PORTING_NOTES.md`.
 
-## Oitava fatia — tabela de validação integrada (08/11/2026)
+---
 
-Plano aprovado e preparação executada. A tabela distingue verificação do agente e ações do responsável; nenhuma expectativa abaixo equivale a resultado observado. Cenário parcialmente executado mantém `não executado` até completar suas subetapas.
+## Validação e Encerramento da Fase 2
 
-| Nº | Cenário | Resultado | Quem executou | Evidência e pendência |
-| --- | --- | --- | --- | --- |
-| 1 | Servidor dedicado com mod, sem erro | passou | Agente | Log dedicado: carregamento HF; `Done (0.244s)!` às 11:33:55; `list`, `hf day` e consulta de NPC responderam às 11:33:57. Nenhum ERROR/FATAL na subida e inspeção até 11:44. Às 11:51:25 houve Connection reset após queda nativa do cliente; servidor permaneceu ativo. Avisos e ocorrência registrados nas notas. |
-| 2 | Dois clientes com nomes distintos | passou | Responsável conectou; agente verificou | HFTester2 entrou às 11:43:35; HFTester1 às 11:43:49; `list` às 11:44:17: `There are 2 of a max of 2 players online: HFTester2, HFTester1`. Primeiro runClient2 falhou nativamente; repetição conectou. |
-| 3 | Isolamento de ouro, aniversário e fila | passou | Responsável depositou; agente preparou e inspecionou | `data get entity <nome> "neoforge:attachments"` às 11:45:36: HFTester1 ouro 100, primavera 5, fila de um graveto a 25; HFTester2 ouro 200, inverno 20, fila de um graveto a 40. Dados distintos preservados simultaneamente. |
-| 4 | Permissões dos três comandos | passou | Responsável (gold sem OP) e agente (demais consultas) | Cliente HFTester2: get de gold, birthday e npcBirthday negados sem OP; os três aceitos após op nível 2 (11:49–11:50). Variantes mutadoras/alvo explícito do roteiro ampliado não foram executadas nesta comparação; não ampliar a cobertura. |
-| 5 | Reconexão preserva ouro, aniversário e fila | passou | Agente (HFTester2), responsável (HFTester1); agente inspecionou | HFTester2 saiu/entrou às 11:50:38/11:50:51: 200, inverno 20, fila 40. HFTester1 reconectou após queda nativa às 11:52:29: 100, primavera 5, fila 25. NBT e comandos às 11:50:59/11:52:41. |
-| 6 | Relógio único e pagamentos sem duplicação | passou | Agente (viradas/inspeção e consulta inicial HFTester2), responsável (consultas dos clientes) | Ambos mostraram primavera 1/ano 1; viradas às 11:52:52 e 11:53:07 geraram uma atualização cada. Ouro 125/240, filas vazias; segunda virada manteve valores. Logs dos clientes às 11:53:36 e 11:53:43: primavera 3/ano 1. |
-| 7 | Remessa offline na virada | passou | Responsável depositou/desconectou/reconectou HFTester2; agente executou viradas e inspeções | Observação concluída: não pagou offline nem ao reconectar (240 e fila 40); pagou na próxima virada conectado (280 e fila vazia às 16:36:59). Leituras offline precedidas de save-all. Aceito no encerramento pelo responsável em 08/11/2026; não constitui prova adicional de paridade. |
-| 8 | Espelho cliente e isolamento do titular | não executado | — | Sem depurador preparado. Pendência obrigatória quando houver primeiro consumidor cliente (HUD/interface). Mensagens administrativas e testes de codec não comprovam o espelho. |
-| 9 | Preços e aniversários por datapack e reload | passou | Responsável depositou; agente operou console/pack e inspecionou | Às 16:45:58, fila real 100+140+140 (segundo clique extra informado pelo responsável); crédito 380 levou 280 a 660. Nova virada manteve 660. Pack desativado/reload: depósito a 100, saldo 760 e fila vazia às 16:46:49. NPC retornou primavera 15 e sibling ausente; regras inválidas e continuidade da válida verificadas antes. |
-
-### Build e evidências desta preparação
-
-- Build com reexecução de testes: `BUILD SUCCESSFUL in 16s`; 38 testes, zero falhas, erros ou ignorados, tarefa `test` executada. `run/validation/build.log`.
-- Build final após ajuste de console: `BUILD SUCCESSFUL in 8s`; 38 testes nos XML, `test UP-TO-DATE`, reutilizando a execução acima. `run/validation/build-final.log`.
-- Última linha literal do build final:
-
-```text
-Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
-```
-
-- Logs dos jogos: `run/server/logs/latest.log`, `run/client1/logs/latest.log`, `run/client2/logs/latest.log`. Roteiro completo e detalhes do ambiente em `PORTING_NOTES.md`, seção da oitava fatia.
-- Ocorrência de ambiente: primeiro segundo cliente encerrou às 11:34:55 com `EXCEPTION_ACCESS_VIOLATION` em `glfw.dll`, fora da JVM; `run/client2/hs_err_pid15572.log`. Reiniciado sem alteração de código; posteriormente conectado. Causa não determinada; nenhum bug do mod diagnosticado ou corrigido.
-- Pendências: cenário 8 obrigatório no primeiro consumidor cliente; aceite da Fase 2 e avanço à Fase 3 registrados em 08/11/2026. Variantes adicionais de permissão do roteiro ampliado não foram exercitadas; consultas dos três comandos passaram. Falhas nativas de GLFW registradas sem causa comprovada. Servidor encerrado normalmente por stop às 16:46:49, com salvamento de jogadores e todas as dimensões.
-- **Fase 2 encerrada pelo responsável, exceto cenário 8; Fase 3 autorizada em 08/11/2026.**
-
-### Encerramento da execução desta fatia — 08/11/2026
-
-- Cenários 1–7 e 9 observados, com limites explícitos na tabela; cenário 8 pendente obrigatório. O cenário 7 foi posteriormente aceito pelo responsável no encerramento, sem alteração de comportamento.
-- Build mais recente: `BUILD SUCCESSFUL in 6s`; 38 testes, zero falhas, erros ou ignorados; `test UP-TO-DATE`, reutilizando a reexecução desta sessão. Saída `run/validation/build-conclusion.log`; última linha literal igual à transcrita acima.
-- Servidor encerrado por `save-all` e `stop` às 16:46:49; jogadores e todas as dimensões salvos; runServer terminou com sucesso. Evidência `run/validation/server-final.log`.
-- Nenhum bug do mod corrigido e nenhuma feature criada. **Fase 2 posteriormente encerrada pelo responsável com ressalva do cenário 8; Fase 3 autorizada.**
-
-## Aceite e transição — 08/11/2026
-
-O responsável deu a Fase 2 e a oitava fatia como concluídas, exceto o cenário 8, e autorizou seguir à Fase 3 antes dessa verificação. Esta decisão sucede os registros históricos que mantinham a fase aberta ou aguardavam aceite do comportamento offline. Mantida a regra observada de pagamento na próxima virada com o jogador conectado, sem correção e sem alegar prova adicional de paridade.
-
-O cenário 8 continua não executado e obrigatório no primeiro consumidor cliente (HUD/interface): ouro/aniversário do titular, isolamento entre jogadores, atualização, limpeza e reconexão. Mensagens administrativas e testes de codec não comprovam o espelho. Avançar não elimina a pendência nem autoriza implementar HUD agora.
-
-Somente STATUS.md e PORTING_NOTES.md atualizados. Nenhum código, pacote ou sistema novo; primeira fatia da Fase 3 ainda precisa de escopo e critérios verificáveis conforme DEPENDENCIES.md. Limitações dos testes e incidentes nativos de GLFW preservados. Nenhum comando Git ou controle de interface realizado.
-
-Validação documental da transição: `BUILD SUCCESSFUL in 6s`; 38 testes nos XML, zero falhas, erros ou ignorados. `test UP-TO-DATE`, sem nova execução de testes. Comando: `.\gradlew.bat build '-Dorg.gradle.jvmargs=-Xmx1G -Dfile.encoding=COMPAT' --max-workers=2 --console=plain`; saída em `run/validation/build-phase3-transition.log`. Nenhum cliente aberto nesta atualização. Última linha literal:
-
-```text
-Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html
-```
-
-Validação desta preparação documental (09/11/2026): BUILD SUCCESSFUL in 15s; 38 testes nos XML, zero falhas, erros ou ignorados. Tarefa test UP-TO-DATE, sem reexecução nem testes das ferramentas ainda. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. Build executado com TEMP/TMP locais e COMPAT; acesso ao cache Gradle exigiu execução autorizada após bloqueio inicial de escrita no arquivo de lock. runClient não executado; servidor dedicado e multiplayer pendentes para a fatia 9.
-
-## Fatia 9 — entrega automatizada (09/11/2026)
-
-Plano aprovado e pacote harvestfestival.tools criado. Duas ferramentas, solo preparado passivo e regras recarregáveis por tags entregues; nenhuma implementação de cultivo, esforço, coleta, interface ou integração externa. Etapa 4 continua parcialmente aberta para cesta, flores e apoios restantes.
-
-Build: `BUILD SUCCESSFUL in 13s`; 57 testes, sendo 19 novos, zero falhas, erros ou ignorados; tarefa test executada. Relatórios em build/test-results/test e build/reports/tests/test/index.html. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`.
-
-Roteiro concreto single player em PORTING_NOTES.md; runClient não executado nesta implementação. Aceite manual pendente. Servidor dedicado e multiplayer continuam pendentes para a fatia 9. Nenhum comando Git executado.
-
-### Aceite manual e complemento visual — 09/11/2026
-
-Responsável confirmou teste validado e fatia 9 aprovada. Aceite single player registrado, sem atribuir resultados individuais não relatados nem validar dedicado/multiplayer. Barra azul e tooltip de água do regador implementados como complemento autorizado, ainda aguardando validação visual. O cenário 8 integra obrigatoriamente os critérios de aceite deste complemento e permanece não executado.
-
-Pendências do solo observadas pelo responsável: não seca por tempo/dias e não retorna à terra ao pisar. Registradas para definição e implementação no cultivo; nenhuma alteração de solo neste complemento.
-
-Build do complemento: `BUILD SUCCESSFUL in 15s`; 57 testes existentes executados, zero falhas, erros ou ignorados. Última linha literal: `Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html`. runClient não executado pelo agente nesta alteração. Roteiro e APIs em PORTING_NOTES.md.
-
-## Reorganização documental — 11/11/2026
-
-Compactação de PORTING_NOTES autorizada pelo responsável: entrada estável e contratos por sistema em docs/porting/. Histórico integral preservado em [docs/archive/README.md](archive/README.md), com reconstrução conferida. Inclui fatias 1–9, procedimentos e evidências. Nenhuma mudança de fase, pacote, gameplay ou cobertura; cenário 8 e validação visual permanecem pendentes. Validação desta reorganização: BUILD SUCCESSFUL em 17s; test UP-TO-DATE, sem reexecução. Preservação textual integral e links vigentes conferidos; runClient não executado (alteração documental).
-
-
-Validação automatizada da fatia 13: build aprovado; 14 testes novos, 119 totais efetivamente executados, zero falhas/erros/ignorados. runClient não executado nesta entrega; aceite visual e manual pendente. Testes usam adaptadores, registros e serialização reais, sem simular cliente ou servidor dedicado.
-
-Preferência do responsável em 14/11/2026: evitar arquivos de planos; permitida remoção após conclusão da implementação, preservando decisões/evidências nos contratos. Roteiros manuais devem aparecer na resposta final, após implementar. Planos transitórios da fatia 14 removidos; correção rastreável dos handlers em Cultivos e sequência vigente em FEATURES. AGENTS.md não alterado.
+A Fase 2 e a oitava fatia foram concluídas com ressalva do cenário 8, e a Fase 3 foi autorizada em 08/11/2026. A tabela completa de validação integrada (cenários 1 a 7 e 9), comandos e evidências do servidor dedicado e clientes multiplayer estão preservados na íntegra em [fatia-08-validacao-integrada.md](archive/fatia-08-validacao-integrada.md). A documentação e os testes da fatia 9 estão preservados em [fatia-09-ferramentas.md](archive/fatia-09-ferramentas.md).

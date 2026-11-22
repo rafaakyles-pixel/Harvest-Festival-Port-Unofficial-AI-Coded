@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": ["#harvestfestival:crops"]
+  "values": [
+    "#harvestfestival:crops",
+    "harvestfestival:peach_tree"
+  ]
 }

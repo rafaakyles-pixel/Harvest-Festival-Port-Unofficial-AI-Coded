@@ -1,5 +1,7 @@
 # Abas criativas
 
+Revisão da 20, sem implementação: 19-A recebeu aceite global do responsável, com plantio normal do Nabo Robusto, sem resultados individuais dos demais testes. 19-B permanece integralmente adiada, inclusive saco HF; decisões específicas “reavaliar se retomada”. Proposta de destinos da 20: sementes pêssego/laranja/banana/maçã/uva após as atuais; pêssego e aspersor velho definitivos são exemplares da 20-A, não itens fictícios de teste. Velho e ferro vazios ao final de Ferramentas e blocos; quatro produtos HF e folhas obtíveis somente busca; maçã nos destinos vanilla; bases/topos/frutos técnicos sem exposição. Confirmar destinos antes do código; nenhuma aba nova, receita de aquisição ou conversão automática. Detalhes e distribuição sazonal em [Árvores](arvores-frutiferas.md) e [Aspersores](aspersores.md). Cenário 8 permanece não executado.
+
 Entrega 19-A autorizada: saco Nabo Robusto após grama na aba Sementes; produto somente na busca, ao final dos produtos HF. Recursos originais, ACA262 nas duas camadas e traduções incluídos. 19-B integralmente adiada, inclusive saco HF: nether wart permanece somente nos destinos vanilla preexistentes. Essa decisão sucede a proposta abaixo; exposição criativa não implementa aquisição pelo tutorial.
 
 ## Destinos propostos da 19 — sem implementação

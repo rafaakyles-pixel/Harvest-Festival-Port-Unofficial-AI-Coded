@@ -27,6 +27,8 @@ public final class HarvestFestival {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public HarvestFestival(IEventBus modBus) {
+        harvestfestival.crops.OrchardContent.register(modBus);
+        NeoForge.EVENT_BUS.addListener(harvestfestival.crops.TreeDefinitions::register);
         harvestfestival.crops.VanillaCropPolicy.register(modBus);
         harvestfestival.crops.VanillaCropLootModifier.register(modBus);
         harvestfestival.crops.VanillaCropEvents.register();

@@ -90,5 +90,18 @@
   "item.harvestfestival.watermelon_seeds": "Watermelon Seeds",
   "item.harvestfestival.pumpkin_seeds": "Pumpkin Seeds",
   "item.harvestfestival.grass_seeds": "Grass Seeds",
-  "item.harvestfestival.grass": "Fodder"
+  "item.harvestfestival.grass": "Fodder",
+  "item.harvestfestival.peach": "Peach",
+  "item.harvestfestival.peach_seeds": "Peach Seeds",
+  "block.harvestfestival.peach_tree": "Peach Tree",
+  "block.harvestfestival.peach_tree_top": "Peach Tree Top",
+  "block.harvestfestival.peach_leaves": "Peach Leaves",
+  "block.harvestfestival.peach_fruit": "Peach",
+  "block.harvestfestival.old_sprinkler": "Old Sprinkler",
+  "tooltip.harvestfestival.tree_water": "Does not need water",
+  "tooltip.harvestfestival.tree_space": "Clear space: %s blocks wide",
+  "tooltip.harvestfestival.tree_maturity": "Maturity: %s growths",
+  "tooltip.harvestfestival.tree_season": "Fruits in: %s",
+  "season.harvestfestival.summer": "Summer",
+  "season.harvestfestival.autumn": "Autumn"
 }

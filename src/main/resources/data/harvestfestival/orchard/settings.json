@@ -1,0 +1,6 @@
+{
+  "trees_grow_daily": true,
+  "enable_bonemeal": false,
+  "seasonal_bonemeal": true,
+  "sprinkler_daily_consumption": 0
+}

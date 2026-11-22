@@ -90,5 +90,18 @@
   "item.harvestfestival.watermelon_seeds": "Sementes de melancia",
   "item.harvestfestival.pumpkin_seeds": "Sementes de abóbora",
   "item.harvestfestival.grass_seeds": "Sementes de grama",
-  "item.harvestfestival.grass": "Feno"
+  "item.harvestfestival.grass": "Feno",
+  "item.harvestfestival.peach": "Pêssego",
+  "item.harvestfestival.peach_seeds": "Sementes de pessegueiro",
+  "block.harvestfestival.peach_tree": "Pessegueiro",
+  "block.harvestfestival.peach_tree_top": "Topo de pessegueiro",
+  "block.harvestfestival.peach_leaves": "Folhas de pessegueiro",
+  "block.harvestfestival.peach_fruit": "Pêssego",
+  "block.harvestfestival.old_sprinkler": "Aspersor velho",
+  "tooltip.harvestfestival.tree_water": "Não precisa de água",
+  "tooltip.harvestfestival.tree_space": "Espaço livre: %s blocos de largura",
+  "tooltip.harvestfestival.tree_maturity": "Maturidade: %s crescimentos",
+  "tooltip.harvestfestival.tree_season": "Frutifica: %s",
+  "season.harvestfestival.summer": "Verão",
+  "season.harvestfestival.autumn": "Outono"
 }

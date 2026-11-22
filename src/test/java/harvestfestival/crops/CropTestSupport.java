@@ -136,7 +136,13 @@ public final class CropTestSupport implements AutoCloseable {
     private final Map<TagKey<Item>, List<Holder<Item>>> items;
     public CropTestSupport(Path path) throws Exception {
         bindItems();
-        for (var file : RESOURCES) {
+        var files = new java.util.ArrayList<>(List.of(RESOURCES));
+        for (String species : OrchardContent.TREES.keySet()) {
+            for (String suffix : List.of("fruit_trees/", "tags/item/seeds/")) files.add("harvestfestival/" + suffix + species + ".json");
+            files.add("c/tags/item/crops/" + species + ".json");
+            files.add("harvestfestival/shipping_prices/tags/c/crops/" + species + ".json");
+        }
+        for (var file : files) {
             var target = path.resolve("data/" + file);
             Files.createDirectories(target.getParent());
             try (var stream = CropContent.class.getResourceAsStream("/data/" + file)) {
@@ -155,8 +161,12 @@ public final class CropTestSupport implements AutoCloseable {
                 List.of(net.minecraft.world.item.Items.WHEAT.builtInRegistryHolder()));
         BuiltInRegistries.ITEM.prepareTagReload(new TagLoader.LoadResult<>(Registries.ITEM, itemTags)).apply();
         CropDefinitions.INSTANCE.apply(CropDefinitions.INSTANCE.prepare(manager, null), manager, null);
+        TreeDefinitions.INSTANCE.apply(TreeDefinitions.INSTANCE.prepare(manager, null), manager, null);
     }
     public static void bindItems() {
+        for (var tree : OrchardContent.TREES.values()) for (var item : List.of(tree.seed().get(), tree.product().get(), tree.leaves().get().asItem()))
+            item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        OrchardContent.OLD.get().asItem().builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         for (var item : List.of(CropContent.TUTORIAL_TURNIP.get(), CropContent.TUTORIAL_TURNIP_SEEDS.get(), CropContent.WATERMELON_SEEDS.get(), CropContent.PUMPKIN_SEEDS.get(),
                 CropContent.GRASS_SEEDS.get(), CropContent.GRASS.get(), net.minecraft.world.item.Items.MELON,
                 net.minecraft.world.item.Items.MELON_SLICE, net.minecraft.world.item.Items.PUMPKIN,
@@ -218,6 +228,7 @@ public final class CropTestSupport implements AutoCloseable {
     public static CropDefinition turnip() { return CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:turnip")); }
     public static CropDefinition cucumber() { return CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:cucumber")); }
     public void close() {
+        TreeDefinitions.INSTANCE.apply(new TreeDefinitions.Data(Map.of(), OrchardSettings.DEFAULT), null, null);
         CropDefinitions.INSTANCE.apply(Map.of(), null, null);
         BuiltInRegistries.BLOCK.prepareTagReload(new TagLoader.LoadResult<>(Registries.BLOCK, blocks)).apply();
         BuiltInRegistries.ITEM.prepareTagReload(new TagLoader.LoadResult<>(Registries.ITEM, items)).apply();

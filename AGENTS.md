@@ -10,12 +10,14 @@ Portabilidade fiel em gameplay do mod Harvest Festival.
 - **Estrutura:** Um único mod contendo todas as features, organizado internamente em pacotes divididos por sistema.
 - **Escopo:** Uso pessoal, sem publicação.
 
-## 2. Fluxo de Início de Tarefa (Obrigatório)
-Antes de escrever qualquer código, execute os seguintes passos na ordem:
-1. Leia este arquivo, `docs/STATUS.md` e `docs/PORTING_NOTES.md`.
-2. Leia `docs/FEATURES.md` se a tarefa atual envolver a implementação de features.
-3. Leia apenas o catálogo necessário, se houver: - `docs/catalogs/variants.md`: variantes de itens, blocos e ferramentas. - `docs/catalogs/content-registries.md`: identificadores de registro de conteúdo. - `docs/catalogs/quests.md`: missões anotadas. - `docs/catalogs/resources.md`: advancements, edifícios, festivais, árvores e loot tables.
-4. Consulte apenas o código de referência estritamente necessário para comprovar a mecânica em questão, incluindo condições, configurações padrão, exceções e interações relevantes. Quando o comportamento for herdado do Minecraft/Forge original, confira também essa implementação; não o deduza pela versão alvo. Se a leitura não esclarecer o funcionamento, valide no jogo original quando possível ou apresente a incerteza ao responsável antes de implementar.
+## 2. Fluxo de Início de Tarefa (Otimizado para Contexto)
+Antes de escrever qualquer código, execute os seguintes passos de leitura direcionada:
+1. **Prioridade do Prompt:** Leia prioritariamente os arquivos essenciais indicados de forma explícita pelo responsável no prompt da tarefa.
+2. **Consulta Direcionada:** Se o prompt não especificar arquivos essenciais ou houver dúvida de fronteira:
+   - Consulte apenas a fatia ativa em `docs/STATUS.md` (evite ler o histórico completo de fatias já concluídas).
+   - Consulte o índice em `docs/PORTING_NOTES.md` e abra **apenas** o contrato de `docs/porting/` diretamente relacionado ao sistema alterado.
+   - `docs/FEATURES.md` e catálogos em `docs/catalogs/` só devem ser lidos sob demanda explícita para planejamento de escopo ou inventário de variantes.
+3. **Código de Referência:** Consulte em `reference/original-1.12.2/` apenas o código estritamente necessário para comprovar a mecânica em questão, incluindo condições, configurações padrão, exceções e interações relevantes. Quando o comportamento for herdado do Minecraft/Forge original, confira também essa implementação; não o deduza pela versão alvo. Se a leitura não esclarecer o funcionamento, valide no jogo original quando possível ou apresente a incerteza ao responsável antes de implementar.
 
 **Atenção:** A fase atual do projeto e os pacotes permitidos estão definidos em `docs/STATUS.md`. Se a tarefa solicitada exigir ações fora da fase atual, interrompa o processo e solicite confirmação explícita antes de prosseguir.
 
@@ -65,7 +67,7 @@ Antes de escrever qualquer código, execute os seguintes passos na ordem:
 
 ## 9. Manutenção da documentação (controle de tamanho)
 
-- **Leitura inicial:** leia `AGENTS.md`, `docs/STATUS.md` e `docs/PORTING_NOTES.md`. Leia somente os contratos de `docs/porting/` indicados pelo índice e pertinentes ao sistema alterado ou consumido. `docs/archive/` só é consultado quando necessário para evidência histórica ou procedimento referenciado.
+- **Leitura cirúrgica:** priorize estritamente os arquivos indicados no prompt da tarefa. Não faça leitura preventiva ou cumulativa de múltiplos arquivos de documentação. Quando consultar `docs/STATUS.md`, foque na seção da fatia ativa; quando consultar `docs/porting/`, leia apenas o contrato do sistema ativo. `docs/archive/` só é consultado quando houver referência explícita a procedimento histórico necessário.
 - **PORTING_NOTES é uma entrada estável:** escopo, ambiente consolidado, decisões transversais, pendências obrigatórias e índice por sistema. Não acrescentar uma seção por fatia nem tabela global acumulativa de APIs. Meta de até 200 linhas, sem omitir informação nem juntar parágrafos artificialmente para cumprir contagem; detalhes vigentes vão ao contrato pertinente.
 - **Ao concluir uma fatia**, atualizar no lugar o contrato de `docs/porting/<sistema>.md`: comportamento final, decisões do responsável, formato persistido, API pública, APIs verificadas com versão/evidência, limitações e validação. Evitar duplicar APIs já documentadas. Cerca de 15 linhas é meta para resumo, somente quando não omitir informações; contratos completos não têm esse limite.
 - **Contagens de testes:** distinguir novos testes da suíte total e execução efetiva de resultados em cache. Não ampliar cobertura manual a partir de build ou codec.

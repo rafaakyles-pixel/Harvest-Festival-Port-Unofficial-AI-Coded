@@ -1,0 +1,2389 @@
+{
+  "sapling": 12,
+  "juvenile": 34,
+  "maturity": 49,
+  "maximum": 53,
+  "regrow": 50,
+  "radius": 3,
+  "season": "summer",
+  "offset_x": -4,
+  "offset_z": -4,
+  "template": [
+    {
+      "pos": [
+        2,
+        2,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        2,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        2,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        2,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        2,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        2,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        2,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        2,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        2,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        2,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        2,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        2,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        2,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        2,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        2,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        2,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        3,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        3,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        5,
+        3,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        6,
+        3,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        3,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        3,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        6,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        7,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        4,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:orange_leaves"
+      }
+    }
+  ]
+}

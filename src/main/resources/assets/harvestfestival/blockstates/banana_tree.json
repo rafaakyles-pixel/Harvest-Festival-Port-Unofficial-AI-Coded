@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "appearance=0": {
+      "model": "harvestfestival:block/banana_seeds"
+    },
+    "appearance=1": {
+      "model": "harvestfestival:block/banana_sapling"
+    },
+    "appearance=2": {
+      "model": "harvestfestival:block/banana_juvenile_lower"
+    },
+    "appearance=3": {
+      "model": "minecraft:block/jungle_log"
+    }
+  }
+}

@@ -2,6 +2,8 @@
 
 Auditoria de 30/10/2026. **Aprovado pelo usuário em 30/10/2026.** A Fase 1 foi posteriormente autorizada e seu esqueleto validado; os pacotes permitidos continuam definidos em `STATUS.md`. A aprovação do grafo não autoriza antecipar sistemas das próximas fases. A distribuição permanece em mod único conforme `AGENTS.md`.
 
+Fatia 20: cinco árvores e dois aspersores implementados em harvestfestival.crops, consumindo calendário, solo e remessas existentes. NPCs/lojas/missões são dependências externas de aquisição, mantidas fora da conclusão funcional; NPCs começam na 21. Cobertura automatizada e limites manuais nos contratos de árvores/aspersores.
+
 ## Leitura do grafo
 
 `A --> B` significa **A usa B**, e não ordem de inicialização. O original contém ciclos e acesso indireto por `HFApi`/`HFTrackers`; portanto não existe uma ordenação topológica de todos os pacotes atuais. `LoadOrder` ordena registros, não elimina dependências de execução. O grafo abaixo resume relações funcionais; a matriz de imports ao final complementa com acoplamentos estáticos, inclusive de renderização e inicialização.

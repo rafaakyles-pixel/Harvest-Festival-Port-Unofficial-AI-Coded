@@ -19,6 +19,11 @@ public final class FruitLeavesBlock extends Block {
     public static final BooleanProperty BLOOM = BooleanProperty.create("bloom");
     public FruitLeavesBlock(Properties properties) { super(properties); registerDefaultState(stateDefinition.any().setValue(CHECK_DECAY, false).setValue(BLOOM, false)); }
     @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) { builder.add(CHECK_DECAY, BLOOM); }
+    @Override public void animateTick(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, RandomSource random) {
+        if (level.isRainingAt(pos.above()) && !level.getBlockState(pos.below()).isSolidRender() && random.nextInt(15) == 1)
+            level.addParticle(net.minecraft.core.particles.ParticleTypes.DRIPPING_WATER,
+                    pos.getX() + random.nextFloat(), pos.getY() - .05, pos.getZ() + random.nextFloat(), 0, 0, 0);
+    }
     @Override public BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext context) {
         var level = context.getLevel();
         return defaultBlockState().setValue(BLOOM, level instanceof ServerLevel server

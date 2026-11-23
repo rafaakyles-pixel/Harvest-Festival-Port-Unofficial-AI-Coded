@@ -21,6 +21,10 @@
     "#c:crops/pumpkins",
     "#c:crops/grass",
     "#c:crops/tutorial_turnip",
-    "#c:crops/peach"
+    "#c:crops/peach",
+    "#c:crops/orange",
+    "#c:crops/banana",
+    "#c:crops/apple",
+    "#c:crops/grape"
   ]
 }

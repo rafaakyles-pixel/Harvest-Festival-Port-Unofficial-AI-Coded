@@ -15,6 +15,9 @@ public final class TreeBlockEntity extends BlockEntity {
     private int stage = 1;
     private long lastCycle;
     private boolean valid = true;
+    private String producerId = "";
+    public String producerId() { return producerId; }
+    public void producerId(String id) { producerId = id; setChanged(); }
     public TreeBlockEntity(BlockPos pos, BlockState state) { super(OrchardContent.TREE_ENTITY.get(), pos, state); }
     public String species() { return ((TreeBlock) getBlockState().getBlock()).species(); }
     public int stage() { return stage; }
@@ -36,14 +39,16 @@ public final class TreeBlockEntity extends BlockEntity {
     }
     @Override protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
-        output.putInt("schema", 1); output.putString("species", species()); output.putInt("stage", stage);
+        output.putInt("schema", 2); output.putString("producer", producerId); output.putString("species", species()); output.putInt("stage", stage);
         output.store("last_cycle", DailyCycleData.MARKER_CODEC, lastCycle); output.putBoolean("valid", valid);
     }
     @Override protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         stage = input.getIntOr("stage", -1);
         lastCycle = input.read("last_cycle", DailyCycleData.MARKER_CODEC).orElse(Long.MAX_VALUE);
-        valid = input.getIntOr("schema", 0) == 1 && input.getStringOr("species", "").equals(species())
+        int schema = input.getIntOr("schema", 0);
+        producerId = schema == 1 ? "" : input.getStringOr("producer", "invalid");
+        valid = (schema == 1 || schema == 2) && input.getStringOr("species", "").equals(species())
                 && stage >= 1 && stage <= 10000 && input.getBooleanOr("valid", false);
     }
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider registries) { return saveCustomOnly(registries); }

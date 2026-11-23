@@ -1,8 +1,18 @@
-# Aspersores — contrato em levantamento
+# Aspersores — contrato da fatia 20
 
-Preparação da fatia 20 em 21/11/2026; **sem implementação**. Escopo geral de completar ambos os aspersores na 20 aprovado; divergências específicas ainda não respondidas permanecem propostas. Leitura de código/recursos, nenhum teste em jogo.
+Implementação autorizada em 21–22/11/2026: velho funcional na A e ferro completo na D, sobre o mesmo tanque/algoritmo; integração na E. Preparação original preservada abaixo. Não há aceite manual presumido.
 
-## Revisão vigente — A funcional, D completa variantes, E integra
+## Implementação vigente
+
+- `SprinklerBlock` e `SprinklerBlockEntity`: velho 17 candidatos/r=1/altura 0,5; ferro 161/r=4/altura 0,7, sem colisão. Ambos usam modelos e PNG originais MIT, item de quebra sem tanque, aba Ferramentas e blocos com tanque vazio. Nenhuma receita, loja ou missão substituta.
+- `SprinklerHydration.water` confirma escritas em farmland participante por tag; não usa eventos/permissões de ferramentas nem consulta disable_growth. `CropDailyUpdates.process` é o coordenador real: árvores e todos os cultivos crescem antes de qualquer secagem; POST global executa limpeza de fruto e irrigação. Operação autônoma sem dono, limitada a posições carregadas e dentro da borda/altura. Não compensa dias descarregados.
+- Tanque transacional de 1000 por `FluidStacksResourceHandler`, água por tag, mesma capability em seis faces/null. Manual somente no modo positivo, sempre recipiente→tanque, uma unidade temporária; balde inteiro não preenche tanque parcial. Survival recebe recipiente resultante, criativo conserva mão sem balde extra; som de esvaziamento após sucesso. Transferência externa pode preencher/drenar também no padrão sem consumo.
+- Default custo=0 (qualquer <=0 é gratuito). Positivo exige >1 unidade; se alguma escrita confirma, drena min(custo,reserva) uma vez. Sobreposição não cobra a máquina que não mudou solo. Cada entidade guarda last_cycle separado de crop_cycle; replay é recusado. Transações abortadas não notificam; toda alteração confirmada marca save e sincroniza quantidade.
+- Save schema=1: consumo visual, last_cycle e composto tank serializado pela API; variante é identidade do bloco. Entrada no chunk e update packet completos; ticker atualiza configuração visual após reload. Save inválido de tanque não pode introduzir outro fluido/exceder capacidade. Não promete migração 1.12.2 nem rollback de remoção desses registros; codecs antigos não mudam.
+- Partículas são apenas cliente, a cada 15 ticks, relógio global 6000–6250, ausência de chuva e combustível original; velho dispersa por 1/3. Isto não implementa chuva HF nem altera hidratação pelo estado de chuva.
+- APIs da tabela abaixo efetivamente consumidas/compiladas no alvo 26.2.0.93, incluindo capability real de balde e blocos, callback pós-commit e codec do tanque. Testes cobrem limites, abort, save/reload, balde inteiro/parcial, criativo, faces, matriz de custos, replay, falha de escrita, sobreposição e ordem global. Observação de quantidade/partículas no cliente e dedicado/multiplayer continuam pendentes.
+
+## Revisão aprovada — A funcional, D completa variantes, E integra
 
 **Decisões aprovadas pelo responsável em 21/11/2026:** implementar a 20, atuação sem proprietário, destinos criativos propostos e persistência/sincronização após toda alteração confirmada do tanque. Sem force-load, sem aquisição substituta e sem integração específica. Crescimento de árvores exige espaço integral conforme contrato próprio; não muda alcance nem custo da máquina.
 
@@ -86,3 +96,11 @@ Novas entidades de bloco com quantidade/conteúdo e marcador diário, sem modifi
 - 20-G: 161 posições, limites verticais, sobreposição de máquinas, fronteiras carregadas, dimensões e dados de variante; regressão do velho e regadores. Testes de integração para não cobrar tanque quando nenhuma alteração ocorreu. Visual de partículas em cliente não é comprovado por testes de geometria.
 - Recomendações que exigem decisão: preservar default 0 e limiar >1; expor ambos na aba aprovada sem receita; operar somente em chunks carregados, sem compensação; definir permissões de máquina e se solos sujeitos a `disable_growth` serão hidratáveis. A exceção já aprovada para regadores não autoriza automaticamente aspersores.
 - Sem implementação, testes novos ou execução manual neste levantamento. Build documental e contagem reutilizada registrados em STATUS. Cenário 8 não executado; dedicado/multiplayer pendentes; indicadores funcionais do regador não encerram cenário 8; camas por dimensão adiadas.
+
+## Validação da implementação 20-A–E
+
+Build final aprovado: 274 testes efetivamente executados, 23 novos sobre os 251 anteriores, zero falhas/erros/ignorados; duas tarefas executadas e sete UP-TO-DATE. Distribuição por entrega e limites em [Árvores — validação](arvores-frutiferas.md#validação-da-implementação-20-ae). Capabilities reais de baldes e blocos, rollback, capacidade/fluido, matriz de custos, sobreposição nos dois sentidos, gravação/reload do marcador e ordem crescer→secar→regar testados.
+
+runClient inicializado com recursos finais, sem erro de modelo/textura do conteúdo novo nos logs. Nenhum mundo, tanque ou partícula foi exercitado visualmente pelo agente: ferramenta não autorizou controle da janela Java. Aceite manual independente, dedicado/multiplayer e cenário 8 continuam pendentes; indicadores do regador não encerram cenário 8, camas por dimensão adiadas. Não declara agricultura inteira concluída.
+
+Confirmação final após ajuste apenas de whitespace: build aprovado, uma tarefa executada e oito UP-TO-DATE; test reutilizou os mesmos 274 resultados da execução efetiva anterior, sem testes adicionais.

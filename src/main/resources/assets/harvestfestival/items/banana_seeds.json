@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/banana_seeds",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16772970
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 16772970
+      }
+    ]
+  }
+}

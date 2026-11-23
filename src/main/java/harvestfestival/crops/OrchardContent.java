@@ -30,11 +30,11 @@ public final class OrchardContent {
     public record TreeContent(DeferredBlock<TreeBlock> base, DeferredBlock<TreeTopBlock> top,
             DeferredBlock<FruitLeavesBlock> leaves, DeferredBlock<TreeFruitBlock> fruit,
             DeferredItem<TreeSeedItem> seed, Supplier<? extends Item> product) {}
-    static { tree("peach"); }
+    static { tree("peach"); tree("orange"); tree("banana"); tree("apple"); tree("grape"); }
     private static void tree(String species) {
-        var base = BLOCKS.registerBlock(species + "_tree", p -> new TreeBlock(species, p), p -> p.noOcclusion().randomTicks().strength(.1F).sound(SoundType.WOOD).noLootTable());
-        var top = BLOCKS.registerBlock(species + "_tree_top", p -> new TreeTopBlock(species, p), p -> p.noOcclusion().randomTicks().strength(.1F).sound(SoundType.WOOD).noLootTable());
-        var leaves = BLOCKS.registerBlock(species + "_leaves", FruitLeavesBlock::new, p -> p.noOcclusion().randomTicks().strength(.2F).sound(SoundType.GRASS));
+        var base = BLOCKS.registerBlock(species + "_tree", p -> new TreeBlock(species, p), p -> p.noOcclusion().forceSolidOff().randomTicks().strength(.1F).sound(SoundType.WOOD).noLootTable());
+        var top = BLOCKS.registerBlock(species + "_tree_top", p -> new TreeTopBlock(species, p), p -> p.noOcclusion().forceSolidOff().randomTicks().strength(.1F).sound(SoundType.WOOD).noLootTable());
+        var leaves = BLOCKS.registerBlock(species + "_leaves", FruitLeavesBlock::new, p -> p.noOcclusion().isSuffocating((s,l,pos)->false).isViewBlocking((s,l,pos)->false).randomTicks().strength(.2F).sound(SoundType.GRASS));
         var fruit = BLOCKS.registerBlock(species + "_fruit", p -> new TreeFruitBlock(species, p), p -> p.noCollision().noOcclusion().sound(SoundType.GRASS));
         ITEMS.registerSimpleBlockItem(leaves);
         var seed = ITEMS.registerItem(species + "_seeds", p -> new TreeSeedItem(species, p));
@@ -42,10 +42,11 @@ public final class OrchardContent {
         TREES.put(species, new TreeContent(base, top, leaves, fruit, seed, product));
     }
     public static final DeferredBlock<SprinklerBlock> OLD = BLOCKS.registerBlock("old_sprinkler", p -> new SprinklerBlock(1, .5, p), p -> p.noCollision().noOcclusion().sound(SoundType.GRAVEL));
-    static { ITEMS.registerSimpleBlockItem(OLD); }
+    public static final DeferredBlock<SprinklerBlock> IRON = BLOCKS.registerBlock("iron_sprinkler", p -> new SprinklerBlock(4, .7, p), p -> p.noCollision().noOcclusion().sound(SoundType.GRAVEL));
+    static { ITEMS.registerSimpleBlockItem(OLD); ITEMS.registerSimpleBlockItem(IRON); }
     public static final Supplier<BlockEntityType<TreeBlockEntity>> TREE_ENTITY = ENTITIES.register("fruit_tree", () -> new BlockEntityType<>(TreeBlockEntity::new,
             TREES.values().stream().map(t -> t.base().get()).toArray(Block[]::new)));
-    public static final Supplier<BlockEntityType<SprinklerBlockEntity>> SPRINKLER_ENTITY = ENTITIES.register("sprinkler", () -> new BlockEntityType<>(SprinklerBlockEntity::new, OLD.get()));
+    public static final Supplier<BlockEntityType<SprinklerBlockEntity>> SPRINKLER_ENTITY = ENTITIES.register("sprinkler", () -> new BlockEntityType<>(SprinklerBlockEntity::new, OLD.get(), IRON.get()));
     public static void register(IEventBus bus) {
         OrchardSync.register(bus);
         BLOCKS.register(bus); ITEMS.register(bus); ENTITIES.register(bus);

@@ -58,8 +58,11 @@ public final class TreeBlock extends BaseEntityBlock implements BonemealableBloc
         return direction == Direction.DOWN && level instanceof ServerLevel && !supports(state, level, pos) ? Blocks.AIR.defaultBlockState() : state;
     }
     @Override protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved) {
-        if (TreeGrowth.available(level, pos.above()) && level.getBlockState(pos.above()).is(OrchardContent.TREES.get(species).top().get())) level.removeBlock(pos.above(), false);
+        if (!juvenile(state) || !TreeGrowth.available(level, pos.above())) return;
+        var other = level.getBlockState(pos.above());
+        if (other.is(OrchardContent.TREES.get(species).top().get()) && juvenile(other)) level.removeBlock(pos.above(), false);
     }
+    static boolean juvenile(BlockState state) { return state.getValue(APPEARANCE) < 3; }
     static boolean permitted(Level level, BlockPos pos, BlockPos other, Player player, net.minecraft.world.item.ItemStack tool) {
         if (!(level instanceof ServerLevel server)) return true;
         return CropPair.permitted(pos, other, p -> TreeGrowth.available(server, p) && server.mayInteract(player, p)
@@ -68,25 +71,41 @@ public final class TreeBlock extends BaseEntityBlock implements BonemealableBloc
     }
     @Override public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player,
             net.minecraft.world.item.ItemStack tool, boolean harvest, net.minecraft.world.level.material.FluidState fluid) {
-        var other = level.getBlockState(pos.above()).is(OrchardContent.TREES.get(species).top().get()) ? pos.above() : pos;
+        var upper = level.getBlockState(pos.above());
+        var other = juvenile(state) && upper.is(OrchardContent.TREES.get(species).top().get()) && juvenile(upper) ? pos.above() : pos;
         return permitted(level, pos, other, player, tool) && super.onDestroyedByPlayer(state, level, pos, player, tool, harvest, fluid);
     }
     static TreeBlockEntity entity(LevelReader level, BlockPos pos) { return level.getBlockEntity(pos) instanceof TreeBlockEntity tree ? tree : null; }
     static void advance(ServerLevel level, BlockPos pos) {
         var tree = entity(level, pos);
         if (tree != null) TreeGrowth.grow(level, tree, CropDailyUpdates.seasonForDimension(level.dimension(), WorldCalendar.get(level.getServer()).season()));
+        else {
+            var data = TreeProducers.get(level);
+            var producer = data.at(pos.above());
+            if (producer != null && producer.origin.equals(pos)) data.grow(level, producer,
+                    CropDailyUpdates.seasonForDimension(level.dimension(), WorldCalendar.get(level.getServer()).season()));
+        }
     }
     @Override protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         randomAdvance(level, pos, pos, random);
     }
     static void randomAdvance(ServerLevel level, BlockPos physical, BlockPos base, RandomSource random) {
-        if (!TreeDefinitions.INSTANCE.settings().daily() && level.getMaxLocalRawBrightness(physical.above()) >= 9 && random.nextInt(20) == 0) advance(level, base);
+        if (TreeDefinitions.INSTANCE.settings().daily()) return;
+        var data = TreeProducers.get(level);
+        var producer = data.at(physical);
+        if (producer != null) data.random(level, producer, physical);
+        else if (level.getMaxLocalRawBrightness(physical.above()) >= 9 && random.nextInt(20) == 0) advance(level, base);
     }
     @Override public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         var tree = entity(level, pos); var definition = TreeDefinitions.INSTANCE.get(species);
         if (level instanceof Level world && world.isClientSide()) {
             var info = OrchardSync.client().trees().get(species);
             return OrchardSync.client().bonemeal() && tree != null && tree.valid() && info != null && tree.stage() < info.maximum();
+        }
+        if (tree == null && level instanceof ServerLevel server) {
+            var p = TreeProducers.get(server).at(pos.above());
+            return TreeDefinitions.INSTANCE.settings().bonemeal() && p != null && p.origin.equals(pos)
+                    && definition != null && p.stage < definition.maximum();
         }
         return TreeDefinitions.INSTANCE.settings().bonemeal() && tree != null && tree.valid() && definition != null && tree.stage() < definition.maximum();
     }

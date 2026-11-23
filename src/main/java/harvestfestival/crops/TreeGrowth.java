@@ -43,40 +43,72 @@ public final class TreeGrowth {
     }
     /** The approved port requires the entire template to fit before changing the world. */
     public static boolean placeTemplate(ServerLevel level, BlockPos base, TreeDefinition definition, Rotation rotation) {
+        return placeTemplate(level, base, definition, rotation, null);
+    }
+    private static boolean placeTemplate(ServerLevel level, BlockPos base, TreeDefinition definition, Rotation rotation, TreeProducers.Producer producer) {
         var plan = template(definition, base, rotation);
+        for (var cell : definition.template()) {
+            var pos = base.offset(rotate(cell.pos().offset(definition.offsetX(), 0, definition.offsetZ()), rotation));
+            plan.put(pos, cell.state().rotate(level, pos, rotation));
+        }
         plan.replaceAll((pos, state) -> state.getBlock() instanceof FruitLeavesBlock
                 ? state.setValue(FruitLeavesBlock.BLOOM, harvestfestival.calendar.WorldCalendar.get(level.getServer()).season() == Season.SPRING) : state);
+        boolean placed = place(plan, new Placement() {
+            public boolean available(BlockPos pos) { return TreeGrowth.available(level, pos); }
+            public BlockState get(BlockPos pos) { return level.getBlockState(pos); }
+            public boolean replaceable(BlockPos pos, BlockState state) { return state.getDestroySpeed(level, pos) >= 0 && TreeGrowth.replaceable(state); }
+            public boolean bush(BlockState state) { return state.is(OrchardContent.BUSHES); }
+            public boolean set(BlockPos pos, BlockState state) { return level.setBlock(pos, state, Block.UPDATE_CLIENTS); }
+            public void notify(BlockPos pos) { level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock()); }
+        });
+        if (placed && producer != null) TreeProducers.get(level).matured(level, producer, plan);
+        return placed;
+    }
+    public interface Placement {
+        boolean available(BlockPos pos);
+        BlockState get(BlockPos pos);
+        boolean replaceable(BlockPos pos, BlockState state);
+        boolean bush(BlockState state);
+        boolean set(BlockPos pos, BlockState state);
+        void notify(BlockPos pos);
+    }
+    public static boolean place(Map<BlockPos, BlockState> plan, Placement world) {
         var clear = new LinkedHashMap<BlockPos, BlockState>();
         for (var pos : plan.keySet()) {
-            if (!available(level, pos) || !available(level, pos.above())) return false;
-            var previous = level.getBlockState(pos);
-            if (previous.getDestroySpeed(level, pos) < 0 || !replaceable(previous)) return false;
-            var above = level.getBlockState(pos.above());
-            if (above.is(OrchardContent.BUSHES) && !plan.containsKey(pos.above())) clear.put(pos.above(), Blocks.AIR.defaultBlockState());
+            if (!world.available(pos) || !world.available(pos.above())) return false;
+            var previous = world.get(pos);
+            if (!world.replaceable(pos, previous)) return false;
+            var above = world.get(pos.above());
+            if (world.bush(above) && !plan.containsKey(pos.above())) clear.put(pos.above(), Blocks.AIR.defaultBlockState());
         }
         clear.putAll(plan);
-        return commit(level, clear);
+        return commit(world, clear);
     }
-    static boolean commit(ServerLevel level, Map<BlockPos, BlockState> plan) {
+    static boolean commit(Placement world, Map<BlockPos, BlockState> plan) {
         var before = new LinkedHashMap<BlockPos, BlockState>();
         for (var entry : plan.entrySet()) {
             var pos = entry.getKey();
-            var old = level.getBlockState(pos);
+            var old = world.get(pos);
             if (old.equals(entry.getValue())) continue;
             before.put(pos, old);
-            if (!level.setBlock(pos, entry.getValue(), Block.UPDATE_CLIENTS)) {
-                for (var previous : before.entrySet()) level.setBlock(previous.getKey(), previous.getValue(), Block.UPDATE_CLIENTS);
+            if (!world.set(pos, entry.getValue())) {
+                for (var previous : before.entrySet()) world.set(previous.getKey(), previous.getValue());
                 return false;
             }
         }
-        for (var pos : before.keySet()) level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock());
+        for (var pos : before.keySet()) world.notify(pos);
         return true;
     }
     public static void grow(ServerLevel level, TreeBlockEntity tree, Season season) {
+        var data = TreeProducers.get(level);
+        var producer = data.attach(level, tree);
+        if (producer != null) data.grow(level, producer, season);
+    }
+    static void growYoung(ServerLevel level, TreeBlockEntity tree, TreeProducers.Producer producer, Season season) {
         var definition = TreeDefinitions.INSTANCE.get(tree.species());
         if (!tree.valid() || definition == null || season == Season.WINTER || tree.isRemoved()) return;
         var pos = tree.getBlockPos();
-        int stage = TreeLifecycle.advance(tree.stage(), definition, season, new TreeLifecycle.Space() {
+        int stage = TreeLifecycle.advance(producer.stage, definition, season, new TreeLifecycle.Space() {
             public boolean area() { return TreeGrowth.area(level, pos, definition.radius()); }
             public boolean juvenile() {
                 var top = pos.above();
@@ -84,9 +116,11 @@ public final class TreeGrowth {
                 return level.setBlock(top, OrchardContent.TREES.get(tree.species()).top().get().defaultBlockState()
                         .setValue(TreeBlock.APPEARANCE, 2), Block.UPDATE_CLIENTS);
             }
-            public boolean mature() { return placeTemplate(level, pos, definition, Rotation.values()[level.getRandom().nextInt(4)]); }
+            public boolean mature() { return placeTemplate(level, pos, definition, Rotation.values()[level.getRandom().nextInt(4)], producer); }
             public void fruit() { TreeGrowth.fruit(level, tree.species(), pos); }
         });
+        producer.stage = stage;
+        TreeProducers.get(level).setDirty();
         tree.stage(stage);
     }
     public static void fruit(ServerLevel level, String species, BlockPos base) {

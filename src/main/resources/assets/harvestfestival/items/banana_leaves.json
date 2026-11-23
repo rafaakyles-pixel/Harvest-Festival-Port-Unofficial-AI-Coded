@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:block/banana_leaves",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 4764952
+      }
+    ]
+  }
+}

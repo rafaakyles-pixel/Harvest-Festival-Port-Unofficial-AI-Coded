@@ -34,7 +34,9 @@ public record TreeDefinition(int sapling, int juvenile, int maturity, int maximu
         var positions = new java.util.HashSet<BlockPos>();
         for (var cell : template) {
             if (!positions.add(cell.pos()) || Math.abs(cell.pos().getX()) > 32 || Math.abs(cell.pos().getZ()) > 32
-                    || cell.pos().getY() < 2 || cell.pos().getY() > 32) throw new IllegalArgumentException("invalid tree cell");
+                    || cell.pos().getY() < 0 || cell.pos().getY() > 32) throw new IllegalArgumentException("invalid tree cell");
+            if (cell.pos().getX() + offsetX == 0 && cell.pos().getZ() + offsetZ == 0 && cell.pos().getY() < 2)
+                throw new IllegalArgumentException("template overlaps producer");
         }
     }
     public int appearance(int stage) { return stage < sapling ? 0 : stage < juvenile ? 1 : stage < maturity ? 2 : 3; }

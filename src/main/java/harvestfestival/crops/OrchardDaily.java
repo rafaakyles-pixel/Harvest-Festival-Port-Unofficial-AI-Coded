@@ -37,16 +37,14 @@ public final class OrchardDaily {
     public static void grow(NewDayEvent event, List<Work> chunks) {
         long cycle = event.getCycle();
         if (cycle <= 0) return;
+        var levels = new java.util.LinkedHashSet<ServerLevel>();
         for (var work : chunks) {
             if (!current(work)) continue;
-            for (var entity : new ArrayList<>(work.chunk().getBlockEntities().values())) {
-                if (!(entity instanceof TreeBlockEntity tree) || tree.isRemoved() || tree.lastCycle() >= cycle || !tree.valid()) continue;
-                if (TreeDefinitions.INSTANCE.get(tree.species()) == null) continue;
-                tree.mark(cycle);
-                if (TreeDefinitions.INSTANCE.settings().daily()) TreeGrowth.grow(work.level(), tree,
-                        CropDailyUpdates.seasonForDimension(work.level().dimension(), event.getCurrentDate().season()));
-            }
+            TreeProducers.get(work.level()).importChunk(work.level(), work.chunk());
+            levels.add(work.level());
         }
+        for (var level : levels) TreeProducers.get(level).daily(level, cycle,
+                CropDailyUpdates.seasonForDimension(level.dimension(), event.getCurrentDate().season()));
     }
     public static void post(NewDayEvent event, List<Work> chunks) {
         if (event.getCycle() <= 0) return;

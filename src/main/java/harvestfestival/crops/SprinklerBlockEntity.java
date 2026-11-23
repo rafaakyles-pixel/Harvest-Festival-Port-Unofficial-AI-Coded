@@ -65,16 +65,19 @@ public final class SprinklerBlockEntity extends BlockEntity {
         return creative ? held : temporary.getResource(0).toStack((int)temporary.getAmountAsLong(0));
     }
     public void newDay(ServerLevel level, long cycle) {
+        newDay(cycle, new SprinklerHydration.Soil() {
+            public boolean available(BlockPos pos) { return TreeGrowth.available(level, pos); }
+            public BlockState get(BlockPos pos) { return level.getBlockState(pos); }
+            public boolean set(BlockPos pos, BlockState state) { return level.setBlock(pos, state, Block.UPDATE_ALL); }
+        });
+    }
+    void newDay(long cycle, SprinklerHydration.Soil soil) {
         if (cycle <= 0 || lastCycle >= cycle) return;
         lastCycle = cycle; setChanged();
         int cost = consumption();
         if (!fueled(cost, tank.getAmountAsLong(0))) return;
         int range = ((SprinklerBlock)getBlockState().getBlock()).range();
-        boolean changed = SprinklerHydration.water(worldPosition, range, new SprinklerHydration.Soil() {
-            public boolean available(BlockPos pos) { return TreeGrowth.available(level, pos); }
-            public BlockState get(BlockPos pos) { return level.getBlockState(pos); }
-            public boolean set(BlockPos pos, BlockState state) { return level.setBlock(pos, state, Block.UPDATE_ALL); }
-        });
+        boolean changed = SprinklerHydration.water(worldPosition, range, soil);
         if (changed && cost > 0 && !tank.getResource(0).isEmpty()) try (var transaction = Transaction.openRoot()) {
             tank.extract(0, tank.getResource(0), cost, transaction); transaction.commit();
         }

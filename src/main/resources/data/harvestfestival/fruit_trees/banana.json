@@ -1,0 +1,590 @@
+{
+  "sapling": 15,
+  "juvenile": 30,
+  "maturity": 55,
+  "maximum": 60,
+  "regrow": 56,
+  "radius": 1,
+  "season": "summer",
+  "offset_x": -4,
+  "offset_z": -4,
+  "template": [
+    {
+      "pos": [
+        4,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        0,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        8,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:jungle_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        7,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        8,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        8,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        8,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:banana_leaves"
+      }
+    }
+  ]
+}

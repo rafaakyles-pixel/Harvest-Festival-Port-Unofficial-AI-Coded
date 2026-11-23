@@ -35,6 +35,9 @@ public final class SprinklerBlock extends BaseEntityBlock {
         var result = sprinkler.fillFrom(stack, player.hasInfiniteMaterials());
         if (result == null) return InteractionResult.PASS;
         if (!player.hasInfiniteMaterials()) player.setItemInHand(hand, result);
+        var water = sprinkler.tank().getResource(0);
+        var sound = water.getFluidType().getSound(water.toStack(1000), net.neoforged.neoforge.common.SoundActions.BUCKET_EMPTY);
+        if (sound != null) level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 1F, 1F);
         return InteractionResult.SUCCESS;
     }
 }

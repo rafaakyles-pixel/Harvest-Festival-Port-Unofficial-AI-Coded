@@ -80,6 +80,7 @@ public final class CreativeTabs {
         output.accept(CropContent.GRASS.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(CropContent.TUTORIAL_TURNIP.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
         output.accept(harvestfestival.crops.OrchardContent.OLD.get());
+        output.accept(harvestfestival.crops.OrchardContent.IRON.get());
         harvestfestival.crops.OrchardContent.TREES.forEach((species, tree) -> {
             if (!species.equals("apple")) output.accept(tree.product().get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
             output.accept(tree.leaves().get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);

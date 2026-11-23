@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "#harvestfestival:crops",
-    "harvestfestival:peach_tree"
+    "harvestfestival:peach_tree",
+    "harvestfestival:orange_tree",
+    "harvestfestival:banana_tree",
+    "harvestfestival:apple_tree",
+    "harvestfestival:grape_tree"
   ]
 }

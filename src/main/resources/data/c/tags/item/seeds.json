@@ -20,6 +20,10 @@
     "#harvestfestival:seeds/pumpkin",
     "#harvestfestival:seeds/grass",
     "#harvestfestival:seeds/tutorial_turnip",
-    "#harvestfestival:seeds/peach"
+    "#harvestfestival:seeds/peach",
+    "#harvestfestival:seeds/orange",
+    "#harvestfestival:seeds/banana",
+    "#harvestfestival:seeds/apple",
+    "#harvestfestival:seeds/grape"
   ]
 }

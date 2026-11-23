@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:item/grape_seeds",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 13995768
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 13995768
+      }
+    ]
+  }
+}

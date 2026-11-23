@@ -1,0 +1,1028 @@
+{
+  "sapling": 6,
+  "juvenile": 21,
+  "maturity": 36,
+  "maximum": 40,
+  "regrow": 37,
+  "radius": 2,
+  "season": "autumn",
+  "offset_x": -3,
+  "offset_z": -4,
+  "template": [
+    {
+      "pos": [
+        3,
+        2,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        3,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        4,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        4,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        5,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        5,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        5,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        6,
+        5,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        0,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "x"
+        }
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        8
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "z"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        6,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        6,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        6
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        5,
+        6,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        1,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        2,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        7
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        5
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        1
+      ],
+      "state": {
+        "Name": "minecraft:oak_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    {
+      "pos": [
+        3,
+        7,
+        0
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        4,
+        7,
+        4
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        8,
+        3
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        8,
+        2
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    },
+    {
+      "pos": [
+        3,
+        8,
+        1
+      ],
+      "state": {
+        "Name": "harvestfestival:apple_leaves"
+      }
+    }
+  ]
+}

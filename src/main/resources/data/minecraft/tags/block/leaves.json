@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "harvestfestival:peach_leaves"
+    "harvestfestival:peach_leaves",
+    "harvestfestival:orange_leaves",
+    "harvestfestival:banana_leaves",
+    "harvestfestival:apple_leaves",
+    "harvestfestival:grape_leaves"
   ]
 }

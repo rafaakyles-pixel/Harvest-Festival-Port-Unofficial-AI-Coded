@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "harvestfestival:block/orange_leaves",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 4764952
+      }
+    ]
+  }
+}

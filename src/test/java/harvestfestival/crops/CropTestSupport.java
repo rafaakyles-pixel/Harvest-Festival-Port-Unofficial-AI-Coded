@@ -137,6 +137,8 @@ public final class CropTestSupport implements AutoCloseable {
     public CropTestSupport(Path path) throws Exception {
         bindItems();
         var files = new java.util.ArrayList<>(List.of(RESOURCES));
+        files.add("harvestfestival/tags/item/leaf_shears.json");
+        files.add("harvestfestival/tags/block/tree_soils.json");
         for (String species : OrchardContent.TREES.keySet()) {
             for (String suffix : List.of("fruit_trees/", "tags/item/seeds/")) files.add("harvestfestival/" + suffix + species + ".json");
             files.add("c/tags/item/crops/" + species + ".json");
@@ -167,6 +169,7 @@ public final class CropTestSupport implements AutoCloseable {
         for (var tree : OrchardContent.TREES.values()) for (var item : List.of(tree.seed().get(), tree.product().get(), tree.leaves().get().asItem()))
             item.builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         OrchardContent.OLD.get().asItem().builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
+        OrchardContent.IRON.get().asItem().builtInRegistryHolder().bindComponents(DataComponentMap.builder().set(DataComponents.MAX_STACK_SIZE, 64).build());
         for (var item : List.of(CropContent.TUTORIAL_TURNIP.get(), CropContent.TUTORIAL_TURNIP_SEEDS.get(), CropContent.WATERMELON_SEEDS.get(), CropContent.PUMPKIN_SEEDS.get(),
                 CropContent.GRASS_SEEDS.get(), CropContent.GRASS.get(), net.minecraft.world.item.Items.MELON,
                 net.minecraft.world.item.Items.MELON_SLICE, net.minecraft.world.item.Items.PUMPKIN,

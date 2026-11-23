@@ -25,8 +25,8 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador/foice até mystril, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
 | Cultivos até a 19-A, estação nula no Nether/End para todos os HF; 19-B integralmente adiada com levantamento preservado; transformação em vanilla, grama dupla, loot e política delimitada | [Cultivos](porting/cultivos.md) |
-| Árvores frutíferas: ciclo próprio, templates, folhas/frutos e exceções propostas; levantamento sem implementação | [Árvores frutíferas](porting/arvores-frutiferas.md) |
-| Aspersores velho/ferro: ordem diária, tanque, transferência e aquisição; levantamento sem implementação | [Aspersores](porting/aspersores.md) |
+| Árvores frutíferas: produtor persistente independente dos troncos, migração conservadora, templates, folhas/frutos e adaptações aprovadas na 20 | [Árvores frutíferas](porting/arvores-frutiferas.md) |
+| Aspersores velho/ferro: ordem diária, tanque e transferência implementados; aquisição externa adiada | [Aspersores](porting/aspersores.md) |
 
 Abas e destino criativo dos itens: [Abas criativas](porting/abas-criativas.md). Desde 14/11/2026, itens novos devem receber destino explícito nas abas aprovadas. Isso não encerra cenário 8.
 
@@ -103,13 +103,15 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 
 ## Mixins e itens não verificados
 
+- Árvores, 23/11/2026: `TreeTrunkMixin` observa a mutação real em `LevelChunkSection.setBlockState` dentro de `LevelChunk.setBlockState` para encerrar vínculos sem depender de eventos parciais de quebra/colocação; `TreeRandomTickMixin` preserva sorteios nos dois pontos originais quando os troncos HF já não existem, usando `ServerLevel.tickChunk`. Subpacote existente `harvestfestival.tools.mixin`, sem pacote novo. Eventos disponíveis não cobrem essas operações integralmente; fontes exatas, persistência/migração, snapshots e testes em [Árvores frutíferas](porting/arvores-frutiferas.md).
+
 - Abóbora vanilla lisa 26.2 e adaptações da grama aprovadas em 18/11/2026; fontes/APIs e diferenças em Cultivos. Alternativa de abóbora própria não adotada (suas APIs não foram verificadas). Ramo visual sazonal e callbacks originais da grama não observados em jogo; par coerente é adaptação aprovada. Sem mixin novo.
 
 - Original tem exatamente 2 mixins de cliente; levantamento completo em [mixins originais](archive/mixins-originais.md).
 - Chuva: candidata `CustomWeatherEffectRenderer#tickRain`, consultada na branch móvel 26.2.x. Paridade de partículas/sons, aplicação dinâmica ao Overworld e execução na versão exata 26.2.0.93 **não verificadas**.
 - Anzol: equivalente para reconhecer vara HF no renderizador **não verificado**. Investigar extensão moderna; renderizador próprio é alternativa, sem decisão aprovada.
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
-- Árvores/aspersores: revisão dos contratos fecha por leitura Plains, quebra/encantamentos, folhas/templates, transferência transacional e sincronização no alvo exato. Integração em execução ainda **não verificada**, pois não há implementação. Estação nula/Plains, proteções e chunks, atuação autônoma, correção dos bits de espécie das folhas, notificação integral do tanque e destinos/remessa permanecem decisões específicas. A 20-A terá consumidores reais de ambos; B/C agrupam árvores por estação, D completa variantes e E fecha lacunas internas; aquisição externa não será simulada.
+- Árvores/aspersores da 20 implementados nos pacotes existentes, com exceção dimensional própria, copa integral protegida, autonomia sem dono e flags de espécie/sincronização integral aprovados. Ajuste de 23/11: folhas obtíveis por tesoura ou Silk Touch, metades maduras independentes e par juvenil mantido por decisão explícita; detalhes no contrato de árvores. APIs, saves, recursos e validações nos contratos; cliente sem inspeção visual autorizada, dedicado/multiplayer pendentes. Nenhuma migração/conversão vanilla→HF ou aquisição substituta.
 - Fatia 11: `harvestfestival.tools.mixin.FarmlandBlockMixin`, subpacote aprovado explicitamente pelo responsável. Alvo `FarmlandBlock.randomTick`, injeção HEAD cancelável para solos participantes por tag; impede hidratação/secagem aleatória concorrendo com o ciclo diário. A fonte exata 26.2.0.93 não oferece evento cancelável nesse método. Queda e ticks de obstrução permanecem vanilla/NeoForge. Evidências, limites e migração em [Ferramentas](porting/ferramentas.md).
 
 - Fatia 14: `harvestfestival.tools.mixin.PlayerSleepAccessor`, autorizado explicitamente pelo responsável, escreve somente `Player.sleepCounter` no desmaio com sono instantâneo. Fonte exata 26.2.0.93 não expõe setter/evento equivalente; decisão coletiva de sono continua no motor. Aplicação à classe transformada testada; aceite global da fatia 14 informado pelo responsável em 15/11/2026, sem detalhamento individual do sono. Contrato em [Ferramentas](porting/ferramentas.md).

@@ -28,11 +28,11 @@ class CreativeTabsTest {
             };
             CreativeTabs.seeds(output);
             assertEquals(List.of("turnip_seeds", "cucumber_seeds", "wheat_seeds", "onion_seeds", "spinach_seeds",
-                    "carrot_seeds", "beetroot_seeds", "potato_seeds", "strawberry_seeds", "tomato_seeds", "eggplant_seeds", "cabbage_seeds", "pineapple_seeds", "corn_seeds", "sweet_potato_seeds", "green_pepper_seeds", "watermelon_seeds", "pumpkin_seeds", "grass_seeds", "tutorial_turnip_seeds", "peach_seeds"), ids(visible));
+                    "carrot_seeds", "beetroot_seeds", "potato_seeds", "strawberry_seeds", "tomato_seeds", "eggplant_seeds", "cabbage_seeds", "pineapple_seeds", "corn_seeds", "sweet_potato_seeds", "green_pepper_seeds", "watermelon_seeds", "pumpkin_seeds", "grass_seeds", "tutorial_turnip_seeds", "peach_seeds", "orange_seeds", "banana_seeds", "apple_seeds", "grape_seeds"), ids(visible));
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
-            assertEquals(List.of("hoe", "hoe_copper", "hoe_silver", "hoe_gold", "hoe_mystril", "watering_can", "watering_can_copper", "watering_can_silver", "watering_can_gold", "watering_can_mystril", "sickle", "sickle_copper", "sickle_silver", "sickle_gold", "sickle_mystril", "shipping_box", "old_sprinkler"), ids(visible));
-            assertEquals(List.of("turnip", "cucumber", "onion", "spinach", "strawberry", "tomato", "eggplant", "cabbage", "pineapple", "corn", "sweet_potato", "green_pepper", "grass", "tutorial_turnip", "peach", "peach_leaves"), ids(searchOnly));
+            assertEquals(List.of("hoe", "hoe_copper", "hoe_silver", "hoe_gold", "hoe_mystril", "watering_can", "watering_can_copper", "watering_can_silver", "watering_can_gold", "watering_can_mystril", "sickle", "sickle_copper", "sickle_silver", "sickle_gold", "sickle_mystril", "shipping_box", "old_sprinkler", "iron_sprinkler"), ids(visible));
+            assertEquals(List.of("turnip", "cucumber", "onion", "spinach", "strawberry", "tomato", "eggplant", "cabbage", "pineapple", "corn", "sweet_potato", "green_pepper", "grass", "tutorial_turnip", "peach", "peach_leaves", "orange", "orange_leaves", "banana", "banana_leaves", "apple_leaves", "grape", "grape_leaves"), ids(searchOnly));
             for (var stack : visible) if (stack.getItem() instanceof harvestfestival.tools.WateringCanItem) assertEquals(0, WateringCanState.get(stack).water());
             for (int i=0;i<visible.size();i++) if (visible.get(i).getItem() instanceof harvestfestival.tools.SickleItem) {
                 assertEquals(0, visible.get(i).getDamageValue());
@@ -42,7 +42,7 @@ class CreativeTabsTest {
             visible.clear();
             CreativeTabs.toolsAndBlocks(output);
             assertEquals(0, WateringCanState.get(visible.stream().filter(stack -> stack.getItem() instanceof harvestfestival.tools.WateringCanItem).findFirst().orElseThrow()).water());
-            assertEquals(17, ids(visible).stream().distinct().count());
+            assertEquals(18, ids(visible).stream().distinct().count());
         }
     }
     @Test void registeredTabsHaveExistingIconsAndTranslatedTitles() {

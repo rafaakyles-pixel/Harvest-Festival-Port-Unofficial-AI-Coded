@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "appearance=0": {
+      "model": "harvestfestival:block/apple_seeds"
+    },
+    "appearance=1": {
+      "model": "harvestfestival:block/apple_sapling"
+    },
+    "appearance=2": {
+      "model": "harvestfestival:block/apple_juvenile_upper"
+    },
+    "appearance=3": {
+      "model": "minecraft:block/oak_log"
+    }
+  }
+}

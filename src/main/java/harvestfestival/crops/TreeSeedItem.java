@@ -10,16 +10,27 @@ import net.minecraft.world.level.block.Block;
 public final class TreeSeedItem extends Item {
     private final String species;
     public TreeSeedItem(String species, Properties properties) { super(properties); this.species = species; }
+    public interface Plot {
+        boolean editable(net.minecraft.core.BlockPos pos);
+        boolean empty(net.minecraft.core.BlockPos pos);
+        boolean support(net.minecraft.core.BlockPos pos);
+        boolean place(net.minecraft.core.BlockPos pos);
+    }
+    public static boolean plant(Plot plot, net.minecraft.core.BlockPos pos, Direction face) {
+        if (face != Direction.UP) return false;
+        for (var target : new net.minecraft.core.BlockPos[]{pos.below(),pos,pos.above()}) if (!plot.editable(target)) return false;
+        return plot.empty(pos) && plot.empty(pos.above()) && plot.support(pos) && plot.place(pos);
+    }
     @Override public void appendHoverText(net.minecraft.world.item.ItemStack stack, Item.TooltipContext context,
             net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<net.minecraft.network.chat.Component> lines,
             net.minecraft.world.item.TooltipFlag flag) {
         var info = OrchardSync.client().trees().get(species);
         if (info != null) {
             lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.harvestfestival.tree_water"));
-            lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.harvestfestival.tree_space", info.radius() * 2 + 1));
+            lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.harvestfestival.tree_space", info.radius() * 2 + 1, info.radius() * 2 + 1));
             lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.harvestfestival.tree_maturity", info.maturity() - 1));
             lines.accept(net.minecraft.network.chat.Component.translatable("tooltip.harvestfestival.tree_season",
-                    net.minecraft.network.chat.Component.translatable("season.harvestfestival." + info.season())));
+                    net.minecraft.network.chat.Component.translatable("harvestfestival.season." + info.season())));
         }
     }
     @Override public InteractionResult useOn(UseOnContext context) {
@@ -29,13 +40,21 @@ public final class TreeSeedItem extends Item {
         if (TreeDefinitions.INSTANCE.get(species) == null) return InteractionResult.PASS;
         var pos = context.getClickedPos().above();
         var stack = context.getItemInHand();
-        for (var target : new net.minecraft.core.BlockPos[]{pos.below(), pos, pos.above()})
-            if (!TreeGrowth.available(level, target) || !level.mayInteract(player, target) || !player.mayUseItemAt(target, Direction.UP, stack)) return InteractionResult.PASS;
         var block = OrchardContent.TREES.get(species).base().get();
-        if (!level.isEmptyBlock(pos) || !level.isEmptyBlock(pos.above()) || !TreeBlock.supports(block.defaultBlockState(), level, pos)) return InteractionResult.PASS;
-        if (!level.setBlock(pos, block.defaultBlockState(), Block.UPDATE_ALL)) return InteractionResult.PASS;
-        if (!(level.getBlockEntity(pos) instanceof TreeBlockEntity tree)) { level.removeBlock(pos, false); return InteractionResult.PASS; }
-        tree.stage(1);
+        boolean planted = plant(new Plot() {
+            public boolean editable(net.minecraft.core.BlockPos target) { return TreeGrowth.available(level, target)
+                    && level.mayInteract(player, target) && player.mayUseItemAt(target, Direction.UP, stack); }
+            public boolean empty(net.minecraft.core.BlockPos target) { return level.isEmptyBlock(target); }
+            public boolean support(net.minecraft.core.BlockPos target) { return TreeBlock.supports(block.defaultBlockState(), level, target); }
+            public boolean place(net.minecraft.core.BlockPos target) {
+                if (!level.setBlock(target, block.defaultBlockState(), Block.UPDATE_ALL)) return false;
+                if (!(level.getBlockEntity(target) instanceof TreeBlockEntity tree)) { level.removeBlock(target, false); return false; }
+                tree.stage(1);
+                if (TreeProducers.get(level).attach(level, tree) == null) { level.removeBlock(target, false); return false; }
+                return true;
+            }
+        }, pos, context.getClickedFace());
+        if (!planted) return InteractionResult.PASS;
         if (!player.hasInfiniteMaterials()) stack.shrink(1);
         return InteractionResult.SUCCESS;
     }

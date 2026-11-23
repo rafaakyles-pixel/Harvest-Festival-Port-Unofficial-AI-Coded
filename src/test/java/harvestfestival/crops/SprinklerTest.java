@@ -74,4 +74,82 @@ class SprinklerTest {
             TreeDefinitions.INSTANCE.apply(new TreeDefinitions.Data(Map.of(),OrchardSettings.DEFAULT),null,null);
         }
     }
+    @Test void registeredBlockCapabilityExposesOneTankOnAllFacesAndNull() {
+        var faces=new ArrayList<Direction>(List.of(Direction.values()));faces.add(null);
+        for(var block:List.of(OrchardContent.OLD.get(),OrchardContent.IRON.get())) {
+            var entity=new SprinklerBlockEntity(BlockPos.ZERO,block.defaultBlockState());
+            for(var face:faces)assertSame(entity.tank(),net.neoforged.neoforge.capabilities.Capabilities.Fluid.BLOCK
+                    .getCapability(null,BlockPos.ZERO,entity.getBlockState(),entity,face));
+        }
+    }
+    @Test void dailyCostMatrixChargesOnceOnlyAfterConfirmedHydrationAndNeverReplays() throws Exception {
+        try(var fixture=new CropTestSupport(directory)) {
+            Fluids.WATER.builtInRegistryHolder().bindComponents(net.minecraft.core.component.DataComponentMap.EMPTY);
+            for(int cost:new int[]{-1,0,1,2,1000,2000})for(int amount:new int[]{0,1,2,1000}) {
+                TreeDefinitions.INSTANCE.apply(new TreeDefinitions.Data(Map.of(),new OrchardSettings(true,false,true,cost)),null,null);
+                var entity=new SprinklerBlockEntity(BlockPos.ZERO,OrchardContent.OLD.get().defaultBlockState());
+                entity.tank().set(0,FluidResource.of(Fluids.WATER),amount);
+                var changes=new java.util.concurrent.atomic.AtomicInteger();
+                var soil=new SprinklerHydration.Soil(){
+                    public boolean available(BlockPos p){return true;}
+                    public BlockState get(BlockPos p){return Blocks.FARMLAND.defaultBlockState();}
+                    public boolean set(BlockPos p,BlockState s){changes.incrementAndGet();return true;}
+                };
+                entity.newDay(1,soil);boolean runs=cost<=0||amount>1;
+                assertEquals(runs?17:0,changes.get());
+                assertEquals(runs&&cost>0?Math.max(0,amount-cost):amount,entity.tank().getAmountAsLong(0));
+                entity.newDay(1,soil);assertEquals(runs?17:0,changes.get());
+                entity.newDay(2,new SprinklerHydration.Soil(){
+                    public boolean available(BlockPos p){return true;}
+                    public BlockState get(BlockPos p){return Blocks.FARMLAND.defaultBlockState();}
+                    public boolean set(BlockPos p,BlockState s){return false;}
+                });
+                assertEquals(runs&&cost>0?Math.max(0,amount-cost):amount,entity.tank().getAmountAsLong(0));
+            }
+        }
+    }
+    @Test void overlappingVariantsChargeOnlyMachineThatChangesSoilInEitherOrder() throws Exception {
+        try(var fixture=new CropTestSupport(directory)) {
+            Fluids.WATER.builtInRegistryHolder().bindComponents(net.minecraft.core.component.DataComponentMap.EMPTY);
+            TreeDefinitions.INSTANCE.apply(new TreeDefinitions.Data(Map.of(),new OrchardSettings(true,false,true,100)),null,null);
+            for(boolean ironFirst:List.of(false,true)) {
+                var old=new SprinklerBlockEntity(BlockPos.ZERO,OrchardContent.OLD.get().defaultBlockState());
+                var iron=new SprinklerBlockEntity(new BlockPos(1,0,0),OrchardContent.IRON.get().defaultBlockState());
+                for(var entity:List.of(old,iron))entity.tank().set(0,FluidResource.of(Fluids.WATER),1000);
+                var state=new BlockState[]{Blocks.FARMLAND.defaultBlockState()};var target=new BlockPos(0,-1,0);
+                var soil=new SprinklerHydration.Soil(){public boolean available(BlockPos p){return p.equals(target);}
+                    public BlockState get(BlockPos p){return state[0];}public boolean set(BlockPos p,BlockState s){state[0]=s;return true;}};
+                var order=ironFirst?List.of(iron,old):List.of(old,iron);
+                for(var entity:order)entity.newDay(1,soil);
+                assertEquals(900,order.get(0).tank().getAmountAsLong(0));assertEquals(1000,order.get(1).tank().getAmountAsLong(0));
+                assertEquals(7,state[0].getValue(FarmlandBlock.MOISTURE));
+            }
+            assertEquals(4,OrchardContent.IRON.get().range());assertEquals(.7,OrchardContent.IRON.get().height());
+            assertEquals(1,OrchardContent.OLD.get().range());assertEquals(.5,OrchardContent.OLD.get().height());
+        }
+    }
+    @Test void coordinatorGrowsAllChunksBeforeDryingAndIrrigatesOnlyAfterBoth() {
+        var order=new ArrayList<String>();
+        class Chunk implements CropDailyUpdates.ChunkWork {
+            final String name;long cycle;Chunk(String name){this.name=name;}
+            public long lastCycle(){return cycle;}public void mark(long value){cycle=value;}
+            public void grow(){order.add("grow:"+name);}public void dry(){order.add("dry:"+name);}
+        }
+        var chunks=List.of(new Chunk("west"),new Chunk("east"));
+        CropDailyUpdates.process(1,chunks,()->order.add("water"));
+        assertEquals(List.of("grow:west","grow:east","dry:west","dry:east","water"),order);
+        order.clear();CropDailyUpdates.process(1,chunks,()->order.add("water"));assertEquals(List.of("water"),order);
+        // The POST entity's own persisted marker rejects this second call, independently of crop_cycle.
+    }
+    @Test void persistedPostMarkerPreventsDuplicateHydrationAfterReload() {
+        var original=new SprinklerBlockEntity(BlockPos.ZERO,OrchardContent.IRON.get().defaultBlockState());
+        var calls=new java.util.concurrent.atomic.AtomicInteger();
+        var soil=new SprinklerHydration.Soil(){public boolean available(BlockPos p){calls.incrementAndGet();return false;}
+            public BlockState get(BlockPos p){throw new AssertionError();}public boolean set(BlockPos p,BlockState s){throw new AssertionError();}};
+        original.newDay(45,soil);assertEquals(161,calls.get());
+        var registry=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
+        var restored=(SprinklerBlockEntity)net.minecraft.world.level.block.entity.BlockEntity.loadStatic(BlockPos.ZERO,original.getBlockState(),original.saveWithFullMetadata(registry),registry);
+        assertNotNull(restored);calls.set(0);restored.newDay(45,soil);assertEquals(0,calls.get());
+        restored.newDay(46,soil);assertEquals(161,calls.get());
+    }
 }

@@ -66,10 +66,12 @@ public final class CropDailyUpdates {
                 var pos = chunk.getPos();
                 if (MIGRATION_PENDING.contains(chunk) && level.getChunkSource().getChunkNow(pos.x(), pos.z()) == chunk) {
                     migrate(level, chunk);
+                    TreeProducers.get(level).importChunk(level, chunk);
                     OrchardDaily.refresh(new OrchardDaily.Work(level, chunk), harvestfestival.calendar.WorldCalendar.get(level.getServer()).season());
                     MIGRATION_PENDING.remove(chunk);
                 }
             }
+            TreeProducers.get(level).settlePending(level);
         });
     }
 
@@ -106,6 +108,11 @@ public final class CropDailyUpdates {
         for (var chunk : eligible) chunk.grow();
         for (var chunk : eligible) { chunk.dry(); chunk.mark(cycle); }
     }
+    public static void process(long cycle, List<? extends ChunkWork> chunks, Runnable irrigation) {
+        if (cycle <= 0) return;
+        process(cycle, chunks);
+        irrigation.run();
+    }
 
     public static void newDay(NewDayEvent event) {
         var work = new ArrayList<ChunkWork>();
@@ -123,8 +130,7 @@ public final class CropDailyUpdates {
             }
         });
         OrchardDaily.grow(event, orchard);
-        process(event.getCycle(), work);
-        OrchardDaily.post(event, orchard);
+        process(event.getCycle(), work, () -> OrchardDaily.post(event, orchard));
     }
 
     /** The original hidden season providers return null in the Nether and End. */

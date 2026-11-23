@@ -24,6 +24,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CropShippingTest {
     @TempDir Path directory;
+    @Test void orchardPricesUseProductTagsIncludingAnyVanillaApple() throws Exception {
+        try(var fixture=new CropTestSupport(directory)) {
+            var prices=new ShippingPrices();prices.apply(prices.prepare(fixture.manager,null),fixture.manager,null);
+            var expected=java.util.Map.of("peach",250,"orange",200,"banana",300,"apple",100,"grape",200);
+            for(var entry:harvestfestival.crops.OrchardContent.TREES.entrySet()) {
+                var holder=new SavedHolder();
+                assertTrue(PlayerShipping.depositInto(holder,new ItemStack(entry.getValue().product().get()),prices));
+                assertEquals(expected.get(entry.getKey()).longValue(),holder.getData(PlayerShipping.QUEUE).total());
+                assertFalse(PlayerShipping.depositInto(holder,new ItemStack(entry.getValue().seed().get()),prices));
+                assertFalse(PlayerShipping.depositInto(holder,new ItemStack(entry.getValue().leaves().get()),prices));
+            }
+        }
+    }
     @Test void tutorialTurnipHasDistinctPriceAndSeedsAreRejectedAfterPersistedSingleHarvest() throws Exception {
         try (var fixture = new CropTestSupport(directory.resolve("pack"))) {
             var d = harvestfestival.crops.CropDefinitions.INSTANCE.get(net.minecraft.resources.Identifier.parse("harvestfestival:tutorial_turnip"));

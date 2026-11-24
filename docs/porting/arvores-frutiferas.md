@@ -2,6 +2,14 @@
 
 Implementação autorizada da fatia 20 em 21–22/11/2026, com as decisões específicas abaixo aprovadas. A preparação original está preservada nas seções históricas. Evidências são leitura de código/recursos, não observação em jogo. A 19-A recebeu aceite global do responsável, que relatou plantio normal do Nabo Robusto, sem resultados individuais dos demais testes. 19-B integralmente adiada, inclusive saco HF; decisões específicas: “reavaliar se retomada”.
 
+## Correções de frutos planejadas — decisão de 23/11/2026
+
+Responsável solicitou incluir no fechamento agrícola anterior aos NPCs: ao quebrar a folha imediatamente acima de um fruto, remover o fruto e soltá-lo como item; ajustar sua caixa de seleção/interação, atualmente de bloco inteiro, ao tamanho visual de cada espécie. Planejamento autorizado, ainda não implementado; não reabre o aceite global da 20.
+
+- Queda por quebra da folha é alteração intencional autorizada: sucede, para esse caso, a decisão anterior de manter frutos suspensos. `BlockFruit` original não define remoção por perda de suporte; evidência anterior preservada abaixo. Não estender automaticamente a decay, explosões ou qualquer troca de suporte sem delimitar esses caminhos no recorte.
+- Hitbox significa seleção/interação, preservando ausência de colisão física. Leitura de `BlockFruit.java`: `getCollisionBoundingBox` retorna `NULL_AABB`; não define uma caixa menor de seleção nessa classe. Conferir herança, modelos das cinco espécies e APIs do alvo antes de implementar; não atribuir dimensões numéricas ainda não levantadas.
+- Critérios: cinco espécies, quebra da folha diretamente superior com e sem ferramenta/encantamento, um único produto por fruto removido, sem duplicar colheita/clique ou loot; respeitar cancelamento/permissões da quebra. Seleção alinhada ao fruto visível, inclusive uva/banana, com passagem física livre. Regressão de remoção sazonal, produtor independente e dedicado/multiplayer. Nenhuma validação manual nova realizada nesta decisão.
+
 ## Produtor independente dos troncos — decisão de 23/11/2026
 
 Responsável aprovou a segunda alternativa: registro persistente único por árvore, mantendo frutificação após retirar base/topo enquanto restar algum tronco vinculado; aprovou também a migração conservadora. Esta autorização posterior inclui a mudança aditiva de save e sucede a limitação dos ajustes anteriores abaixo. Aceite global da fatia 20 informado, sem atribuir testes individuais ou execução manual adicional.

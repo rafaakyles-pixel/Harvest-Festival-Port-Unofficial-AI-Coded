@@ -2,7 +2,7 @@
 
 Auditoria de 30/10/2026. **Aprovado pelo usuário em 30/10/2026.** A Fase 1 foi posteriormente autorizada e seu esqueleto validado; os pacotes permitidos continuam definidos em `STATUS.md`. A aprovação do grafo não autoriza antecipar sistemas das próximas fases. A distribuição permanece em mod único conforme `AGENTS.md`.
 
-Fatia 20: cinco árvores e dois aspersores implementados em harvestfestival.crops, consumindo calendário, solo e remessas existentes. NPCs/lojas/missões são dependências externas de aquisição, mantidas fora da conclusão funcional; NPCs começam na 21. Cobertura automatizada e limites manuais nos contratos de árvores/aspersores.
+Fatia 20: cinco árvores e dois aspersores implementados em harvestfestival.crops, consumindo calendário, solo e remessas existentes. NPCs/lojas/missões são dependências externas de aquisição, mantidas fora da conclusão funcional; a previsão anterior de NPCs na 21 foi substituída: início na 22 ou 23 após o fechamento agrícola aprovado. Cobertura automatizada e limites manuais nos contratos de árvores/aspersores.
 
 ## Leitura do grafo
 
@@ -108,7 +108,11 @@ Esta ordem propõe **fatias internas**, não a cópia sequencial dos pacotes aco
 14. **Cobertura final:** coleções/notas/avanços e recursos de interface restantes, configurações e comportamento multiplayer. Persistência e UI essenciais já devem acompanhar cada fatia anterior.
 15. **Integrações externas:** somente mediante solicitação explícita, na fase apropriada; não restaurar código comentado automaticamente.
 
-## Prioridade aprovada para as fatias 19–21
+## Prioridade vigente — fechamento agrícola antes dos NPCs
+
+Em 23/11/2026, responsável confirmou a fatia 20 aprovada e adiou NPCs para a fatia 22 ou 23, após entrega e aceite de A–E (clima diário, chuva/agricultura, inverno, camas por dimensão e dedicado/multiplayer) e dos complementos servidor vazio, substituição de plantas após morte e controle de umidade. A 21 inicia esse fechamento; a necessidade de distribuí-lo também na 22 define o início dos NPCs na 23. Escopo e critérios centralizados em [STATUS](STATUS.md). Complementos dependentes de NPCs, incluindo aquisição por lojas/missões e serviços de melhoria/reparo, ficam após os NPCs. Não altera o grafo estático nem autoriza novos pacotes ou divergências; a substituição de plantas exige conferir suas dependências de coleta antes da implementação.
+
+Histórico da sequência 19–21, preservado abaixo: a previsão anterior de NPCs na 21 foi substituída pela decisão acima.
 
 Atualização posterior do responsável: executar apenas 19-A (Nabo Robusto), ampliada para ausência de estação no Nether/End em todos os cultivos HF. 19-B (nether wart HF, inclusive saco) adiada integralmente, preservando vanilla; decisões específicas reavaliadas se retomada. Esta revisão sucede o escopo da 19 no parágrafo abaixo, sem alterar 20-A/B/etc. nem início dos NPCs na 21.
 
@@ -116,7 +120,7 @@ O responsável definiu a sequência executiva: 19 para nabo de tutorial e nether
 
 O grafo estático permanece evidência das dependências originais. Antes de cada entrega, conferir os caminhos realmente consumidos e delimitar o mínimo necessário, particularmente o ciclo NPC–cidade–construções–missões. Não simular sistemas ausentes para forçar a nova ordem nem antecipá-los integralmente. Os subrecortes da 20 e o primeiro recorte concreto da 21 serão definidos após levantamento, com APIs verificadas, persistência e critérios de conclusão próprios. Novos pacotes concretos serão registrados em STATUS quando delimitados. A Fase 3 e as pendências existentes permanecem vigentes.
 
-Revisão da 20 em 21/11/2026: A entrega infraestrutura funcional de árvores **e** aspersores, com pessegueiro e velho definitivos; B completa verão (laranja/banana e integração do pêssego); C completa outono (maçã/uva); D entrega ferro e fecha variantes; E integra/corrige cobertura dentro da 20. B/C/D dependem tecnicamente da A; máquinas consomem calendário/solo, não lojas/árvores. A deve coordenar três passagens globais crescer→secar→regar, preservando o ciclo vigente e sem force-load proposto. Templates são dados de árvores, sem importar construções/cidade. Aquisição por lojas/missões e alimentação conjunta permanecem dependências externas explícitas, sem impedir o fechamento funcional dos dois sistemas e sem substitutos inventados. Contratos de [árvores](porting/arvores-frutiferas.md) e [aspersores](porting/aspersores.md) registram evidência, APIs exatas, critérios e decisões específicas; proposta anterior preservada ali como substituída. Reutilizar pacotes aprovados crops/tools/calendar/player, sem novo pacote de sistema. 19-A aceita globalmente, com relato de plantio normal do Nabo Robusto; 19-B adiada integralmente. NPCs começam na 21.
+Revisão da 20 em 21/11/2026: A entrega infraestrutura funcional de árvores **e** aspersores, com pessegueiro e velho definitivos; B completa verão (laranja/banana e integração do pêssego); C completa outono (maçã/uva); D entrega ferro e fecha variantes; E integra/corrige cobertura dentro da 20. B/C/D dependem tecnicamente da A; máquinas consomem calendário/solo, não lojas/árvores. A deve coordenar três passagens globais crescer→secar→regar, preservando o ciclo vigente e sem force-load proposto. Templates são dados de árvores, sem importar construções/cidade. Aquisição por lojas/missões e alimentação conjunta permanecem dependências externas explícitas, sem impedir o fechamento funcional dos dois sistemas e sem substitutos inventados. Contratos de [árvores](porting/arvores-frutiferas.md) e [aspersores](porting/aspersores.md) registram evidência, APIs exatas, critérios e decisões específicas; proposta anterior preservada ali como substituída. Reutilizar pacotes aprovados crops/tools/calendar/player, sem novo pacote de sistema. 19-A aceita globalmente, com relato de plantio normal do Nabo Robusto; 19-B adiada integralmente. A previsão anterior de NPCs na 21 foi substituída: início na 22 ou 23 após o fechamento agrícola aprovado.
 
 ## Pontos de corte possíveis
 

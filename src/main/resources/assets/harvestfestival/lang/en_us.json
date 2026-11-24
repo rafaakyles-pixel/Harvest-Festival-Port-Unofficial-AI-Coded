@@ -1,4 +1,7 @@
 {
+  "commands.harvestfestival.weather.invalid": "Invalid weather: use sunny, rain, typhoon, snow or blizzard.",
+  "commands.harvestfestival.weather.set": "Today's weather set to: %s",
+  "commands.harvestfestival.weather.report": "Today: %s; recent non-sunny: %s; current rain/storm: %s/%s; target percentages: %s/%s; forecast: %s",
   "item.harvestfestival.tutorial_turnip": "Hardy Turnip",
   "item.harvestfestival.tutorial_turnip_seeds": "Hardy Turnip Seeds",
   "itemGroup.harvestfestival.seeds": "Harvest Festival — Seeds",

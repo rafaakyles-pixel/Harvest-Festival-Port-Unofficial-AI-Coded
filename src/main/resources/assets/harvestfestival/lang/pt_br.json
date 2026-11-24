@@ -1,4 +1,7 @@
 {
+  "commands.harvestfestival.weather.invalid": "Clima inválido: use sunny, rain, typhoon, snow ou blizzard.",
+  "commands.harvestfestival.weather.set": "Clima de hoje definido: %s",
+  "commands.harvestfestival.weather.report": "Hoje: %s; último não ensolarado: %s; intensidade atual (chuva/tempestade): %s/%s; alvos percentuais: %s/%s; previsão: %s",
   "item.harvestfestival.tutorial_turnip": "Nabo Robusto",
   "item.harvestfestival.tutorial_turnip_seeds": "Sementes de Nabo Robusto",
   "itemGroup.harvestfestival.seeds": "Harvest Festival — Sementes",

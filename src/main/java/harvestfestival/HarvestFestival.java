@@ -57,6 +57,8 @@ public final class HarvestFestival {
         NeoForge.EVENT_BUS.addListener(DailyUpdates::beforeTick);
         NeoForge.EVENT_BUS.addListener(DailyUpdates::afterTick);
         NeoForge.EVENT_BUS.addListener(DailyUpdates::stopped);
+        harvestfestival.calendar.DailyWeather.register(modBus);
+        NeoForge.EVENT_BUS.addListener(harvestfestival.calendar.command.WeatherCommands::register);
         NeoForge.EVENT_BUS.addListener(GoldCommands::register);
         NeoForge.EVENT_BUS.addListener(CalendarCommands::register);
         LOGGER.info("Harvest Festival loaded with persistent player gold and the world calendar.");

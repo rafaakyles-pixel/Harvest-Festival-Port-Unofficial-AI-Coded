@@ -10,7 +10,7 @@ Histórico não faz parte da leitura inicial. Regras de manutenção na seção 
 - Minecraft 26.2 / NeoForge 26.2.0.93; ModDevGradle 2.0.148, Gradle 9.2.1, toolchain Java 25.
 - Mod único `harvestfestival`, versão técnica `0.1.0-dev`. Fase e pacotes autorizados: [STATUS](STATUS.md).
 - Não prometer migração de saves 1.12.2; as fatias implementadas não realizam essa migração.
-- Grafo e prioridade executiva em [DEPENDENCIES](DEPENDENCIES.md): 19 cultivos especiais, 20 árvores/aspersores em subfatias, NPCs a partir da 21, conforme sequência aprovada pelo responsável. Integrações específicas adiadas em [FEATURES](FEATURES.md).
+- Grafo e prioridade executiva em [DEPENDENCIES](DEPENDENCIES.md): 20 aprovada; fechamento agrícola A–E e complementos de servidor vazio, substituição de plantas após morte e controle de umidade, além das correções de queda/caixa de seleção dos frutos registradas em [Árvores](porting/arvores-frutiferas.md), antes dos NPCs, adiados para a 22 ou 23. Escopo e critérios em [STATUS](STATUS.md#sequência-aprovada-pelo-responsável--fechamento-agrícola--npcs-na-22-ou-23). Complementos dependentes de NPCs ficam após os NPCs; integrações específicas continuam adiadas em [FEATURES](FEATURES.md). Decisão de 23/11/2026, sem implementação nesta revisão.
 
 ## Consulta por sistema
 
@@ -21,7 +21,7 @@ Não há tabela global acumulativa nem diário de fatias neste arquivo.
 | Quando consultar | Contrato vigente |
 | --- | --- |
 | Ouro, attachments, sincronização, aniversários do jogador/NPCs | [Jogador](porting/jogador.md) |
-| Relógio, datas, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
+| Relógio, datas, clima diário/previsão, virada do dia, qualquer consumidor de `NewDayEvent` | [Calendário](porting/calendario.md) |
 | Caixa, fila, preços por item/tag, venda e pagamento | [Remessas](porting/remessas.md) |
 | Enxada/regador/foice até mystril, carga/área/nível/durabilidade, água, esforço e solo | [Ferramentas](porting/ferramentas.md) |
 | Cultivos até a 19-A, estação nula no Nether/End para todos os HF; 19-B integralmente adiada com levantamento preservado; transformação em vanilla, grama dupla, loot e política delimitada | [Cultivos](porting/cultivos.md) |
@@ -46,7 +46,7 @@ Aceites globais das fatias 15, 16, 17, 18 e 19-A registrados em [STATUS](STATUS.
 - `NewDayEvent` notifica uma transição observada; não compensa dias pulados nem promete transação durável contra crash.
 - Remessas fixam preço no depósito e pagam na próxima virada com o jogador conectado. Não pagam offline nem ao reconectar; comportamento aceito em 08/11/2026.
 - A futura escolha de aniversário pelo jogador deve reutilizar API/attachment existentes, validando autorização; escolha e efeitos continuam adiados.
-- Cultivos avaliam farmland com `moisture=7` antes da secagem diária 7→3→0; solo já seco sem planta pode voltar à terra. Migração de prepared_soil e pisoteio por queda autorizados na fatia 11; sem compensação retroativa. Chuva/clima continuam pendentes. Contrato em [Ferramentas](porting/ferramentas.md).
+- Cultivos avaliam farmland com `moisture=7` antes da secagem diária 7→3→0; solo já seco sem planta pode voltar à terra. Migração de prepared_soil e pisoteio por queda autorizados na fatia 11; sem compensação retroativa. Clima diário em [Calendário](porting/calendario.md#clima-diário--fatia-21-a); hidratação por chuva e inverno físico/visual continuam pendentes. Contrato em [Ferramentas](porting/ferramentas.md).
 - Rega ampliada por autorização de 16/11/2026: qualquer bloco pode iniciar a área existente, com alterações/custos somente em solos aceitos pelas regras; regadores são exceção à negação de uso da política vanilla. Geometria, permissões e limites em [Ferramentas](porting/ferramentas.md#ampliação-autorizada-da-rega--16112026).
 
 ## Validação e pendências obrigatórias
@@ -102,6 +102,8 @@ $env:TMP = $env:TEMP
 Direções arquiteturais não são aprovação de APIs concretas. Verificações exatas e suas evidências estão nos contratos por sistema.
 
 ## Mixins e itens não verificados
+
+- Clima diário: `harvestfestival.tools.mixin.DailyWeatherMixin` substitui `ServerLevel.advanceWeatherCycle` apenas em tipos `minecraft:overworld`; nenhuma API/evento equivalente nas fontes exatas 26.2.0.93. Previsão, rede, transições, comandos e limites em [Calendário](porting/calendario.md#clima-diário--fatia-21-a). Renderização sazonal específica continua fora da 21-A.
 
 - Árvores, 23/11/2026: `TreeTrunkMixin` observa a mutação real em `LevelChunkSection.setBlockState` dentro de `LevelChunk.setBlockState` para encerrar vínculos sem depender de eventos parciais de quebra/colocação; `TreeRandomTickMixin` preserva sorteios nos dois pontos originais quando os troncos HF já não existem, usando `ServerLevel.tickChunk`. Subpacote existente `harvestfestival.tools.mixin`, sem pacote novo. Eventos disponíveis não cobrem essas operações integralmente; fontes exatas, persistência/migração, snapshots e testes em [Árvores frutíferas](porting/arvores-frutiferas.md).
 

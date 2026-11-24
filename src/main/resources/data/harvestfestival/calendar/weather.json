@@ -1,0 +1,9 @@
+{
+  "enabled": {"sunny": true, "rain": true, "typhoon": true, "snow": true, "blizzard": true},
+  "seasons": {
+    "spring": [{"weather": "sunny", "weight": 70}, {"weather": "rain", "weight": 30}],
+    "summer": [{"weather": "sunny", "weight": 95}, {"weather": "rain", "weight": 4}, {"weather": "typhoon", "weight": 1}],
+    "autumn": [{"weather": "rain", "weight": 45}, {"weather": "sunny", "weight": 55}],
+    "winter": [{"weather": "sunny", "weight": 49}, {"weather": "snow", "weight": 50}, {"weather": "blizzard", "weight": 1}]
+  }
+}

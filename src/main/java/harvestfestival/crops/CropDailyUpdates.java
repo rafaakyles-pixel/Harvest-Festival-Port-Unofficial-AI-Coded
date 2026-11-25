@@ -18,9 +18,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.ImposterProtoChunk;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.level.ChunkEvent;
+import net.neoforged.neoforge.event.level.ChunkDataEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,11 +31,21 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public final class CropDailyUpdates {
     private static final Map<ServerLevel, Set<LevelChunk>> LOADED = new ConcurrentHashMap<>();
     private static final Set<LevelChunk> MIGRATION_PENDING = ConcurrentHashMap.newKeySet();
+    private static final Set<LevelChunk> RAIN_PENDING = ConcurrentHashMap.newKeySet();
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, "harvestfestival");
     public static final Supplier<AttachmentType<Long>> LAST_CYCLE = ATTACHMENTS.register("crop_cycle",
             () -> AttachmentType.builder(() -> 0L).serialize(DailyCycleData.MARKER_CODEC.optionalFieldOf("last_cycle", Long.MAX_VALUE)).build());
     private CropDailyUpdates() {}
     public static void register(IEventBus bus) { ATTACHMENTS.register(bus); }
+
+    public static void read(ChunkDataEvent.Load event) {
+        // Sample at disk read, as in the original, not after promotion or on newly generated chunks.
+        // ImposterProtoChunk.getLevel() is null; its wrapped LevelChunk owns the actual level.
+        var chunk = event.getChunk() instanceof ImposterProtoChunk wrapped ? wrapped.getWrapped()
+                : event.getChunk() instanceof LevelChunk full ? full : null;
+        if (chunk != null && chunk.getLevel() instanceof ServerLevel level
+                && AgriculturalRain.onLoad(level.getRainLevel(1.0F))) RAIN_PENDING.add(chunk);
+    }
 
     public static void loaded(ChunkEvent.Load event) {
         // Load can precede FULL status. Only keep the reference here; never touch the world.
@@ -44,15 +56,18 @@ public final class CropDailyUpdates {
     }
     public static void unloaded(ChunkEvent.Unload event) {
         MIGRATION_PENDING.remove(event.getChunk());
+        RAIN_PENDING.remove(event.getChunk());
         if (event.getLevel() instanceof ServerLevel level) {
             var chunks = LOADED.get(level);
             if (chunks != null) chunks.remove(event.getChunk());
         }
     }
     public static void stopped(ServerStoppedEvent event) {
+        RAIN_PENDING.removeIf(chunk -> chunk.getLevel() instanceof ServerLevel level && level.getServer() == event.getServer());
         LOADED.entrySet().removeIf(entry -> {
             if (entry.getKey().getServer() != event.getServer()) return false;
             MIGRATION_PENDING.removeAll(entry.getValue());
+            RAIN_PENDING.removeAll(entry.getValue());
             return true;
         });
     }
@@ -76,14 +91,17 @@ public final class CropDailyUpdates {
     }
 
     private static void migrate(ServerLevel level, LevelChunk chunk) {
+        boolean rainOnLoad = RAIN_PENDING.remove(chunk);
         var sections = chunk.getSections();
         for (int index = 0; index < sections.length; index++) {
             var section = sections[index];
-            if (!section.maybeHas(state -> state.is(ToolContent.PREPARED_SOIL.get()) || state.is(CropContent.CROP.get()))) continue;
+            if (!section.maybeHas(state -> state.is(ToolContent.PREPARED_SOIL.get()) || state.is(CropContent.CROP.get())
+                    || (rainOnLoad && FarmlandSoil.managed(state)))) continue;
             int baseY = chunk.getSectionYFromSectionIndex(index) * 16;
             for (int y = 0; y < 16; y++) for (int z = 0; z < 16; z++) for (int x = 0; x < 16; x++) {
                 var state = section.getBlockState(x, y, z);
                 var next = FarmlandSoil.migrate(state);
+                if (rainOnLoad) next = AgriculturalRain.hydrate(next);
                 if (next == state && !state.is(CropContent.CROP.get())) continue;
                 var pos = new BlockPos(chunk.getPos().getMinBlockX() + x, baseY + y, chunk.getPos().getMinBlockZ() + z);
                 if (next != state) level.setBlock(pos, next, Block.UPDATE_ALL);
@@ -101,7 +119,7 @@ public final class CropDailyUpdates {
         void grow();
         void dry();
     }
-    /** All plants see yesterday's watering before any participating soil is dried. */
+    /** All plants see existing water and today's rain before the MAIN soil pass. */
     public static void process(long cycle, List<? extends ChunkWork> chunks) {
         if (cycle <= 0) return;
         var eligible = chunks.stream().filter(chunk -> chunk.lastCycle() < cycle).toList();
@@ -171,15 +189,18 @@ public final class CropDailyUpdates {
             for (var pos : crops) {
                 if (!(chunk.getBlockEntity(pos) instanceof CropBlockEntity crop)) continue;
                 var state = crop.crop();
-                var next = CropLifecycle.newDay(state, CropDefinitions.INSTANCE.get(state.crop()), season,
-                        watered(chunk.getBlockState(pos.below())), level.getServer().isDedicatedServer());
-                CropGrowth.advance(level, crop, CropDefinitions.INSTANCE.get(state.crop()), next);
+                var definition = CropDefinitions.INSTANCE.get(state.crop());
+                var next = CropLifecycle.newDay(state, definition, season,
+                        watered(chunk.getBlockState(pos.below())) || (definition != null
+                                && definition.requiresWater() && AgriculturalRain.at(level, pos.above())),
+                        level.getServer().isDedicatedServer());
+                CropGrowth.advance(level, crop, definition, next);
             }
         }
         public void dry() {
             for (var pos : soils) {
                 var state = chunk.getBlockState(pos);
-                var next = CropDailyUpdates.dry(state, chunk.getBlockState(pos.above()));
+                var next = AgriculturalRain.soilDay(state, chunk.getBlockState(pos.above()), AgriculturalRain.at(level, pos.above(2)));
                 if (!next.equals(state)) level.setBlock(pos, next, Block.UPDATE_ALL);
             }
         }

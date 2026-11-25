@@ -15,8 +15,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 /** Transient, player-owned client mirror. Replacing the player also clears this mirror. */
-public record WeatherSnapshot(String dimension, List<Weather> forecast, Weather recent, float rain, float storm)
+public record WeatherSnapshot(String dimension, List<Weather> forecast, Weather recent, float rain, float storm, boolean snowFog)
         implements CustomPacketPayload {
+    public WeatherSnapshot(String dimension, List<Weather> forecast, Weather recent, float rain, float storm) {
+        this(dimension, forecast, recent, rain, storm, true);
+    }
     public WeatherSnapshot { forecast = List.copyOf(forecast); }
     public static final WeatherSnapshot EMPTY = new WeatherSnapshot("", DailyWeatherData.INITIAL, Weather.SUNNY, 0, 0);
     public static final Type<WeatherSnapshot> TYPE = new Type<>(Identifier.parse("harvestfestival:weather"));
@@ -25,7 +28,8 @@ public record WeatherSnapshot(String dimension, List<Weather> forecast, Weather 
             ByteBufCodecs.fromCodec(DailyWeatherData.FORECAST_CODEC), WeatherSnapshot::forecast,
             ByteBufCodecs.fromCodec(Weather.CODEC), WeatherSnapshot::recent,
             ByteBufCodecs.FLOAT, WeatherSnapshot::rain,
-            ByteBufCodecs.FLOAT, WeatherSnapshot::storm, WeatherSnapshot::new);
+            ByteBufCodecs.FLOAT, WeatherSnapshot::storm,
+            ByteBufCodecs.BOOL, WeatherSnapshot::snowFog, WeatherSnapshot::new);
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, HarvestFestival.MOD_ID);
     public static final Supplier<AttachmentType<WeatherSnapshot>> VIEW = ATTACHMENTS.register("weather_view",
@@ -36,7 +40,7 @@ public record WeatherSnapshot(String dimension, List<Weather> forecast, Weather 
         bus.addListener(WeatherSnapshot::payloads);
     }
     private static void payloads(RegisterPayloadHandlersEvent event) {
-        event.registrar("1").playToClient(TYPE, STREAM_CODEC, (snapshot, context) -> {
+        event.registrar("2").playToClient(TYPE, STREAM_CODEC, (snapshot, context) -> {
             var player = context.player();
             var level = player.level();
             if (!level.dimension().identifier().toString().equals(snapshot.dimension())) return;

@@ -110,6 +110,8 @@ Esta ordem propõe **fatias internas**, não a cópia sequencial dos pacotes aco
 
 ## Prioridade vigente — fechamento agrícola antes dos NPCs
 
+Atualização de 25/11/2026: 21-B aceita globalmente. Novas correções distribuídas em C.1 (queda/seleção de frutos), C.2 (cópia de troncos/frutas pelo botão central) e D.1 (cópia de sementes dos cultivos), com regressão em E e aceite anterior aos NPCs. São complementos separados de inverno/camas, nos sistemas existentes, sem novos pacotes aprovados ou APIs presumidas. Ordem e critérios em [STATUS](STATUS.md#distribuição-dos-ajustes-solicitados-em-25112026); demais complementos obrigatórios mantidos.
+
 Em 23/11/2026, responsável confirmou a fatia 20 aprovada e adiou NPCs para a fatia 22 ou 23, após entrega e aceite de A–E (clima diário, chuva/agricultura, inverno, camas por dimensão e dedicado/multiplayer) e dos complementos servidor vazio, substituição de plantas após morte e controle de umidade. A 21 inicia esse fechamento; a necessidade de distribuí-lo também na 22 define o início dos NPCs na 23. Escopo e critérios centralizados em [STATUS](STATUS.md). Complementos dependentes de NPCs, incluindo aquisição por lojas/missões e serviços de melhoria/reparo, ficam após os NPCs. Não altera o grafo estático nem autoriza novos pacotes ou divergências; a substituição de plantas exige conferir suas dependências de coleta antes da implementação.
 
 Histórico da sequência 19–21, preservado abaixo: a previsão anterior de NPCs na 21 foi substituída pela decisão acima.

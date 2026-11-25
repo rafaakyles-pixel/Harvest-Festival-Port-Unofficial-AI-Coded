@@ -67,12 +67,45 @@ Decisão de 23/11/2026: fatia 20 aprovada; adiar o início dos NPCs, anteriormen
 
 Registro inicial de escopo/prioridade sem implementação; a entrega 21-A está descrita abaixo. Ordem-base A→B→C→D→E; complementos devem integrar o aceite anterior aos NPCs, com recortes pequenos e dependências conferidas antes do código. A aprovação da sequência não aprova divergências, APIs ou novos pacotes. Obtenção por lojas/missões, serviços de melhoria/reparo e demais complementos dependentes de NPCs serão realizados após os NPCs. 19-B, milho de duas camadas e ampliação da foice mantêm decisões próprias.
 
+### Distribuição dos ajustes solicitados em 25/11/2026
+
+Após aceitar a 21-B, o responsável relatou frutos ainda suspensos ao quebrar folhas e ausência de cópia pelo botão central (clique na roda do mouse) em troncos, frutas e cultivos. Solicitação de planejamento, sem implementação nesta revisão. Preservar C/inverno e D/camas como entregas próprias; os sufixos abaixo identificam complementos separados, não ampliação automática desses escopos.
+
+| Recorte | Encaixe e critérios |
+| --- | --- |
+| 21-C.1 — Suporte e seleção dos frutos | Após C: executar a queda já autorizada ao quebrar a folha imediatamente superior e o ajuste pendente da caixa de seleção. Cinco espécies; um produto por fruto, sem duplicação, respeitando cancelamento/permissões e mantendo ausência de colisão. Não ampliar automaticamente para decay/explosões. |
+| 21-C.2 — Cópia de troncos e frutas | Após C.1, antes de D: botão central retorna o item correspondente ao alvo/espécie. Conferir original, herança e API exata antes de definir o item de troncos e frutos; divergências concretas exigem decisão. Cobrir estágios e partes aplicáveis das cinco árvores, sem colher, remover ou duplicar produção; não introduzir concessão de itens em survival. |
+| 21-D.1 — Cópia de sementes dos cultivos | Após D, antes de E: botão central sobre cultivo HF retorna suas sementes correspondentes. Conferir estágios, pares e casos mortos/transformados no original; não presumir que hastes/frutos já convertidos para vanilla mantêm identidade HF. Sem alterar crescimento, colheita ou inventário survival por concessão. |
+| 21-E — Regressão integrada | Além do escopo vigente, validar os três recortes com dois clientes: item/espécie corretos, sincronização, limites de inventário criativo/survival e ausência de drops/produção duplicados. Cenário 8 continua obrigatório. |
+
+Ordem desses recortes: C → C.1 → C.2 → D → D.1 → E. Complementos de servidor vazio, morte de plantas e umidade permanecem obrigatórios no fechamento; esta distribuição não os cancela nem antecipa NPCs. Cada recorte exige implementação, build e aceite próprios; nenhuma funcionalidade nova é declarada concluída pelo registro.
+
 ### Fatia 21-A — clima diário
+
+- Aceite informado pelo responsável na solicitação da 21-B: 21-A testada e aprovada. Aceite global, sem atribuir resultados individuais adicionais ou ampliar cobertura para dedicado/multiplayer; cenário 8 permanece pendente.
 
 - Implementados cinco estados, previsão persistida de sete dias, pesos/opções originais em JSON, transições graduais e espelho cliente autoritativo. Integração no `NewDayEvent` existente; ajustes HF de data não deslocam previsão nem simulam dias. Comando `/hf weather` consulta/altera somente o dia atual. Fontes, peculiaridades preservadas, formato salvo e APIs em [Calendário](porting/calendario.md#clima-diário--fatia-21-a).
 - Controle por tipo `minecraft:overworld`, via mixin no subpacote existente; não controla Nether/End ou tipos próprios. Nenhum pacote de sistema novo. Hidratação por chuva, inverno físico/visual, camas, complementos e correções de frutos permanecem nos recortes próprios; NPCs continuam adiados até o aceite combinado.
 - Build aprovado: 15 testes novos, 299 totais efetivamente executados, zero falhas/ignorados; quatro tarefas executadas e cinco `UP-TO-DATE`, sem resultado de testes reutilizado em cache. Cobertura detalhada no contrato de calendário.
-- Validação real de cliente, reconexão, sono, salvar/reabrir e dedicado/multiplayer pendente nesta entrega; testes automatizados não substituem sessões. Sem aceite antecipado da 21-A, de A–E ou do fechamento agrícola.
+- Na entrega original, validação real de cliente, reconexão, sono, salvar/reabrir e dedicado/multiplayer estava pendente; o aceite posterior da 21-A está registrado acima, sem inventar resultados individuais. Testes automatizados não substituem sessões; dedicado/multiplayer e aceite de A–E/fechamento agrícola permanecem pendentes.
+
+### Fatia 21-B — precipitação e hidratação agrícola
+
+- Aceite global em 25/11/2026: responsável declarou «Fatia 21-B aprovada». Sucede a pendência de aceite da entrega abaixo, sem atribuir resultados individuais, execução ao agente ou cobertura adicional em dedicado/multiplayer. Cenário 8 permanece não executado.
+
+- Implementados predicado agrícola diário, preparo adiado e hidratação na leitura de chunks, preservando a distinção entre clima diário e intensidade. Ordem explícita no evento existente: clima → crescimento → hidratação/secagem → aspersores. Tag de exclusão de biomas aprovada pelo responsável em 24/11/2026; contrato e evidências em [Cultivos](porting/cultivos.md#chuva-agrícola--fatia-21-b), preparo em [Ferramentas](porting/ferramentas.md#integração-de-precipitação--21-b).
+- Build aprovado: 11 testes novos/310 totais efetivamente executados, zero falhas/erros/ignorados; quatro tarefas executadas e cinco UP-TO-DATE, com test executada, sem resultados de testes reutilizados em cache. Testes de regras, recursos, biomas reais do alvo e coordenação por adaptadores; não são sessões de jogo ou carga real de mundo.
+- Nenhuma sessão de cliente/original/dedicado realizada pelo agente nesta entrega; aceite posterior da B registrado acima, sem detalhamento individual dos testes manuais. Saves do port mantêm formatos, sem migração 1.12.2. Sem pacote/mixin novo ou alteração nas regras de regadores, aspersores, remessas e sono coletivo.
+- Na entrega da B, C/inverno físico e visual, D/camas, E/dedicado e multiplayer, complementos e correções de frutos ficaram nos recortes próprios; implementação posterior da C registrada abaixo. NPCs adiados até fechamento agrícola e aceites. Cenário 8 permanece não executado.
+
+### Fatia 21-C — inverno físico e visual
+
+- Aceite global informado pelo responsável após a entrega: «Aprovado». Não atribui resultados individuais adicionais, sessões ao agente ou cobertura de dedicado/multiplayer; cenário 8 permanece pendente.
+
+- Implementação entregue para aceite: formação sazonal de neve/gelo, colunas de precipitação, supressão original de partículas/sons e neblina; nevasca/degelo no evento diário existente, antes da agricultura. Contrato, fontes, persistência e limites em [Calendário](porting/calendario.md#inverno-físico-e-visual--fatia-21-c).
+- Responsável aprovou altura completa da dimensão e classificação moderna de biomas/posição; identidade do port prioriza adaptações ao ambiente moderno mantendo grande fidelidade ao original. Tag e hidratação agrícola da 21-B preservadas; nenhum pacote novo. Dois mixins restritos no subpacote existente; apresentação utiliza espelho autoritativo.
+- Build aprovado com **12 testes novos/322 totais efetivamente executados**, sem falhas/erros/ignorados; quatro tarefas executadas e cinco UP-TO-DATE, sem reutilizar resultados da tarefa test. Cobertura de regras, biomas reais do alvo, codec/configuração e transformação do servidor; não equivale a gameplay observado.
+- C aceita globalmente, sem ampliar aceites A/B/C para dedicado/multiplayer nem encerrar cenário 8. Próximo recorte: C.1 — suporte e seleção dos frutos; depois C.2 → D → D.1 → E, além dos complementos agrícolas vigentes. NPCs permanecem adiados até fechamento e aceites; agricultura/A–E não estão concluídos.
 
 Sequência anterior preservada abaixo como histórico substituído apenas quanto à prioridade/início dos NPCs:
 
@@ -114,7 +147,7 @@ Validação desta atualização de sequência: build aprovado, nove tarefas UP-T
 - Complemento visual autorizado após o aceite da fatia 9: barra de água no item e quantidade exata no tooltip do regador. Sem novo pacote ou alteração do estado persistido. Por introduzir interface, seus critérios de aceite incluem o cenário 8 de espelho cliente de ouro/aniversário, ainda não executado; o indicador de água não comprova esse cenário.
 
 ### ⏳ Próximos passos
-- Próximo passo: validar em jogo e submeter a 21-A ao aceite; depois delimitar B e os complementos conforme a sequência vigente acima. Fatia 20 aprovada; NPCs na 22 ou 23 após aceite de A–E, servidor vazio, substituição após morte, controle de umidade e correções de frutos. 19-B permanece integralmente adiada.
+- Próximo passo: delimitar e implementar C/inverno em solicitação própria; 21-A e 21-B aceitas. Ajustes de frutos/cópia distribuídos em C.1, C.2 e D.1 acima, com regressão em E. NPCs na 22 ou 23 somente após fechamento agrícola e aceites, incluindo servidor vazio, morte de plantas, umidade e esses ajustes. 19-B permanece integralmente adiada.
 - Executar cenário 8, ainda vinculado ao complemento visual do regador. Indicadores funcionais e texturas confirmados não comprovam o espelho cliente de ouro/aniversário.
 - Obrigação da Fase 3 reafirmada pelo responsável em 12/11/2026: completar o sistema agrícola e seus itens/ferramentas, procurando paridade de gameplay com o original. Fatias continuam pequenas e verificáveis, mas seus mínimos não encerram o sistema nem transferem funções faltantes ao polimento. Próximas fatias devem tratar ferramentas/sementes vanilla, solo compartilhado, itens e comportamentos agrícolas restantes conforme FEATURES/DEPENDENCIES; dependências de lojas/NPCs permanecem ordenadas pelo grafo.
 - Pendência de validação: cenário 8 no primeiro consumidor cliente. Escolha da data pelo jogador e efeitos continuam adiados.

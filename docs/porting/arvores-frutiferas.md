@@ -4,6 +4,8 @@ Implementação autorizada da fatia 20 em 21–22/11/2026, com as decisões espe
 
 ## Correções de frutos planejadas — decisão de 23/11/2026
 
+Atualização de 25/11/2026: após aprovar a 21-B, o responsável reiterou que os frutos ainda não caem ao quebrar folhas. Correção continua pendente, agora alocada na **21-C.1**, após C/inverno, junto da caixa de seleção já solicitada; não reabre o aceite de B. Na **21-C.2**, implementar a cópia pelo botão central sobre troncos e frutas das cinco espécies. Antes do código, conferir item retornado, estágios/partes e herança no original e API 26.2/NeoForge 26.2.0.93; não presumir item técnico de tronco versus semente. Verificar seleção correta sem colher/remover o alvo, sem duplicar produção e sem conceder itens em survival. Regressão com dois clientes na E. Planejamento apenas; critérios e ordem em [STATUS](../STATUS.md#distribuição-dos-ajustes-solicitados-em-25112026).
+
 Responsável solicitou incluir no fechamento agrícola anterior aos NPCs: ao quebrar a folha imediatamente acima de um fruto, remover o fruto e soltá-lo como item; ajustar sua caixa de seleção/interação, atualmente de bloco inteiro, ao tamanho visual de cada espécie. Planejamento autorizado, ainda não implementado; não reabre o aceite global da 20.
 
 - Queda por quebra da folha é alteração intencional autorizada: sucede, para esse caso, a decisão anterior de manter frutos suspensos. `BlockFruit` original não define remoção por perda de suporte; evidência anterior preservada abaixo. Não estender automaticamente a decay, explosões ou qualquer troca de suporte sem delimitar esses caminhos no recorte.

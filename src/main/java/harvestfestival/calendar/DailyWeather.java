@@ -15,9 +15,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public final class DailyWeather {
     private DailyWeather() {}
     public static void register(IEventBus bus) {
+        WinterUpdates.register(bus);
         WeatherSnapshot.register(bus);
         NeoForge.EVENT_BUS.addListener(WeatherRules::register);
-        NeoForge.EVENT_BUS.addListener(DailyWeather::newDay);
+        NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.HIGHEST, DailyWeather::newDay);
         NeoForge.EVENT_BUS.addListener(DailyWeather::afterTick);
         NeoForge.EVENT_BUS.addListener(DailyWeather::login);
         NeoForge.EVENT_BUS.addListener(DailyWeather::respawn);
@@ -57,7 +58,7 @@ public final class DailyWeather {
         var level = player.level();
         var data = get(level.getServer());
         var snapshot = new WeatherSnapshot(level.dimension().identifier().toString(), data.forecast(), data.recent(),
-                level.rainLevel, level.thunderLevel);
+                level.rainLevel, level.thunderLevel, WeatherRules.INSTANCE.active().snowFog());
         if (force || !snapshot.equals(player.getData(WeatherSnapshot.VIEW))) {
             player.setData(WeatherSnapshot.VIEW, snapshot);
             PacketDistributor.sendToPlayer(player, snapshot);

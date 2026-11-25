@@ -8,11 +8,14 @@ Histórico não faz parte da leitura inicial. Regras de manutenção na seção 
 - Original: `reference/original-1.12.2/`, branch `1.12.2-0.6.X`, somente leitura; conteúdo até 0.6.x.
 - TODOs e vestígios não constituem compromisso de implementação; ambiguidades exigem consulta ao responsável.
 - Minecraft 26.2 / NeoForge 26.2.0.93; ModDevGradle 2.0.148, Gradle 9.2.1, toolchain Java 25.
+- Identidade definida pelo responsável em 25/11/2026: port quase idêntico ao original, priorizando atualizações para o ambiente moderno. Na 21-C foram aprovadas altura completa da dimensão e classificação moderna de precipitação por bioma/posição; a classificação agrícola aprovada na 21-B permanece independente. Decisões e adaptações concretas em [Calendário](porting/calendario.md#inverno-físico-e-visual--fatia-21-c).
 - Mod único `harvestfestival`, versão técnica `0.1.0-dev`. Fase e pacotes autorizados: [STATUS](STATUS.md).
 - Não prometer migração de saves 1.12.2; as fatias implementadas não realizam essa migração.
 - Grafo e prioridade executiva em [DEPENDENCIES](DEPENDENCIES.md): 20 aprovada; fechamento agrícola A–E e complementos de servidor vazio, substituição de plantas após morte e controle de umidade, além das correções de queda/caixa de seleção dos frutos registradas em [Árvores](porting/arvores-frutiferas.md), antes dos NPCs, adiados para a 22 ou 23. Escopo e critérios em [STATUS](STATUS.md#sequência-aprovada-pelo-responsável--fechamento-agrícola--npcs-na-22-ou-23). Complementos dependentes de NPCs ficam após os NPCs; integrações específicas continuam adiadas em [FEATURES](FEATURES.md). Decisão de 23/11/2026, sem implementação nesta revisão.
 
 ## Consulta por sistema
+
+21-B aceita globalmente em 25/11/2026, sem ampliar cobertura dedicada/multiplayer. Correções de suporte/seleção e cópia pelo botão central distribuídas em C.1/C.2 (árvores) e D.1 (sementes dos cultivos), com regressão em E; ordem e critérios em [STATUS](STATUS.md#distribuição-dos-ajustes-solicitados-em-25112026). Planejamento apenas: original e APIs desses ajustes serão conferidos nos contratos pertinentes antes do código.
 
 Leia o documento correspondente antes de alterar o sistema ou implementar um consumidor de seu contrato.
 As APIs verificadas e os formatos persistidos ficam nesses documentos, junto às limitações da verificação.
@@ -46,7 +49,7 @@ Aceites globais das fatias 15, 16, 17, 18 e 19-A registrados em [STATUS](STATUS.
 - `NewDayEvent` notifica uma transição observada; não compensa dias pulados nem promete transação durável contra crash.
 - Remessas fixam preço no depósito e pagam na próxima virada com o jogador conectado. Não pagam offline nem ao reconectar; comportamento aceito em 08/11/2026.
 - A futura escolha de aniversário pelo jogador deve reutilizar API/attachment existentes, validando autorização; escolha e efeitos continuam adiados.
-- Cultivos avaliam farmland com `moisture=7` antes da secagem diária 7→3→0; solo já seco sem planta pode voltar à terra. Migração de prepared_soil e pisoteio por queda autorizados na fatia 11; sem compensação retroativa. Clima diário em [Calendário](porting/calendario.md#clima-diário--fatia-21-a); hidratação por chuva e inverno físico/visual continuam pendentes. Contrato em [Ferramentas](porting/ferramentas.md).
+- Cultivos avaliam farmland com `moisture=7` ou precipitação agrícola antes da passagem diária de solo; sem precipitação, secagem 7→3→0 e retorno à terra sem planta seguem vigentes. Integração 21-B, tag de biomas aprovada e regra distinta de preparo/carga em [Cultivos](porting/cultivos.md#chuva-agrícola--fatia-21-b). Migração de prepared_soil e pisoteio da fatia 11 mantidos, sem compensação retroativa. Clima diário em [Calendário](porting/calendario.md#clima-diário--fatia-21-a); inverno físico/visual permanece na C.
 - Rega ampliada por autorização de 16/11/2026: qualquer bloco pode iniciar a área existente, com alterações/custos somente em solos aceitos pelas regras; regadores são exceção à negação de uso da política vanilla. Geometria, permissões e limites em [Ferramentas](porting/ferramentas.md#ampliação-autorizada-da-rega--16112026).
 
 ## Validação e pendências obrigatórias
@@ -110,7 +113,7 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Abóbora vanilla lisa 26.2 e adaptações da grama aprovadas em 18/11/2026; fontes/APIs e diferenças em Cultivos. Alternativa de abóbora própria não adotada (suas APIs não foram verificadas). Ramo visual sazonal e callbacks originais da grama não observados em jogo; par coerente é adaptação aprovada. Sem mixin novo.
 
 - Original tem exatamente 2 mixins de cliente; levantamento completo em [mixins originais](archive/mixins-originais.md).
-- Chuva: candidata `CustomWeatherEffectRenderer#tickRain`, consultada na branch móvel 26.2.x. Paridade de partículas/sons, aplicação dinâmica ao Overworld e execução na versão exata 26.2.0.93 **não verificadas**.
+- Inverno: `WinterPrecipitationMixin` adapta as consultas de formação em `ServerLevel.tickPrecipitation`; `WinterParticlesMixin`, exclusivo do cliente, cancela `ClientLevel.tickWeatherEffects` conforme o último clima não ensolarado. Eventos modernos atendem colunas e neblina, mas não essas duas interceptações sem substituir dados dimensionais. Fontes exatas, justificativas, alcance e validação em [Calendário](porting/calendario.md#inverno-físico-e-visual--fatia-21-c).
 - Anzol: equivalente para reconhecer vara HF no renderizador **não verificado**. Investigar extensão moderna; renderizador próprio é alternativa, sem decisão aprovada.
 - Access transformers, reflexão e provedores antigos devem ser reavaliados caso a caso, sem cópia automática.
 - Árvores/aspersores da 20 implementados nos pacotes existentes, com exceção dimensional própria, copa integral protegida, autonomia sem dono e flags de espécie/sincronização integral aprovados. Ajuste de 23/11: folhas obtíveis por tesoura ou Silk Touch, metades maduras independentes e par juvenil mantido por decisão explícita; detalhes no contrato de árvores. APIs, saves, recursos e validações nos contratos; cliente sem inspeção visual autorizada, dedicado/multiplayer pendentes. Nenhuma migração/conversão vanilla→HF ou aquisição substituta.

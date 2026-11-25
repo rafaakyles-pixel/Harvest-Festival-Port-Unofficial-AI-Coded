@@ -4,6 +4,8 @@ Implementação autorizada em 21–22/11/2026: velho funcional na A e ferro comp
 
 ## Implementação vigente
 
+- Integração 21-B: a passagem MAIN anterior ao POST agora hidrata por precipitação ou seca. Aspersores mantêm algoritmo, custo, tanque e marcador: solo já molhado pela chuva não gera escrita nem cobrança; solo protegido que secou ainda pode ser regado no POST. Não houve alteração no código dos aspersores, regadores ou partículas. Ordem e diferenças entre clima diário e intensidade em [Cultivos](cultivos.md#chuva-agrícola--fatia-21-b).
+
 - `SprinklerBlock` e `SprinklerBlockEntity`: velho 17 candidatos/r=1/altura 0,5; ferro 161/r=4/altura 0,7, sem colisão. Ambos usam modelos e PNG originais MIT, item de quebra sem tanque, aba Ferramentas e blocos com tanque vazio. Nenhuma receita, loja ou missão substituta.
 - `SprinklerHydration.water` confirma escritas em farmland participante por tag; não usa eventos/permissões de ferramentas nem consulta disable_growth. `CropDailyUpdates.process` é o coordenador real: árvores e todos os cultivos crescem antes de qualquer secagem; POST global executa limpeza de fruto e irrigação. Operação autônoma sem dono, limitada a posições carregadas e dentro da borda/altura. Não compensa dias descarregados.
 - Tanque transacional de 1000 por `FluidStacksResourceHandler`, água por tag, mesma capability em seis faces/null. Manual somente no modo positivo, sempre recipiente→tanque, uma unidade temporária; balde inteiro não preenche tanque parcial. Survival recebe recipiente resultante, criativo conserva mão sem balde extra; som de esvaziamento após sucesso. Transferência externa pode preencher/drenar também no padrão sem consumo.

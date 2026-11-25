@@ -209,6 +209,15 @@ Conferência dirigida da referência em 12/11/2026:
 
 ## Umidade, queda e APIs da fatia 11
 
+### Integração de precipitação — 21-B
+
+- Contrato completo de clima, biomas, ordem e carga em [Cultivos](cultivos.md#chuva-agrícola--fatia-21-b). A regra compartilhada de regadores permanece intacta, incluindo custos, permissões, alcance e exceção da política vanilla; chuva usa hidratação autônoma do solo por tag, sem consumir água/esforço de jogador.
+- Original `WateringTickHandler.onDirtTilled` observa `UseHoeEvent` não cancelado, consulta solo+2 e agenda `RainingSoil`. O handler conta ambas as fases de WorldTickEvent: tenta hidratar na chamada 31 (existence começa em zero, condição ≥30), sem consultar novamente chuva/cobertura. `CropRegistry.hydrateSoil` só muda solo reconhecido e ainda não molhado. Plantio não cria essa tarefa.
+- Equivalente verificado em `neoforge-26.2.0.93-sources.jar`: `BlockToolModificationEvent`, `HOE_TILL`, `isSimulated`, cancelamento, `LevelTickEvent.Pre/Post`. Listener LOWEST observa enxadas HF e vanilla, recusa simulação/cancelamento, captura precipitação e conta 31 callbacks com listeners concretos Pre/Post. Na tentativa só altera solo gerido; alvo removido/inelegível não recebe água. Não força chunks descarregados e descarta tarefa após a tentativa; fila transitória limpa no encerramento, como registro não persistido original.
+- Umidade aleatória continua bloqueada pelo mixin existente; não acrescenta ticker de rega contínua, hidratação por proximidade de água ou controles de configuração. Migração de prepared_soil mantém 0/7, seguida da hidratação de carga se a condição capturada permitir; nenhum contador de cultivo/ciclo é resetado.
+
+### Contrato anterior preservado
+
 - `FarmlandSoil.managed/watered/dry/migrate` centraliza reconhecimento por tag, rega exclusivamente em 7, secagem e conversão. Umidades 1/2/4/5/6 são preservadas pela atualização diária, como no WateringHandler original; regador pode levá-las a 7. Estado vanilla inválido segue o codec vanilla, sem armazenamento duplicado.
 - Original HFCrops desabilita ticks aleatórios de farmland com `Disable vanilla moisture` true por padrão. Na versão 26.2.0.93, FarmlandBlock.randomTick não publica evento cancelável; o mixin cancela exclusivamente esse método para solos na tag crop_soils com MOISTURE. Não altera fallOn, tick de obstrução, shape ou registros vanilla. Não há substituição do bloco nem reflexão/access transformer.
 - Fontes locais exatas: `minecraft-patched-26.2.0.93-sources.jar`: FarmlandBlock.MOISTURE/randomTick/fallOn/turnToDirt, Entity.canTrample, BlockTags.MAINTAINS_FARMLAND; `neoforge-26.2.0.93-sources.jar`: CommonHooks.onFarmlandTrample, BlockEvent.FarmlandTrampleEvent. Migração usa APIs de chunks já documentadas em Cultivos e ServerTickEvent.Pre existente.

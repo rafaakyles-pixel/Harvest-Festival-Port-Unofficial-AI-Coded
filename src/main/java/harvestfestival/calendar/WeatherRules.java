@@ -22,7 +22,8 @@ public final class WeatherRules extends SimplePreparableReloadListener<WeatherRu
     public static final WeatherRules INSTANCE = new WeatherRules();
     private volatile Settings active = DEFAULT;
     public record Weight(Weather weather, double weight) {}
-    public record Settings(Map<Weather, Boolean> enabled, Map<Season, List<Weight>> seasons) {
+    public record Settings(Map<Weather, Boolean> enabled, Map<Season, List<Weight>> seasons, boolean snowFog) {
+        public Settings(Map<Weather, Boolean> enabled, Map<Season, List<Weight>> seasons) { this(enabled, seasons, true); }
         public Settings {
             enabled = Map.copyOf(enabled);
             var copy = new EnumMap<Season, List<Weight>>(Season.class);
@@ -73,7 +74,10 @@ public final class WeatherRules extends SimplePreparableReloadListener<WeatherRu
             if (weights.isEmpty() || !Double.isFinite(total)) throw new IllegalArgumentException("Empty/overflowing weather table");
             seasons.put(season, weights);
         }
-        return new Settings(enabled, seasons);
+        var fog = json.get("snow_fog");
+        if (fog != null && (!fog.isJsonPrimitive() || !fog.getAsJsonPrimitive().isBoolean()))
+            throw new IllegalArgumentException("snow_fog must be boolean");
+        return new Settings(enabled, seasons, fog == null || fog.getAsBoolean());
     }
     private static Settings defaults() {
         try (var reader = new InputStreamReader(Objects.requireNonNull(WeatherRules.class.getResourceAsStream(

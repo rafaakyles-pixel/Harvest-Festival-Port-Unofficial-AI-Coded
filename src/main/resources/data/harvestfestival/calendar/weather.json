@@ -1,4 +1,5 @@
 {
+  "snow_fog": true,
   "enabled": {"sunny": true, "rain": true, "typhoon": true, "snow": true, "blizzard": true},
   "seasons": {
     "spring": [{"weather": "sunny", "weight": 70}, {"weather": "rain", "weight": 30}],

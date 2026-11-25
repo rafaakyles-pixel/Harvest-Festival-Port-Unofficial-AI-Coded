@@ -37,8 +37,10 @@ public final class HarvestFestival {
         CreativeTabs.register(modBus);
         NeoForge.EVENT_BUS.addListener(harvestfestival.tools.SickleRules::register);
         CropContent.register(modBus);
+        harvestfestival.crops.AgriculturalRain.register();
         NeoForge.EVENT_BUS.addListener(CropDefinitions::register);
         NeoForge.EVENT_BUS.addListener(CropDailyUpdates::loaded);
+        NeoForge.EVENT_BUS.addListener(CropDailyUpdates::read);
         NeoForge.EVENT_BUS.addListener(CropDailyUpdates::unloaded);
         NeoForge.EVENT_BUS.addListener(CropDailyUpdates::stopped);
         NeoForge.EVENT_BUS.addListener(CropDailyUpdates::newDay);

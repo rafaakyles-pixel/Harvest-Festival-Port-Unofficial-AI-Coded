@@ -21,7 +21,10 @@ abstract class TreeTrunkMixin {
     private BlockState harvestfestival$trunkChanged(LevelChunkSection section, int x, int y, int z, BlockState state,
             Operation<BlockState> original, @Local(argsOnly = true) BlockPos pos) {
         var old = original.call(section, x, y, z, state);
-        if (((LevelChunk)(Object)this).getLevel() instanceof ServerLevel level) TreeProducers.changed(level, pos, old, state);
+        if (((LevelChunk)(Object)this).getLevel() instanceof ServerLevel level) {
+            TreeProducers.changed(level, pos, old, state);
+            harvestfestival.crops.FruitSupport.changed(level, pos, old, state);
+        }
         return old;
     }
 }

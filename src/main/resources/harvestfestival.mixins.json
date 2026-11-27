@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "harvestfestival.tools.mixin",
-  "mixins": ["FarmlandBlockMixin", "PlayerSleepAccessor", "TreeTrunkMixin", "TreeRandomTickMixin", "DailyWeatherMixin", "WinterPrecipitationMixin"],
+  "mixins": ["FarmlandBlockMixin", "PlayerSleepAccessor", "TreeTrunkMixin", "TreeRandomTickMixin", "DailyWeatherMixin", "WinterPrecipitationMixin", "FruitSupportMixin"],
   "client": ["WinterParticlesMixin"],
   "injectors": {"defaultRequire": 1}
 }

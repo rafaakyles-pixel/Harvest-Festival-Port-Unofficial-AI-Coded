@@ -48,6 +48,7 @@ public final class OrchardContent {
             TREES.values().stream().map(t -> t.base().get()).toArray(Block[]::new)));
     public static final Supplier<BlockEntityType<SprinklerBlockEntity>> SPRINKLER_ENTITY = ENTITIES.register("sprinkler", () -> new BlockEntityType<>(SprinklerBlockEntity::new, OLD.get(), IRON.get()));
     public static void register(IEventBus bus) {
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(FruitSupport::tick);
         OrchardSync.register(bus);
         BLOCKS.register(bus); ITEMS.register(bus); ENTITIES.register(bus);
         bus.addListener(OrchardContent::capabilities);

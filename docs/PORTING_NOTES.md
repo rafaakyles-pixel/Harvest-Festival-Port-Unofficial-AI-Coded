@@ -15,7 +15,7 @@ Histórico não faz parte da leitura inicial. Regras de manutenção na seção 
 
 ## Consulta por sistema
 
-21-B aceita globalmente em 25/11/2026, sem ampliar cobertura dedicada/multiplayer. Correções de suporte/seleção e cópia pelo botão central distribuídas em C.1/C.2 (árvores) e D.1 (sementes dos cultivos), com regressão em E; ordem e critérios em [STATUS](STATUS.md#distribuição-dos-ajustes-solicitados-em-25112026). Planejamento apenas: original e APIs desses ajustes serão conferidos nos contratos pertinentes antes do código.
+21-B e 21-C aceitas globalmente, sem ampliar cobertura dedicada/multiplayer. Suporte/seleção implementados na C.1, incluindo extensão solicitada de queda por decay das folhas frutíferas; remoção sazonal permanece sem drop por decisão do responsável. Validação real pendente; cópia pelo botão central permanece em C.2 (árvores) e D.1 (sementes dos cultivos), com regressão em E. Ordem e critérios em [STATUS](STATUS.md#distribuição-dos-ajustes-solicitados-em-25112026); fontes e APIs da C.1 em [Árvores](porting/arvores-frutiferas.md#suporte-e-seleção-dos-frutos--fatia-21-c1).
 
 Leia o documento correspondente antes de alterar o sistema ou implementar um consumidor de seu contrato.
 As APIs verificadas e os formatos persistidos ficam nesses documentos, junto às limitações da verificação.
@@ -109,6 +109,7 @@ Direções arquiteturais não são aprovação de APIs concretas. Verificações
 - Clima diário: `harvestfestival.tools.mixin.DailyWeatherMixin` substitui `ServerLevel.advanceWeatherCycle` apenas em tipos `minecraft:overworld`; nenhuma API/evento equivalente nas fontes exatas 26.2.0.93. Previsão, rede, transições, comandos e limites em [Calendário](porting/calendario.md#clima-diário--fatia-21-a). Renderização sazonal específica continua fora da 21-A.
 
 - Árvores, 23/11/2026: `TreeTrunkMixin` observa a mutação real em `LevelChunkSection.setBlockState` dentro de `LevelChunk.setBlockState` para encerrar vínculos sem depender de eventos parciais de quebra/colocação; `TreeRandomTickMixin` preserva sorteios nos dois pontos originais quando os troncos HF já não existem, usando `ServerLevel.tickChunk`. Subpacote existente `harvestfestival.tools.mixin`, sem pacote novo. Eventos disponíveis não cobrem essas operações integralmente; fontes exatas, persistência/migração, snapshots e testes em [Árvores frutíferas](porting/arvores-frutiferas.md).
+- Frutos, C.1: `FruitSupportMixin` envolve `ServerPlayerGameMode.removeBlock` para observar remoção efetiva por jogador, inclusive criativo, após cancelamentos/permissões. Evento de quebra é anterior à remoção e loot não cobre criativo; por isso não substituem esse ponto. Reutiliza `TreeTrunkMixin` para invalidar confirmações por alterações/restauração, sem mudar vínculos. API exata 26.2/26.2.0.93, geometria, divergência autorizada e limites em [Árvores](porting/arvores-frutiferas.md#suporte-e-seleção-dos-frutos--fatia-21-c1).
 
 - Abóbora vanilla lisa 26.2 e adaptações da grama aprovadas em 18/11/2026; fontes/APIs e diferenças em Cultivos. Alternativa de abóbora própria não adotada (suas APIs não foram verificadas). Ramo visual sazonal e callbacks originais da grama não observados em jogo; par coerente é adaptação aprovada. Sem mixin novo.
 

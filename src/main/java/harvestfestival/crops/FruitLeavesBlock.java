@@ -68,6 +68,10 @@ public final class FruitLeavesBlock extends Block {
             if (!TreeGrowth.available(level, pos.offset(x, 0, z))) return;
         if (connected(pos, p -> level.getBlockState(p).is(OrchardContent.LOGS), p -> level.getBlockState(p).is(OrchardContent.LEAVES)))
             level.setBlock(pos, state.setValue(CHECK_DECAY, false), Block.UPDATE_CLIENTS);
-        else level.removeBlock(pos, false);
+        else {
+            var fruit = level.getBlockState(pos.below());
+            boolean removed = level.removeBlock(pos, false);
+            FruitSupport.broken(level, pos, state, fruit, removed);
+        }
     }
 }

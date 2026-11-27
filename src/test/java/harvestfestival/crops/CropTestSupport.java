@@ -139,6 +139,8 @@ public final class CropTestSupport implements AutoCloseable {
         var files = new java.util.ArrayList<>(List.of(RESOURCES));
         files.add("harvestfestival/tags/item/leaf_shears.json");
         files.add("harvestfestival/tags/block/tree_soils.json");
+        files.add("harvestfestival/tags/block/tree_leaves.json");
+        files.add("minecraft/tags/block/leaves.json");
         for (String species : OrchardContent.TREES.keySet()) {
             for (String suffix : List.of("fruit_trees/", "tags/item/seeds/")) files.add("harvestfestival/" + suffix + species + ".json");
             files.add("c/tags/item/crops/" + species + ".json");
